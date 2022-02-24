@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/*
+@function rem($value) {
+  $remValue: ($value / 16) + rem; 
+  @return $remValue;
+}
+*/
+
+html {
+  box-sizing: border-box;
+}
+
+*,*::after,*::before {
+  box-sizing: inherit;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page {
+  &__title {
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 88.4%;
+    text-transform: uppercase;
+    color: #3D3935;
+  }
+
+  &__block {
+    padding: 60px 0;
+
+    &-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    &-link {
+      font-size: 14px;
+      line-height: 17px;
+      text-align: right;
+      text-decoration-line: underline;
+      color: #D05871;
+    }
+  }
+
+  &__basket-btn {
+    border: 2px solid #3D3935;
+    border-radius: 100px;
+    padding: 8px 40px 8px 16px;
+    color: #3D3935;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      transform: translateY(-50%);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-image: url(../images/icons/basket-btn.svg);
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__border-btn {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    color: #3D3935;
+    border-radius: 100px;
+    border: 2px solid #D05871;
+    padding: 22px 72px;
+    background: none;
+  }
+}
+
+.container {
+  max-width: 1190px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.intro {
+  background-image: url(../images/intro/main-intro.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center right;
+  min-height: 727px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  padding-bottom: 44px;
+  margin-bottom: 60px;
+  &__btn{
+    font-size: 14px;
+    line-height: 21px;
+    color: #fff;
+    padding: 24px 72px;
+    background: #D05871;
+    border-radius: 100px;
+    border: none;
+  }
+}

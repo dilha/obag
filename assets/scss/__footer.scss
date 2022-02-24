@@ -1,0 +1,108 @@
+.footer {
+    background-color: #F6F6F6;
+    padding: 45px 0;
+
+    &__inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 50px;
+    }
+
+    &__left {
+        &-top {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    &__info {
+        margin-top: 45px;
+
+        &-text {
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 17px;
+            color: #3D3935;
+            padding-left: 40px;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0;
+                background-repeat: no-repeat;
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        &-phone {
+            &::before {
+                background-image: url(~/assets/images/icons/call.svg);
+            }
+        }
+
+        &-schedule {
+            margin-top: 20px;
+            &::before {
+                background-image: url(~/assets/images/icons/clock.svg);
+            }
+        }
+    }
+
+    &__right {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__list {
+        max-width: 150px;
+
+        &-title {
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 17px;
+            color: #3D3935; 
+        }
+
+        &-item {
+            & + & {
+                margin-top: 12px;
+            }
+        }
+
+        &-link {
+            font-size: 14px;
+            line-height: 21px;
+            color: #9C9C9C;
+        }
+    }
+
+    &__copy {
+        margin-top: 45px;
+        padding-top: 55px;
+        border-top: 1px solid #9C9C9C;
+        display: flex;
+        justify-content: space-between;
+
+        &-text {
+            font-size: 14px;
+            line-height: 21px;
+            color: #9C9C9C;
+        }
+    }
+
+    &__social {
+        display: flex;
+        align-items: center;
+        &-link {
+            display: inline-block;
+            
+            &+& {
+                margin-left: 16px;
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+.mid__flash {
+    &-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & + & {
+            margin-top: 120px;
+        }
+    }
+
+    &-img {
+        width: 660px;
+        height: 660px;
+        object-fit: cover;
+    }
+
+    &-title {
+        max-width: 460px;
+    }
+
+    &-text {
+        font-size: 18px;
+        line-height: 170%;
+        color: #3D3935;
+        margin: 50px 0;
+        max-width: 260px;
+    }
+}

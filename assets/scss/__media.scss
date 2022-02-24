@@ -1,0 +1,13 @@
+@media(max-width: 900px) {
+    .header {
+        &__search {
+            width: 200px;
+        }
+
+        &__logo {
+            img {
+                width: 120px;
+            }
+        }
+    }
+}
