@@ -21,6 +21,6 @@
 
 <script>
 export default {
-    name: "MailingBlock",
+    name: "AppMail",
 }
 </script>

@@ -5,7 +5,7 @@
         <div class="footer__left">
           <div class="footer__left-top">
             <ul class="footer__list">
-              <li class="footer__list-title">
+              <li class="footer__list-item footer__list-title">
                   O bag
               </li>
               <li class="footer__list-item">
@@ -178,7 +178,7 @@ import IconInstagram from "~/components/icons/IconInstagram.vue";
 import IconTelegram from "~/components/icons/IconTelegram.vue"
 
 export default {
-    name: "FooterBlock",
+    name: "AppFooter",
     components: {
         IconFacebook,
         IconInstagram,

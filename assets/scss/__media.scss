@@ -1,3 +1,108 @@
+@media(max-width: 1200px) {
+    .obag__insta {
+        &-gallery {
+            grid-gap: 20px;
+        }
+    }
+}
+
+@media(max-width: 1100px) {
+    .page {
+        &__title {
+            font-size: 54px;
+        }
+
+        &__basket {
+            &-btn {
+                padding: 4px 30px 4px 10px;
+                font-size: 12px;
+                line-height: 14px;
+
+                &::after {
+                    right: 10px;
+                }
+            }
+        }
+    }
+
+    .product__card {
+        &-sale {
+            padding: 5px 10px;
+        }
+    }
+
+    .news {
+        &__inner {
+            grid-column-gap: 20px;
+        }
+    }
+
+    .mailing {
+        &__title {
+            font-size: 40px;
+        }
+
+        &__img {
+            width: 362px;
+            height: 362px;
+        }
+    }
+
+    .footer {
+        &__inner {
+            grid-column-gap: 20px;
+        }
+    }
+}   
+
+@media(max-width: 980px) {
+
+    .page {
+        &__title {
+            font-size: 45px;
+        }
+
+        &__border-btn {
+            padding: 15px 50px;
+        }
+    }
+
+    .product__card {
+        &-sale {
+            padding: 5px 10px;
+            font-size: 10px;
+            line-height: 12px;
+        }
+
+        &-title {
+            font-size: 15px;
+        }
+    }
+
+    .will__like {
+        &-inner {
+            grid-column-gap: 20px;
+        }
+    }
+
+    .mailing {
+        &__content {
+            max-width: 400px;
+        }
+
+        &__title {
+            font-size: 35px;
+            line-height: 40px;
+        }
+    }
+
+    .footer {
+        &__inner {
+            grid-column-gap: 10px;
+        }
+    }
+}
+
 @media(max-width: 900px) {
     .header {
         &__search {
@@ -8,6 +113,460 @@
             img {
                 width: 120px;
             }
+        }
+    }
+
+    .nav {
+        &__list {
+            padding: 15px 0;
+        }
+
+        &__link {
+            font-size: 12px;
+            line-height: 18px;   
+        }
+    }
+
+    .mid__flash {
+        &-text {
+            margin: 20px 0;
+        }
+    }
+
+    .news {
+        &__item {
+            &-title {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+            &-text {
+                font-size: 13px;
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    .footer {
+        &__list {
+            text-align: center;
+            &-item {
+                & + & {
+                    margin-top: 5px;
+                }
+            }
+            &-link {
+                font-size: 12px;
+                line-height: 14px;
+            }
+        }
+    }
+}
+
+@media(max-width: 870px) {
+    .will__like {
+        &-inner {
+            grid-column-gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &-top {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    }
+
+    .product__card {
+        margin: 0 auto;
+    }
+}
+
+@media(max-width: 800px) {
+    .header {
+        &__top {
+            padding: 15px 0 10px;
+        }
+        &__link {
+            font-size: 12px;
+            line-height: 12px;
+            &::before {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        &__profile {
+            padding-left: 25px;
+        }
+
+        &__number {
+            font-size: 9px;
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .language {
+        &__header {
+            padding: 2px 10px;
+        }
+
+        &__body {
+            font-size: 12px;
+            line-height: 18px;
+        }
+    }
+
+    .intro {
+        min-height: auto;
+        height: 450px;
+
+        &__btn {
+            padding: 15px 40px;
+        }
+    }
+
+    .news {
+        &__title {
+            font-size: 35px;
+        }
+    }
+
+    .mailing {
+        &__img {
+            width: 300px;
+            height: 300px;
+        }
+    }
+
+    .footer {
+        padding-bottom: 20px ;
+        &__left {
+            &-top {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        &__right {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__list {
+            max-width: 200px;
+
+            &+& {
+                margin-top: 30px;
+            }
+        }
+
+        &__copy {
+            padding-top: 30px;
+        }
+    }
+}
+
+@media(max-width: 750px) {
+    .header {
+        &__search {
+            width: 150px;
+        }
+    }
+    .nav {
+        &__link {
+            font-size: 11px;
+            line-height: 18px;
+        }
+    }
+
+    .mid__flash {
+        &-title {
+            font-size: 30px;
+        }
+
+        &-text {
+            font-size: 16px;
+            line-height: 120%;
+        }
+
+        &-btn {
+            padding: 10px 20px;
+        }
+    }
+
+    .news {
+        &__inner {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        &__item {
+            margin: 0 auto;
+        }
+    }
+
+    .mailing {
+        &__content {
+            max-width: 300px;
+        }
+
+        &__title {
+            font-size: 25px;
+            line-height: 30px;
+        }
+
+        &__text {
+            font-size: 16px;
+            margin: 15px 0;   
+        }
+
+        &__btn {
+            padding: 10px 30px;
+        }
+    }
+
+    .footer {
+        &__info {
+            &-text {
+                font-size: 13px;
+                padding-left: 20px;
+
+                &::before {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+        }
+    }
+
+}
+
+@media(max-width: 670px) {
+    .obag__insta {
+        &-title {
+            font-size: 30px;
+        }
+    }
+
+    .news {
+        &__title {
+            font-size: 30px;
+        }
+    }
+
+    .mailing {
+        padding-bottom: 20px;
+        &__img {
+            position: absolute;
+            bottom: 0;
+            right: 10px;
+            width: 200px;
+            height: 200px;
+        }
+    }
+
+    .footer {
+        &__info {
+            &-text {
+                font-size: 12px;
+                padding-left: 20px;
+            }
+        }
+    }
+}
+
+@media(max-width: 600px) {
+    .page {
+        &__border-btn {
+            padding: 10px 30px;
+        }
+    }
+    .will__like {
+        &-inner {
+            grid-column-gap: 20px;
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    .obag__insta {
+        &-gallery {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .mid__flash {
+
+        &-inner {
+            &+& {
+                margin-top: 50px;
+            }
+        }
+
+        &-title {
+            font-size: 24px;
+        }
+
+        &-text {
+            font-size: 14px;
+        }
+        
+        &-btn {
+            padding: 10px 20px;
+        }
+    }
+
+    .news {
+        &__title {
+            font-size: 25px;
+        }
+    }
+
+    .footer {
+        &__list {
+            max-width: 100%;
+
+            &-title {
+                font-size: 16px;
+                line-height: 18px;
+            }
+            &-item {
+                &+& {
+                    margin-top: 10px;
+                }
+            }
+
+            &-link {
+                font-size: 15px;
+                line-height: 17px;
+            }
+        }
+        &__left {
+            margin-top: 20px;
+        }
+        &__inner {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+
+        &__info {
+            &-text {
+                font-size: 16px;
+                line-height: 20px;
+                margin-right: 10px;
+            }
+        }
+
+        &__copy {
+            &-text {
+                font-size: 12px;
+                line-height: 15px;
+            }
+        }
+    }
+}
+
+@media(max-width: 520px) {
+    .page {
+        &__block {
+            padding: 30px 0;
+        }
+    }
+
+    .will__like {
+        &-title {
+            font-size: 35px;
+        }
+    }
+
+    .mid__flash{
+        &-title {
+            font-size: 20px;
+            line-height: 120%;
+        }
+
+        &-btn {
+            padding: 5px 15px;
+        }
+    }
+
+    .obag__insta {
+        &-title {
+            font-size: 25px;
+        }
+    }
+
+    .news {
+        &__inner {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        &__title {
+            font-size: 23px;
+        }
+
+        &__link {
+            font-size: 12px;
+        }
+    }
+
+    .mailing {
+        padding-top: 20px;
+        &__img {
+            width: 150px;
+            height: 150px;
+            
+        }
+    }
+}
+
+@media(max-width: 470px) {
+    .mailing {
+        &__img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+}
+
+@media(max-width: 400px) {
+    .will__like {
+        &-btn {
+            margin-bottom: 10px;
+            &+& {
+                margin-left: 5px;
+            }
+        }
+
+        &-inner {
+            margin: 20px 0 40px;
+        }
+    }
+
+    .mid__flash {
+        &-img {
+            width: 50%;
+        }
+    }
+
+    .footer {
+        &__info {
+            &-text {
+                font-size: 13px;
+                line-height: 16px;
+            }
+
+            &-schedule {
+                margin-top: 10px;
+            }
+        }
+
+        &__copy {
+            margin-top: 20px;
         }
     }
 }

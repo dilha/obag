@@ -1,0 +1,48 @@
+.details {
+    &__inner {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 40px;
+        background: #000;
+    }
+
+    &__design {
+        width: 260px;
+        height: 270px;
+
+        &-text {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 145.9%;
+            margin-bottom: 25px;
+        }
+
+        &-btn {
+            font-size: 14px;
+            line-height: 21px;
+            color: #FFFFFF;
+            padding: 10px 35px;
+        }
+    }
+
+    &__item {
+        width: 260px;
+        height: 270px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &-title {
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 88.4%;
+            text-align: center;
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+    }
+}

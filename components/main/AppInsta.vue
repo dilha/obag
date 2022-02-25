@@ -28,6 +28,6 @@
 
 <script>
 export default {
-    name: "ObagInsta",
+    name: "AppInsta",
 }
 </script>

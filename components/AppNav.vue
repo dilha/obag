@@ -62,6 +62,6 @@
 
 <script>
 export default {
-    name: "NavBlock",
+    name: "AppNav",
 }
 </script>

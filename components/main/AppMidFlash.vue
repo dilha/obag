@@ -2,7 +2,7 @@
     <section class="mid__flash page__block">
     <div class="container">
       <div class="mid__flash-inner">
-        <img class="mid__flash-img" src="@/assets/images/mid-flash/mid-flash-1.jpg" alt="">
+        <img class="mid__flash-img mid-img" src="@/assets/images/mid-flash/mid-flash-1.jpg" alt="">
         <div class="mid__flash-content">
           <h3 class="mid__flash-title page__title">
               Mid Season
@@ -27,7 +27,7 @@
               Перейти
           </button>
         </div>
-        <img class="mid__flash-img" src="@/assets/images/mid-flash/mid-flash-2.jpg" alt="">
+        <img class="mid__flash-img flash-img" src="@/assets/images/mid-flash/mid-flash-2.jpg" alt="">
       </div>
     </div>
   </section>
@@ -35,6 +35,6 @@
 
 <script>
 export default {
-    name: "MidFlash",   
+    name: "AppMidFlash",   
 }
 </script>

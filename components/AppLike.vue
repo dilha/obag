@@ -5,7 +5,7 @@
         <h3 class="will__like-title page__title">
           Вам понравится
         </h3>
-        <div class="will__like-butto">
+        <div class="will__like-button">
           <button class="will__like-btn">
             O clock
           </button>
@@ -34,9 +34,9 @@
 import ProductCard from "~/components/product/ProductCard.vue";
 
 export default {
-    name: "LikeWill",
+    name: "AppLike",
     components: {
       ProductCard,
-    }
+    },
 }
 </script>

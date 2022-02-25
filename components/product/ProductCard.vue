@@ -7,7 +7,6 @@
                 </div>
                 <button class="product__card-bookmark">
                   <icon-bookmark />
-                    <!-- <img src="@/assets/images/icons/bookmarks-icon.svg" alt=""> -->
                 </button>
               </div>
               <img class="product__card-img" src="@/assets/images/products/products-1.jpg" alt="">
@@ -40,6 +39,6 @@ export default {
     name: 'ProductCard',
     components: {
     IconBookmark,
-  }
+    },
 }
 </script>
