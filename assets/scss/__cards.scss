@@ -1,0 +1,58 @@
+.card {
+    &__inner {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 40px;
+        margin: 36px 0;  
+    }
+
+    &__item {
+        width: 260px;
+        height: 270px;
+        background-image: url(../images/catalog/catalog-1.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+
+        &-title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(0deg, rgba(61, 57, 53, 0.6), rgba(61, 57, 53, 0.6));
+            opacity: 0;
+            transition: all .2s linear;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 88.4%;
+            text-align: center;
+            color: #fff;
+        }
+
+        &:hover &-title{
+            opacity: 1;;
+        }
+    }
+}
+
+.clock {
+    &__title {
+        grid-column-start: 2;
+        grid-column-end: 5;
+        font-weight: bold;
+        font-size: 144px;
+        line-height: 88.4%;
+        text-transform: uppercase;
+        text-align: center;
+        color: #3D3935;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

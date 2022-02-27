@@ -4,6 +4,37 @@
             grid-gap: 20px;
         }
     }
+
+    .details {
+        &__inner {
+            grid-gap: 20px;
+        }
+    }
+
+    .card {
+        &__inner {
+            grid-gap: 20px;
+        }
+
+        &__item {
+            width: 100%;
+            height: 260px;
+        }
+    }
+}
+
+
+@media(max-width: 1150px) {
+    .details {
+        &__item {
+            width: 100%;
+            height: 240px;
+        }
+        &__design {
+            width: 100%;
+            height: 240px;
+        }
+    }
 }
 
 @media(max-width: 1100px) {
@@ -34,6 +65,23 @@
     .news {
         &__inner {
             grid-column-gap: 20px;
+        }
+    }
+
+    .details {
+        &__design {
+            &-text {
+                font-size: 16px;
+            }
+            &-btn {
+                padding: 5px 15px;
+            }
+        }
+
+        &__item {
+            &-title {
+                font-size: 20px;
+            }
         }
     }
 
@@ -85,6 +133,23 @@
         }
     }
 
+    .details {
+        &__design {
+            height: 200px;
+            &-text {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+        }
+
+        &__item {
+            height: 200px;
+            &-title {
+                font-size: 18px;
+            }
+        }
+    }
+
     .mailing {
         &__content {
             max-width: 400px;
@@ -93,6 +158,25 @@
         &__title {
             font-size: 35px;
             line-height: 40px;
+        }
+    }
+
+    .card {
+        &__inner {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &__item {
+            width: 100%;
+            height: 260px;
+        }
+    }
+
+    .clock {
+        &__title {
+            grid-column-start: 3;
+            grid-column-end: 4;
+            font-size: 50px;
         }
     }
 
@@ -146,6 +230,8 @@
             }
         }
     }
+
+    
 
     .footer {
         &__list {
@@ -244,6 +330,12 @@
         }
     }
 
+    .details {
+        &__inner {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
     .footer {
         padding-bottom: 20px ;
         &__left {
@@ -329,6 +421,7 @@
         }
     }
 
+    
     .footer {
         &__info {
             &-text {
@@ -343,6 +436,26 @@
         }
     }
 
+}
+
+@media(max-width: 700px) {
+    .card {
+        &__inner {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &__item {
+            height: 230px;
+        }
+    }
+
+    .clock {
+        &__title {
+            grid-column-start: 2;
+            grid-column-end: 3;
+            font-size: 50px;
+        }
+    }
 }
 
 @media(max-width: 670px) {
@@ -468,6 +581,12 @@
             }
         }
     }
+
+    .clock {
+        &__title {
+            font-size: 40px;
+        }
+    }
 }
 
 @media(max-width: 520px) {
@@ -522,6 +641,22 @@
             
         }
     }
+    
+    .card {
+        &__item{
+            height: 200px;
+            &-title {
+                font-size: 18px;
+            }
+        }
+    }
+
+    .clock {
+        &__title {
+            font-size: 30px;
+        }
+    }
+
 }
 
 @media(max-width: 470px) {
@@ -569,4 +704,20 @@
             margin-top: 20px;
         }
     }
+
+    .details {
+        &__design {
+            height: 150px;
+            padding: 5px 10px;
+
+            &-text {
+                font-size: 13px;
+                text-align: center;
+            }
+        }
+        &__item {
+            height: 150px;
+        }
+    }
+    
 }

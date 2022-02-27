@@ -72,7 +72,7 @@ button {
     outline: none;
     cursor: pointer;
     position: relative;
-
+    
     &::after {
       content: '';
       position: absolute;
@@ -108,7 +108,7 @@ button {
 .intro {
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center right;
+  background-position: center;
   min-height: 727px;
   display: flex;
   flex-direction: column;

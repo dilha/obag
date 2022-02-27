@@ -1,7 +1,7 @@
 <template>
 <div>
   <app-header />
-  <app-intro bgImg="assets/images/intro/main-intro.jpg"/>
+  <app-intro bgImg="assets/images/intro/main-intro.jpg" />
   <app-season />
   <app-like />
   <app-mid-flash />

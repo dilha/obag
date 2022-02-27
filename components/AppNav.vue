@@ -2,59 +2,59 @@
     <nav class="nav">
       <ul class="nav__list">
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/season">
             Mid Season Sale
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/collection">
             Коллекции
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/season">
             Сумки
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/clock">
             Часый
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/season">
             Очки
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/season">
             Аксессуары
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/season">
             Обувь
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/season">
             Gift card
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/season">
             Каталог
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/season">
             Конструктор
-          </a>
+          </nuxt-link>
         </li>
         <li class="nav__item">
-          <a class="nav__link" href="#?">
+          <nuxt-link class="nav__link" to="/season">
             Контакты
-          </a>
+          </nuxt-link>
         </li>
       </ul>
     </nav>

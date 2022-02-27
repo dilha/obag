@@ -12,12 +12,12 @@ export default {
     props:{
         bgImg:{
             type:String,
-        }
+        },
     },
     methods:{
         getImage(path){
             return require('@/' + path)
-        }
+        },
     }
 }
 </script>
