@@ -1,5 +1,6 @@
 <template>
     <section class="intro" :style="{backgroundImage:`url(${getImage(bgImg)})`}">
+        <slot></slot>
         <button class="intro__btn">
             Смотреть
         </button>

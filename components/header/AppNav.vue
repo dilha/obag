@@ -18,21 +18,21 @@
         </li>
         <li class="nav__item">
           <nuxt-link class="nav__link" to="/clock">
-            Часый
+            Часы
           </nuxt-link>
         </li>
         <li class="nav__item">
-          <nuxt-link class="nav__link" to="/season">
+          <nuxt-link class="nav__link" to="/glasses">
             Очки
           </nuxt-link>
         </li>
         <li class="nav__item">
-          <nuxt-link class="nav__link" to="/season">
+          <nuxt-link class="nav__link" to="/accessories">
             Аксессуары
           </nuxt-link>
         </li>
         <li class="nav__item">
-          <nuxt-link class="nav__link" to="/season">
+          <nuxt-link class="nav__link" to="/shoes">
             Обувь
           </nuxt-link>
         </li>

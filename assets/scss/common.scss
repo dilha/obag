@@ -113,9 +113,31 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: end;
+  justify-content: center;
   padding-bottom: 44px;
   margin-bottom: 60px;
+  position: relative;
+
+  &__title {
+    font-weight: bold;
+    font-size: 96px;
+    line-height: 88.4%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    max-width: 1100px;
+  }
+
+  &__text {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    max-width: 620px;
+    margin-top: 35px;
+  }
+
   &__btn{
     font-size: 14px;
     line-height: 21px;
@@ -124,5 +146,8 @@ button {
     background: #D05871;
     border-radius: 100px;
     border: none;
+    position: absolute;
+    bottom: 44px;
+    display: inline-block;
   }
 }

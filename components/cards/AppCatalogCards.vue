@@ -1,5 +1,5 @@
 <template>
-    <div class="catalog page__block">
+    <section class="catalog page__block">
         <div class="container">
             <div class="catalog__top page__block-top">
                 <h3 class="catalog__title page__title">
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>

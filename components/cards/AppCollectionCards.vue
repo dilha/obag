@@ -1,5 +1,5 @@
 <template>
-    <div class="collection">
+    <section class="collection page__block">
         <div class="container">
             <div class="card__inner">
                 <div class="card__item" v-for="collection in collections" :key="collection" :style="{backgroundImage:`url(${getImage(collection.bgImg)})`}">
@@ -9,7 +9,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>

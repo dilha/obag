@@ -1,7 +1,7 @@
 <template>
-    <a class="header__logo" href="#?">
+    <nuxt-link class="header__logo" to="/">
         <img src="~/assets/images/logo.png" alt="O bag">
-    </a>
+    </nuxt-link>
 </template>
 
 <script>

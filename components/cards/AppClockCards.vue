@@ -1,5 +1,5 @@
 <template>
-    <div class="clock">
+    <section class="clock page__block">
         <div class="container">
             <div class="card__inner">
                 <div class="card__item" v-for="clock in clocks" :key="clock" :style="{backgroundImage:`url(${getImage(clock.bgImg)})`}">
@@ -12,7 +12,7 @@
                 </h3>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
