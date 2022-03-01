@@ -120,6 +120,17 @@
         }
     }
 
+    .intro {
+        &__title {
+            font-size: 70px;
+        }
+
+        &__text {
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+
     .footer {
         &__inner {
             grid-column-gap: 20px;
@@ -279,6 +290,17 @@
         }
     }
 
+    .history {
+        &__title {
+            font-size: 40px;
+        }
+
+        &__text {
+            font-size: 16px;
+            margin: 20px 0;
+        }
+    }
+
     .footer {
         &__list {
             text-align: center;
@@ -315,6 +337,16 @@
 
     .product__card {
         margin: 0 auto;
+    }
+
+    .intro {
+        &__title {
+            font-size: 70px;
+        }
+
+        &__text {
+            margin-top: 20px;
+        }
     }
 }
 
@@ -361,7 +393,17 @@
         &__btn {
             padding: 15px 40px;
         }
+
+        &__title {
+            font-size: 50px;
+        }
+
+        &__text {
+            font-size: 14px;
+            margin-top: 10px;
+        }
     }
+    
 
     .news {
         &__title {
@@ -379,6 +421,16 @@
     .details {
         &__inner {
             grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .mission {
+        &__content {
+            padding: 30px 0;
+        }
+
+        &__text {
+            font-size: 16px;
         }
     }
 
@@ -467,6 +519,21 @@
         }
     }
 
+    .history {
+        &__content {
+            padding: 30px 0 !important;
+        }
+
+        &__title {
+            font-size: 30px;
+        }
+        
+        &__text {
+            font-size: 14px;
+            margin: 15px 0;
+        }
+    }
+
     
     .footer {
         &__info {
@@ -535,6 +602,19 @@
         }
     }
 
+    .mission {
+        &__content {
+            padding: 15px 0;
+        }
+
+        &__text {
+            font-size: 14px;
+            &+& {
+                margin-top: 15px;
+            }
+        }
+    }
+
     .footer {
         &__info {
             &-text {
@@ -600,6 +680,12 @@
 
         &__img {
             height: 250px;
+        }
+    }
+
+    .intro {
+        &__title {
+            font-size: 40px;
         }
     }
 
@@ -738,6 +824,19 @@
         }
     }
 
+    .mission {
+        &__title {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        &__text {
+            &+& {
+                margin-top: 10px;
+            }
+        }
+    }
+
 }
 
 @media(max-width: 470px) {
@@ -745,6 +844,20 @@
         &__img {
             width: 100px;
             height: 100px;
+        }
+    }
+
+    .history {
+        &__content {
+            padding: 15px 0 !important;
+        }
+
+        &__title {
+            font-size: 20px;
+        }
+        
+        &__text {
+            font-size: 13px;
         }
     }
 

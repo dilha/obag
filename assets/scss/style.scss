@@ -1,6 +1,7 @@
 @import "../css/reset.css";
 @import "./common.scss";
 @import "./__header.scss";
+@import "./_intro.scss";
 @import "./main/__season.scss";
 @import "./__product-card.scss";
 @import "./__will-like.scss";
@@ -15,8 +16,11 @@
 @import "./__combination.scss";
 
 @import "./__history.scss";
+@import "./_mission.scss";
+
+@import "./_about.scss";
+
 
 @import "./__footer.scss";
-
 
 @import "./_media.scss";

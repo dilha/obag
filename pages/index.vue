@@ -19,7 +19,7 @@ import AppSeason from "~/components/main/AppSeason.vue";
 import AppLike from "~/components/AppLike.vue";
 import AppMidFlash from "~/components/main/AppMidFlash.vue";
 import AppInsta from "~/components/main/AppInsta.vue";
-import AppNews from "~/components/AppNews.vue";
+import AppNews from "~/components/news/AppNews.vue";
 import AppMail from "~/components/AppMail.vue";
 import AppFooter from "~/components/AppFooter.vue";
 

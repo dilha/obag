@@ -17,7 +17,7 @@ import AppIntroButton from "~/components/intro/AppIntroButton.vue";
 import AppDetailsCards from "~/components/AppDetailsCards.vue";
 import AppCatalogCards from "~/components/cards/AppCatalogCards.vue";
 import AppLike from "~/components/AppLike.vue";
-import AppNews from "~/components/AppNews.vue";
+import AppNews from "~/components/news/AppNews.vue";
 import AppMail from "~/components/AppMail.vue";
 import AppFooter from "~/components/AppFooter.vue";
 

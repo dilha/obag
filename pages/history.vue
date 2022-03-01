@@ -8,7 +8,7 @@
         </app-intro>
         <section class="history">
           <div class="container">
-            <div class="history__content">
+            <div class="history__content page__block">
               <h3 class="history__title page__title">
                 O bag: инновационная итальянская марка, создавшая революцию в индустрии сумок
               </h3>
@@ -42,10 +42,10 @@
               <p class="history__text">
                 Эта философия означает, что клиент O bag становится частью творческого процесса. Создавая свою личную комбинацию, покупатель еще больше подчеркивает уникальность и оригинальность, которые являются отличительной чертой бренда.
               </p>
-              <img class="history__img" src="" alt="">
+              <img class="history__img" src="@/assets/images/history/history-1.jpg" alt="">
             </div>
-            <div class="history__content">
-              <h3 class="history__title">
+            <div class="history__content page__block">
+              <h3 class="history__title page__title">
                 Миссия
               </h3>
               <p class="history__text">
@@ -54,7 +54,7 @@
               <p class="history__text">
                 O bag верит в поддержку своего региона Венето и активно развивается во всем мире. Благодаря подходу, ориентированному на будущее, O bag быстро выявляет тенденции и развивает их со своей молодой, талантливой командой. Важность командного духа отражена в его упорном и столь молодом управлении, которое стремится сделать O bag стандартом для итальянского и международного бизнеса и розничной торговли, от создания продукта до его распространения и обслуживания клиентов. С 2012 года O bag принимает участие в развитии розничной торговли по всему миру.
               </p>
-              <img class="history__img" src="" alt="">
+              <img class="history__img" src="@/assets/images/history/history-2.jpg" alt="">
               <p class="history__text">
                 Сегодня O bag представлен более чем в 50 странах, с сетью свыше 400 фирменных или франчайзинговых магазинов, а также с широким оптовым покрытием более чем в 500 мультибрендовых магазинах. Концепция магазина основана на простом, чистом, оптимизированном пространстве, отражает философию бренда и расширяет возможности продукта, предлагает покупателям лучший опыт покупок. 
               </p>
@@ -62,10 +62,7 @@
                 Магазины можно найти в торговых центрах самых оживленных городов в мире:  Рим, Венеция, Барселона, Париж, Варшава, Брюссель, Вена, Киев, Майами, Монреаль, Манила, Дели, Йоханнесбург, Сантьяго-де-Чили, Плайя-дель-Кармен и Китай, с 20 магазинами в Пекине, Шанхае и Чэнду.
               </p>
               <div class="history__inner">
-                <img class="history__inner-img" src="" alt="">
-                <img class="history__inner-img" src="" alt="">
-                <img class="history__inner-img" src="" alt="">
-                <img class="history__inner-img" src="" alt="">
+                <img class="history__img" src="@/assets/images/history/history-3.jpg" alt="">
               </div>
             </div>
           </div>
@@ -79,7 +76,7 @@
 <script>
 import AppHeader from "~/components/header/AppHeader.vue";
 import AppIntro from "~/components/intro/AppIntro.vue";
-import AppNews from "~/components/AppNews.vue";
+import AppNews from "~/components/news/AppNews.vue";
 import AppMail from "~/components/AppMail.vue";
 import AppFooter from "~/components/AppFooter.vue";
 

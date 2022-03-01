@@ -1,7 +1,4 @@
 .history {
-    &__content {
-
-    }
 
     &__title {
         line-height: 108%;
@@ -13,5 +10,10 @@
         line-height: 170%;
         color: #3D3935;
         margin: 35px 0;
+    }
+
+    &__img {
+        width: 100%;
+        height: auto;
     }
 }
