@@ -1,6 +1,5 @@
 <template>
     <div>
-        <app-header />
         <app-intro bgImg="assets/images/intro/history-intro.jpg"> 
           <h3 class="intro__title">
               История и миссия компании O bag
@@ -68,26 +67,18 @@
           </div>
         </section>
         <app-news />
-        <app-mail />
-        <app-footer />
     </div>
 </template>
 
 <script>
-import AppHeader from "~/components/header/AppHeader.vue";
 import AppIntro from "~/components/intro/AppIntro.vue";
 import AppNews from "~/components/news/AppNews.vue";
-import AppMail from "~/components/AppMail.vue";
-import AppFooter from "~/components/AppFooter.vue";
 
 export default {
   name: 'CollectionPage',
   components: {
-    AppHeader,
     AppIntro,
     AppNews,
-    AppMail,
-    AppFooter,
   },
 }
 </script>

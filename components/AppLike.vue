@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="will__like-inner">
-        <product-card v-for="item in 4" :key="item"/>
+        <product-card v-for="item in items" :key="item" :item="item"/>
       </div>
       <button class="will__like-button page__border-btn">
         Открыть полный каталог
@@ -38,5 +38,35 @@ export default {
     components: {
       ProductCard,
     },
+    data() {
+      return {
+        items: [
+          {
+            title: "Женская сумка O bag Unique Сангрия",
+            priceOld: "1990.00 грн.",
+            priceNew: "1393.00 грн",
+            image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
+          },
+          {
+            title: "Женская сумка O bag Unique Сангрия",
+            priceOld: "1990.00 грн.",
+            priceNew: "1393.00 грн",
+            image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
+          },
+          {
+            title: "Женская сумка O bag Unique Сангрия",
+            priceOld: "1990.00 грн.",
+            priceNew: "1393.00 грн",
+            image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
+          },
+          {
+            title: "Женская сумка O bag Unique Сангрия",
+            priceOld: "1990.00 грн.",
+            priceNew: "1393.00 грн",
+            image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
+          },
+        ]
+      }
+    }
 }
 </script>

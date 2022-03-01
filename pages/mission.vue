@@ -1,6 +1,5 @@
 <template>
     <div>
-        <app-header />
         <app-intro bgImg="assets/images/intro/history-intro.jpg"> 
           <h3 class="intro__title">
               Социальная миссия O bag
@@ -59,26 +58,19 @@
             </div>
         </div>
         <app-news />
-        <app-mail />
-        <app-footer />
     </div>
 </template>
 
 <script>
-import AppHeader from "~/components/header/AppHeader.vue";
 import AppIntro from "~/components/intro/AppIntro.vue";
 import AppNews from "~/components/news/AppNews.vue";
-import AppMail from "~/components/AppMail.vue";
-import AppFooter from "~/components/AppFooter.vue";
+
 
 export default {
   name: 'MissionPage',
   components: {
-    AppHeader,
     AppIntro,
     AppNews,
-    AppMail,
-    AppFooter,
   },
 }
 </script>

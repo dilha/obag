@@ -13,4 +13,65 @@
             }
         }
     }
+
+    &__products {
+        &-title {
+            margin-bottom: 64px;
+        }
+    }
+
+    &__content {
+        &-title {
+            font-size: 48px;
+            line-height: 66px;
+        }
+    }
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__item {
+        padding: 60px 0;
+        max-width: 660px;
+        margin-right: 40px;
+        &-text {
+            font-size: 18px;
+            line-height: 170%;
+            color: #3D3935;
+            margin: 35px 0;
+            span {
+                font-weight: bold;
+            }
+        }
+
+        &-btn {
+            &+& {
+                margin-left: 25px;
+            }
+        }
+
+        &-img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__all {
+        margin-top: 100px 0;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 170%;
+        color: #000000;
+
+        &-text {
+            margin: 35px 0;
+        }
+
+        &-list {
+            list-style: inside;
+        }
+    }
 }

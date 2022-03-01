@@ -33,6 +33,15 @@
             height: 500px;
         }
     }
+
+    .contacts {
+        &__content {
+            &-title {
+                font-size: 35px;
+                line-height: 45px;
+            }
+        }
+    }
 }
 
 
@@ -130,6 +139,49 @@
             line-height: 20px;
         }
     }
+
+    .about {
+        &__products {
+            &-title {
+                margin-bottom: 40px;
+            }
+        }
+        &__item {
+            padding: 30px 0;
+            &-text {
+                font-size: 15px;
+                margin: 20px 0;
+            }
+            &-img {
+                height: 400px;
+            }
+        }
+    }
+
+    .contacts {
+
+        &__inner {
+            align-items: flex-start;
+        }
+        
+        &__content {
+            &-title {
+                font-size: 30px;
+                line-height: 40px;
+            }
+        }
+
+        &__form {
+            &-input,
+            &-textarea {
+                padding: 10px 15px;
+            }
+
+            &-btn {
+                padding: 10px 30px;
+            }
+        }
+    } 
 
     .footer {
         &__inner {
@@ -300,6 +352,58 @@
             margin: 20px 0;
         }
     }
+
+    .about {
+
+        &__brand {
+            &-text {
+                font-size: 16px;
+                line-height: 120%;
+            }
+        }
+
+        &__products {
+            &-title {
+                margin-bottom: 40px;
+            }
+        }
+        &__item {
+            padding: 30px 0;
+            &-text {
+                font-size: 13px;
+                line-height: 15px;
+                margin: 15px 0;
+            }
+            &-img {
+                height: 300px;
+            }
+        }
+    }
+
+    .contacts {
+        &__content {
+            &-title {
+                font-size: 20px;
+                line-height: 30px;
+            }
+
+            &-text {
+                font-size: 15px;
+            }
+
+            &-item {
+                padding-left: 30px;
+
+                &+& {
+                    margin-top: 20px;
+                }
+                &::before {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+        }
+    } 
 
     .footer {
         &__list {
@@ -576,6 +680,28 @@
             line-height: 30px;
         }
     }
+
+    .contacts {
+        &__content {
+            &-title {
+                font-size: 15px;
+                line-height: 20px;
+            }
+
+
+            &-item {
+                padding-left: 30px;
+
+                &+& {
+                    margin-top: 10px;
+                }
+                &::before {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    } 
 }
 
 @media(max-width: 670px) {
@@ -611,6 +737,36 @@
             font-size: 14px;
             &+& {
                 margin-top: 15px;
+            }
+        }
+    }
+
+    .about {
+        &__inner {
+            flex-direction: column-reverse;
+        }
+
+        &__products {
+            &-title {
+                font-size: 35px;
+                margin-bottom: 20px;
+            }
+        }
+        &__content {
+            &-title {
+                font-size: 30px;
+            }
+        }
+        &__item {
+            padding: 10px 0;
+            &-text {
+                font-size: 13px;
+                line-height: 15px;
+                margin: 15px 0;
+            }
+            &-img {
+                width: 300px;
+                height: 300px;
             }
         }
     }
@@ -688,6 +844,20 @@
             font-size: 40px;
         }
     }
+
+    .contacts {
+        &__inner {
+            flex-direction: column;
+            align-items: center;
+        }
+        &__content {
+            margin-bottom: 20px;
+            &-title {
+                font-size: 20px;
+                line-height: 30px;
+            }
+        }
+    } 
 
     .footer {
         &__list {
@@ -837,6 +1007,19 @@
         }
     }
 
+    .about {
+        &__all {
+            margin-top: 50px 0;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 120%;
+            color: #000000;
+    
+            &-text {
+                margin: 20px 0;
+            }
+        }
+    }
 }
 
 @media(max-width: 470px) {
@@ -861,6 +1044,19 @@
         }
     }
 
+    .contacts {
+        &__form {
+            &-label {
+                font-size: 12px;
+                line-height: 18px;
+            }
+
+            &-btn {
+                margin-top: 15px;
+            }
+        }
+    }
+
 }
 
 @media(max-width: 400px) {
@@ -880,6 +1076,37 @@
     .mid__flash {
         &-img {
             width: 50%;
+        }
+    }
+
+    .about {
+        &__inner {
+            flex-direction: column-reverse;
+        }
+
+        &__products {
+            &-title {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+        }
+        &__content {
+            &-title {
+                font-size: 25px;
+            }
+        }
+        &__item {
+            &-img {
+                width: 250px;
+                height: 250px;
+            }
+
+            &-btn {
+                padding: 10px 15px;
+                &+& {
+                    margin-left: 10px;
+                }
+            }
         }
     }
 

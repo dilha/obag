@@ -1,6 +1,5 @@
 <template>
     <div>
-        <app-header />
         <app-intro-arrow> 
           <h3 class="intro__title intro__title-arrow">
               Информация
@@ -18,26 +17,18 @@
           </div>
         </div>
         <app-news />
-        <app-mail />
-        <app-footer />
     </div>
 </template>
 
 <script>
-import AppHeader from "~/components/header/AppHeader.vue";
 import AppIntroArrow from "~/components/intro/AppIntroArrow.vue";
 import AppNews from "~/components/news/AppNews.vue";
-import AppMail from "~/components/AppMail.vue";
-import AppFooter from "~/components/AppFooter.vue";
 
 export default {
   name: 'MissionPage',
   components: {
-    AppHeader,
     AppIntroArrow,
     AppNews,
-    AppMail,
-    AppFooter,
   },
 }
 </script>

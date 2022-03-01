@@ -10,6 +10,10 @@
     padding-bottom: 44px;
     margin-bottom: 60px;
     position: relative;
+
+    &-red {
+      background-color: #D05871;
+    }
   
     &__season {
       position: relative !important;
@@ -19,7 +23,7 @@
     &__title {
       font-weight: bold;
       font-size: 96px;
-      line-height: 88.4%;
+      line-height: 100.4%;
       text-align: center;
       text-transform: uppercase;
       color: #FFFFFF;
@@ -55,7 +59,7 @@
 
     &__arrow {
         position: absolute;
-        bottom: 0;
+        bottom: 44px;
     }
 
   }

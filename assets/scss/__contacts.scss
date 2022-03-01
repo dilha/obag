@@ -1,0 +1,151 @@
+.contacts {
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__content {
+        margin-right: 20px;
+        &-item {
+            text-align: left;
+            position: relative;
+            padding-left: 60px;
+
+            &+&{
+                margin-top: 35px;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        &-message {
+            &::before {
+                background-image: url(../images/icons/message-icon.svg);
+            }
+        }
+        &-phone {
+            &::before {
+                background-image: url(../images/icons/call-icon.svg);
+            }
+        }
+        &-clock {
+            &::before {
+                background-image: url(../images/icons/cloc-icon.svg);
+            }
+        }
+
+        &-title {
+            font-weight: bold;
+            font-size: 48px;
+            line-height: 66px;
+            text-transform: uppercase;
+            color: #3D3935;
+        }
+
+        &-text {
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 120%;
+            color: #9C9C9C;
+        }
+    }
+
+    &__form {
+        max-width: 460px;
+        &-input,
+        &-textarea {
+            outline: none;
+            border: 1px solid #9C9C9C;
+            padding: 16px 24px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            color: #9C9C9C;
+            display: block;
+            width: 100%;
+            &+& {
+                margin-top: 12px;
+            }
+
+            &::placeholder {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
+                color: #9C9C9C;
+            }
+        }
+
+        &-checkbox {
+            position: relative;
+            display: flex;
+            margin-top: 20px;
+        }
+
+        &-check {
+            appearance: none;
+        }
+
+        &-check:checked + &-label::after {
+            opacity: 1;
+        }
+
+        &-label {
+            display: inline-block;
+            font-size: 14px;
+            line-height: 20px;
+            color: #9C9C9C;
+            padding-left: 30px;
+            user-select: none;
+            cursor: pointer;
+
+            &::before {
+                content: '';
+                display: block;
+                width: 24px;
+                height: 24px;
+                background: #FFFFFF;
+                border: 1px solid #9C9C9C;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+            }
+
+            &::after {
+                content: '';
+                opacity: 0;
+                display: block;
+                width: 15px;
+                height: 12px;
+                background-image: url(../images/icons/check-icon.svg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: absolute;
+                top: 6px;
+                left: 5px;
+                z-index: 2;
+                transition: opacity .1s linear;
+            }
+        }
+
+        &-textarea {
+            height: 155px;
+            resize: none;
+        }
+
+        &-btn {
+            margin-top: 35px;
+        }
+
+    }
+}

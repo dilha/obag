@@ -1,42 +1,65 @@
 <template>
     <div>
-        <app-header />
         <app-intro-arrow> 
           <h3 class="intro__title intro__title-arrow">
               Информация о продукции O bag
           </h3>
         </app-intro-arrow>
-        <div class="about__brand">
+        <div class="about__products">
           <div class="container">
-            <p class="about__brand-text">
-              <span>O bag</span> - современный, динамичный и дальновидный итальянский бренд аксессуаров. Компания была основана и построена на успехе одноименных модульных и полностью комбинируемых сумок, изготовленных из инновационного сверхлегкого материала XL Extralight®. Материал превратил изделия в настоящие культовые аксессуары, а также стал преимущественной особенностью бренда. 
-            </p>
-            <p class="about__brand-text">
-              <span>O bag</span> существует на рынке более 10 лет и признан ведущим брендом в создании индивидуального стиля. Сегодня ассортимент продукции варьируется от сумок до часов, солнцезащитных очков, обуви и даже линии Home, в которую входят лампы и контейнеры для хранения продуктов, созданные в сотрудничестве с Guzzini. O bag - это бренд, основанный на дизайне. Сегодня это признанное модное имя. Его любят все поколения, которые ценят возможность создавать и выражать свой собственный стиль.
-            </p>
+            <h3 class="about__products-title page__title">
+              Сумки
+            </h3>
+            <div class="about__content">
+              <h4 class="about__content-title page__title">
+                O bag и O bag mini
+              </h4>
+              <div class="about__inner">
+                <div class="about__item">
+                  <p class="about__item-text">
+                    <span>O bag и O bag mini</span> - это знаковые сумки бренда, появившиеся на свет в 2012 году. Благодаря своей уникальной форме и простому дизайну, сумка O bag стала символом бренда, названного в ее честь. Использование XL Extralight® позволяет сочетать функциональность, надежность и легкость. O bag стала «пионером» в кастомизации. Это необходимая вещь для любой женщины, которая любит создавать и персонализировать собственный стиль.Обе сумки можно изменять благодаря сменным компонентам, таким как: ручки, подкладки, внутренние карманы, манжеты и накладки. Комплект легко собирать - он преображается за несколько минут. Корпус XL Extralight® - полужесткий, вместительный и удобный, его можно комбинировать с различными аксессуарами, что делает эту модель универсальным вариантом для любого случая: похода по магазинам, работы или отдыха. Корпуса O bag classic и O bag mini также бывают с различными текстурами, которые получаются с помощью специальной обработки.
+                  </p>
+                  <button class="about__item-btn page__border-btn">
+                    O bag
+                  </button>
+                  <button class="about__item-btn page__border-btn">
+                    O bag mini
+                  </button>
+                </div>
+                <img class="about__item-img" src="@/assets/images/about/about-1.jpg" alt="">
+              </div>
+            </div>
+            <div class="about__content">
+              <h4 class="about__content-title page__title">
+                О bag urban
+              </h4>
+              <div class="about__inner">
+                <div class="about__item">
+                  <p class="about__item-text">
+                    <span>O bag urban</span> -  это большая, удобная и вместительная сумка для жизни в современном городе. Она идеально подходит для динамичных, активных и ярких женщин. O bag urban - эргономичная модель с сафьяновой текстурой. Ее можно носить как в руках так и на плече: с золотыми или серебряными цепочками и элементами, которые выполнены из экокожи. Также эта модель доступна в версии matelassé, созданной по специальной технологии, это придает сумке необычайно утонченный стеганый эффект.
+                  </p>
+                  <button class="about__item-btn page__border-btn">
+                    O bag urban
+                  </button>
+                </div>
+                 <img class="about__item-img" src="@/assets/images/about/about-2.jpg" alt="">
+              </div>
+            </div>
           </div>
         </div>
         <app-news />
-        <app-mail />
-        <app-footer />
     </div>
 </template>
 
 <script>
-import AppHeader from "~/components/header/AppHeader.vue";
 import AppIntroArrow from "~/components/intro/AppIntroArrow.vue";
 import AppNews from "~/components/news/AppNews.vue";
-import AppMail from "~/components/AppMail.vue";
-import AppFooter from "~/components/AppFooter.vue";
 
 export default {
-  name: 'MissionPage',
+  name: 'AboutProductPage',
   components: {
-    AppHeader,
     AppIntroArrow,
     AppNews,
-    AppMail,
-    AppFooter,
   },
 }
 </script>
