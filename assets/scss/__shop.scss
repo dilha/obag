@@ -1,0 +1,35 @@
+.shop {
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 40px;
+    margin: 35px 0 50px;
+  }
+
+  &__item {
+    &-img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 16px;
+    }
+  
+    &-title {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 132%;
+      color: #3D3935;
+      margin-bottom: 16px;
+    }
+  
+    &-text {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #9C9C9C;
+      span {
+        color: #3D3935;
+      }
+    }
+  }
+
+}

@@ -3,13 +3,13 @@
     <app-intro-arrow>
       <h3 class="intro__title intro__title-arrow">Доставка и оплата</h3>
     </app-intro-arrow>
-    <div class="delivery">
+    <div class="delivery inside">
       <div class="container">
         <p class="delivery__text">
           Осуществить покупку в интернет-магазине obag.ua можно из любой точки
           Украины. Доступны несколько вариантов получения заказа:
         </p>
-        <div class="delivery__block">
+        <div class="delivery__block inside__block">
           <h3 class="delivery__title page__title">УПАКОВКА</h3>
           <p class="delivery__text">
             Теперь получать и дарить O bag стало еще удобнее и приятнее! Мы
@@ -55,7 +55,7 @@
             />
           </div>
         </div>
-        <div class="delivery__block">
+        <div class="delivery__block inside__block">
           <h3 class="delivery__title page__title">
             ОТПРАВКА КОМПАНИЕЙ «НОВАЯ ПОЧТА»
           </h3>
@@ -87,7 +87,7 @@
              Все расходы по доставке товара и денежных средств обратно оплачивает заказчик. Более детальную информацию об условиях доставки перевозчика «Новая Почта» Вы можете найти на официальном сайте компании.
           </p>
         </div>
-        <div class="delivery__block">
+        <div class="delivery__block inside__block">
           <h3 class="delivery__title page__title">
             ОПЛАТА ТОВАРА
           </h3>
@@ -112,9 +112,9 @@
           </p>
           <div class="delivery__phone">
             <p class="delivery__text">За дополнительной информацией обращайтесь по телефону: </p>
-            <strong class="delivery__tel">
+            <p class="delivery__tel">
               +38 (044) 333 43 42
-            </strong>
+            </p>
           </div>
         </div>
       </div>
@@ -135,3 +135,5 @@ export default {
   },
 }
 </script>
+
+

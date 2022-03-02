@@ -1,0 +1,120 @@
+.vacancies {
+
+  &__form {
+    max-width: 940px;
+
+    &-box {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-gap: 15px;
+    }
+  }
+
+  &__textarea {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    resize: none;
+    height: 100px;
+  }
+
+  &__input,
+  &__textarea {
+      outline: none;
+      border: 1px solid #9C9C9C;
+      padding: 16px 24px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #9C9C9C;
+      display: block;
+      width: 100%;
+     
+      &::placeholder {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 21px;
+          color: #9C9C9C;
+      }
+  }
+
+    &__checkbox {
+        position: relative;
+        display: flex;
+        margin-top: 20px;
+    }
+
+    &__check {
+        appearance: none;
+    }
+
+    &__check:checked + &__label::after {
+        opacity: 1;
+    }
+
+    &__label {
+        display: inline-block;
+        font-size: 14px;
+        line-height: 20px;
+        color: #9C9C9C;
+        padding-left: 30px;
+        user-select: none;
+        max-width: 660px;
+        cursor: pointer;
+
+        &::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 24px;
+            background: #FFFFFF;
+            border: 1px solid #9C9C9C;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        &::after {
+            content: '';
+            opacity: 0;
+            display: block;
+            width: 15px;
+            height: 12px;
+            background-image: url(../images/icons/check-icon.svg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: absolute;
+            top: 6px;
+            left: 5px;
+            z-index: 2;
+            transition: opacity .1s linear;
+        }
+    }
+
+    &__download {
+      font-size: 14px;
+      line-height: 21px;
+      text-decoration-line: underline;
+      color: #D05871;
+      display: inline-block;
+      margin: 25px 0;
+      padding-left: 30px;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        background-image: url(../images/icons/download-icon.svg);
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    &__btn {
+      margin-top: 24px;
+    }
+
+}

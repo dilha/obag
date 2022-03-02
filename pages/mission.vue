@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-intro bgImg="assets/images/intro/history-intro.jpg"> 
+        <app-intro bg-img="assets/images/intro/history-intro.jpg"> 
           <h3 class="intro__title">
               Социальная миссия O bag
           </h3>

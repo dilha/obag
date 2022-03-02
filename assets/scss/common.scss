@@ -33,11 +33,18 @@ button {
   cursor: pointer;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 .page {
   &__title {
     font-weight: bold;
     font-size: 64px;
-    line-height: 88.4%;
+    line-height: 100%;
     text-transform: uppercase;
     color: #3D3935;
   }
