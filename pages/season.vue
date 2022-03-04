@@ -10,7 +10,7 @@
 
 <script>
 import AppIntroButton from "~/components/intro/AppIntroButton.vue";
-import AppDetailsCards from "~/components/AppDetailsCards.vue";
+import AppDetailsCards from "~/components/cards/AppDetailsCards.vue";
 import AppCatalogCards from "~/components/cards/AppCatalogCards.vue";
 import AppLike from "~/components/AppLike.vue";
 import AppNews from "~/components/news/AppNews.vue";

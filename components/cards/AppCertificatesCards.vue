@@ -1,0 +1,31 @@
+<template>
+    <div class="certificates__item">
+        <img class="certificates__item-img" :src="item.image" alt="">
+        <h6 class="certificates__item-title">
+            {{item.title}}
+        </h6>
+        <p class="certificates__item-price">
+            {{item.price}}
+        </p>
+        <div class="certificates__item-bottom">
+            <button class="page__basket-btn certificates__item-basket">
+                В корзину
+            </button>
+            <a class="certificates__item-link" href="#?">
+                Подробнее
+            </a>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'ProductCard',
+    props: {
+      item: {
+        type: Object,
+        require: true,
+      },
+    },
+}
+</script>

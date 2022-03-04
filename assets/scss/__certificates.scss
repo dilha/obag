@@ -1,0 +1,50 @@
+.certificates {
+    
+    &__inner {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 40px;
+    }
+
+    &__item {
+        &-img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 16px;
+        }
+
+        &-title,
+        &-price {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 132%;
+        }
+
+        &-title {
+            color: #3D3935;
+            margin-bottom: 20px;
+        }
+
+        &-price {
+            color: #D05871;
+            margin-bottom: 20px;
+        }
+
+        &-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &-button {
+            margin-right: 10px;
+        }
+
+        &-link {
+            font-size: 14px;
+            line-height: 17px;
+            text-decoration-line: underline;
+            color: #D05871;
+        }
+    }
+}
