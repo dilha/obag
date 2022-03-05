@@ -18,11 +18,6 @@
 <script>
 export default {
     name: 'AppSeason',
-    methods:{
-        getImage(path){
-            return require('@/' + path)
-        }
-    },
     data() {
       return {
         items: [
@@ -34,6 +29,11 @@ export default {
           },
         ]
       }
+    },
+    methods:{
+        getImage(path){
+            return require('@/' + path)
+        }
     }
 }
 </script>

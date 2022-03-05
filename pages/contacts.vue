@@ -2,8 +2,7 @@
     <div>
         <app-intro-arrow> 
           <h3 class="intro__title intro__title-arrow">
-              Информация
-              о бренде O bag
+              Контакты компании O bag
           </h3>
         </app-intro-arrow>
         <div class="contacts">
@@ -56,9 +55,9 @@
                         <input class="contacts__form-input" type="text" placeholder="Ваша фамилия*">
                         <input class="contacts__form-input" type="text" placeholder="E-mail*">
                         <input class="contacts__form-input" type="text" placeholder="Номер телефона*">
-                        <textarea class="contacts__form-textarea" name="" id="" cols="30" rows="10" placeholder="Сообщение*"></textarea>
+                        <textarea id="" class="contacts__form-textarea" name="" cols="30" rows="10" placeholder="Сообщение*"></textarea>
                         <div class="contacts__form-checkbox">
-                            <input class="contacts__form-check" type="checkbox" id="check">
+                            <input id="check" class="contacts__form-check" type="checkbox">
                             <label class="contacts__form-label" for="check">
                                 Как заинтересованная сторона, ознакомившись с Политикой конфиденциальности, я даю согласие на обработку моих личных данных для ответа на мой запрос к O bag
                             </label>

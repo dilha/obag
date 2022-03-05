@@ -37,12 +37,12 @@
           </nuxt-link>
         </li>
         <li class="nav__item">
-          <nuxt-link class="nav__link" to="/season">
+          <nuxt-link class="nav__link" to="/certificates">
             Gift card
           </nuxt-link>
         </li>
         <li class="nav__item">
-          <nuxt-link class="nav__link" to="/season">
+          <nuxt-link class="nav__link" to="/catalog">
             Каталог
           </nuxt-link>
         </li>
@@ -52,7 +52,7 @@
           </nuxt-link>
         </li>
         <li class="nav__item">
-          <nuxt-link class="nav__link" to="/season">
+          <nuxt-link class="nav__link" to="/contacts">
             Контакты
           </nuxt-link>
         </li>
