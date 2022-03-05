@@ -17,4 +17,9 @@
         justify-content: end;
         align-items: center;
     }
+
+    &__slider {
+        max-width: 260px;
+        overflow: hidden;
+    }
 }

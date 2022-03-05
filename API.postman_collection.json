@@ -1,0 +1,581 @@
+{
+	"info": {
+		"_postman_id": "520e93f2-5b4f-411d-94b6-8c0e3e468a2b",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tkn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"rusio\",\r\n    \"email\":\"rus@rus.rus\",\r\n    \"password\":\"root\",\r\n    \"password_confirmation\":\"root\",\r\n    \"phone\":\"+77471700444\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{link}}/register",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\":\"+77471700444\",\r\n    \"password\":\"root\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bag.a-lux.dev/api/login",
+							"protocol": "https",
+							"host": [
+								"bag",
+								"a-lux",
+								"dev"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tkn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/logout",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pages",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/index",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"index"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/category/3",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"category",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subcategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/subcategory/1",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"subcategory",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filtered products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\":[1,2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{link}}/subcategory/1/filtered",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"subcategory",
+								"1",
+								"filtered"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/products/search/a",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"products",
+								"search",
+								"a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "history",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/page/history",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"page",
+								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/page/mission",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"page",
+								"mission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "brand info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/page/brand-info",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"page",
+								"brand-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recomended products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/recomendedProducts",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"recomendedProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/get-categories",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"get-categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get news",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/page/get-news",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"page",
+								"get-news"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "constructor",
+			"item": [
+				{
+					"name": "constructor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/constructor/watch",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"constructor",
+								"watch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/constructor/category/1",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"constructor",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "callback send",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"sanya\",\r\n    \"surname\":\"serishev\",\r\n    \"email\":\"user@gmail.com\",\r\n    \"phone\":\"+77777777777\",\r\n    \"text\":\"some text\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{link}}/callback/send",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"callback",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favourite add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tkn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/product/2/favourite",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"product",
+								"2",
+								"favourite"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "favourites",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tkn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/user/favourites",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"user",
+								"favourites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tkn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"rusia\",\r\n    \"email\":\"rus@rus.rus\",\r\n    \"address\":\"shigabudinova 8\",\r\n    \"date_of_birth\":\"01/01/01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{link}}/user/edit",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"user",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "history",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tkn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/user/history",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"user",
+								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{link}}/user",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tkn}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":3,\r\n    \"address\":\"shigabudinova 8\",\r\n    \"name\":\"admin\",\r\n    \"phone\":\"+77777777777\",\r\n    \"email\":\"rusrabotyaga@gmail.com\",\r\n    \"price\":15250,\r\n    \"bonus_waste\":0,\r\n    \"delivery_type\":\"mail\",\r\n    \"payment_type\":\"card\",\r\n    \"cart_elements\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"quantity\": 3,\r\n            \"price\":100,\r\n            \"title\":\"productio\"\r\n        },\r\n        {\r\n            \"constructor_element_id\": 1,\r\n            \"quantity\": 3,\r\n            \"price\":100,\r\n            \"title\":\"constructorio\"\r\n        },\r\n        {\r\n            \"certificate_id\": 1,\r\n            \"quantity\": 3,\r\n            \"price\":100,\r\n            \"title\":\"certificatio\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{link}}/cart/store",
+							"host": [
+								"{{link}}"
+							],
+							"path": [
+								"cart",
+								"store"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

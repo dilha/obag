@@ -27,6 +27,17 @@
         background-position: 90%;
         background-color: #f6f6f6;
         background-repeat: no-repeat;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        color: #9C9C9C;
+
+        &::placeholder {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            color: #9C9C9C;
+        }
     }
 
     &__link {
