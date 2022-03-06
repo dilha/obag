@@ -1,11 +1,14 @@
 <template>
   <div>
     <app-intro-button bg-img="assets/images/intro/main-intro.jpg" />
+    <button @click="show">hello world</button>
     <app-season />
     <app-like />
     <app-mid-flash />
     <app-insta />
     <app-news />
+    <!-- <app-modal-products v-if="modalShow" @close="close" /> -->
+    <app-modal-contacts v-if="modalShow" @close="close" />
   </div>
 </template>
 
@@ -16,6 +19,8 @@ import AppLike from '~/components/AppLike.vue'
 import AppMidFlash from '~/components/main/AppMidFlash.vue'
 import AppInsta from '~/components/main/AppInsta.vue'
 import AppNews from '~/components/news/AppNews.vue'
+// import AppModalProducts from '~/components/modal/AppModalProducts.vue'
+import AppModalContacts from "~/components/modal/AppModalContacts.vue"
 
 export default {
   name: 'IndexPage',
@@ -26,6 +31,23 @@ export default {
     AppMidFlash,
     AppInsta,
     AppNews,
+    // AppModalProducts,
+    AppModalContacts
   },
+  data() {
+    return {
+      modalShow: false,
+    }
+  },
+  methods: {
+    show() {
+      this.modalShow = true;
+    },
+    close() {
+      this.modalShow = false;
+    }
+  }
+    
+
 }
 </script>

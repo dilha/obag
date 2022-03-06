@@ -1,0 +1,93 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 105px;
+  padding-bottom: 50px;
+  min-height: 100vh;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.4);
+
+  &__close {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+  }
+
+  &__container {
+    max-width: 615px;
+    padding: 35px 64px;
+    margin: 0 auto;
+    background-color: #fff;
+  }
+
+  &__top {
+    margin-bottom: 24px;
+    &-title {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 132%;
+      color: #3D3935;
+      position: relative;
+      padding-left: 32px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        transform: translateY(-50%);
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-image: url(../images/icons/black-arrow.svg);
+        width: 24px;
+        height: 24px;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+
+  &__contacts {
+    &-title {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 132%;
+      color: #3D3935;
+      padding: 24px 0;
+      border-top: 1px solid #F6F6F6;
+      border-bottom: 1px solid #F6F6F6;
+    }
+
+    input {
+      width: 100%;
+        background: #F6F6F6;
+        border-radius: 100px;
+        padding: 17px 24px 17px 64px;
+        border: none;
+        outline: none;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAE9SURBVHgBlVLbbYNAEOQw8E0HoYOQDlyCO7ARAomvJBUYSvAXEiCRDuJUEDoIJbgEvnlmBnMWQcRRVlrfmtvZnZ09ocwsz3OzbduDqqqP06eq7/sPz/MKZWFCBlmW7Yid/pYEwS24DS+apnGCILj8AE6gd/hps9mEjuNUMiGOY0vX9U/GuHuSd4L0uq77EkIUrus6yopJ8DxHxQzsZtV1HSm/GCkOw3CC79hIArecYc5/zTRNe8NhYlZrBI58hbgLosnZoPgVCFAFCvZfwCRJxhzkXgsgOOO00zTd3gOi0zOOi9ypOgUFOudUbw00FT1Aj5uAGn+4XMpNB6UI55kzsZBhGHuwCpmHPT5I4O3lMAnKhei8XzSkBuxk4u4ID7HLSCxpTe/Vpnp4GKXv++WMMgsfUehVKP80gF+o7Df/zJ2q/BFUhgAAAABJRU5ErkJggg==);
+        background-position: 24px;
+        background-color: #f6f6f6;
+        background-repeat: no-repeat;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        color: #9C9C9C;
+
+        &::placeholder {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            color: #9C9C9C;
+        }
+    }
+    input + input {
+      margin-top: 16px;
+    }
+  }
+  
+}
