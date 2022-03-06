@@ -1,0 +1,41 @@
+.parts {
+    display: flex;
+    align-items: center;
+    
+    & + & {
+      padding-top: 24px;
+      margin-top: 24px;
+      border-top: 1px solid #F6F6F6;
+    }
+
+  &__img {
+    margin-right: 40px;
+    width: 160px;
+    height: 160px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 132%;
+    color: #3D3935;
+    margin-bottom: 8px;
+  }
+
+  &__number {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+
+    P:first-child  {
+      margin-right: 16px;
+    }
+  }
+
+  &__price {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    color: #D05871;
+  }
+}

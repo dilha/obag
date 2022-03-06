@@ -13,12 +13,12 @@
             placeholder="Введите Ваше ФИО"
           />
           <input
-            class="modal__contacts-name"
+            class="modal__contacts-phone"
             type="number"
             placeholder="Введите Ваш номер телефона"
           />
           <input
-            class="modal__contacts-name"
+            class="modal__contacts-email"
             type="email"
             placeholder="Введите Ваш почтовый адрес"
           />

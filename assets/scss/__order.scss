@@ -3,6 +3,7 @@
     &-item {
       display: flex;
       align-items: flex-start;
+      position: relative;
       padding: 24px 0;
       border-top: 1px solid #F6F6F6;
       border-bottom: 1px solid #F6F6F6;
@@ -13,6 +14,10 @@
       margin-right: 15px;
       object-fit: cover;
       object-position: center;
+    }
+
+    &-content {
+      max-width: 260px;
     }
 
     &-title {
@@ -40,6 +45,9 @@
       border: none;
       background: none;
       padding: 0;
+      position: absolute;
+      top: 24px;
+      right: 0;
     }
 
     &-number {
@@ -85,6 +93,11 @@
       div {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+
+        p {
+          max-width: 50%;
+        }
       }
 
       div + div {
