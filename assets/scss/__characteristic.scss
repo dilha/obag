@@ -74,6 +74,8 @@
   &__buttons {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   &__buy {
@@ -85,6 +87,7 @@
     background: #D05871;
     border: none;
     border-radius: 100px;
+    margin-bottom: 24px;
   }
 
   &__link {
@@ -94,6 +97,7 @@
     color: #D05871;
     padding-left: 32px;
     position: relative;
+    margin-bottom: 24px;
 
     &::before {
       content: '';
@@ -120,7 +124,7 @@
   }
 
   &__info {
-    margin: 24px 0;
+    margin-bottom: 24px;
     padding: 24px 0;
     border-top: 1px solid #F6F6F6;
     border-bottom: 1px solid #F6F6F6;
@@ -128,6 +132,8 @@
     &-buttons {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     &-btn {
@@ -138,6 +144,7 @@
       font-size: 12px;
       line-height: 15px;
       color: #9C9C9C;
+      margin-bottom: 15px;
 
       &.active {
         background: #FFD0DA;
@@ -151,6 +158,9 @@
 
     &-text {
       display: flex;
+    }
+
+    &-text + &-text {
       margin-top: 16px;
     }
 
@@ -186,6 +196,14 @@
       line-height: 132%;
       color: #9C9C9C;
       padding: 25px 0;
+
+      ol {
+        margin: 16px 0 24px;
+        padding-left: 15px;
+        li + li {
+          margin-top: 15px;
+        }
+      }
     }
   }
 
