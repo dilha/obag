@@ -20,6 +20,14 @@
 
     &__slider {
         max-width: 260px;
-        overflow: hidden;
+        position: relative;
+        margin-right: 50px;
+
+        &-btn {
+            &::after {
+                display: none;
+            }
+            z-index: 100;
+        }
     }
 }

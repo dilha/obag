@@ -86,33 +86,39 @@
             </div>
           </div>
           <div class="characteristic__accordion">
-            <div class="characteristic__accordion-title">Оплата и доставка</div>
-            <div class="characteristic__accordion-text">
-              <p>Варианты оплаты заказа:</p>
-              <ol>
-               <li>Оплата после получения</li>
-                <li>
-                  Оплата через приложение WayForPay которое дает возможность
-                  оплатить карточкой или оформить оплату частями от Monobank или
-                  ПриватБанк
-                </li>
-              </ol>
-              <p>
-                Доставка осуществляется по территории Украины и может занимать
-                от 2 до 5 дней. На срок доставки могут повлиять праздничные дни
-                и периоды акций и распродаж, о чем мы сообщаем дополнительно.
-                Наша Служба по работе с клиентами работает ежедневно. После
-                размещения заказа на сайте, мы свяжемся с вами и согласуем
-                детали доставки, если иное не указано в примечании к вашему
-                заказу.
-              </p>
+            <div class="characteristic__accordion-title" @click="toggleShowAccordionFirst">
+              Оплата и доставка <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="">
             </div>
+            <transition name="fade">
+              <div v-if="showAccordionFirst" class="characteristic__accordion-text">
+                <p>Варианты оплаты заказа:</p>
+                <ol>
+                <li>Оплата после получения</li>
+                  <li>
+                    Оплата через приложение WayForPay которое дает возможность
+                    оплатить карточкой или оформить оплату частями от Monobank или
+                    ПриватБанк
+                  </li>
+                </ol>
+                <p>
+                  Доставка осуществляется по территории Украины и может занимать
+                  от 2 до 5 дней. На срок доставки могут повлиять праздничные дни
+                  и периоды акций и распродаж, о чем мы сообщаем дополнительно.
+                  Наша Служба по работе с клиентами работает ежедневно. После
+                  размещения заказа на сайте, мы свяжемся с вами и согласуем
+                  детали доставки, если иное не указано в примечании к вашему
+                  заказу.
+                </p>
+              </div>
+            </transition>
           </div>
-          <div class="characteristic__accordion">
+          <div class="characteristic__accordion" @click="toggleShowAccordionSecond">
             <div class="characteristic__accordion-title">
               Поддержка Клиентов
+              <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="">
             </div>
-            <div class="characteristic__accordion-text">
+            <transition name="fade">
+            <div v-if="showAccordionSecond" class="characteristic__accordion-text">
               <p>Варианты оплаты заказа:</p>
               <ol>
                 <li>Оплата после получения</li>
@@ -132,6 +138,7 @@
                 заказу.
               </p>
             </div>
+            </transition>
           </div>
         </div>
       </div>
@@ -148,5 +155,29 @@ export default {
     IconBookmark,
     AppPartsCard,
   },
+  data() {
+    return {
+        showAccordionFirst: true,
+        showAccordionSecond: false,
+      };
+},
+  methods: {
+    toggleShowAccordionFirst() {
+      this.showAccordionFirst = !this.showAccordionFirst;
+    },
+    toggleShowAccordionSecond() {
+      this.showAccordionSecond = !this.showAccordionSecond;
+    }
+  }
+
 }
 </script>
+
+<style lang="scss">
+  .fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
+</style>

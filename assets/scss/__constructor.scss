@@ -1,0 +1,138 @@
+.constructor {
+  padding: 120px 0;
+  &__title {
+    color: #3D3935;
+    margin-bottom: 45px;
+    max-width: none;
+  }
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 30px;
+  }
+  &__item {
+    margin-bottom: 20px;
+    &-images {
+      background: linear-gradient(180deg, #F3F3F3 0%, #F6F6F6 0.01%);
+      border-radius: 5px;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    &-title {
+      font-size: 14px;
+      line-height: 21px;
+      color: #9C9C9C;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0 50px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__btn {
+    margin-bottom: 20px;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__product {
+    margin-right: 20px;
+    &-title {
+      font-weight: bold;
+      font-size: 64px;
+      line-height: 88.4%;
+      text-transform: uppercase;
+      color: #3D3935;
+      margin-bottom: 50px;
+    }
+  }
+
+  &__card {
+    text-align: center;
+    &-img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      border: 1px solid #000000;
+    }
+    &-buttons {
+      display: flex;
+      align-items: center;
+      margin: 35px 0;
+      justify-content: center;
+    }
+    &-arrow {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      font-size: 14px;
+      line-height: 21px;
+      color: #3D3935;
+      svg {
+        width: 55px;
+        height: 55px;
+      }
+    }
+  }
+
+  &__selected {
+    margin-top: 70px;
+    &-title {
+      font-size: 18px;
+      line-height: 132%;
+      color: #3D3935;
+      margin-bottom: 33px;
+      font-weight: 600;
+    }
+
+    &-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #F6F6F6;
+      border-bottom: 1px solid #F6F6F6;
+      padding: 24px 0;
+    }
+
+    &-btn {
+      background: #D05871;
+      border: 2px solid #D05871;
+      border-radius: 100px;
+      padding: 16px 24px;
+      margin-top: 24px;
+      font-size: 14px;
+      line-height: 17px;
+      color: #FFFFFF;
+    }
+  }
+
+  &__elements {
+    &-title {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 132%;
+      color: #3D3935;
+      max-width: 245px;
+      margin-bottom: 56px;
+    }
+    &-inner {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 40px;
+    }
+  }
+
+}

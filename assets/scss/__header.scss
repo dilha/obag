@@ -162,6 +162,7 @@
         line-height: 21px;
         color: #3D3935;
         transition: color .2s linear;
+        cursor: pointer;
 
         &:hover {
             color: #D05871;
@@ -169,3 +170,55 @@
     }
 }
 
+.burger {
+    position: absolute;
+    bottom: 10px;
+    margin: 10px 0;
+    display: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 100;
+
+    &.active {
+        .burger-line {
+            opacity: 0;
+            transition: opacity 0s;
+        }
+
+        &::after {
+            width: 45px;
+            transform: translateY(-16px) rotate(-135deg);
+        }
+
+        &::before {
+            transform: translateY(13px) rotate(135deg);
+        }
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        transition: transform .2s linear;
+        width: 45px;
+        height: 4px;
+        background-color: #3D3935;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    &::after {
+        margin-bottom: 0;
+    }
+
+    &-line {
+        background-color: #3D3935;
+        width: 45px;
+        height: 4px;
+        display: block;
+        margin-bottom: 10px;
+        transition: opacity .7s;
+    }
+}

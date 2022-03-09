@@ -1,8 +1,15 @@
 .catalog {
   padding: 60px 0 120px;
 
+  &__title {
+    margin-right: 20px;
+    margin-bottom: 10px;
+
+  }
+
   &__page {
     display: flex;
+    justify-content: space-between;
   }
 
   &__content {
@@ -11,9 +18,42 @@
 
   &__top {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
+  }
+
+  &__model {
+    max-width: 860px;
+    overflow: hidden; 
+    margin-bottom: 35px;
+    &-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    &-btn {
+      background: none;
+      border: none;
+    }
+    &-slider {
+         display: flex;
+         transform: margin-left .5s ease;
+    }
+    &-item {
+      img {
+        width: 40px;
+        height: 50px;
+      }
+    }
+    &-item + &-item {
+      margin-left: 30px;
+      padding-left: 30px;
+      border-left: 1px solid #f6f6f6;
+    }
   }
 
   &__sorting {
@@ -37,6 +77,7 @@
 
 .sorting {
   position: relative;
+  z-index: 10;
   &__header {
       background: #F6F6F6;
       border-radius: 100px;
@@ -88,7 +129,7 @@
 }
 
 .aside {
-  max-width: 265px;
+  width: 265px;
   
   input {
     outline: none;
@@ -98,7 +139,7 @@
     &-input {
       background: #F6F6F6;
       border-radius: 100px;
-      width:260px;
+      width:100%;
       padding: 7px 32px 7px 16px;
       border: none;
       outline: none;
@@ -123,9 +164,7 @@
   &__checkbox {
     position: relative;
     display: flex;
-    &+& {
       margin-top: 20px;
-    }
   }
 
   &__check {
@@ -188,7 +227,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    user-select: none;
   }
 
   &__price {
@@ -216,6 +255,7 @@
       justify-content: space-between;
       align-items: center;
       position: relative;
+      margin-top: 16px;
 
       &::before {
         content: '';
@@ -223,7 +263,7 @@
         top: 50%;
         left: 50%;
         transform: translateY(-50%) translateX(-50%);
-        width: 48px;
+        width: 15%;
         height: 1px;
         background: #9C9C9C;
       }

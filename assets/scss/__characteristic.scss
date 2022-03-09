@@ -181,7 +181,6 @@
   }
 
   &__accordion {
-    border-bottom: 1px solid #F6F6F6;
     & + & {
       margin-top: 24px;
     }
@@ -190,12 +189,19 @@
       font-size: 14px;
       line-height: 17px;
       color: #D05871;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
     }
     &-text {
       font-size: 14px;
       line-height: 132%;
       color: #9C9C9C;
       padding: 25px 0;
+    border-bottom: 1px solid #F6F6F6;
+
 
       ol {
         margin: 16px 0 24px;

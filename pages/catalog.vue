@@ -11,6 +11,7 @@
       <div class="catalog__page">
         <catalog-aside />
         <div class="catalog__content">
+          <catalog-model />
           <div class="catalog__inner">
             <product-card v-for="item in items" :key="item" :item="item" />
           </div>
@@ -25,6 +26,7 @@
 // import axios from 'axios'
 import SortingSelect from '~/components/catalog/SortingSelect.vue'
 import CatalogAside from '~/components/catalog/CatalogAside.vue'
+import CatalogModel from "~/components/catalog/CatalogModel.vue"
 import ProductCard from '~/components/product/ProductCard.vue'
 import AppNews from '~/components/news/AppNews.vue'
 export default {
@@ -32,6 +34,7 @@ export default {
   components: {
     SortingSelect,
     CatalogAside,
+    CatalogModel,
     ProductCard,
     AppNews,
   },
