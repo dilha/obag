@@ -14,6 +14,7 @@
 
   &__content {
     margin-left: 40px;
+    max-width: 860px;
   }
 
   &__top {
@@ -25,8 +26,6 @@
   }
 
   &__model {
-    max-width: 860px;
-    overflow: hidden; 
     margin-bottom: 35px;
     &-top {
       display: flex;
@@ -34,24 +33,12 @@
       align-items: center;
       margin-bottom: 16px;
     }
-
     &-btn {
       background: none;
       border: none;
     }
-    &-slider {
-         display: flex;
-         transform: margin-left .5s ease;
-    }
-    &-item {
-      img {
-        width: 40px;
-        height: 50px;
-      }
-    }
     &-item + &-item {
-      margin-left: 30px;
-      padding-left: 30px;
+      padding-left: 4%;
       border-left: 1px solid #f6f6f6;
     }
   }
