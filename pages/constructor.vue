@@ -71,11 +71,8 @@
         <div class="constructor__product">
           <h3 class="constructor__product-title">O bag Classic</h3>
           <div class="constructor__card">
-            <img
-              class="constructor__card-img"
-              src="@/assets/images/constructor/constructor-card.svg"
-              alt=""
-            />
+            <div class="constructor__card-img" :style="{backgroundImage:`${cardBg} ${corpBg}`}">
+            </div>
             <div class="constructor__card-buttons">
               <button class="constructor__card-arrow constructor__card-prev">
                 Предыдущий <icon-arrow-prev />
@@ -101,7 +98,15 @@
         <div class="constructor__elements">
           <h6 class="constructor__elements-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
           <div class="constructor__elements-inner">
-            <product-card v-for="item in items" :key="item" :item="item"/>
+            <div v-for="element in elements" :key="element.id" class="constructor__elements-item" @click="addElement(element)">
+              <h6>
+                {{element.title}}
+              </h6>
+              <img :src="element.image" alt="">
+              <p class="constructor__elements-price">
+                {{element.price}}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -122,7 +127,7 @@ import IconUrban from '~/components/icons/constructor-icons/IconUrban.vue'
 import IconArrowNext from '~/components/icons/slider-arrows/IconArrowNext.vue'
 import IconArrowPrev from '~/components/icons/slider-arrows/IconArrowPrev.vue'
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
-import ProductCard from '~/components/product/ProductCard.vue'
+
 export default {
   name: 'ConstructorPage',
   components: {
@@ -138,10 +143,14 @@ export default {
     IconArrowNext,
     IconArrowPrev,
     AppPartsCard,
-    ProductCard,
+
   },
   data() {
     return {
+      cardBg: 'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp)',
+      corpBg: '',
+      handleBg: '',
+
       items: [
         {
           title: 'Женская сумка O bag Unique Сангрия',
@@ -186,7 +195,40 @@ export default {
             'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
         },
       ],
+      elements: [
+        {
+          id: 1,
+          title: '',
+          image: 'https://obag.ua/image/cache/wp/gj/Glam/Body/OBAGB034_EVS00_132-150x150.webp',
+          price: '1400',
+          bg: 'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Body/OBAGB001_EVS00_055_NOTAG_UNICA_100_obag-655x655.webp'
+        },
+        {
+          id: 2,
+          title: '',
+          image: 'https://obag.ua/image/cache/wp/gj/Glam/Body/OBAGB034_EVS00_133-150x150.webp',
+          price: '1450',
+          bg: 'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Body/OBAGB001_EVS00_071_NOTAG_UNICA_100_obag-655x655.webp'
+        },
+        {
+          id: 3,
+          title: '',
+          image: 'https://obag.ua/image/cache/wp/gj/Glam/Body/OBAGB034_EVS00_602-150x150.webp',
+          price: '1000',
+          bg: 'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Body/OBAGB001_EVS00_071_NOTAG_UNICA_100_obag-655x655.webp'
+        },
+      ]
     }
   },
+  methods: {
+    addElement(element) {
+      this.cardBg = null;
+      this.corpBg = element.bg;
+      console.log(this.corpBg)
+      console.log(this.cardBg)
+    },
+  }
+
+  
 }
 </script>

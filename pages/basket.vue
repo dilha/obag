@@ -15,7 +15,7 @@
       </div>
     </section>
     <app-news />
-  </div>
+  </div> 
 </template>
 
 <script>

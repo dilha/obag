@@ -4,7 +4,7 @@
         <span class="burger-line"></span>
       </div>
       <ul class="nav__list" :class="{'active':IsNavShow}">
-          <nuxt-link v-for="link in links" :key="link" tag="li" class="nav__item nav__link" :to="link.src">
+          <nuxt-link v-for="link in links" :key="link.id" tag="li" class="nav__item nav__link" :to="link.src">
             {{link.text}}
           </nuxt-link>
       </ul>

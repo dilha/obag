@@ -250,10 +250,17 @@
     }
 
     .constructor {
+        &__card {
+            &-img {
+                height: 400px;
+            }
+        }
         &__inner {
             grid-gap: 10px;
         }
     }
+
+
 
     .footer {
         &__inner {
@@ -603,8 +610,7 @@
             &-img {
                 width: 560px;
                 height: 560px;
-                object-fit: cover;
-                object-position: center;
+                margin: 0 auto;
             }
 
         }
@@ -1486,7 +1492,7 @@
     &__card {
         &-img {
             width: 100%;
-            height: auto;
+            height: 400px;
         }
     }
     }

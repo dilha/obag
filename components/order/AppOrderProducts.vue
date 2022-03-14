@@ -1,5 +1,5 @@
 <template>
-  <div class="order__products-item">
+  <div v-if="item" class="order__products-item">
     <img
       class="order__products-img"
       src="@/assets/images/products/products-1.jpg"

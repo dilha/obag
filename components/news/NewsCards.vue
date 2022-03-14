@@ -1,5 +1,5 @@
 <template>
-    <div v-if="item" class="news__item">
+    <div  v-if="item" class="news__item">
         <img class="news__item-img" :src="item.image" alt="">
         <div class="news__item-title">
         {{item.title}}

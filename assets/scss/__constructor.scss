@@ -63,7 +63,10 @@
     text-align: center;
     &-img {
       width: 100%;
-      height: auto;
+      height: 560px;
+      background-size: contain;
+      background-position: 50%;
+      background-repeat: no-repeat;
       border-radius: 20px;
       border: 1px solid #000000;
     }
@@ -130,7 +133,7 @@
     }
     &-inner {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       grid-gap: 40px;
     }
   }
