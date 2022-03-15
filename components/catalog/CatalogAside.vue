@@ -1,6 +1,5 @@
 <template>
   <div class="aside">
-    {{ selectedCategories }}
     <form class="aside__form">
       <div class="aside__search aside__block">
         <input class="aside__search-input" type="text" placeholder="Поиск" />
@@ -40,10 +39,11 @@
           >
             <input
               :id="category.id"
+              name="category"
               class="aside__check"
               type="checkbox"
-              :data-id="category.id"
-              @change="selectCategory"
+              :checked="selectedCategory.id === category.id"
+              @change="loadAllCategoryProducts(category)"
             />
             <label class="aside__label" :for="category.id">
               {{ category.title }}
@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import { actionTypes } from '@/store/catalog'
 
 export default {
@@ -123,47 +123,30 @@ export default {
       showProduct: false,
       showDiscount: false,
       showColor: false,
-      defaultSelectedCategory: null,
     }
   },
   computed: {
-    ...mapState('catalog', ['categories', 'selectedCategories']),
-  },
-  watch: {
-    categories: {
-      handler() {
-        if (this.categories?.length) {
-          this.defaultSelectedCategory = this.categories[0]?.id
-        }
-      },
+    ...mapState('catalog', ['categories']),
+    ...mapGetters('catalog', ['selectedCategory']),
+    defaultCategory() {
+      return this.categories.length > 0 ? this.categories[0] : null
     },
-    // defaultSelectedCategory:{
-    //   handler(){
-    //     const subCategories = this.categories
-    //     this.addSubCategories()
-    //   }
-    // }
   },
+
   mounted() {
-    this.loadAllCategories()
+    this.loadAllCategories().then((categories) => {
+      console.log('START lODING PORDUCTS ASAID')
+      // if (categories?.legnth > 0) {
+      this.loadAllCategoryProducts(this.selectedCategory)
+      // }
+    })
   },
   methods: {
     ...mapActions('catalog', {
       loadAllCategories: actionTypes.loadAllCategories,
-      addSelectedCategory: actionTypes.addSelectedCategory,
-      removeSelectedCategory: actionTypes.removeSelectedCategory,
+      loadAllCategoryProducts: actionTypes.loadAllCategoryProducts,
     }),
-    selectCategory({ target }) {
-      const id = target.dataset?.id
-      if (target.checked) {
-        console.log(id, target.checked)
-        this.addSelectedCategory(id)
-      }
-      if (!target.checked) {
-        console.log('remove call')
-        this.removeSelectedCategory(id)
-      }
-    },
+
     togglePrice() {
       this.showPrice = !this.showPrice
     },

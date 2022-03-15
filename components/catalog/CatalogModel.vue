@@ -18,15 +18,17 @@
       </div>
     </div>
     <swiper
-      v-if="defaultSubCategories"
+      v-if="selectedCategory"
       ref="reviewsSlider"
       class="catalog__model-slider"
       :options="swiperOption"
     >
       <swiper-slide
-        v-for="item in testSlider"
+        v-for="item in selectedCategory.subcategories"
         :key="item.id"
         class="catalog__model-item"
+        :data-id="item.id"
+        @click.native.stop="loadAllSubCategoryProducts(item.id)"
       >
         <img :src="item.image" :alt="item.title" />
       </swiper-slide>
@@ -35,73 +37,56 @@
 </template>
 
 <script>
-// import IconClassic from '~/components/icons/constructor-icons/IconClassic.vue'
-import { mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { actionTypes } from '~/store/catalog'
 
 export default {
   name: 'CatalogModel',
-  components: {
-    // IconClassic,
-  },
+  components: {},
   data() {
     return {
       swiperOption: {
         slideTo: 1,
-        on: {
-          click: () => {
-            // this.readAllReviews(e.realIndex)
-          },
-        },
+        slidesPerView: 10,
+        responsive: true,
+        // on: {
+        //   click: ({ target }) => {
+        //     console.log('FROM SWIPER OPT', target)
+        //     this.loadAllSubCategoryProducts(target.dataset.id)
+        //   },
+        // },
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',
         },
-        breakpoints: {
-          1000: {
-            slidesPerView: 11,
-          },
-          700: {
-            slidesPerView: 8,
-          },
-          350: {
-            slidesPerView: 6,
-          },
-          300: {
-            slidesPerView: 4,
-          },
-        },
+        // breakpoints: {
+        //   1000: {
+        //     slidesPerView: 11,
+        //   },
+        //   700: {
+        //     slidesPerView: 8,
+        //   },
+        //   350: {
+        //     slidesPerView: 6,
+        //   },
+        //   300: {
+        //     slidesPerView: 4,
+        //   },
+        // },
       },
-      images: [],
     }
   },
   computed: {
-    ...mapGetters('catalog', ['defaultSubCategories']),
+    ...mapState('catalog', ['selectedCategory']),
     swiper() {
       return this.$refs.reviewsSlider?.$swiper
     },
-    testSlider() {
-      const test2 = [...this.defaultSubCategories]
-      const test3 = [...test2, ...this.defaultSubCategories]
-      const test4 = [...test3, ...this.defaultSubCategories]
-      return test4
-    },
   },
-  mounted() {
-    // this.slideTotalCount = this.swiper.slides.length
-    // this.activeSlideIndex = this.swiper.activeIndex + 1
-    // this.pageCount = Math.ceil(
-    //   this.swiper.slides.length / this.swiper.params.slidesPerView
-    // )
-  },
+  mounted() {},
   methods: {
-    // prevSlide() {
-    //   this.swiper.slidePrev()
-    //   this.activeSlideIndex = this.swiper.activeIndex + 1
-    // },
-    // nextSlide() {
-    //   this.swiper.slideNext()
-    //   this.activeSlideIndex = this.swiper.activeIndex + 1
-    // },
+    ...mapActions('catalog', {
+      loadAllSubCategoryProducts: actionTypes.loadAllSubCategoryProducts,
+    }),
   },
 }
 </script>
