@@ -40,6 +40,12 @@
 
   &__btn {
     margin-bottom: 20px;
+
+    &.active {
+      background-color: #FFD0DA;
+      border-color: #FFD0DA;
+      color: #D05871;
+    }
   }
 
   &__container {

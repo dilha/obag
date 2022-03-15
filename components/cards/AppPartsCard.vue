@@ -1,5 +1,5 @@
 <template>
-  <div class="parts">
+  <div v-if="items" class="parts">
     <img class="parts__img" src="@/assets/images/parts/parts-1.jpg" alt="" />
     <div class="parts__content">
       <div class="parts__title">Корпус O bag classic Песок</div>
@@ -15,5 +15,11 @@
 <script>
 export default {
   name: 'AppPartsCard',
+  props: {
+    items: {
+      type: Object,
+      require: true,
+    }
+  }
 }
 </script>
