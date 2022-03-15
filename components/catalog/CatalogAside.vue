@@ -1,8 +1,9 @@
 <template>
   <div class="aside">
+    {{ selectedCategories }}
     <form class="aside__form">
       <div class="aside__search aside__block">
-        <input class="aside__search-input" type="text" placeholder="Поиск">
+        <input class="aside__search-input" type="text" placeholder="Поиск" />
       </div>
       <div class="aside__price aside__block">
         <div class="aside__top" @click="togglePrice">
@@ -14,8 +15,12 @@
           />
         </div>
         <div v-if="showPrice" class="aside__body aside__price-body">
-          <input class="aside__price-input aside__price-from" type="text" placeholder="0 ₸"/>
-          <input class="aside__price-input" type="text" value="15.000 ₸"/>
+          <input
+            class="aside__price-input aside__price-from"
+            type="text"
+            placeholder="0 ₸"
+          />
+          <input class="aside__price-input" type="text" value="15.000 ₸" />
         </div>
       </div>
       <div class="aside__product aside__block">
@@ -27,26 +32,22 @@
             alt=""
           />
         </div>
-        <div v-if="showProduct" class="aside__body">
-          <div class="aside__checkbox">
-            <input id="bags" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="bags"> Сумки </label>
-          </div>
-          <div class="aside__checkbox">
-            <input id="clock" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="clock"> Часы </label>
-          </div>
-          <div class="aside__checkbox">
-            <input id="glasses" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="glasses"> Очки </label>
-          </div>
-          <div class="aside__checkbox">
-            <input id="accessories" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="accessories"> Аксессуары </label>
-          </div>
-          <div class="aside__checkbox">
-            <input id="shoes" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="shoes"> Обувь </label>
+        <div v-if="!showProduct && categories.length" class="aside__body">
+          <div
+            v-for="category of categories"
+            :key="category.id"
+            class="aside__checkbox"
+          >
+            <input
+              :id="category.id"
+              class="aside__check"
+              type="checkbox"
+              :data-id="category.id"
+              @change="selectCategory"
+            />
+            <label class="aside__label" :for="category.id">
+              {{ category.title }}
+            </label>
           </div>
         </div>
       </div>
@@ -111,29 +112,70 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import { actionTypes } from '@/store/catalog'
+
 export default {
   name: 'CatalogAside',
   data() {
     return {
-        showPrice: false,
-        showProduct: false,
-        showDiscount: false,
-        showColor: false,
-    } 
+      showPrice: false,
+      showProduct: false,
+      showDiscount: false,
+      showColor: false,
+      defaultSelectedCategory: null,
+    }
+  },
+  computed: {
+    ...mapState('catalog', ['categories', 'selectedCategories']),
+  },
+  watch: {
+    categories: {
+      handler() {
+        if (this.categories?.length) {
+          this.defaultSelectedCategory = this.categories[0]?.id
+        }
+      },
+    },
+    // defaultSelectedCategory:{
+    //   handler(){
+    //     const subCategories = this.categories
+    //     this.addSubCategories()
+    //   }
+    // }
+  },
+  mounted() {
+    this.loadAllCategories()
   },
   methods: {
+    ...mapActions('catalog', {
+      loadAllCategories: actionTypes.loadAllCategories,
+      addSelectedCategory: actionTypes.addSelectedCategory,
+      removeSelectedCategory: actionTypes.removeSelectedCategory,
+    }),
+    selectCategory({ target }) {
+      const id = target.dataset?.id
+      if (target.checked) {
+        console.log(id, target.checked)
+        this.addSelectedCategory(id)
+      }
+      if (!target.checked) {
+        console.log('remove call')
+        this.removeSelectedCategory(id)
+      }
+    },
     togglePrice() {
-      this.showPrice = !this.showPrice;
+      this.showPrice = !this.showPrice
     },
     toggleProduct() {
-      this.showProduct = !this.showProduct;
+      this.showProduct = !this.showProduct
     },
     toggleDiscount() {
-      this.showDiscount = !this.showDiscount;
+      this.showDiscount = !this.showDiscount
     },
     toggleColor() {
-      this.showColor = !this.showColor;
-    }
-  }
+      this.showColor = !this.showColor
+    },
+  },
 }
 </script>
