@@ -1,16 +1,20 @@
 .about {
     &__brand {
         &-text {
-            font-size: 18px;
-            line-height: 170%;
-            color: #3D3935;
+            p {
+                font-size: 18px;
+                line-height: 170%;
+                color: #3D3935;
+            }
+
+            p + p {
+                margin-top: 35px;
+            }
+            
             span {
                 font-weight: bold;
             }
 
-            &+& {
-                margin-top: 35px;
-            }
         }
     }
 
