@@ -2,7 +2,7 @@
 export const state = ()=>({
   categories:[],
   products:[],
-  selectedCategories:[],
+  selectedCategory:null,
   error:null,
   isLoading:false,
 })
@@ -12,13 +12,17 @@ export const mutationTypes = {
   loadCategoriesSuccess:"mutation/loadCategoriesSuccess load categories success",
   loadCategoriesFailure:"mutation/loadCategoriesFailure loadCategoriesFailure",
 
-  addSelectedCategory:'mutation/addSelectedCategory add one category',
-  removeSelectedCategory:'mutation/removeSelectedCategory add one category'
+  setSelectedCategory:'mutation/setSelectedCategory',
+
+  loadProductsStart:'mutation/loadProductsStart',
+  loadProductsSuccess:'mutation/loadProductsSuccess',
+  loadProductsFailure:'mutation/loadProductsFailure',
+
 }
 export const actionTypes = {
   loadAllCategories:'action/loadAllCategories get all categories',
-  addSelectedCategory:'action/addSelectedCategory add category',
-  removeSelectedCategory:'action/removeSelectedCategory remove category'
+  loadAllCategoryProducts:'actions/loadAllCategoryProducts',
+  loadAllSubCategoryProducts:'actions/loadAllSubCategoryProducts'
 }
 
 export const mutations = {
@@ -33,13 +37,20 @@ export const mutations = {
     state.isLoading = false;
     state.error = payload;
   },
-  [mutationTypes.addSelectedCategory](state, payload){
-    console.log("WTFFFFFF")
-    state.selectedCategories = [...state.selectedCategories, payload]
+  [mutationTypes.setSelectedCategory](state, payload){
+    state.selectedCategory = payload;
   },
-  [mutationTypes.removeSelectedCategory](state, payload){
-      console.log("remove")
-    state.selectedCategories = state.selectedCategories.filter(c=>c.id !== payload)
+
+  [mutationTypes.loadProductsStart](state){
+    state.isLoading = true;
+  },
+  [mutationTypes.loadProductsSuccess](state, payload){
+    state.isLoading = false;
+    state.products = payload;
+  },
+  [mutationTypes.loadProductsFailure](state, payload){
+    state.isLoading = false;
+    state.error = payload;
   },
 }
 export const actions = {
@@ -52,7 +63,7 @@ export const actions = {
       .then((response)=>{
         const categories = response.data.categories;
         commit(mutationTypes.loadCategoriesSuccess, categories )
-        // console.log("CALING DATA", data)
+        commit(mutationTypes.setSelectedCategory, categories[0]);
         resolve(categories);
       })
       .catch((e)=>{
@@ -60,18 +71,48 @@ export const actions = {
       })
     })
   },
-  [actionTypes.addSelectedCategory]({commit}, id){
-    console.log(id)
-    commit(mutationTypes.addSelectedCategory, id);
+  [actionTypes.loadAllCategoryProducts]({commit}, category){
+
+    commit(mutationTypes.setSelectedCategory, category);
+    commit(mutationTypes.loadProductsStart);
+
+    return new Promise(resolve => {
+      this.$api
+      .get(`/category/${category.id}`)
+      .then((response)=>{
+        const products = response.data.category.products;
+        commit(mutationTypes.loadProductsSuccess, products )
+
+        resolve(products);
+      })
+      .catch((e)=>{
+        commit(mutationTypes.loadProductsFailure, e)
+      })
+    })
 
   },
-  [actionTypes.removeSelectedCategory]({commit}, id){
+  [actionTypes.loadAllSubCategoryProducts]({commit}, subCategoryId){
+      console.log("loading... sub")
+    commit(mutationTypes.loadProductsStart);
 
-    commit(mutationTypes.removeSelectedCategory, id);
+    return new Promise(resolve => {
+      this.$api
+      .get(`/subcategory/${subCategoryId}`)
+      .then((response)=>{
+        const products = response.data.subcategory.products;
+        commit(mutationTypes.loadProductsSuccess, products )
 
-  }
+        resolve(products);
+      })
+      .catch((e)=>{
+        commit(mutationTypes.loadProductsFailure, e)
+      })
+    })
+
+  },
 }
 
 export const getters={
-  defaultSubCategories:(state)=>state.categories[0]?.subcategories
+  selectedCategory:state=>state.selectedCategory ? state.selectedCategory : state.categories[0]
+  // selectedSubCategory:(state)=>state.categories.find(c=>c.id === state.selectedCategory.id)
 }

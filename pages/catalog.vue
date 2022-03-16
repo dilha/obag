@@ -12,10 +12,10 @@
         <catalog-aside />
         <div class="catalog__content">
           <catalog-model />
-          <div class="catalog__inner">
+          <div v-if="products" class="catalog__inner">
             <product-card
-              v-for="item in items"
-              :key="item.image"
+              v-for="item in products"
+              :key="item.id"
               :item="item"
             />
           </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import { mapState } from 'vuex'
 import SortingSelect from '~/components/catalog/SortingSelect.vue'
 import CatalogAside from '~/components/catalog/CatalogAside.vue'
 import CatalogModel from '~/components/catalog/CatalogModel.vue'
@@ -76,12 +76,8 @@ export default {
       ],
     }
   },
-  // mounted() {
-  //     axios
-  //       .get('')
-  //       .then(response => {
-  //         this.items = response
-  //       })
-  // }
+  computed: {
+    ...mapState('catalog', ['products']),
+  },
 }
 </script>
