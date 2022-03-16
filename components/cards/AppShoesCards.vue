@@ -2,7 +2,7 @@
     <section class="shoes page__block">
         <div class="container">
             <div class="card__inner">
-                <div class="card__item" v-for="shoe in shoes" :key="shoe" :style="{backgroundImage:`url(${getImage(shoe.bgImg)})`}">
+                <div v-for="shoe in items" :key="shoe.title" class="card__item" :style="{backgroundImage:`url(${shoe.image})`}">
                     <a class="card__item-title" href="">
                         {{ shoe.title }}
                     </a>
@@ -15,21 +15,21 @@
 <script>
 export default {
     name: "AppClockCards",
+    props: {
+        items: {
+            type: Array,
+            require: true
+        }
+    },
     data() {
       return {
-        shoes: [
-          {
-            title:'Шлепанцы',
-            bgImg:'assets/images/shoes/shoes-1.jpg',
-          },
-        ]
+        // shoes: [
+        //   {
+        //     title:'Шлепанцы',
+        //     bgImg:'assets/images/shoes/shoes-1.jpg',
+        //   },
+        // ]
       }
     },
-    methods:{
-        getImage(path){
-            return require('@/' + path)
-        },
-    }
-
 }
 </script>

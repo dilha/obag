@@ -1,10 +1,12 @@
 <template>
 <div>
-  <app-intro-button bgImg="assets/images/intro/season-intro.jpg" />
+  <app-intro-button :image="assets/images/intro/season-intro.jpg" />
   <app-details-cards />
   <app-catalog-cards />
   <app-like />
   <app-news />
+
+  
 </div>
 </template>
 

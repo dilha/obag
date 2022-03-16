@@ -1,13 +1,17 @@
 <template>
-  <div v-if="items" class="parts">
-    <img class="parts__img" src="@/assets/images/parts/parts-1.jpg" alt="" />
+  <div v-if="item" class="parts">
+    <img class="parts__img" :src="item.previewImage" alt="" />
     <div class="parts__content">
-      <div class="parts__title">Корпус O bag classic Песок</div>
+      <div class="parts__title">
+        {{item.title}}
+      </div>
       <div class="parts__number">
         <p>Кол-во:</p>
         <p>1</p>
       </div>
-      <div class="parts__price">1490.00 грн.</div>
+      <div class="parts__price">
+        {{item.price}}
+      </div>
     </div>
   </div>
 </template>
@@ -16,7 +20,7 @@
 export default {
   name: 'AppPartsCard',
   props: {
-    items: {
+    item: {
       type: Object,
       require: true,
     }

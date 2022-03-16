@@ -28,7 +28,7 @@ export default {
           },
           {
             text: 'Сумки',
-            src: '/season',
+            src: '/bags',
           },
           {
             text: 'Часы',

@@ -60,19 +60,26 @@
           <p class="constructor__item-title">O bag classic</p>
         </div>
       </div>
-      <div class="constructor__buttons">
-        <button class="constructor__btn page__border-btn" >Назад</button>
-        <button class="constructor__btn page__border-btn" :class="{'active':corpShow}" @click="corpBtn">Корпуса</button>
-        <button class="constructor__btn page__border-btn" :class="{'active':handleShow}" @click="handleBtn">Ручки</button>
-        <button class="constructor__btn page__border-btn" :class="{'active':liningShow}" @click="liningBtn">Подкладки</button>
-        <button class="constructor__btn page__border-btn" :class="{'active':accessoriesShow}" @click="accessoriesBtn">Аксессуары</button>
+      <div v-if="selectedConfiguratorMenu" class="constructor__buttons">
+        <button
+          v-for="(constructor, index) in productConstructor.configurator"
+          :key="index"
+          class="constructor__btn page__border-btn"
+          :class="{ active: constructor.id === selectedConfiguratorMenu.id }"
+          @click="selectConfiguratorMenu(constructor)"
+        >
+          {{ constructor.title }}
+        </button>
       </div>
       <div class="constructor__container">
         <div class="constructor__product">
           <h3 class="constructor__product-title">O bag Classic</h3>
           <div class="constructor__card">
-            <div class="constructor__card-img" :style="{backgroundImage:` ${cardBg + handleBg + liningsBg + accessoriesBg  + corpBg}`}">
-            </div>
+            <div
+              ref="obagConstuctor"
+              class="constructor__card-img"
+              :style="{ backgroundImage: `${backgroundImages}` }"
+            ></div>
             <div class="constructor__card-buttons">
               <button class="constructor__card-arrow constructor__card-prev">
                 Предыдущий <icon-arrow-prev />
@@ -81,63 +88,40 @@
                 <icon-arrow-next /> Следующий
               </button>
             </div>
-            <button class="constructor__card-btn page__border-btn" @click="removeElements">
+            <button
+              class="constructor__card-btn page__border-btn"
+              @click="removeElements"
+            >
               Сбросить
             </button>
           </div>
           <div class="constructor__selected">
             <h6 class="constructor__selected-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
-            <app-parts-card v-for="item in 2" :key="item" />
+            <app-parts-card v-for="selected in selectedElements.id" :key="selected.id" :item="selected"/>
             <div class="constructor__selected-total">
               <p class="constructor__selected-text">Всего:</p>
-              <p class="constructor__selected-number">4766.20 грн.</p>
+              <p class="constructor__selected-number">
+                {{totalAll}}
+              </p>
             </div>
             <button class="constructor__selected-btn">В корзину</button>
           </div>
         </div>
         <div class="constructor__elements">
           <h6 class="constructor__elements-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
-          <div v-if="corpShow" class="constructor__elements-inner">
-            <div v-for="corp in corps" :key="corp.id" class="constructor__elements-item" @click="addCorp(corp)">
-              <h6>
-                {{corp.title}}
-              </h6>
-              <img :src="corp.image" alt="">
+          <div
+            v-if="selectedConfiguratorMenu"
+            class="constructor__elements-inner"
+          >
+            <div
+              v-for="element in selectedConfiguratorMenu.elements"
+              :key="element.id"
+              class="constructor__elements-item"
+              @click="addBackground(element)"
+            >
+              <img :src="element.previewImage" alt="" />
               <p class="constructor__elements-price">
-                {{corp.price}}
-              </p>
-            </div>
-          </div>
-          <div v-if="handleShow" class="constructor__elements-inner">
-            <div v-for="handle in handles" :key="handle.id" class="constructor__elements-item" @click="addHandle(handle)">
-              <h6>
-                {{handle.title}}
-              </h6>
-              <img :src="handle.image" alt="">
-              <p class="constructor__elements-price">
-                {{handle.price}}
-              </p>
-            </div>
-          </div>
-          <div v-if="liningsShow" class="constructor__elements-inner">
-            <div v-for="lining in linings" :key="lining.id" class="constructor__elements-item" @click="addLinings(lining)">
-              <h6>
-                {{lining.title}}
-              </h6>
-              <img :src="lining.image" alt="">
-              <p class="constructor__elements-price">
-                {{lining.price}}
-              </p>
-            </div>
-          </div>
-          <div v-if="accessoriesShow" class="constructor__elements-inner">
-            <div v-for="accessory in accessories" :key="accessory.id" class="constructor__elements-item" @click="addAccessories(accessory)">
-              <h6>
-                {{accessory.title}}
-              </h6>
-              <img :src="accessory.image" alt="">
-              <p class="constructor__elements-price">
-                {{accessory.price}}
+                {{ element.price }}
               </p>
             </div>
           </div>
@@ -176,21 +160,21 @@ export default {
     IconArrowNext,
     IconArrowPrev,
     AppPartsCard,
-
   },
   data() {
     return {
-      cardBg: 'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp)',
-      corpBg: '',
-      corpShow: true,
-      handleBg: '',
-      handleShow: false,
-      liningsBg: '',
-      liningsShow: false,
-      accessoriesBg: '',
-      accessoriesShow: false,
-      total: 0,
-      result: [],
+      selectedConfiguratorMenu: null,
+      configuratorBg: {},
+      configuratorImg: [],
+      sortImg: [],
+      priceElement: {},
+      totalElement: [],
+      selectedObject: {},
+      selectedElements: [],
+
+      totalAll: '',
+      backgroundImages:
+        'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp',
 
       items: [
         {
@@ -236,166 +220,187 @@ export default {
             'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
         },
       ],
-      corps: [
-        {
-          id: 1,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Classic/Body/OBAGB001_EVS00_055_NOTAG_UNICA_L1-150x150.webp',
-          price: 1400,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Body/OBAGB001_EVS00_055_NOTAG_UNICA_100_obag-655x655.webp")'
-        },
-        {
-          id: 2,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Classic/Body/OBAGB001_EVS00_132_NOTAG_UNICA_L1-150x150.webp',
-          price: 1450,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Body/OBAGB001_EVS00_132_NOTAG_UNICA_100_obag-655x655.webp")'
-        },
-        {
-          id: 3,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Classic/Body/OBAGB001_EVS00_786-150x150.webp',
-          price: 1000,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Body/OBAGB001_EVS00_786-655x655.webp")'
-        },
-      ],
-      handles: [
-        {
-          id: 4,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Handel-long/HLESPD03_ECSK6_587-150x150.webp',
-          price: 1000,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESPD03_ECSK6_587-CLASSIC-1-655x655.webp"), url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESPD03_ECSK6_587-CLASSIC-2-655x655.webp"),'
-        },
-        {
-          id: 5,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Handel-short/HLESX800_ECS00_039_NOTAG_UNICA_L1-150x150.webp',
-          price: 1000,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESX800_ECS00_039_classic_1-655x655.webp"), url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESX800_ECS00_039_classic_2-655x655.webp"),'
-        },
-        {
-          id: 6,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Handel-short/HLESPD03_ECSK6_587-150x150.webp',
-          price: 1000,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESPD03_TESZF_132-classic-1-655x655.webp"), url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESPD03_TESZF_132-classic-2-655x655.webp"),'
-        },
-      ],
-      linings: [
-        {
-          id: 7,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Classic/Inner/OBAGS901_ECSM6_132_NOTAG_UNICA_L1-150x150.webp',
-          price: 1000,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Inner/OBAGS901_ECSM6_132-655x655.webp"),'
-        },
-        {
-          id: 8,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Classic/Inner/OBAGS901_TESZH_751-150x150.webp',
-          price: 1000,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Inner/OBAGS901_TESZH_751-655x655.webp"),'
-        },
-        {
-          id: 8,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Classic/Inner/OBAGS901_TESZH_752-150x150.webp',
-          price: 1000,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Inner/OBAGS901_TESZH_752-655x655.webp"),'
-        },
-      ],
-      accessories: [
-        {
-          id: 9,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Classic/Trim/OBAGT001_TESBK_137_NOTAG_UNICA_L1-150x150.webp',
-          price: 1900,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_TESBK_137_NOTAG_UNICA_160_obag-655x655.webp"), url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_TESBK_137_NOTAG_UNICA_120_obag-655x655.webp"),'
-        },
-        {
-          id: 10,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Classic/Trim/OBAGT001_TESCK_019_NOTAG_UNICA_L1-150x150.webp',
-          price: 1900,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_TESCK_019_NOTAG_UNICA_160_obag-655x655.webp"), url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_TESCK_019_NOTAG_UNICA_120_obag-655x655.webp"),'
-        },
-        {
-          id: 11,
-          title: '',
-          image: 'https://obag.ua/image/cache/wp/gj/Classic/Trim/OBAGT001_FAS30_018-150x150.webp',
-          price: 1900,
-          bg: 'url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_FAS30_018-655x655.webp"), url("https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_FAS30_018_2-655x655.webp"),'
-        },
-        
-      ],
+
+      productConstructor: {
+        initImage: 'imgmain.jpg',
+        configurator: [
+          {
+            id: 1,
+            title: 'Корпуса',
+            elements: [
+              {
+                id: 1,
+                title: 'Element 1 korpus',
+                order: 6,
+                previewImage:
+                  'https://obag.ua/image/cache/wp/gj/Classic/Body/OBAGB001_EVS93_717_NOTAG_UNICA_L1-150x150.webp',
+                images: [
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Body/OBAGB001_EVS93_717_NOTAG_UNICA_L1-655x655.webp',
+                ],
+
+                price: '1220',
+              },
+              {
+                id: 1,
+                title: 'Element 1 korpus',
+                order: 6,
+                previewImage:
+                  'https://obag.ua/image/cache/wp/gj/Classic/Body/OBAGB001_EVS00_055_NOTAG_UNICA_L1-150x150.webp',
+                images: [
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Body/OBAGB001_EVS00_055_NOTAG_UNICA_100_obag-655x655.webp',
+                ],
+                price: '1200',
+              },
+            ],
+          },
+          {
+            id: 2,
+            title: 'Ручки',
+            elements: [
+              {
+                id: 2,
+                title: 'Element ',
+                order: 1,
+                previewImage:
+                  'https://obag.ua/image/cache/wp/gj/Handel-short/HLESPD03_ECSK6_371-150x150.webp',
+                images: [
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESPD03_ECSK6_371-classic-2-655x655.webp',
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESPD03_ECSK6_371-classic-1-655x655.webp'
+                ],
+                price: '1020',
+              },
+              {
+                id: 2,
+                title: 'Element ',
+                previewImage:
+                  'https://obag.ua/image/cache/wp/gj/Handel-long/HLESPD03_ECSK6_587-150x150.webp',
+                  order: 1,
+                images: [
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESPD03_ECSK6_587-CLASSIC-2-655x655.webp',
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Short-handel/HLESPD03_ECSK6_587-CLASSIC-1-655x655.webp'
+                ],
+                price: '1200',
+              },
+            ],
+          },
+          {
+            id: 3,
+            title: 'Подкладки',
+            elements: [
+              {
+                id: 1,
+                title: 'Element ',
+                order: 3,
+                previewImage:
+                  'https://obag.ua/image/cache/wp/gj/Classic/Inner/OBAGS901_ECSM6_132_NOTAG_UNICA_L1-150x150.webp',
+                images: [
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Inner/OBAGS901_ECSM6_132-655x655.webp',
+                ],
+                price: '1000',
+              },
+              {
+                id: 1,
+                title: 'Element ',
+                order: 3,
+                previewImage:
+                  'https://obag.ua/image/cache/wp/gj/Classic/Inner/OBAGS901_TESZH_752-150x150.webp',
+                images: [
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Inner/OBAGS901_TESZH_752-655x655.webp',
+                ],
+                price: '220',
+              },
+            ],
+          },
+          {
+            id: 4,
+            title: 'Аксессуары',
+            elements: [
+              {
+                id: 1,
+                title: 'Element ',
+                order: 4,
+                previewImage:
+                  'https://obag.ua/image/cache/wp/gj/Classic/Trim/OBAGT001_TESBK_137_NOTAG_UNICA_L1-150x150.webp',
+                images: [
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_TESBK_137_NOTAG_UNICA_120_obag-655x655.webp',
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_TESBK_137_NOTAG_UNICA_160_obag-655x655.webp',
+                ],
+                price: '1320',
+              },
+              {
+                id: 1,
+                title: 'Element ',
+                order: 4,
+                previewImage:
+                  'https://obag.ua/image/cache/wp/gj/Classic/Trim/OBAGT001_FAS30_018-150x150.webp',
+                images: [
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_FAS30_018_2-655x655.webp',
+                  'https://obag.ua/image/cache/wp/gp/Constructor/Classic/Trim/OBAGT001_FAS30_018-655x655.webp',
+                ],
+                price: '1240',
+              },
+            ],
+          },
+        ],
+      },
     }
   },
+  mounted() {
+    this.selectedConfiguratorMenu = this.productConstructor.configurator[0]
+  },
   methods: {
-    corpBtn() {
-      this.corpShow = true;
-      this.handleShow = false;
-      this.liningsShow = false;
-      this.accessoriesShow = false;
+    selectConfiguratorMenu(configuratorItem) {
+      this.selectedConfiguratorMenu = configuratorItem
+    },
+    addBackground(element) {
+      // console.log(element)
+       const url = [];
+      element.images.forEach((e) => {
+       
+          url.push(`url(${e})`)
+      
+        // if (element.images.length ===1) {
+        //   this.configuratorBg[this.selectedConfiguratorMenu.id]=(`url(${e})`)
+        // } else {
+        //   this.configuratorBg[this.selectedConfiguratorMenu.id]+=`url(${e})`)
+        // }
+        // this.configuratorBg[this.selectedConfiguratorMenu.id]+=(`url(${e})`)
+        // this.backgroundImages += `url(${e}),`
+      })
+          this.$set(this.configuratorBg, this.selectedConfiguratorMenu.id, url.join(','))
+
+
+      
+    // добавление картинки
+      this.configuratorImg = Object.values(this.configuratorBg)
+      this.configuratorImg.reverse((previousValue, currentValue) => previousValue + currentValue, 0)
+      this.backgroundImages = this.configuratorImg.join();
+      // console.log(this.configuratorImg)
+      // console.log(this.backgroundImages)
+      
+
+    // выбранные элементы
+      this.$set(this.selectedElements, this.selectedConfiguratorMenu.id, element )
+      this.selectedElements = Object.values(this.selectedElements)
+      console.log(this.selectedElements)
+
+    // итоговая цена
+      this.$set(this.priceElement, this.selectedConfiguratorMenu.id, element.price )
+      this.totalElement = Object.values(this.priceElement)
+      this.totalAll = this.totalElement.reduce(function(sum, el) {
+        return Number(sum) + Number(el)
+      })
+      // console.log(this.totalAll)
     },
 
-    handleBtn() {
-      this.corpShow = false;
-      this.handleShow = true;
-      this.liningsShow = false;
-      this.accessoriesShow = false;
-    },
 
-    liningBtn() {
-      this.corpShow = false;
-      this.handleShow = false;
-      this.liningsShow = true;
-      this.accessoriesShow = false;
-    },
 
-    accessoriesBtn() {
-      this.corpShow = false;
-      this.handleShow = false;
-      this.liningsShow = false;
-      this.accessoriesShow = true;
-    },
 
-    addCorp(element) {
-      this.cardBg = '';
-      this.corpBg = element.bg;
-      this.corpPrice = element.price;
-      this.result.push(this.corpPrice);
-      console.log(this.corpBg)
+
+    removeElements() {      
+      this.backgroundImages =
+        'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp'
     },
-    addHandle(element) {
-      this.cardBg = '';
-      this.handleBg = element.bg;
-      this.handlePrice = element.price;
-      this.result.push(this.handlePrice);
-      console.log(this.handleBg)
-    },
-    addLinings(element) {
-      this.cardBg = '';
-      this.liningsBg = element.bg;
-      this.liningsPrice = element.price;
-      this.result.push(this.liningsPrice);
-      console.log(this.liningsBg)
-    },
-    addAccessories(element) {
-      this.cardBg = '';
-      this.accessoriesBg = element.bg;
-      this.accessoriesPrice = element.price;
-      this.result.push(this.accessoriesPrice);
-      console.log(this.accessoriesBg)
-    },
-    removeElements() {
-      this.corpBg = '';
-       this.handleBg = '';
-      this.liningsBg = '';
-      this.accessoriesBg = '';
-      this.cardBg = 'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp)';
-     
-    }
-  }
+  },
 }
 </script>

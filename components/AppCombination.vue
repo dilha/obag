@@ -1,10 +1,10 @@
 <template>
-    <section class="combination page__block">
+    <section v-if="items" class="combination page__block">
         <div class="container">
             <div class="combination__inner">
                 <div class="combination__content">
                     <h3 class="combination__title page__title">
-                        Откройте для себя огромный выбор комбинаций часов O clock
+                        {{items.title}}
                     </h3>
                     <button class="combination__btn page__border-btn">
                         Перейти
@@ -19,5 +19,11 @@
 <script>
 export default {
     name: "AppCombination",
+    props: {
+        items: {
+            type: Object,
+            require: true,
+        }
+    }
 }
 </script>

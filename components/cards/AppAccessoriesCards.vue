@@ -2,7 +2,7 @@
     <section class="accessories page__block">
         <div class="container">
             <div class="card__inner">
-                <div class="card__item" v-for="accessorie in accessories" :key="accessorie" :style="{backgroundImage:`url(${getImage(accessorie.bgImg)})`}">
+                <div v-for="accessorie in items" :key="accessorie.title" class="card__item" :style="{backgroundImage:`url(${accessorie.image})`}">
                     <a class="card__item-title" href="">
                         {{ accessorie.title }}
                     </a>
@@ -15,41 +15,41 @@
 <script>
 export default {
     name: "AppAccessoriesCards",
-    data() {
-      return {
-        accessories: [
-          {
-            title:'Аксессуары для пляжа',
-            bgImg:'assets/images/accessories/accessories-1.jpg',
-          },
-          {
-            title:'Браслеты',
-            bgImg:'assets/images/accessories/accessories-2.jpg',
-          },
-          {
-            title:'Клатчи и косметички',
-            bgImg:'assets/images/accessories/accessories-3.jpg',
-          },
-          {
-            title:'Защитные маски',
-            bgImg:'assets/images/accessories/accessories-4.jpg',
-          },
-          {
-            title:'Кошельки',
-            bgImg:'assets/images/accessories/accessories-5.jpg',
-          },
-          {
-            title:'Подвески',
-            bgImg:'assets/images/accessories/accessories-6.jpg',
-          },
-        ]
+    props: {
+      items: {
+        type: Array,
+        require: true
       }
     },
-    methods:{
-        getImage(path){
-            return require('@/' + path)
-        },
-    }
-
+    data() {
+      return {
+        // accessories: [
+        //   {
+        //     title:'Аксессуары для пляжа',
+        //     bgImg:'assets/images/accessories/accessories-1.jpg',
+        //   },
+        //   {
+        //     title:'Браслеты',
+        //     bgImg:'assets/images/accessories/accessories-2.jpg',
+        //   },
+        //   {
+        //     title:'Клатчи и косметички',
+        //     bgImg:'assets/images/accessories/accessories-3.jpg',
+        //   },
+        //   {
+        //     title:'Защитные маски',
+        //     bgImg:'assets/images/accessories/accessories-4.jpg',
+        //   },
+        //   {
+        //     title:'Кошельки',
+        //     bgImg:'assets/images/accessories/accessories-5.jpg',
+        //   },
+        //   {
+        //     title:'Подвески',
+        //     bgImg:'assets/images/accessories/accessories-6.jpg',
+        //   },
+        // ]
+      }
+    },
 }
 </script>

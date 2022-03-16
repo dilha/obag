@@ -1,22 +1,23 @@
 <template>
     <div>
-        <app-intro-button bg-img="assets/images/intro/clock-intro.jpg">
+        <app-intro-button :image="category.image">
           <h2 class="intro__title">
-            O clock
+            {{category.title}}
           </h2>
           <p class="intro__text">
-            Оригинальные часы-конструктор были созданы в 2009 году.
-            Простыми жестами вы можете создать более 1300 комбинаций.
+            {{category.text}}
           </p>
         </app-intro-button>
-        <app-clock-cards />
-        <app-combination />
-        <app-like />
+        <app-clock-cards :items="category.subcategories"/>
+        <app-combination :items="category['constructor']"/>
+        <app-like :items="likesProducts"/>
         <app-news />
     </div>
 </template>
 
 <script>
+import {mapActions, mapState, mapGetters} from 'vuex'
+import{actionTypes} from '@/store';
 import AppIntroButton from "~/components/intro/AppIntroButton.vue";
 import AppClockCards from "~/components/cards/AppClockCards.vue";
 import AppCombination from "~/components/AppCombination.vue";
@@ -31,6 +32,20 @@ export default {
     AppCombination,
     AppLike,
     AppNews,
+  },
+  computed: {
+    ...mapState([
+      'category'
+    ]),
+    ...mapGetters([
+      'likesProducts'
+    ])
+  },
+  mounted() {
+    this.getCategory(3)
+  },
+  methods: {
+    ...mapActions({getCategory:actionTypes.loadCategory}),
   },
 }
 </script>
