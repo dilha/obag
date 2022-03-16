@@ -25,6 +25,7 @@
   }
 
   &__model {
+    width: 100%;
     margin-bottom: 35px;
     &-top {
       display: flex;
@@ -60,6 +61,7 @@
     grid-gap: 40px;
   }
   &__model-item {
+    min-width: 50px;
     img {
       width: 40px;
       height: 40px;

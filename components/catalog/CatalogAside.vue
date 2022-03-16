@@ -75,31 +75,33 @@
           </div>
         </div> -->
       <!-- </div> -->
-      <div class="aside__colors aside__block">
-        <div class="aside__top" @click="toggleColor">
-          <h6 class="aside__top-title">Цвета:</h6>
-          <img
-            class="aside__top-arrow"
-            src="@/assets/images/icons/select-icon.svg"
-            alt=""
-          />
-        </div>
-        <div v-if="showColor" class="aside__body">
-          <div class="aside__checkbox">
-            <input id="biscuit" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="biscuit"> Бисквит </label>
+      <div v-for="(field, index) in Object.keys(filters)" :key="index">
+        <div class="aside__colors aside__block">
+          <div class="aside__top" @click="toggleColor">
+            <h6 class="aside__top-title">{{ field }}:</h6>
+            <img
+              class="aside__top-arrow"
+              src="@/assets/images/icons/select-icon.svg"
+              alt=""
+            />
           </div>
-          <div class="aside__checkbox">
-            <input id="bordeaux" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="bordeaux"> Бордо </label>
-          </div>
-          <div class="aside__checkbox">
-            <input id="grenadine" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="grenadine"> Гренадин </label>
-          </div>
-          <div class="aside__checkbox">
-            <input id="accessories" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="accessories"> Карри </label>
+          <div class="aside__body">
+            <div
+              v-for="filterVal in filters[field]"
+              :key="filed + filterVal.title"
+              class="aside__checkbox"
+            >
+              <input
+                :id="field + filterVal.title"
+                :name="filed + filterVal.title"
+                class="aside__check"
+                type="checkbox"
+                @change="getFilteredProducts(filterVal)"
+              />
+              <label class="aside__label" :for="field + filterVal.title">
+                {{ filterVal.title }}
+              </label>
+            </div>
           </div>
         </div>
       </div>
@@ -115,6 +117,7 @@ export default {
   name: 'CatalogAside',
   data() {
     return {
+      selectedFilters: [],
       showPrice: false,
       showProduct: false,
       showDiscount: false,
@@ -122,7 +125,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('catalog', ['categories', 'sales']),
+    ...mapState('catalog', ['categories', 'filters', 'selectedSubCategory']),
     ...mapGetters('catalog', ['selectedCategory']),
     defaultCategory() {
       return this.categories.length > 0 ? this.categories[0] : null
@@ -130,7 +133,7 @@ export default {
   },
 
   mounted() {
-    this.loadAllCategories().then((categories) => {
+    this.loadAllCategories().then(() => {
       console.log('START lODING PORDUCTS ASAID')
       // if (categories?.legnth > 0) {
       this.loadAllCategoryProducts(this.selectedCategory)
@@ -141,9 +144,21 @@ export default {
     ...mapActions('catalog', {
       loadAllCategories: actionTypes.loadAllCategories,
       loadAllCategoryProducts: actionTypes.loadAllCategoryProducts,
-      updateSelectedSales: actionTypes.updateSelectedSales,
+      loadFilterProducts: actionTypes.loadFilterProducts,
     }),
-
+    getFilteredProducts(filter) {
+      console.log(filter)
+      const indexOf = this.selectedFilters.indexOf(filter.id)
+      if (indexOf !== -1) {
+        this.selectedFilters.splice(indexOf, 1)
+      } else {
+        this.selectedFilters.push(filter.id)
+      }
+      this.loadFilterProducts({
+        filters: this.selectedFilters,
+        subCategoryId: this.selectedSubCategory,
+      })
+    },
     togglePrice() {
       this.showPrice = !this.showPrice
     },
