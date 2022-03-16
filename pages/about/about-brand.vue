@@ -1,19 +1,21 @@
 <template>
-    <div>
+    <div v-if="content">
         <app-intro-arrow> 
           <h3 class="intro__title intro__title-arrow">
-              Информация
-              о бренде O bag
+              <!-- Информация
+              о бренде O bag -->
+              {{content.title}}
           </h3>
         </app-intro-arrow>
         <div class="about__brand">
           <div class="container">
-            <p class="about__brand-text">
+            <div class="about__brand-text" v-html="content.text"></div>
+            <!-- <p class="about__brand-text">
               <span>O bag</span> - современный, динамичный и дальновидный итальянский бренд аксессуаров. Компания была основана и построена на успехе одноименных модульных и полностью комбинируемых сумок, изготовленных из инновационного сверхлегкого материала XL Extralight®. Материал превратил изделия в настоящие культовые аксессуары, а также стал преимущественной особенностью бренда. 
             </p>
             <p class="about__brand-text">
               <span>O bag</span> существует на рынке более 10 лет и признан ведущим брендом в создании индивидуального стиля. Сегодня ассортимент продукции варьируется от сумок до часов, солнцезащитных очков, обуви и даже линии Home, в которую входят лампы и контейнеры для хранения продуктов, созданные в сотрудничестве с Guzzini. O bag - это бренд, основанный на дизайне. Сегодня это признанное модное имя. Его любят все поколения, которые ценят возможность создавать и выражать свой собственный стиль.
-            </p>
+            </p> -->
           </div>
         </div>
         <app-news />
@@ -30,5 +32,22 @@ export default {
     AppIntroArrow,
     AppNews,
   },
+  data() {
+    return {
+       content: null,
+    }
+  },
+  mounted() {
+    this.getBrand()
+  },
+  methods: {
+    getBrand() {
+      this.$api
+      .get('/page/brand-info')
+      .then((res)=> {
+        this.content = res.data.content
+      })
+    }
+  }
 }
 </script>

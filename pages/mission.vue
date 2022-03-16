@@ -9,6 +9,17 @@
             <div class="container">
                 <div class="mission__content">
                     <h3 class="mission__title page__title">
+                        {{content.title}}
+                    </h3>
+                    <p class="mission__text">
+                        В 2017 году компания начала экологичную инициативу “CLOSE THE CIRCLE”, которая заключается в сборе, переработке и правильной утилизации корпусов O bag в XL Extralight Material®. Таким образом, компания еще раз подтверждает свою заботу об окружающей среде.
+                    </p>
+                    <p class="mission__text">
+                        Инициатива “CLOSE THE CIRCLE” является частью более масштабной программы устойчивого развития, начатой O bag в 2018 году. В настоящее время проект действует в итальянских магазинах O bag, а долгосрочная цель заключается в распространении инициативы во всех странах, где представлен бренд.
+                    </p>
+                </div>
+                <!-- <div class="mission__content">
+                    <h3 class="mission__title page__title">
                         Социальная миссия 
                     </h3>
                     <p class="mission__text">
@@ -54,7 +65,7 @@
                         Украинский офис компании O bag всецело разделяет и внедряет инициативы главного офиса Компании. Помимо этого, в рамках различных проектов, поддерживает такие фонды, как “Кото-Ярмарок” и “Таблеточки”. Мы разделяем стремление бизнеса быть причастными к социальным инициативам и открыты к предложениям, которые вы можете направлять нам на email marketing.obag@gmail.ua
                     </p>
                     <img class="mission__img" src="@/assets/images/mission/mission-4.png" alt="">
-                </div>
+                </div> -->
             </div>
         </div>
         <app-news />
@@ -78,10 +89,10 @@ export default {
     }
   },
   mounted() {
-    this.getHistory()
+    this.getMission()
   },
   methods: {
-    getHistory() {
+    getMission() {
       this.$api
       .get('/page/mission')
       .then((res)=> {
