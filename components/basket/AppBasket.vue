@@ -1,11 +1,16 @@
 <template>
-    <a class="header__basket header__link"  href="#?">
-        <span class="header__number header__basket--number">1</span> Корзина
-    </a>
+  <nuxt-link to="/basket" class="header__basket header__link">
+    <span class="header__number header__basket--number">{{
+      $store.getters['cart/totalProductCount']
+        ? $store.getters['cart/totalProductCount']
+        : 0
+    }}</span>
+    Корзина
+  </nuxt-link>
 </template>
 
 <script>
 export default {
-    name: "AppBasket",
+  name: 'AppBasket',
 }
 </script>

@@ -14,21 +14,32 @@
     </div>
     <div class="product__card-price">
       <p class="product__card-odlprice">
-        {{ item.priceOld }}
+        {{ item.price }}
       </p>
       <p class="product__card-newprice">
-        {{ item.priceNew }}
+        {{ item.new_price ? item.new_price : item.price }}тг.
       </p>
     </div>
     <div class="product__card-bottom">
-      <button class="page__basket-btn product__card-basket">В корзину</button>
-      <a class="product__card-link" href="#?">Подробнее</a>
+      <button
+        class="page__basket-btn product__card-basket"
+        @click.prevent="add(item)"
+      >
+        В корзину
+      </button>
+      <nuxt-link
+        class="product__card-link"
+        :to="{ name: 'products-id', params: { id: item.id } }"
+        >Подробнее</nuxt-link
+      >
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
+import { actionTypes } from '~/store/cart'
 export default {
   name: 'ProductCard',
   components: {
@@ -39,6 +50,9 @@ export default {
       type: Object,
       require: true,
     },
+  },
+  methods: {
+    ...mapActions('cart', { add: actionTypes.addProduct }),
   },
 }
 </script>

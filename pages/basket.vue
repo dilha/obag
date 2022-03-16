@@ -4,32 +4,48 @@
       <div class="container">
         <h3 class="basket__title page__title">Корзина</h3>
         <div class="basket__inner">
-          <div class="basket__products">
-            <app-order-products v-for="item in 3" :key="item" />
+          <div v-if="products" class="basket__products">
+            <app-order-products
+              v-for="item in products"
+              :key="item"
+              :item="item"
+            />
           </div>
-          <div class="basket__price">
-            <app-order-promo />
-            <app-order-price />
-          </div>
+
+          <app-order-price
+            @clickCheckoutButton="isVisibleContactModal = true"
+          />
         </div>
       </div>
     </section>
     <app-news />
-  </div> 
+    <modal-contact v-if="isVisibleContactModal" />
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import ModalContact from '@/components/modal/AppModalContacts.vue'
+
 import AppOrderProducts from '~/components/order/AppOrderProducts.vue'
-import AppOrderPromo from '~/components/order/AppOrderPromo.vue'
+
 import AppOrderPrice from '~/components/order/AppOrderPrice.vue'
 import AppNews from '~/components/news/AppNews.vue'
 export default {
   name: 'BasketPage',
   components: {
     AppOrderProducts,
-    AppOrderPromo,
+    ModalContact,
     AppOrderPrice,
     AppNews,
+  },
+  data() {
+    return {
+      isVisibleContactModal: false,
+    }
+  },
+  computed: {
+    ...mapGetters('cart', ['products']),
   },
 }
 </script>
