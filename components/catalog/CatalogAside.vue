@@ -13,7 +13,7 @@
             alt=""
           />
         </div>
-        <div v-if="showPrice" class="aside__body aside__price-body">
+        <div class="aside__body aside__price-body">
           <input
             class="aside__price-input aside__price-from"
             type="text"
@@ -51,34 +51,30 @@
           </div>
         </div>
       </div>
-      <div class="aside__discount aside__block">
-        <div class="aside__top" @click="toggleDiscount">
+      <!-- <div class="aside__discount aside__block"> -->
+      <!-- <div class="aside__top" @click="toggleDiscount">
           <h6 class="aside__top-title">Скидка:</h6>
           <img
             class="aside__top-arrow"
             src="@/assets/images/icons/select-icon.svg"
             alt=""
           />
-        </div>
-        <div v-if="showDiscount" class="aside__body">
-          <div class="aside__checkbox">
-            <input id="12%" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="12%"> 12% </label>
+        </div> -->
+      <!-- <div v-if="sales" class="aside__body">
+          <div v-for="sale in sales" :key="sale.id" class="aside__checkbox">
+            <input
+              :id="sale.title"
+              class="aside__check"
+              type="checkbox"
+              @change="updateSelectedSales(sale)"
+            />
+            <label class="aside__label" :for="sale.title">
+              {{ sale.title }}
+              {{ sale.text }}
+            </label>
           </div>
-          <div class="aside__checkbox">
-            <input id="15%" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="15%"> 15% </label>
-          </div>
-          <div class="aside__checkbox">
-            <input id="20%" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="20%"> 20% </label>
-          </div>
-          <div class="aside__checkbox">
-            <input id="40%" class="aside__check" type="checkbox" />
-            <label class="aside__label" for="40%"> 40% </label>
-          </div>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       <div class="aside__colors aside__block">
         <div class="aside__top" @click="toggleColor">
           <h6 class="aside__top-title">Цвета:</h6>
@@ -126,7 +122,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('catalog', ['categories']),
+    ...mapState('catalog', ['categories', 'sales']),
     ...mapGetters('catalog', ['selectedCategory']),
     defaultCategory() {
       return this.categories.length > 0 ? this.categories[0] : null
@@ -145,6 +141,7 @@ export default {
     ...mapActions('catalog', {
       loadAllCategories: actionTypes.loadAllCategories,
       loadAllCategoryProducts: actionTypes.loadAllCategoryProducts,
+      updateSelectedSales: actionTypes.updateSelectedSales,
     }),
 
     togglePrice() {

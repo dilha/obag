@@ -2,6 +2,9 @@
 export const state = ()=>({
   categories:[],
   products:[],
+  salesProducts:[],
+  sales:[],
+  selectedSales:[],
   selectedCategory:null,
   error:null,
   isLoading:false,
@@ -13,6 +16,11 @@ export const mutationTypes = {
   loadCategoriesFailure:"mutation/loadCategoriesFailure loadCategoriesFailure",
 
   setSelectedCategory:'mutation/setSelectedCategory',
+  setCategorySales:'mutation/setCategorySales',
+  addSelectedSales:'mutation/addSelectedSales',
+  removeSelectedSales:'mutation/removeSelectedSales',
+  setSalesProducts:'mutation/setSalesProducts',
+  removeSalesProducts:'mutation/removeSalesProducts',
 
   loadProductsStart:'mutation/loadProductsStart',
   loadProductsSuccess:'mutation/loadProductsSuccess',
@@ -21,8 +29,9 @@ export const mutationTypes = {
 }
 export const actionTypes = {
   loadAllCategories:'action/loadAllCategories get all categories',
-  loadAllCategoryProducts:'actions/loadAllCategoryProducts',
-  loadAllSubCategoryProducts:'actions/loadAllSubCategoryProducts'
+  loadAllCategoryProducts:'action/loadAllCategoryProducts',
+  loadAllSubCategoryProducts:'action/loadAllSubCategoryProducts',
+  updateSelectedSales:'action/updateSelectedSales'
 }
 
 export const mutations = {
@@ -40,18 +49,40 @@ export const mutations = {
   [mutationTypes.setSelectedCategory](state, payload){
     state.selectedCategory = payload;
   },
+  [mutationTypes.setCategorySales](state, payload){
+    state.sales = payload;
+  },
+  [mutationTypes.setSalesProducts](state, payload){
+    // state.products = []
+    state.salesProducts = [...state.salesProducts, ...payload]
+  },
+  [mutationTypes.removeSalesProducts](state, payload){
+    // state.salesProducts = [];
+    payload.forEach(p1=>{
+       state.salesProducts = state.salesProducts.filter(p2=>p2.id !== p1.id);
+    })
+    // state.salesProducts = state.salesProducts.filter(p=>p.category_id !== payload);
+  },
 
   [mutationTypes.loadProductsStart](state){
     state.isLoading = true;
   },
   [mutationTypes.loadProductsSuccess](state, payload){
     state.isLoading = false;
-    state.products = payload;
+    state.products = payload
   },
   [mutationTypes.loadProductsFailure](state, payload){
     state.isLoading = false;
     state.error = payload;
   },
+  [mutationTypes.addSelectedSales](state, payload){
+      state.selectedSales.push(payload)
+  },
+  [mutationTypes.removeSelectedSales](state, payload){
+      state.selectedSales = state.selectedSales.filter(s=>s.id !== payload)
+  },
+
+
 }
 export const actions = {
   [actionTypes.loadAllCategories]({commit}){
@@ -81,6 +112,9 @@ export const actions = {
       .get(`/category/${category.id}`)
       .then((response)=>{
         const products = response.data.category.products;
+        const sales = response.data.sales;
+
+        commit(mutationTypes.setCategorySales, sales)
         commit(mutationTypes.loadProductsSuccess, products )
 
         resolve(products);
@@ -100,6 +134,9 @@ export const actions = {
       .get(`/subcategory/${subCategoryId}`)
       .then((response)=>{
         const products = response.data.subcategory.products;
+         const sales = response.data.sales;
+
+        commit(mutationTypes.setCategorySales, sales)
         commit(mutationTypes.loadProductsSuccess, products )
 
         resolve(products);
@@ -110,6 +147,18 @@ export const actions = {
     })
 
   },
+  [actionTypes.updateSelectedSales]({commit, state}, sale){
+    console.log("SALLALALA", sale)
+    const isExistsSale = state.selectedSales.some(s=>s.id === sale.id);
+    if(isExistsSale){
+      // alert()
+        commit(mutationTypes.removeSelectedSales, sale.id)
+        commit(mutationTypes.removeSalesProducts, sale?.products)
+        return
+    }
+    commit(mutationTypes.addSelectedSales, sale)
+    commit(mutationTypes.setSalesProducts, sale?.products)
+  }
 }
 
 export const getters={

@@ -12,9 +12,19 @@
         <catalog-aside />
         <div class="catalog__content">
           <catalog-model />
-          <div v-if="products" class="catalog__inner">
+          <div
+            v-if="products.length && !salesProducts.length"
+            class="catalog__inner"
+          >
             <product-card
               v-for="item in products"
+              :key="item.id"
+              :item="item"
+            />
+          </div>
+          <div v-if="salesProducts.length > 0" class="catalog__inner">
+            <product-card
+              v-for="item in salesProducts"
               :key="item.id"
               :item="item"
             />
@@ -77,7 +87,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('catalog', ['products']),
+    ...mapState('catalog', ['products', 'salesProducts']),
   },
 }
 </script>

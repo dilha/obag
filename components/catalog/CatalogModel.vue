@@ -49,30 +49,10 @@ export default {
         slideTo: 1,
         slidesPerView: 10,
         responsive: true,
-        // on: {
-        //   click: ({ target }) => {
-        //     console.log('FROM SWIPER OPT', target)
-        //     this.loadAllSubCategoryProducts(target.dataset.id)
-        //   },
-        // },
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',
         },
-        // breakpoints: {
-        //   1000: {
-        //     slidesPerView: 11,
-        //   },
-        //   700: {
-        //     slidesPerView: 8,
-        //   },
-        //   350: {
-        //     slidesPerView: 6,
-        //   },
-        //   300: {
-        //     slidesPerView: 4,
-        //   },
-        // },
       },
     }
   },
