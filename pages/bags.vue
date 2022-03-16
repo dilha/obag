@@ -4,11 +4,8 @@
           <h2 class="intro__title">
             {{category.title}}
           </h2>
-          <p class="intro__text">
-            {{category.text}}
-          </p>
         </app-intro-button>
-        <app-accessories-cards :items="category.subcategories"/>
+        <app-shoes-cards :items="category.subcategories"/>
         <app-like :items="likesProducts"/>
         <app-news />
     </div>
@@ -18,15 +15,15 @@
 import {mapActions, mapState, mapGetters} from 'vuex'
 import{actionTypes} from '@/store';
 import AppIntroButton from "~/components/intro/AppIntroButton.vue";
-import AppAccessoriesCards from "~/components/cards/AppAccessoriesCards.vue";
+import AppShoesCards from "~/components/cards/AppShoesCards.vue";
 import AppLike from "~/components/AppLike.vue";
 import AppNews from "~/components/news/AppNews.vue";
 
 export default {
-  name: 'GlasesPAge',
+  name: 'ChoesPage',
   components: {
     AppIntroButton,
-    AppAccessoriesCards,
+    AppShoesCards,
     AppLike,
     AppNews,
   },
@@ -39,7 +36,7 @@ export default {
     ])
   },
   mounted() {
-    this.getCategory(5)
+    this.getCategory(2)
   },
   methods: {
     ...mapActions({getCategory:actionTypes.loadCategory}),

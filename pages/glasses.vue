@@ -1,21 +1,23 @@
 <template>
     <div>
-        <app-intro-button bgImg="assets/images/intro/glasses-intro.jpg">
+        <app-intro-button :image="category.image">
           <h2 class="intro__title">
-            O sun 
+            {{category.title}}
           </h2>
           <p class="intro__text">
-            O sun, O sun flat and O sun shine - легкие модульные очки-конструктор.
+            {{category.text}}
           </p>
         </app-intro-button>
-        <app-glasses-cards />
-        <app-combination />
-        <app-like />
+        <app-glasses-cards :items="category.subcategories"/>
+        <app-combination :items="category.constructor" />
+        <app-like :items="likesProducts"/>
         <app-news />
     </div>
 </template>
 
 <script>
+import {mapActions, mapState, mapGetters} from 'vuex'
+import{actionTypes} from '@/store';
 import AppIntroButton from "~/components/intro/AppIntroButton.vue";
 import AppGlassesCards from "~/components/cards/AppGlassesCards.vue";
 import AppCombination from "~/components/AppCombination.vue";
@@ -30,6 +32,20 @@ export default {
     AppCombination,
     AppLike,
     AppNews,
+  },
+  computed: {
+    ...mapState([
+      'category'
+    ]),
+    ...mapGetters([
+      'likesProducts'
+    ])
+  },
+  mounted() {
+    this.getCategory(4)
+  },
+  methods: {
+    ...mapActions({getCategory:actionTypes.loadCategory}),
   },
 }
 </script>

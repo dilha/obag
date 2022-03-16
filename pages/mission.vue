@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="mission__content">
                     <h3 class="mission__title page__title">
-                        Социальная миссия
+                        Социальная миссия 
                     </h3>
                     <p class="mission__text">
                         В 2017 году компания начала экологичную инициативу “CLOSE THE CIRCLE”, которая заключается в сборе, переработке и правильной утилизации корпусов O bag в XL Extralight Material®. Таким образом, компания еще раз подтверждает свою заботу об окружающей среде.
@@ -72,5 +72,22 @@ export default {
     AppIntro,
     AppNews,
   },
+  data() {
+    return {
+       content: null,
+    }
+  },
+  mounted() {
+    this.getHistory()
+  },
+  methods: {
+    getHistory() {
+      this.$api
+      .get('/page/mission')
+      .then((res)=> {
+        this.content = res.data.content
+      })
+    }
+  }
 }
 </script>

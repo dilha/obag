@@ -1,5 +1,5 @@
 <template>
-    <section class="intro" :style="{backgroundImage:`url(${getImage(bgImg)})`}">
+    <section class="intro" :style="{backgroundImage:`url(${image})`}">
         <slot></slot>
         <button class="intro__btn">
             Смотреть
@@ -11,14 +11,9 @@
 export default {
     name: 'AppIntro',
     props:{
-        bgImg:{
+        image:{
             type:String,
         },
     },
-    methods:{
-        getImage(path){
-            return require('@/' + path)
-        },
-    }
 }
 </script>

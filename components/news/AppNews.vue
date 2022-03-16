@@ -7,8 +7,8 @@
           Смотреть все новости
         </a>
       </div>
-      <div class="news__inner">
-        <news-cards  v-for="item in items" :key="item.id" :item="item" />
+      <div  v-if="news.length"  class="news__inner">
+        <news-cards  v-for="item in news" :key="item.title" :item="item" />
       </div>
       <div class="news__button">
         <a class="news__btn page__border-btn" href="#?">
@@ -20,7 +20,9 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import {mapActions, mapState} from 'vuex'
+import{actionTypes} from '@/store';
 import NewsCards from '~/components/news/NewsCards.vue'
 export default {
   name: 'AppNews',
@@ -32,10 +34,16 @@ export default {
       items: [],
     }
   },
-  mounted() {
-    axios
-      .get('https://bag.a-lux.dev/api/page/get-news')
-      .then((response) => (this.items = response.data.news))
+  computed: {
+    ...mapState([
+      'news'
+    ]),
   },
+  methods: {
+    ...mapActions({getNews:actionTypes.loadNews}),
+  },
+  mounted() {
+    this.getNews()
+  }
 }
 </script>

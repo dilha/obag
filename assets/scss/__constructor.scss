@@ -6,9 +6,10 @@
     max-width: none;
   }
   &__inner {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    display: flex;
     grid-gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   &__item {
     margin-bottom: 20px;

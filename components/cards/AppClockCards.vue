@@ -2,9 +2,9 @@
     <section class="clock page__block">
         <div class="container">
             <div class="card__inner">
-                <div class="card__item" v-for="clock in clocks" :key="clock" :style="{backgroundImage:`url(${getImage(clock.bgImg)})`}">
+                <div v-for="item in items" :key="item.id" class="card__item" :style="{backgroundImage:`url(${item.image})`}">
                     <a class="card__item-title" href="">
-                        {{ clock.title }}
+                        {{ item.title }}
                     </a>
                 </div>
                 <h3 class="clock__title">
@@ -18,37 +18,37 @@
 <script>
 export default {
     name: "AppClockCards",
+     props: {
+        items: {
+            type: Array,
+            require: true,
+        },
+    },
     data() {
       return {
-        clocks: [
-          {
-            title:'O clock',
-            bgImg:'assets/images/clock/clock-1.jpg',
-          },
-          {
-            title:'O clock great',
-            bgImg:'assets/images/clock/clock-2.jpg',
-          },
-          {
-            title:'O clock shift',
-            bgImg:'assets/images/clock/clock-3.jpg',
-          },
-          {
-            title:'O clock shift great',
-            bgImg:'assets/images/clock/clock-4.jpg',
-          },
-          {
-            title:'O click shift',
-            bgImg:'assets/images/clock/clock-5.jpg',
-          },
-        ]
+        // clocks: [
+        //   {
+        //     title:'O clock',
+        //     bgImg:'assets/images/clock/clock-1.jpg',
+        //   },
+        //   {
+        //     title:'O clock great',
+        //     bgImg:'assets/images/clock/clock-2.jpg',
+        //   },
+        //   {
+        //     title:'O clock shift',
+        //     bgImg:'assets/images/clock/clock-3.jpg',
+        //   },
+        //   {
+        //     title:'O clock shift great',
+        //     bgImg:'assets/images/clock/clock-4.jpg',
+        //   },
+        //   {
+        //     title:'O click shift',
+        //     bgImg:'assets/images/clock/clock-5.jpg',
+        //   },
+        // ]
       }
     },
-    methods:{
-        getImage(path){
-            return require('@/' + path)
-        },
-    }
-
 }
 </script>

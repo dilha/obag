@@ -1,17 +1,19 @@
 <template>
     <div>
-        <app-intro-button bgImg="assets/images/intro/shoes-intro.jpg">
+        <app-intro-button :image="category.image">
           <h2 class="intro__title">
-            ОБУВЬ
+            {{category.title}}
           </h2>
         </app-intro-button>
-        <app-shoes-cards />
-        <app-like />
+        <app-shoes-cards :items="category.subcategories"/>
+        <app-like :items="likesProducts"/>
         <app-news />
     </div>
 </template>
 
 <script>
+import {mapActions, mapState, mapGetters} from 'vuex'
+import{actionTypes} from '@/store';
 import AppIntroButton from "~/components/intro/AppIntroButton.vue";
 import AppShoesCards from "~/components/cards/AppShoesCards.vue";
 import AppLike from "~/components/AppLike.vue";
@@ -24,6 +26,20 @@ export default {
     AppShoesCards,
     AppLike,
     AppNews,
+  },
+  computed: {
+    ...mapState([
+      'category'
+    ]),
+    ...mapGetters([
+      'likesProducts'
+    ])
+  },
+  mounted() {
+    this.getCategory(6)
+  },
+  methods: {
+    ...mapActions({getCategory:actionTypes.loadCategory}),
   },
 }
 </script>

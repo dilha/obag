@@ -1,11 +1,11 @@
 <template>
-    <div class="certificates__item">
+    <div v-if="item" class="certificates__item">
         <img class="certificates__item-img" :src="item.image" alt="">
         <h6 class="certificates__item-title">
             {{item.title}}
         </h6>
         <p class="certificates__item-price">
-            {{item.price}}
+            {{item.price}} грн.
         </p>
         <div class="certificates__item-bottom">
             <button class="page__basket-btn certificates__item-basket">
@@ -18,7 +18,7 @@
     </div>
 </template>
 
-<script>
+<script> 
 export default {
     name: 'ProductCard',
     props: {
