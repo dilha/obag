@@ -29,6 +29,17 @@
     background: none;
     border: none;
     border-radius: 50%;
+
+    &.active {
+      svg {
+        circle {
+          fill: #3D3935;
+        }
+        path {
+          fill: #fff
+        }
+      }
+    }
   }
 
   &-img {

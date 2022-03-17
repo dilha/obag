@@ -1,9 +1,9 @@
 <template>
     <section class="intro" :style="{backgroundImage:`url(${image})`}">
         <slot></slot>
-        <button class="intro__btn">
+        <nuxt-link class="intro__btn" to="/catalog">
             Смотреть
-        </button>
+        </nuxt-link>
     </section>
 </template>
 

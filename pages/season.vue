@@ -1,6 +1,6 @@
 <template>
 <div>
-  <app-intro-button :image="assets/images/intro/season-intro.jpg" />
+  <app-intro-button :image="image" />
   <app-details-cards />
   <app-catalog-cards />
   <app-like />
@@ -26,5 +26,10 @@ export default {
     AppLike,
     AppNews,
   },
+  data() {
+    return {
+      image: 'https://bag.a-lux.dev/storage/categories/February2022/X61wM9g24oc71fj6VYKE.png',
+    }
+  }
 }
 </script>

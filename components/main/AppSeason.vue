@@ -5,9 +5,7 @@
         <div
           class="season__intro"
           :style="{
-            backgroundImage: `url(${getImage(
-              'assets/images/intro/main-season-intro.jpg'
-            )})`,
+            backgroundImage: `url(${items.image})`,
           }"
         >
           <button class="intro__btn intro__season">Смотреть</button>
@@ -25,7 +23,7 @@
             </button>
           </swiper> -->
           <VueSlickCarousel :arrows="true">
-            <product-card v-for="item in items" :key="item" :item="item" />
+            <product-card v-for="item in items.products" :key="item" :item="item" />
           </VueSlickCarousel>
         </div>
       </div>
@@ -42,24 +40,30 @@ import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 export default {
   name: 'AppSeason',
   components: { ProductCard, VueSlickCarousel },
+  props: {
+    items: {
+      type: Object,
+      require: true
+    }
+  },
   data() {
     return {
-      items: [
-        {
-          title: 'Женская сумка O bag Unique Сангрия',
-          priceOld: '1990.00 грн.',
-          priceNew: '1393.00 грн',
-          image:
-            'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
-        },
-        {
-          title: 'Женская сумка O bag Unique Сангрия',
-          priceOld: '1990.00 грн.',
-          priceNew: '1393.00 грн',
-          image:
-            'https://pp.userapi.com/c636831/v636831783/3277d/F43lnK3KyBk.jpg',
-        },
-      ],
+      // items: [
+      //   {
+      //     title: 'Женская сумка O bag Unique Сангрия',
+      //     priceOld: '1990.00 грн.',
+      //     priceNew: '1393.00 грн',
+      //     image:
+      //       'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
+      //   },
+      //   {
+      //     title: 'Женская сумка O bag Unique Сангрия',
+      //     priceOld: '1990.00 грн.',
+      //     priceNew: '1393.00 грн',
+      //     image:
+      //       'https://pp.userapi.com/c636831/v636831783/3277d/F43lnK3KyBk.jpg',
+      //   },
+      // ],
       // swiperOption: {
       //   navigation: {
       //     nextEl: '.swiper-button-next',
@@ -67,11 +71,6 @@ export default {
       //   },
       // },
     }
-  },
-  methods: {
-    getImage(path) {
-      return require('@/' + path)
-    },
   },
 }
 </script>
