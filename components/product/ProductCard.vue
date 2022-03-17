@@ -22,7 +22,8 @@
       <button
         class="page__basket-btn product__card-basket"
         :class="{ active: isAdded }"
-        @click.prevent="add(item)"
+        :disabled="isAdded"
+        @click="add(item)"
       >
         В корзину
       </button>
@@ -59,15 +60,12 @@ export default {
   },
   methods: {
     ...mapActions('cart', { addProductToCart: actionTypes.addProduct }),
+    ...mapActions('bookmarks', { bookmarks: actionTypesBookmark.addBookmarks }),
     add(item) {
+      this.isAdded = true
       this.addProductToCart(item).then((isExists) => {
         this.isAdded = isExists
       })
-    },
-    ...mapActions('cart', { add: actionTypes.addProduct }),
-    ...mapActions('bookmarks', { bookmarks: actionTypesBookmark.addBookmarks }),
-    con(item) {
-      console.log(item)
     },
   },
 }
