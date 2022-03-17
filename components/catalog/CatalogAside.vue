@@ -51,30 +51,7 @@
           </div>
         </div>
       </div>
-      <!-- <div class="aside__discount aside__block"> -->
-      <!-- <div class="aside__top" @click="toggleDiscount">
-          <h6 class="aside__top-title">Скидка:</h6>
-          <img
-            class="aside__top-arrow"
-            src="@/assets/images/icons/select-icon.svg"
-            alt=""
-          />
-        </div> -->
-      <!-- <div v-if="sales" class="aside__body">
-          <div v-for="sale in sales" :key="sale.id" class="aside__checkbox">
-            <input
-              :id="sale.title"
-              class="aside__check"
-              type="checkbox"
-              @change="updateSelectedSales(sale)"
-            />
-            <label class="aside__label" :for="sale.title">
-              {{ sale.title }}
-              {{ sale.text }}
-            </label>
-          </div>
-        </div> -->
-      <!-- </div> -->
+
       <div v-for="(field, index) in Object.keys(filters)" :key="index">
         <div class="aside__colors aside__block">
           <div class="aside__top" @click="toggleColor">
@@ -88,12 +65,12 @@
           <div class="aside__body">
             <div
               v-for="filterVal in filters[field]"
-              :key="filed + filterVal.title"
+              :key="field + filterVal.title"
               class="aside__checkbox"
             >
               <input
                 :id="field + filterVal.title"
-                :name="filed + filterVal.title"
+                :name="field + filterVal.title"
                 class="aside__check"
                 type="checkbox"
                 @change="getFilteredProducts(filterVal)"
@@ -154,9 +131,17 @@ export default {
       } else {
         this.selectedFilters.push(filter.id)
       }
+      console.log('SELELCT', this.selectedSubCategory)
+      if (!this.selectedSubCategory) {
+        this.loadFilterProducts({
+          filters: this.selectedFilters,
+          categoryId: this.selectedCategory.id,
+        })
+        return
+      }
       this.loadFilterProducts({
         filters: this.selectedFilters,
-        subCategoryId: this.selectedSubCategory,
+        categoryId: this.selectedSubCategory?.id,
       })
     },
     togglePrice() {

@@ -96,8 +96,9 @@ export const actions = {
       .get(`/category/${category.id}`)
       .then((response)=>{
         const products = response.data.category.products;
-
+        const filters = response.data?.filters;
         commit(mutationTypes.loadProductsSuccess, products )
+           commit(mutationTypes.setCategoryFilters, filters )
 
         resolve(products);
       })
@@ -130,12 +131,17 @@ export const actions = {
   [actionTypes.loadFilterProducts]({commit},  payload){
     commit(mutationTypes.loadProductsStart);
     const params ={ids:payload.filters};
+    let url  = `/subcategory/${payload?.subcategoryId}/filtered`
+    if(!payload?.subCategoryId){
+      url = `/category/${payload.categoryId}/filtered`
+    }
+
     console.log("IDS", params.ids[0])
     return new Promise(resolve => {
       this.$api
-      .post(`/subcategory/${payload.subCategoryId}/filtered`, params)
+      .post(url, params)
       .then((response)=>{
-        const products = response.data.subcategory.products;
+        const products = response.data.products;
         commit(mutationTypes.loadProductsSuccess, products )
         resolve(products);
       })
