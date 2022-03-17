@@ -3,9 +3,12 @@
         <div class="container">
             <div class="card__inner">
                 <div v-for="glasse in items" :key="glasse.title" class="card__item" :style="{backgroundImage:`url(${glasse.image})`}">
-                    <a class="card__item-title" href="">
-                        {{ glasse.title }}
-                    </a>
+                    <nuxt-link
+            class="card__item-title"
+            :to="{ name: 'catalog', params: { id: glasse.id } }"
+            >
+            {{ glasse.title }}
+        </nuxt-link>
                 </div>
             </div>
         </div>

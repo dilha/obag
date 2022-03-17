@@ -1,6 +1,6 @@
 <template>
   <div v-if="item" class="parts">
-    <img class="parts__img" :src="item.previewImage" alt="" />
+    <img class="parts__img" :src="item.preview_image" alt="" />
     <div class="parts__content">
       <div class="parts__title">
         {{item.title}}

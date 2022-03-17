@@ -6,13 +6,13 @@
           </h2>
         </app-intro-button>
         <app-shoes-cards :items="category.subcategories"/>
-        <app-like :items="likesProducts"/>
+        <app-like :id="category.id"  />
         <app-news />
     </div>
 </template>
 
 <script>
-import {mapActions, mapState, mapGetters} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 import{actionTypes} from '@/store';
 import AppIntroButton from "~/components/intro/AppIntroButton.vue";
 import AppShoesCards from "~/components/cards/AppShoesCards.vue";
@@ -31,9 +31,6 @@ export default {
     ...mapState([
       'category'
     ]),
-    ...mapGetters([
-      'likesProducts'
-    ])
   },
   mounted() {
     this.getCategory(2)

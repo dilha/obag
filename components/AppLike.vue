@@ -1,78 +1,68 @@
 <template>
-    <section class="will__like page__block">
+  <section v-if="recomended" class="will__like page__block">
     <div class="container">
       <div class="will__like-top page__block-top">
-        <h3 class="will__like-title page__title">
-          Вам понравится
-        </h3>
+        <h3 class="will__like-title page__title">Вам понравится</h3>
         <div class="will__like-button">
-          <button class="will__like-btn">
-            O clock
-          </button>
-          <button class="will__like-btn">
-            O bag
-          </button>
-          <button class="will__like-btn">
-            Новинки
-          </button>
-          <button class="will__like-btn">
-            Популярное
+          <button
+            v-for="(item, index) in recomended"
+            :key="index"
+            class="will__like-btn"
+            :class="{ active: item === selectedRecomendedMenu }"
+            @click="selectRecomendedMenu(item)"
+          >
+            {{ item.title }}
           </button>
         </div>
       </div>
-      <div class="will__like-inner">
-        <product-card v-for="item in items" :key="item" :item="item"/>
+      <div v-if="selectedRecomendedMenu" class="will__like-inner">
+        <product-card v-for="selected in selectedRecomendedMenu.products" :key="selected.id" :item="selected"/>
       </div>
-      <button class="will__like-button page__border-btn">
+      <nuxt-link
+        tag="button"
+        class="will__like-button page__border-btn"
+        :to="{ name: 'catalog', params: { id: id} }"
+      >
         Открыть полный каталог
-      </button>
+      </nuxt-link>
     </div>
   </section>
 </template>
 
 <script>
-import ProductCard from "~/components/product/ProductCard.vue";
+import { mapActions, mapState } from 'vuex'
+import { actionTypes } from '@/store'
+// import ProductCard from '~/components/product/ProductCard.vue'
 
 export default {
-    name: "AppLike",
-    components: {
-      ProductCard,
+  name: 'AppLike',
+  components: {
+    // ProductCard,
+  },
+  props: {
+    id: {
+      type: String,
+      require: true
+    }
+  },
+  data() {
+    return {
+      selectedRecomendedMenu: null,
+    }
+  },
+  computed: {
+    ...mapState(['recomended']),
+  },
+  mounted() {
+    this.getRecomended().then(()=> {
+      this.selectedRecomendedMenu = this.recomended[0]
+    });
+  },
+  methods: {
+    ...mapActions({ getRecomended: actionTypes.loadRecomended }),
+    selectRecomendedMenu(recomendedItem) {
+      this.selectedRecomendedMenu = recomendedItem
     },
-    props: {
-        items: {
-            type: Array,
-            require: true,
-        },
-    },
-    data() {
-      return {
-        // items: [
-        //   {
-        //     title: "Женская сумка O bag Unique Сангрия",
-        //     priceOld: "1990.00 грн.",
-        //     priceNew: "1393.00 грн",
-        //     image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
-        //   },
-        //   {
-        //     title: "Женская сумка O bag Unique Сангрия",
-        //     priceOld: "1990.00 грн.",
-        //     priceNew: "1393.00 грн",
-        //     image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
-        //   },
-        //   {
-        //     title: "Женская сумка O bag Unique Сангрия",
-        //     priceOld: "1990.00 грн.",
-        //     priceNew: "1393.00 грн",
-        //     image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
-        //   },
-        //   {
-        //     title: "Женская сумка O bag Unique Сангрия",
-        //     priceOld: "1990.00 грн.",
-        //     priceNew: "1393.00 грн",
-        //     image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
-        //   },
-        // ]
-      }
-    },
+  },
 }
 </script>

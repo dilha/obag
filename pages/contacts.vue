@@ -7,11 +7,11 @@
         </app-intro-arrow>
         <div class="contacts">
             <div class="container">
-                <div class="contacts__inner">
+                <div v-if="contact" class="contacts__inner">
                     <div class="contacts__content">
-                        <div class="contacts__content-item contacts__content-message">
+                        <div  class="contacts__content-item contacts__content-message">
                             <h5 class="contacts__content-title">
-                                marketing@obag.ua
+                                {{contact['1_email']}}
                             </h5>
                             <p class="contacts__content-text">
                                 сотрудничество
@@ -19,7 +19,7 @@
                         </div>
                         <div class="contacts__content-item contacts__content-message">
                             <h5 class="contacts__content-title">
-                                sales@obag.ua
+                                 {{contact['2_email']}}
                             </h5>
                             <p class="contacts__content-text">
                                 оптовые закупки
@@ -27,7 +27,7 @@
                         </div>
                         <div class="contacts__content-item contacts__content-message">
                             <h5 class="contacts__content-title">
-                                hello@obag.ua
+                                 {{contact['3_email']}}
                             </h5>
                             <p class="contacts__content-text">
                                 интернет магазин
@@ -35,7 +35,7 @@
                         </div>
                         <div class="contacts__content-item contacts__content-phone">
                             <h5 class="contacts__content-title">
-                                +38 044 333 43 42
+                                {{contact.number}}
                             </h5>
                             <p class="contacts__content-text">
                                 (многоканальный)
@@ -46,16 +46,16 @@
                                 Время работы
                             </h5>
                             <p class="contacts__content-text">
-                                ПН - ВС с 09:00 до 20:00
+                                {{contact.time}}
                             </p>
                         </div>
                     </div>
-                    <form class="contacts__form">
-                        <input class="contacts__form-input" type="text" placeholder="Ваше имя*">
-                        <input class="contacts__form-input" type="text" placeholder="Ваша фамилия*">
-                        <input class="contacts__form-input" type="text" placeholder="E-mail*">
-                        <input class="contacts__form-input" type="text" placeholder="Номер телефона*">
-                        <textarea id="" class="contacts__form-textarea" name="" cols="30" rows="10" placeholder="Сообщение*"></textarea>
+                    <form class="contacts__form" @submit.prevent="sendfeedbackForm">
+                        <input v-model="feedbackForm.name" class="contacts__form-input" type="text" placeholder="Ваше имя*" required>
+                        <input v-model="feedbackForm.surname" class="contacts__form-input" type="text" placeholder="Ваша фамилия*" required>
+                        <input v-model="feedbackForm.email" class="contacts__form-input" type="text" placeholder="E-mail*" required>
+                        <input v-model="feedbackForm.number" class="contacts__form-input" type="text" placeholder="Номер телефона*" required>
+                        <textarea id="" v-model="feedbackForm.text" class="contacts__form-textarea" name="" cols="30" rows="10" placeholder="Сообщение*" required></textarea>
                         <div class="contacts__form-checkbox">
                             <input id="check" class="contacts__form-check" type="checkbox">
                             <label class="contacts__form-label" for="check">
@@ -83,5 +83,36 @@ export default {
     AppIntroArrow,
     AppNews,
   },
+   data() {
+    return {
+        feedbackForm: {
+            name: '',
+            surname: '',
+            email: '',
+            number: '',
+            text: '',
+        },
+       contact: null,
+    }
+  },
+  mounted() {
+    this.getContact()
+  },
+  methods: {
+    getContact() {
+      this.$api
+      .get('/contact')
+      .then((res)=> {
+        this.contact = res.data
+      })
+    },
+    sendfeedbackForm() {
+        this.$api
+      .post('/contact', this.feedbackForm)
+      .then((res)=> {
+        console.log(res)
+      })
+    }
+  }
 }
 </script>

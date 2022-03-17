@@ -1,5 +1,6 @@
 <template>
   <section class="catalog">
+    {{$route.params}}
     <div class="container">
       <div class="catalog__top">
         <h3 class="catalog__title page__title">Каталог</h3>

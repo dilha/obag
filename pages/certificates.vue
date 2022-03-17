@@ -9,6 +9,7 @@
       <div class="container">
           <div v-if="certificates" class="certificates__inner">
             <app-certificates-cards v-for="item in certificates" :key="item" :item="item"/>
+            <!-- <product-card v-for="item in certificates" :key="item" :item="item"/> -->
           </div>
       </div>
     </div>
@@ -22,6 +23,7 @@ import{actionTypes} from '@/store/certificates';
 import AppIntroArrow from '~/components/intro/AppIntroArrow.vue';
 import AppCertificatesCards from "~/components/cards/AppCertificatesCards.vue";
 import AppNews from '~/components/news/AppNews.vue';
+// import ProductCard from "~/components/product/ProductCard.vue"
 
 export default {
   name: 'ExploitationAccessoriesPage',
@@ -29,6 +31,7 @@ export default {
     AppIntroArrow,
     AppCertificatesCards,
     AppNews,
+    // ProductCard,
   },
   data() {
     return {

@@ -1,5 +1,5 @@
 <template>
-    <section class="intro" :style="{backgroundImage:`url(${getImage(bgImg)})`}">
+    <section class="intro" :style="{backgroundImage:`url(${getImage(item)})`}">
         <slot></slot>
     </section>
 </template>
@@ -8,7 +8,7 @@
 export default {
     name: 'AppIntro',
     props:{
-        bgImg:{
+        item:{
             type:String,
         },
     },
