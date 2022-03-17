@@ -2,44 +2,77 @@ export const state = ()=>({
   bookmarksProducts:[],
 })
 export const mutationTypes = {
-  addBookmarks:'mutation/addBookmarks',
-  // removeBookmarks:'mutation/removeBookmarks',
+  addBookmark:'mutation/addBookmark',
   updatedQuantity:'mutation/updatedQuantity',
-  clearBookmarks:'mutation/clearBookmarks',
+  removeBookmark:'mutation/removeBookmark',
+  setBookmarkProducts:'mutation/setBookmarkProducts'
 }
 export const actionTypes = {
-  addBookmarks:'action/addBookmarks',
-  // removeBookmarks:'action/removeBookmarks',
+  addBookmark:'action/addBookmark',
   updatedQuantity:'action/updatedQuantity',
-  clearBookmarks:'action/clearBookmarks'
+  removeBookmark:'action/removeBookmark',
+  loadFavorites:'action/loadFavorites'
 }
 export const mutations = {
-  [mutationTypes.addBookmarks](state, payload){
+  [mutationTypes.setBookmarkProducts](state, payload){
+    state.bookmarksProducts = payload;
+  },
+  [mutationTypes.addBookmark](state, payload){
     state.bookmarksProducts.push(payload)
   },
-    [mutationTypes.clearBookmarks](state, payload){
+    [mutationTypes.removeBookmark](state, payload){
     state.bookmarksProducts.forEach((p, i)=>{
       if(p .id=== payload.id) {
         state.bookmarksProducts.splice(i, 1);
-        // this.$delete(this.bookmarksProducts, i)
       }
     })
   },
 }
 export const actions = {
-  [actionTypes.addBookmarks]({commit, state}, bookmarks){
-    const isProductExists = state.bookmarksProducts.some(p=>p.id === bookmarks.id);
-    console.log("CALLL", isProductExists)
 
-    if(!isProductExists){
-      commit(mutationTypes.addBookmarks, bookmarks)
+  [actionTypes.loadFavorites]({commit}){
+   return new Promise(resolve=>{
+        this.$api
+          .get('/user/favourites')
+          .then((response)=>{
+              commit(mutationTypes.setBookmarkProducts, response.data?.products)
+              resolve(response.data?.products)
+          })
+      })
+  },
+
+  [actionTypes.addBookmark]({commit, state, rootState}, bookmark){
+    const isProductExists = state.bookmarksProducts.some(p=>p.id === bookmark.id);
+
+    if(!isProductExists && rootState.auth.isLoggedIn){
+      commit(mutationTypes.addBookmark, bookmark)
+      return new Promise(resolve=>{
+        this.$api
+          .post(`/product/${bookmark.id}/favourite`)
+          .then((response)=>{
+              resolve({status:response.status, isDelete:false})
+          })
+      })
+
+
     } else{
-      commit(mutationTypes.clearBookmarks, bookmarks)
+        alert('Требуется авторизация на сайте')
+    }
+    if(isProductExists && rootState.auth.isLoggedIn){
+      commit(mutationTypes.removeBookmark, bookmark)
+       return new Promise(resolve=>{
+        this.$api
+          .delete(`/product/${bookmark.id}/favourite`)
+          .then((response)=>{
+              resolve({status:response.status, isDelete:true})
+          })
+      })
     }
   },
-  [actionTypes.clearBookmarks]({commit}){
-    commit(mutationTypes.clearBookmarks)
+  [actionTypes.removeBookmark]({commit}){
+    commit(mutationTypes.removeBookmark)
   },
+
 }
 export const getters = {
   totalBookmarkCount:state=>state.bookmarksProducts.length,

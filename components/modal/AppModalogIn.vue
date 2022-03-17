@@ -26,7 +26,9 @@
           </button>
         </form>
         <div class="modal__login-link">
-          <a class="modal__login-register" href="#?"> Зарегистрироваться </a>
+          <a class="modal__login-register" href="#?" @click="$emit('register')">
+            Зарегистрироваться
+          </a>
           <a class="modal__login-forgot" href="#?"> Забыли пароль? </a>
         </div>
       </div>

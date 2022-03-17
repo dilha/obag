@@ -6,26 +6,43 @@
       </div>
       <div class="modal__contacts">
         <h6 class="modal__contacts-title">Контактные данные для заказа:</h6>
+        <p v-if="error" style="color: red; font-size: 12px margin-bottom:8px;">
+          {{ error }}
+        </p>
         <form class="modal__contacts-form">
           <input
+            v-model="name"
             class="modal__contacts-name"
             type="text"
             placeholder="Введите Ваше ФИО"
+            required
           />
           <input
+            v-model="phone"
             class="modal__contacts-phone"
-            type="number"
+            type="text"
             placeholder="Введите Ваш номер телефона"
+            required
           />
           <input
+            v-model="email"
             class="modal__contacts-email"
             type="email"
             placeholder="Введите Ваш почтовый адрес"
+            required
+          />
+          <input
+            v-if="!isLoggedIn"
+            v-model="address"
+            class="modal__contacts-email"
+            type="text"
+            placeholder="Адрес доставки"
+            required
           />
         </form>
       </div>
       <div class="modal__bottom">
-        <app-order-price />
+        <app-order-price @clickCheckoutButton="checkout" />
       </div>
     </div>
     <button class="modal__close" @click="close">
@@ -35,16 +52,56 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapGetters } from 'vuex'
 import AppOrderPrice from '~/components/order/AppOrderPrice.vue'
+import { actionTypes } from '~/store/order'
 
 export default {
   name: 'AppModalProducts',
   components: {
     AppOrderPrice,
   },
+  data() {
+    return {
+      name: '',
+      phone: '',
+      email: '',
+      address: '',
+    }
+  },
+  computed: {
+    ...mapState('auth', ['isLoggedIn', 'user']),
+    ...mapState('order', ['error']),
+    ...mapGetters('cart', ['totalProductCost', 'products']),
+  },
+  mounted() {
+    if (this.isLoggedIn) {
+      this.name = this.user?.name
+      this.phone = this.user?.phone
+      this.email = this.user?.email
+    }
+  },
   methods: {
+    ...mapActions('order', { sendOrder: actionTypes.sendOrder }),
+
     close() {
       this.$emit('close')
+    },
+    checkout() {
+      const data = {
+        user_id: this.user?.id,
+        address: this.user?.address || this.address,
+        name: this.name,
+        phone: this.phone,
+        email: this.email,
+        price: 15250,
+        bonus_waste: 0,
+        delivery_type: 'mail',
+        payment_type: 'card',
+        cart_elements: this.products,
+      }
+      this.sendOrder(data)
+      console.log('CHEKCOUT STARTTT')
     },
   },
 }

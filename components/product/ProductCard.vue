@@ -3,7 +3,11 @@
     <div class="product__card-image">
       <div class="product__card-top">
         <div class="product__card-sale">Mid Season Sale -30%</div>
-        <button class="product__card-bookmark" @click.prevent="bookmarks(item)">
+        <button
+          class="product__card-bookmark"
+          :class="{ active: item.isFavorite || isFavorite }"
+          @click.prevent="addProductToBookmark(item)"
+        >
           <icon-bookmark />
         </button>
       </div>
@@ -56,15 +60,27 @@ export default {
   data() {
     return {
       isAdded: false,
+      isFavorite: false,
     }
   },
   methods: {
     ...mapActions('cart', { addProductToCart: actionTypes.addProduct }),
-    ...mapActions('bookmarks', { bookmarks: actionTypesBookmark.addBookmarks }),
+    ...mapActions('bookmarks', {
+      addBookmark: actionTypesBookmark.addBookmark,
+    }),
     add(item) {
       this.isAdded = true
       this.addProductToCart(item).then((isExists) => {
         this.isAdded = isExists
+      })
+    },
+    addProductToBookmark(item) {
+      this.addBookmark(item).then((payload) => {
+        if (payload.status === 200 && !payload.isDelete) {
+          this.isFavorite = true
+        } else {
+          this.isFavorite = false
+        }
       })
     },
   },
