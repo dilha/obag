@@ -10,9 +10,9 @@
           <p class="mid__flash-text">
               Подборка комплектующих по самой выгодной цене!
           </p>
-          <button class="mid__flash-btn page__border-btn">
+          <nuxt-link tag="button" to="/season" class="mid__flash-btn page__border-btn">
               Перейти
-          </button>
+          </nuxt-link>
         </div>
       </div>
       <div class="mid__flash-inner">
@@ -23,9 +23,9 @@
           <p class="mid__flash-text">
               Праздничная история уже ждет вас!
           </p>
-          <button class="mid__flash-btn page__border-btn">
+          <nuxt-link tag="button" to="/season" class="mid__flash-btn page__border-btn">
               Перейти
-          </button>
+          </nuxt-link>
         </div>
         <img class="mid__flash-img flash-img" src="@/assets/images/mid-flash/mid-flash-2.jpg" alt="">
       </div>

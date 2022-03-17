@@ -29,8 +29,6 @@ export const mutations = {
 export const actions = {
   [actionTypes.addBookmarks]({commit, state}, bookmarks){
     const isProductExists = state.bookmarksProducts.some(p=>p.id === bookmarks.id);
-    console.log("CALLL", isProductExists)
-
     if(!isProductExists){
       commit(mutationTypes.addBookmarks, bookmarks)
     } else{
@@ -44,5 +42,5 @@ export const actions = {
 export const getters = {
   totalBookmarkCount:state=>state.bookmarksProducts.length,
   // totalBookmarkCost:state=>state.bookmarksProducts.reduce((acc, p) =÷>  acc +=p.price  * p.quantity,0),
-  bookmarks:state=>state.bookmarksProducts
+  bookmarks:state=>state.bookmarksProducts,
 }

@@ -10,13 +10,13 @@
         </app-intro-button>
         <app-glasses-cards :items="category.subcategories"/>
         <app-combination :items="category.constructor" />
-        <app-like :items="likesProducts"/>
+        <app-like :id="category.id" />
         <app-news />
     </div>
 </template>
 
 <script>
-import {mapActions, mapState, mapGetters} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 import{actionTypes} from '@/store';
 import AppIntroButton from "~/components/intro/AppIntroButton.vue";
 import AppGlassesCards from "~/components/cards/AppGlassesCards.vue";
@@ -37,9 +37,6 @@ export default {
     ...mapState([
       'category'
     ]),
-    ...mapGetters([
-      'likesProducts'
-    ])
   },
   mounted() {
     this.getCategory(4)

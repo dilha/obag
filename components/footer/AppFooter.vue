@@ -9,14 +9,14 @@
                   O bag
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/history" class="footer__list-link">
                   История/Миссия
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/mission" class="footer__list-link" href="#?">
                   Социальная миссия
-                </a>
+                </nuxt-link>
               </li>
             </ul>
             <ul class="footer__list">
@@ -24,19 +24,19 @@
                   Бренд
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/about/about-brand" class="footer__list-link" href="#?">
                   О бренде O bag
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/about/about-products" class="footer__list-link" href="#?">
                   О продукции
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/collection" class="footer__list-link" href="#?">
                   Коллекции
-                </a>
+                </nuxt-link>
               </li>
             </ul>
             <ul class="footer__list">
@@ -44,14 +44,14 @@
                   Новости
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/news" class="footer__list-link" href="#?">
                   Новости
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/research" class="footer__list-link" href="#?">
                   Исследования и инновации
-                </a>
+                </nuxt-link>
               </li>
             </ul>
           </div>
@@ -70,34 +70,34 @@
                   Обслуживание клиентов
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/contacts" class="footer__list-link">
                   Контакты
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/delivery" class="footer__list-link">
                   Доставка и оплата
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/recovery" class="footer__list-link">
                   Возврат
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/warranty" class="footer__list-link">
                   Гарантии
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/exploitation-products" class="footer__list-link">
                   Правила эксплуатации
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/exploitation-accessories" class="footer__list-link">
                   Инструкции
-                </a>
+                </nuxt-link>
               </li>
             </ul>
             <ul class="footer__list">
@@ -105,19 +105,19 @@
                   Поиск магазинов
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/shop" class="footer__list-link">
                   Наши магазины
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/vacancies" class="footer__list-link">
                   Вакансии
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/shopping" class="footer__list-link">
                   Мобильный шопинг
-                </a>
+                </nuxt-link>
               </li>
             </ul>
             <ul class="footer__list">
@@ -125,29 +125,29 @@
                   Дополнительно
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/news" class="footer__list-link">
                   Акции
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/certificates" class="footer__list-link">
                   Подарочные сертификаты
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="" class="footer__list-link">
                   Система лояльности
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/" class="footer__list-link" href="#?">
                   Корпоративным клиентам
-                </a>
+                </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <a class="footer__list-link" href="#?">
+                <nuxt-link to="/save" class="footer__list-link" href="#?">
                   Save Your O bag
-                </a>
+                </nuxt-link>
               </li>
             </ul>
         </div>
@@ -157,13 +157,13 @@
           © 2020 O bag Kazakhstan. Официальное представительство компании O bag на територии Казахстана
         </p>
         <div class="footer__social">
-          <a class="footer__social-link" href="#?">
+          <a class="footer__social-link" href="https://www.facebook.com/Obag/" target="_blank">
             <icon-facebook />
           </a>
-          <a class="footer__social-link" href="#?">
+          <a class="footer__social-link" href="https://www.instagram.com/obagofficial/" target="_blank">
             <icon-instagram />
           </a>
-          <a class="footer__social-link" href="#?">
+          <a class="footer__social-link" href="https://t.me/obag_copy" target="_blank">
             <icon-telegram />
           </a>
         </div>

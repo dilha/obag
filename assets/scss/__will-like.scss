@@ -12,6 +12,11 @@
         &+& {
             margin-left: 8px;
         }
+
+        &.active {
+            background-color: #FFD0DA;
+            color: #D05871;
+        }
     }
 
     &-inner {

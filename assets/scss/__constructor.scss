@@ -13,6 +13,16 @@
   }
   &__item {
     margin-bottom: 20px;
+    max-width: 100px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 20px;
+
+    &.active &-title {
+      color: #FFD0DA;
+    }
+      
+
     &-images {
       background: linear-gradient(180deg, #F3F3F3 0%, #F6F6F6 0.01%);
       border-radius: 5px;
@@ -37,6 +47,7 @@
     margin: 40px 0 50px;
     flex-wrap: wrap;
     align-items: center;
+    
   }
 
   &__btn {
@@ -76,11 +87,12 @@
       background-repeat: no-repeat;
       border-radius: 20px;
       border: 1px solid #000000;
+      margin-bottom: 35px;
     }
     &-buttons {
       display: flex;
       align-items: center;
-      margin: 35px 0;
+      margin-bottom:  35px;
       justify-content: center;
     }
     &-arrow {
@@ -142,6 +154,20 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 40px;
+    }
+    &-item {
+      border-radius: 20px;
+      border: 1px solid #000000;
+      cursor: pointer;
+      img {
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+      }
+    }
+    &-price {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 5px;
     }
   }
 

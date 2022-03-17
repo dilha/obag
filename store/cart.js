@@ -20,11 +20,11 @@ export const mutations = {
     state.cartProducts.push(payload)
   },
   [mutationTypes.removeProduct](state, payload){
-     state.cartProducts.forEach((p, i)=>{
-       if(p.id === payload) {
-            state.cartProducts.splice(i, 1);
-         }
-       })
+    state.cartProducts.forEach((p, i)=>{
+    if(p.id === payload) {
+        state.cartProducts.splice(i, 1);
+      }
+    })
   },
   [mutationTypes.updatedQuantity](state, {type, product}){
 

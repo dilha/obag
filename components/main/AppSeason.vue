@@ -8,7 +8,7 @@
             backgroundImage: `url(${items.image})`,
           }"
         >
-          <button class="intro__btn intro__season">Смотреть</button>
+          <nuxt-link tag="button" class="intro__btn intro__season" to="/season">Подробнее</nuxt-link>
         </div>
         <div class="season__slider">
           <!-- <swiper>

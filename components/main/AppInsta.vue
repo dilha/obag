@@ -5,7 +5,7 @@
         <h3 class="obag__insta-title page__title">
           O bag Instagram
         </h3>
-        <a class="obag__insta-link page__block-link" href="#?">
+        <a class="obag__insta-link page__block-link" href="https://www.instagram.com/obag.almaty/" target="_blank">
           Перейти в instagram
         </a>
       </div>
@@ -19,9 +19,9 @@
         <img src="@/assets/images/insta/insta-7.jpg" alt="">
         <img src="@/assets/images/insta/insta-8.jpg" alt="">
       </div>
-      <button class="obag__insta-btn page__border-btn">
+      <nuxt-link tag="button" to="/catalog" class="obag__insta-btn page__border-btn">
         Открыть полный каталог
-      </button>
+      </nuxt-link>
     </div>
   </section>
 </template>

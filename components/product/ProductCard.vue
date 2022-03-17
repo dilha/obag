@@ -3,7 +3,7 @@
     <div class="product__card-image">
       <div class="product__card-top">
         <div class="product__card-sale">Mid Season Sale -30%</div>
-        <button class="product__card-bookmark" @click.prevent="bookmarks(item)">
+        <button class="product__card-bookmark">
           <icon-bookmark />
         </button>
       </div>
@@ -56,6 +56,7 @@ export default {
   data() {
     return {
       isAdded: false,
+      isActive: false,
     }
   },
   methods: {
@@ -67,6 +68,7 @@ export default {
         this.isAdded = isExists
       })
     },
+
   },
 }
 </script>
