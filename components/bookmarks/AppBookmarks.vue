@@ -1,11 +1,18 @@
 <template>
-    <a class="header__bookmarks header__link"  href="#?">
-          <span class="header__number header__bookmarks--number">2</span> Закладки
-        </a>
+  <nuxt-link to="/bookmarks" class="header__bookmarks header__link">
+    <span class="header__number header__bookmarks--number">
+      {{
+        $store.getters['bookmarks/totalBookmarkCount']
+          ? $store.getters['bookmarks/totalBookmarkCount']
+          : 0
+      }}
+    </span>
+    Закладки
+  </nuxt-link>
 </template>
 
 <script>
 export default {
-    name: "AppBookmarks",
+  name: 'AppBookmarks',
 }
 </script>

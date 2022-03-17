@@ -3,7 +3,7 @@
     <div class="product__card-image">
       <div class="product__card-top">
         <div class="product__card-sale">Mid Season Sale -30%</div>
-        <button class="product__card-bookmark">
+        <button class="product__card-bookmark" @click.prevent="bookmarks(item)">
           <icon-bookmark />
         </button>
       </div>
@@ -13,9 +13,7 @@
       {{ item.title }}
     </div>
     <div class="product__card-price">
-      <p class="product__card-odlprice">
-        {{ item.price }}
-      </p>
+      <p class="product__card-odlprice">{{ item.price }} тг</p>
       <p class="product__card-newprice">
         {{ item.new_price ? item.new_price : item.price }}тг.
       </p>
@@ -41,6 +39,8 @@
 import { mapActions } from 'vuex'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
 import { actionTypes } from '~/store/cart'
+import { actionTypes as actionTypesBookmark } from '~/store/bookmarks'
+
 export default {
   name: 'ProductCard',
   components: {
@@ -63,6 +63,11 @@ export default {
       this.addProductToCart(item).then((isExists) => {
         this.isAdded = isExists
       })
+    },
+    ...mapActions('cart', { add: actionTypes.addProduct }),
+    ...mapActions('bookmarks', { bookmarks: actionTypesBookmark.addBookmarks }),
+    con(item) {
+      console.log(item)
     },
   },
 }

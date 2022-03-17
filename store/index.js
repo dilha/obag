@@ -53,5 +53,6 @@ export const actions = {
 }
 
 export const getters = {
-  likesProducts:(state)=>state.category?.products?.length ? state.category.products.slice(0, 4) : []
+  likesProducts:(state)=>state.category?.products?.length ? state.category.products.slice(0, 4) : [],
+  blockNews:(state)=>state.news?.length ? state.news.slice(0, 4) : []
 }

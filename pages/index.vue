@@ -1,12 +1,13 @@
 <template>
   <div>
-    <app-intro-button bg-img="assets/images/intro/main-intro.jpg" />
+    <app-intro-button v-if="banner" :image="banner.image" />
     <!-- <button @click="show">hello world</button> -->
-    <app-season />
+    <app-season v-if="mainSale" :items="mainSale" />
     <app-like />
     <app-mid-flash />
     <app-insta />
     <app-news />
+    
     <!-- <app-modal-products v-if="modalShow" @close="close" /> -->
     <!-- <app-modal-contacts v-if="modalShow" @close="close" /> -->
     <!-- <app-modalog-in /> -->
@@ -42,9 +43,37 @@ export default {
   data() {
     return {
       modalShow: false,
+      banner: null,
+      mainSale: null,
+      sales: null,
     }
   },
+  mounted() {
+    this.getBanner();
+    this.getMainSale()
+  },
   methods: {
+    getBanner() {
+      this.$api 
+      .get('/index')
+      .then((res)=> {
+        this.banner = res.data.banner
+      })
+    },
+    getMainSale() {
+      this.$api 
+      .get('/index')
+      .then((res)=> {
+        this.mainSale = res.data.mainSale
+      })
+    },
+    getSales() {
+      this.$api 
+      .get('/index')
+      .then((res)=> {
+        this.sales = res.data.sales
+      })
+    },
     show() {
       this.modalShow = true;
     },

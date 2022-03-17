@@ -92,6 +92,16 @@ input::-webkit-inner-spin-button {
       width: 16px;
       height: 16px;
     }
+
+    &.active {
+      background-color: #D05871;
+      border-color: #D05871;
+      color: #ffff;
+    }
+
+    &.active::after {
+      background-image: url(../images/icons/basket-white.svg);
+    }
   }
 
   &__border-btn {

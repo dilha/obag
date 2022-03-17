@@ -3,25 +3,24 @@
     <div class="container">
       <div class="news__top page__block-top">
         <h3 class="news__title page__title">Новости компании</h3>
-        <a class="news__link page__block-link" href="#?">
+        <nuxt-link class="news__link page__block-link" to="/news">
           Смотреть все новости
-        </a>
+        </nuxt-link>
       </div>
       <div  v-if="news.length"  class="news__inner">
-        <news-cards  v-for="item in news" :key="item.title" :item="item" />
+        <news-cards  v-for="item in blockNews" :key="item.title" :item="item" />
       </div>
       <div class="news__button">
-        <a class="news__btn page__border-btn" href="#?">
+        <nuxt-link class="news__btn page__border-btn" to="/news">
           Смотреть все новости
-        </a>
+        </nuxt-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import axios from 'axios'
-import {mapActions, mapState} from 'vuex'
+import {mapActions, mapState, mapGetters} from 'vuex'
 import{actionTypes} from '@/store';
 import NewsCards from '~/components/news/NewsCards.vue'
 export default {
@@ -29,15 +28,13 @@ export default {
   components: {
     NewsCards,
   },
-  data() {
-    return {
-      items: [],
-    }
-  },
   computed: {
     ...mapState([
       'news'
     ]),
+    ...mapGetters([
+      'blockNews'
+    ])
   },
   methods: {
     ...mapActions({getNews:actionTypes.loadNews}),
