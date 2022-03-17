@@ -19,7 +19,10 @@
       </div>
     </section>
     <app-news />
-    <modal-contact v-if="isVisibleContactModal" />
+    <modal-contact
+      v-if="isVisibleContactModal"
+      @close="isVisibleContactModal = false"
+    />
   </div>
 </template>
 

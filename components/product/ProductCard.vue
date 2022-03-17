@@ -23,6 +23,7 @@
     <div class="product__card-bottom">
       <button
         class="page__basket-btn product__card-basket"
+        :class="{ active: isAdded }"
         @click.prevent="add(item)"
       >
         В корзину
@@ -48,11 +49,21 @@ export default {
   props: {
     item: {
       type: Object,
-      require: true,
+      required: true,
     },
   },
+  data() {
+    return {
+      isAdded: false,
+    }
+  },
   methods: {
-    ...mapActions('cart', { add: actionTypes.addProduct }),
+    ...mapActions('cart', { addProductToCart: actionTypes.addProduct }),
+    add(item) {
+      this.addProductToCart(item).then((isExists) => {
+        this.isAdded = isExists
+      })
+    },
   },
 }
 </script>

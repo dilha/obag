@@ -64,15 +64,17 @@ export const mutations = {
 }
 export const actions = {
   [actionTypes.addProduct]({commit, state}, product){
-
+    const productWithQuantity = {... product, quantity:1}
     const isProductExists = state.cartProducts.some(p=>p.id === product.id);
 
     if(!isProductExists){
-      product.quantity = 1;
-      commit(mutationTypes.addProduct, product)
-    }else{
-      alert("Продукт уже добавлен")
+
+      commit(mutationTypes.addProduct, productWithQuantity)
     }
+
+    return new Promise(resolve=>{
+      resolve(isProductExists)
+    })
   },
 
   [actionTypes.updatedQuantity]({commit}, {type, product}){
@@ -89,6 +91,6 @@ export const getters = {
   totalProductCount:state=>state.cartProducts.length,
   // eslint-disable-next-line no-return-assign
   totalProductCost:state=>state.cartProducts.reduce((acc, p) =>  acc +=p.price  * p.quantity,0),
-  products:state=>state.cartProducts
+  products:state=>state.cartProducts,
 
 }
