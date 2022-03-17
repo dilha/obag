@@ -15,11 +15,19 @@
         </div>
         <div class="aside__body aside__price-body">
           <input
+            v-model="price_from"
             class="aside__price-input aside__price-from"
-            type="text"
+            type="number"
             placeholder="0 ₸"
+            @change="getFilteredProducts"
           />
-          <input class="aside__price-input" type="text" value="15.000 ₸" />
+          <input
+            v-model="price_to"
+            class="aside__price-input"
+            type="number"
+            placeholder="15.000 ₸"
+            @change="getFilteredProducts"
+          />
         </div>
       </div>
       <div class="aside__product aside__block">
@@ -73,7 +81,7 @@
                 :name="field + filterVal.title"
                 class="aside__check"
                 type="checkbox"
-                @change="getFilteredProducts(filterVal)"
+                @change="updateFilter(filterVal)"
               />
               <label class="aside__label" :for="field + filterVal.title">
                 {{ filterVal.title }}
@@ -99,6 +107,8 @@ export default {
       showProduct: false,
       showDiscount: false,
       showColor: false,
+      price_from: null,
+      price_to: null,
     }
   },
   computed: {
@@ -108,22 +118,27 @@ export default {
       return this.categories.length > 0 ? this.categories[0] : null
     },
   },
-
+  watch: {
+    selectedSubCategory: {
+      handler() {
+        this.price_from = null
+        this.price_to = null
+      },
+    },
+  },
   mounted() {
     this.loadAllCategories().then(() => {
-      console.log('START lODING PORDUCTS ASAID')
-      // if (categories?.legnth > 0) {
       this.loadAllCategoryProducts(this.selectedCategory)
-      // }
     })
   },
+
   methods: {
     ...mapActions('catalog', {
       loadAllCategories: actionTypes.loadAllCategories,
       loadAllCategoryProducts: actionTypes.loadAllCategoryProducts,
       loadFilterProducts: actionTypes.loadFilterProducts,
     }),
-    getFilteredProducts(filter) {
+    updateFilter(filter) {
       console.log(filter)
       const indexOf = this.selectedFilters.indexOf(filter.id)
       if (indexOf !== -1) {
@@ -131,17 +146,24 @@ export default {
       } else {
         this.selectedFilters.push(filter.id)
       }
-      console.log('SELELCT', this.selectedSubCategory)
+      this.getFilteredProducts()
+    },
+    getFilteredProducts() {
+      // Бля перепиши
       if (!this.selectedSubCategory) {
         this.loadFilterProducts({
           filters: this.selectedFilters,
           categoryId: this.selectedCategory.id,
+          price_from: this.price_from,
+          price_to: this.price_to,
         })
         return
       }
       this.loadFilterProducts({
         filters: this.selectedFilters,
-        categoryId: this.selectedSubCategory?.id,
+        subCategoryId: this.selectedSubCategory,
+        price_from: this.price_from,
+        price_to: this.price_to,
       })
     },
     togglePrice() {

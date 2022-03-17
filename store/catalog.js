@@ -131,12 +131,18 @@ export const actions = {
   [actionTypes.loadFilterProducts]({commit},  payload){
     commit(mutationTypes.loadProductsStart);
     const params ={ids:payload.filters};
-    let url  = `/subcategory/${payload?.subcategoryId}/filtered`
+    if(payload?.price_from){
+      params.price_from = payload.price_from
+    }
+    if(payload?.price_to){
+      params.price_to = payload.price_to
+    }
+    console.log(payload)
+    let url  = `/subcategory/${payload.subCategoryId}/filtered`
     if(!payload?.subCategoryId){
       url = `/category/${payload.categoryId}/filtered`
     }
 
-    console.log("IDS", params.ids[0])
     return new Promise(resolve => {
       this.$api
       .post(url, params)
