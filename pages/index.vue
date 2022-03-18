@@ -2,11 +2,10 @@
   <div>
     <app-intro-button v-if="banner" :image="banner.image" />
     <app-season v-if="mainSale" :items="mainSale" />
-    <app-like/>
-    <app-mid-flash/>
+    <app-like />
+    <app-mid-flash />
     <app-insta />
     <app-news />
-    
   </div>
 </template>
 
@@ -35,32 +34,26 @@ export default {
     }
   },
   mounted() {
-    this.getBanner();
-    this.getMainSale();
+    this.getBanner()
+    this.getMainSale()
   },
   methods: {
     getBanner() {
-      this.$api 
-      .get('/index')
-      .then((res)=> {
+      this.$api.get('/index').then((res) => {
         this.banner = res.data.banner
       })
     },
     getMainSale() {
-      this.$api 
-      .get('/index')
-      .then((res)=> {
+      this.$api.get('/index').then((res) => {
         this.mainSale = res.data.mainSale
       })
     },
     show() {
-      this.modalShow = true;
+      this.modalShow = true
     },
     close() {
-      this.modalShow = false;
-    }
-  }
-    
-
+      this.modalShow = false
+    },
+  },
 }
 </script>

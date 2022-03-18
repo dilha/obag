@@ -16,12 +16,16 @@
         </div>
       </div>
       <div v-if="selectedRecomendedMenu" class="will__like-inner">
-        <product-card v-for="selected in selectedRecomendedMenu.products" :key="selected.id" :item="selected"/>
+        <product-card
+          v-for="selected in selectedRecomendedMenu.products"
+          :key="selected.id"
+          :item="selected"
+        />
       </div>
       <nuxt-link
         tag="button"
         class="will__like-button page__border-btn"
-        :to="{ name: 'catalog', params: { id: id} }"
+        :to="{ name: 'catalog', params: { id: id } }"
       >
         Открыть полный каталог
       </nuxt-link>
@@ -42,8 +46,8 @@ export default {
   props: {
     id: {
       type: String,
-      require: true
-    }
+      require: true,
+    },
   },
   data() {
     return {
@@ -54,9 +58,11 @@ export default {
     ...mapState(['recomended']),
   },
   mounted() {
-    this.getRecomended().then(()=> {
-      this.selectedRecomendedMenu = this.recomended[0]
-    });
+    this.getRecomended().then(() => {
+      if (this.recomended?.length > 0) {
+        this.selectedRecomendedMenu = this.recomended[0]
+      }
+    })
   },
   methods: {
     ...mapActions({ getRecomended: actionTypes.loadRecomended }),

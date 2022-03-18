@@ -28,7 +28,7 @@ export const mutations = {
   [mutationTypes.loadRecomendedSuccess](state, payload){
     state.recomended = payload;
   },
- 
+
 }
 export const actions = {
   [actionTypes.loadNews]({commit}){
@@ -54,13 +54,14 @@ export const actions = {
       })
     })
   },
- 
+
   [actionTypes.loadRecomended]({commit}){
     return new Promise(resolve => {
       this.$api
       .post('/recomended-products')
       .then((response)=>{
-        const recomended = response.data.recomendedProducts;
+        console.log(response)
+        const recomended = response.data?.recomendedProducts || [];
         commit(mutationTypes.loadRecomendedSuccess, recomended )
         resolve(recomended);
       })

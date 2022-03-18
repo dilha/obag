@@ -33,7 +33,7 @@ export default {
   methods: {
     ...mapActions('auth', { updateIsLoggedIn: actionTypes.updateIsLoggedIn }),
     ...mapActions('bookmarks', {
-      updateIsLoggedIn: bookmarkActionTypes.loadFavorites,
+      loadFavorites: bookmarkActionTypes.loadFavorites,
     }),
   },
 }
