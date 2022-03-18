@@ -7,9 +7,10 @@
   }
   &__inner {
     display: flex;
-    grid-gap: 30px;
+    gap: 30px;
     justify-content: center;
-    flex-wrap: wrap;
+    overflow-x: auto;
+    // flex-wrap: wrap;
   }
   &__item {
     margin-bottom: 20px;
