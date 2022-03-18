@@ -2,7 +2,16 @@
   <div class="aside">
     <form class="aside__form">
       <div class="aside__search aside__block">
-        <input class="aside__search-input" type="text" placeholder="Поиск" />
+        <div class="form-row">
+          <input
+            v-model="searchTerm"
+            class="aside__search-input"
+            type="text"
+            placeholder="Поиск"
+            @keydown.enter="search"
+          />
+          <button class="search__icon" @click.prevent="search"></button>
+        </div>
       </div>
       <div class="aside__price aside__block">
         <div class="aside__top" @click="togglePrice">
@@ -109,6 +118,7 @@ export default {
       showColor: false,
       price_from: null,
       price_to: null,
+      searchTerm: '',
     }
   },
   computed: {
@@ -137,7 +147,13 @@ export default {
       loadAllCategories: actionTypes.loadAllCategories,
       loadAllCategoryProducts: actionTypes.loadAllCategoryProducts,
       loadFilterProducts: actionTypes.loadFilterProducts,
+      loadSearchProducts: actionTypes.loadSearchProducts,
     }),
+    search() {
+      console.log('searing...', this.searchTerm)
+
+      this.loadSearchProducts(this.searchTerm)
+    },
     updateFilter(filter) {
       console.log(filter)
       const indexOf = this.selectedFilters.indexOf(filter.id)

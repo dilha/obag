@@ -22,12 +22,17 @@ export const mutationTypes = {
   loadProductsSuccess:'mutation/loadProductsSuccess',
   loadProductsFailure:'mutation/loadProductsFailure',
 
+  loadSearchProductsStart:'mutation/loadSearchProductsStart',
+  loadSearchProductsSuccess:'mutation/loadSearchProductsSuccess',
+  loadSearchProductsFailure:'mutation/loadSearchProductsFailure',
+
 }
 export const actionTypes = {
   loadAllCategories:'action/loadAllCategories get all categories',
   loadAllCategoryProducts:'action/loadAllCategoryProducts',
   loadAllSubCategoryProducts:'action/loadAllSubCategoryProducts',
   loadFilterProducts:'action/loadFilterProducts',
+  loadSearchProducts:'action/loadSearchProducts',
 
 }
 
@@ -61,6 +66,18 @@ export const mutations = {
     state.products = payload
   },
   [mutationTypes.loadProductsFailure](state, payload){
+    state.isLoading = false;
+    state.error = payload;
+  },
+
+  [mutationTypes.loadSearchProductsStart](state){
+    state.isLoading = true;
+  },
+  [mutationTypes.loadSearchProductsSuccess](state, payload){
+    state.isLoading = false;
+    state.products = payload
+  },
+  [mutationTypes.loadSearchProductsFailure](state, payload){
     state.isLoading = false;
     state.error = payload;
   },
@@ -128,6 +145,26 @@ export const actions = {
     })
 
   },
+  [actionTypes.loadSearchProducts]({commit}, term){
+
+    commit(mutationTypes.loadSearchProductsStart);
+    // commit(mutationTypes.setSelectedSubCategory, null);
+    // commit(mutationTypes.setSelectedCategory, null);
+    // commit(mutationTypes.setCategoryFilters, null )
+
+    return new Promise(resolve => {
+      this.$api
+      .get(`/products/search/${term}`)
+      .then((response)=>{
+        const products = response.data?.products;
+        commit(mutationTypes.loadSearchProductsSuccess, products )
+        resolve(products);
+      })
+      .catch((e)=>{
+        commit(mutationTypes.loadSearchProductsFailure, e)
+      })
+    })
+  },
   [actionTypes.loadFilterProducts]({commit},  payload){
     commit(mutationTypes.loadProductsStart);
     const params ={ids:payload.filters};
@@ -137,7 +174,7 @@ export const actions = {
     if(payload?.price_to){
       params.price_to = payload.price_to
     }
-    console.log(payload)
+
     let url  = `/subcategory/${payload.subCategoryId}/filtered`
     if(!payload?.subCategoryId){
       url = `/category/${payload.categoryId}/filtered`
