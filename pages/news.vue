@@ -13,7 +13,7 @@
                     </h3>
                 </div>
                 <div class="news__inner">
-                    <news-cards v-for="item in news" :key="item" :item="item" />
+                    <news-cards v-for="(item, index) in news" :key="index" :item="item" />
                 </div>
             </div>
         </section>

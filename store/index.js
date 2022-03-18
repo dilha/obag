@@ -10,7 +10,8 @@ export const state = ()=>({
 export const mutationTypes = {
   loadNewsSuccess:"mutation/newsSuccess load news success",
   loadCategorySuccess:'mutation/CategorySuccess load category success"',
-  loadRecomendedSuccess:'mutation/RecomendedSuccess load recomended success"'
+  loadRecomendedSuccess:'mutation/RecomendedSuccess load recomended success"',
+  loadRecomendedFailure: 'mutation/RecomendedFailure load recomended success"'
 }
 export const actionTypes = {
   loadNews:'action/newsStart get all news',
@@ -27,6 +28,10 @@ export const mutations = {
   },
   [mutationTypes.loadRecomendedSuccess](state, payload){
     state.recomended = payload;
+  },
+
+  [mutationTypes.loadRecomendedFailure](state, payload){
+    state.error = payload;
   },
  
 }
@@ -63,6 +68,9 @@ export const actions = {
         const recomended = response.data.recomendedProducts;
         commit(mutationTypes.loadRecomendedSuccess, recomended )
         resolve(recomended);
+      })
+      .catch((error)=> {
+        commit(mutationTypes.loadRecomendedFailure, error )
       })
     })
   },

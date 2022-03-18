@@ -55,7 +55,7 @@
                 {{ totalAll }}
               </p>
             </div>
-            <button class="constructor__selected-btn">В корзину</button>
+            <button class="constructor__selected-btn" @click="addElementsToCart">В корзину</button>
           </div>
         </div>
         <div class="constructor__elements">
@@ -70,7 +70,7 @@
               class="constructor__elements-item"
               @click="addBackground(element)"
             >
-              <img :src="element.preview_image" alt="" />
+              <img :src="element.image" alt="" />
               <p class="constructor__elements-price">
                 {{ element.price }}
               </p>
@@ -85,6 +85,7 @@
 <script>
 import {mapActions, mapState} from 'vuex'
 import{actionTypes} from '@/store/product-constructor';
+import { actionTypes as cartActionTypes } from '~/store/cart'
 
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
 
@@ -170,22 +171,36 @@ export default {
     this.selectedType = types[0]
     })
     
-    this.getConstructor('urban').then(()=> {
+    this.getConstructor('bags').then(()=> {
       this.selectedConfiguratorMenu = this.productConstructor.categories[0]
     });
   },
   methods: {
     ...mapActions('product-constructor', {getTypes:actionTypes.loadType}),
     ...mapActions('product-constructor', {getConstructor:actionTypes.loadConstructor}),
+    ...mapActions('cart', {
+      addElements: cartActionTypes.addProduct,
+    }),
 
     getTypesProducts(item) {
       this.selectedType = item
       this.getConstructor(item.slug)
+      console.log(item)
     },    
+
+    addElementsToCart() {
+      this.selectedElements.forEach((e)=> {
+        this.addElements(e)
+      })
+      if(this.selectedElements.length > 0) {
+        this.clearElements()
+        alert('Детали добавлены в корзину')
+      }
+      
+    },
 
     selectConfiguratorMenu(configuratorItem) {
       this.selectedConfiguratorMenu = configuratorItem
-      // console.log(this.selectedConfiguratorMenu.id)
     },
     addBackground(element) {
       const url = []
@@ -193,26 +208,30 @@ export default {
         url.push(`url(${e})`)
       })
 
+      // const bg = {order:1,  url:url.join(',')}
+      // switch(this.selectedConfiguratorMenu?.type){
+      //   case 'corpus':
+      //     bg.order = 1
+      //     return;
+      //     case 'ruchka':
+      //      bg.order = 2
+
+      // }
       this.$set(
         this.configuratorBg,
         this.selectedConfiguratorMenu.id,
         url.join(',')
       )
-      // if(this.selectedConfiguratorMenu.constructor_elements === element) {
-      //   console.log('gavno')
-      // }
-
-      // switch (element.id) {
-      //       case "":
-      //           break;
-      //       case "":
-      //           break;
-      //       case "":
-      //           break;
-      //   }      
+    
       console.log(element.id)
+
+
+
       // добавление картинки
       this.configuratorImg = Object.values(this.configuratorBg)
+      // this.configuratorImg.sort((a, b)=>{
+      //     return a.order > b.order;
+      // })
       this.configuratorImg.reverse(
         (previousValue, currentValue) => previousValue + currentValue,
         0
@@ -241,13 +260,17 @@ export default {
       this.totalAll = this.totalElement.reduce(function (sum, el) {
         return Number(sum) + Number(el)
       })
-      // console.log(this.totalAll)
     },
 
     removeElements() {
       this.configuratorImg.shift()
       this.selectedElements.shift()
       this.totalElement.shift()
+      console.log(this.selectedElements)
+      this.totalAll = this.totalElement.reduce(function (sum, el) {
+        return Number(sum) + Number(el)
+      },0)
+      console.log(this.totalAll)
       this.backgroundImages = this.configuratorImg.join()
       if(this.configuratorImg.length === 0) {
         this.backgroundImages = 'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp';

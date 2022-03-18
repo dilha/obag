@@ -4,7 +4,7 @@
         Партнерские магазины
       </h3>
       <div class="shop__inner">
-          <app-shop-cards v-for="item in items" :key="item" :shop="item"/>
+          <app-shop-cards v-for="item in items" :key="item.title" :shop="item"/>
       </div>
   </div>
 

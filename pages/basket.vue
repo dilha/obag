@@ -6,8 +6,8 @@
         <div class="basket__inner">
           <div v-if="products" class="basket__products">
             <app-order-products
-              v-for="item in products"
-              :key="item"
+              v-for="(item, index) in products"
+              :key="index"
               :item="item"
             />
           </div>

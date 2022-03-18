@@ -23,7 +23,7 @@
             </button>
           </swiper> -->
           <VueSlickCarousel :arrows="true">
-            <product-card v-for="item in items.products" :key="item" :item="item" />
+            <product-card v-for="(item, index) in items.products" :key="index" :item="item" />
           </VueSlickCarousel>
         </div>
       </div>

@@ -4,8 +4,11 @@
             <h3 class="bookmarks__title page__title">
                 Мои закладки
             </h3>
-            <div class="will__like-inner">
-                <product-card v-for="item in bookmarks" :key="item" :item="item"/>
+            <div v-if="bookmarks.length" class="will__like-inner">
+                <product-card v-for="(item, index) in bookmarks" :key="index" :item="item"/>
+            </div>
+            <div v-else style="text-align: center; margin-top: 20px">
+                <h2>Нет закладок</h2>
             </div>
         </div>
     </section>
@@ -24,32 +27,6 @@ export default {
     },
     data() {
       return {
-        items: [
-          // {
-          //   title: "Женская сумка O bag Unique Сангрия",
-          //   priceOld: "1990.00 грн.",
-          //   priceNew: "1393.00 грн",
-          //   image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
-          // },
-          // {
-          //   title: "Женская сумка O bag Unique Сангрия",
-          //   priceOld: "1990.00 грн.",
-          //   priceNew: "1393.00 грн",
-          //   image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
-          // },
-          // {
-          //   title: "Женская сумка O bag Unique Сангрия",
-          //   priceOld: "1990.00 грн.",
-          //   priceNew: "1393.00 грн",
-          //   image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
-          // },
-          // {
-          //   title: "Женская сумка O bag Unique Сангрия",
-          //   priceOld: "1990.00 грн.",
-          //   priceNew: "1393.00 грн",
-          //   image: "https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png"
-          // },
-        ]
       }
     },
     computed: {

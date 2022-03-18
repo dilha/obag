@@ -13,8 +13,8 @@
     </div>
     <div class="sorting__body">
       <div
-        v-for="item in items"
-        :key="item"
+        v-for="(item, index) in items"
+        :key="index"
         class="sorting__item"
         @click="replacement(item)"
       >

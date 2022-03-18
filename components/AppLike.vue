@@ -54,8 +54,8 @@ export default {
     ...mapState(['recomended']),
   },
   mounted() {
-    this.getRecomended().then(()=> {
-      this.selectedRecomendedMenu = this.recomended[0]
+    this.getRecomended().then((res)=> {
+      this.selectedRecomendedMenu = res[0]
     });
   },
   methods: {

@@ -10,7 +10,7 @@
                 </a>
             </div>
             <div class="card__inner">
-                <div class="card__item" v-for="catalog in catalogs" :key="catalog" :style="{backgroundImage:`url(${getImage(catalog.bgImg)})`}">
+                <div v-for="catalog in catalogs" :key="catalog.title" class="card__item" :style="{backgroundImage:`url(${getImage(catalog.bgImg)})`}">
                     <a class="card__item-title" href="">
                        {{ catalog.title }}
                     </a>
