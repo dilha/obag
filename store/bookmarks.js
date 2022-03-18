@@ -55,9 +55,8 @@ export const actions = {
       })
 
 
-    } else{
-        alert('Требуется авторизация на сайте')
     }
+
     if(isProductExists && rootState.auth.isLoggedIn){
       commit(mutationTypes.removeBookmark, bookmark)
        return new Promise(resolve=>{

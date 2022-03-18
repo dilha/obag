@@ -12,11 +12,30 @@ export default ({ $axios, store }, inject) => {
     $axios.setHeader("Accept-Language", lang.code);
   }
   if (process.client) {
-    const token =localStorage.key("token") ? localStorage.getItem("token")  : null;
+    const token = localStorage.getItem("token");
     if(token){
       $axios.setHeader("Authorization", `Bearer ${token}`);
     }
   }
+
+   $axios.interceptors.request.use(
+    (config) => {
+      if (process.client) {
+      const token = localStorage.getItem("token");
+      if(token){
+        $axios.setHeader("Authorization", `Bearer ${token}`);
+      }
+  }
+
+
+      return config;
+    },
+    (error) => {
+
+      return Promise.reject(error);
+    }
+  );
+
   $axios.setBaseURL("https://bag.a-lux.dev/api");
   $axios.interceptors.response.use(
     (response) => {

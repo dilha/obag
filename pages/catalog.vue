@@ -1,6 +1,6 @@
 <template>
   <section class="catalog">
-    {{$route.params}}
+    {{ $route.params }}
     <div class="container">
       <div class="catalog__top">
         <h3 class="catalog__title page__title">Каталог</h3>
@@ -19,6 +19,10 @@
               :key="item.id"
               :item="item"
             />
+          </div>
+          <div v-else>
+            <img v-if="isLoading" src="@/assets/images/loader.gif" alt="" />
+            <h2 v-else>Нет товара</h2>
           </div>
         </div>
       </div>
@@ -44,14 +48,11 @@ export default {
     AppNews,
   },
   data() {
-    return {
-      isActive: false
-    }
+    return {}
   },
   computed: {
-    ...mapState('catalog', ['products']),
+    ...mapState('catalog', ['products', 'isLoading']),
   },
-  methods: {
-  }
+  methods: {},
 }
 </script>

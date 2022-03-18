@@ -36,7 +36,7 @@ export const mutations = {
   },
 
   [mutationTypes.loginSuccess](state, payload) {
-    state.isLoggedIn = true
+    state.isLoggedIn = true;
     state.token = payload.token
     state.user = payload.user
   },
@@ -84,7 +84,7 @@ export const actions = {
       this.$api
         .post('/login', userData)
         .then((response) => {
-          if (response?.data?.token !== '') {
+          if (response?.data?.token !== '' && response.statue !== 401) {
             commit(mutationTypes.loginSuccess, response.data)
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('user', JSON.stringify(response.data.user))

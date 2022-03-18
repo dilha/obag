@@ -2,7 +2,7 @@
 
 /*
 @function rem($value) {
-  $remValue: ($value / 16) + rem; 
+  $remValue: ($value / 16) + rem;
   @return $remValue;
 }
 */
@@ -11,14 +11,16 @@ html {
   box-sizing: border-box;
 }
 
-*,*::after,*::before {
+*,
+*::after,
+*::before {
   box-sizing: inherit;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
 }
 
 ul {
@@ -35,9 +37,9 @@ button {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 .page {
@@ -46,7 +48,7 @@ input::-webkit-inner-spin-button {
     font-size: 64px;
     line-height: 100%;
     text-transform: uppercase;
-    color: #3D3935;
+    color: #3d3935;
   }
 
   &__block {
@@ -63,15 +65,15 @@ input::-webkit-inner-spin-button {
       line-height: 17px;
       text-align: right;
       text-decoration-line: underline;
-      color: #D05871;
+      color: #d05871;
     }
   }
 
   &__basket-btn {
-    border: 2px solid #3D3935;
+    border: 2px solid #3d3935;
     border-radius: 100px;
     padding: 8px 40px 8px 16px;
-    color: #3D3935;
+    color: #3d3935;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -79,7 +81,7 @@ input::-webkit-inner-spin-button {
     outline: none;
     cursor: pointer;
     position: relative;
-    
+
     &::after {
       content: '';
       position: absolute;
@@ -94,8 +96,8 @@ input::-webkit-inner-spin-button {
     }
 
     &.active {
-      background-color: #D05871;
-      border-color: #D05871;
+      background-color: #d05871;
+      border-color: #d05871;
       color: #ffff;
     }
 
@@ -108,9 +110,9 @@ input::-webkit-inner-spin-button {
     font-size: 14px;
     line-height: 21px;
     font-weight: 500;
-    color: #3D3935;
+    color: #3d3935;
     border-radius: 100px;
-    border: 2px solid #D05871;
+    border: 2px solid #d05871;
     padding: 22px 72px;
     background: none;
   }
@@ -122,3 +124,21 @@ input::-webkit-inner-spin-button {
   padding: 0 15px;
 }
 
+.form-row {
+  position: relative;
+  button {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: none;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAE9SURBVHgBlVLbbYNAEOQw8E0HoYOQDlyCO7ARAomvJBUYSvAXEiCRDuJUEDoIJbgEvnlmBnMWQcRRVlrfmtvZnZ09ocwsz3OzbduDqqqP06eq7/sPz/MKZWFCBlmW7Yid/pYEwS24DS+apnGCILj8AE6gd/hps9mEjuNUMiGOY0vX9U/GuHuSd4L0uq77EkIUrus6yopJ8DxHxQzsZtV1HSm/GCkOw3CC79hIArecYc5/zTRNe8NhYlZrBI58hbgLosnZoPgVCFAFCvZfwCRJxhzkXgsgOOO00zTd3gOi0zOOi9ypOgUFOudUbw00FT1Aj5uAGn+4XMpNB6UI55kzsZBhGHuwCpmHPT5I4O3lMAnKhei8XzSkBuxk4u4ID7HLSCxpTe/Vpnp4GKXv++WMMgsfUehVKP80gF+o7Df/zJ2q/BFUhgAAAABJRU5ErkJggg==);
+    background-repeat: no-repeat;
+  }
+}
