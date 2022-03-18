@@ -8,7 +8,7 @@
     <div class="certificates page__block">
       <div class="container">
           <div v-if="certificates" class="certificates__inner">
-            <app-certificates-cards v-for="item in certificates" :key="item" :item="item"/>
+            <app-certificates-cards v-for="(item, index) in certificates" :key="index" :item="item"/>
             <!-- <product-card v-for="item in certificates" :key="item" :item="item"/> -->
           </div>
       </div>

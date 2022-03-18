@@ -610,12 +610,19 @@
             &-img {
                 width: 560px;
                 height: 560px;
-                margin: 0 auto;
+                margin: 0 auto 20px;
             }
-
         }
+
+        &__product {
+            margin-right: 0;
+            margin-top: 30px;
+        }
+
         &__elements {
-            margin-top: 50px;
+            &-title {
+                margin-bottom: 30px;
+            }
             &-inner {
                 grid-template-columns: repeat(4, 1fr);
                 margin-bottom: 20px;
@@ -843,6 +850,15 @@
         }
     } 
 
+    .constructor {
+        &__product{
+            &-title  {
+                font-size: 45px;
+                margin-bottom: 30px;
+            }
+        }
+    }
+
     .footer {
         padding-bottom: 20px ;
         &__left {
@@ -1040,6 +1056,10 @@
         &__bookmarks {
             grid-column-start: 3;
             grid-column-end: 4;
+        }
+
+        &__profile-item {
+           margin: 20px 10px 25px auto;
         }
     }
 

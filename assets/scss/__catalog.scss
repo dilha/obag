@@ -37,6 +37,9 @@
       background: none;
       border: none;
     }
+    &-item {
+      cursor: pointer;
+    }
     &-item + &-item {
       padding-left: 4%;
       border-left: 1px solid #f6f6f6;

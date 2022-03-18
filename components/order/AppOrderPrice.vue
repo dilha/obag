@@ -17,7 +17,7 @@
         </div>
         <div class="order__all">
           <p class="order__all-text">Всего:</p>
-          <p class="order__all-number">{{ totalProductCost + 500 }} тг.</p>
+          <p class="order__all-number">{{ totalProductCost + 500 - 1506 }} тг.</p>
         </div>
       </div>
       <div class="order__buttons">

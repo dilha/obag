@@ -14,7 +14,7 @@
             </button>
           </div>
           <div class="characteristic__product-inner">
-            <app-parts-card v-for="item in 3" :key="item" />
+            <app-parts-card v-for="(item, index) in 3" :key="index" />
           </div>
         </div>
         <div class="characteristic__content">

@@ -53,5 +53,6 @@ export default {
   computed: {
     ...mapState('catalog', ['products', 'isLoading']),
   },
+  methods: {},
 }
 </script>

@@ -46,7 +46,7 @@ export default {
   props: {
     id: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   data() {

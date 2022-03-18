@@ -130,5 +130,6 @@ export default {
     AppIntroArrow,
     AppNews,
   },
+  
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header__profile-item">
     <a class="header__profile header__link" @click.prevent="showProfile">
       Мой профиль
     </a>

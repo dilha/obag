@@ -10,7 +10,7 @@
                         Создать дизайн
                     </button>
                 </div>
-                <div class="details__item" v-for="detail in details" :key="detail" :style="{backgroundImage:`url(${getImage(detail.bgImg)})`}">
+                <div v-for="detail in details" :key="detail.title" class="details__item" :style="{backgroundImage:`url(${getImage(detail.bgImg)})`}">
                     <h6 class="details__item-title">
                         {{ detail.title }}
                     </h6>

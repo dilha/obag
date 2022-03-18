@@ -14,18 +14,16 @@
             </button>
           </div>
           <div class="characteristic__product-inner">
-            <app-parts-card v-for="item in 3" :key="item" />
+            <app-parts-card v-for="(item,index) in 3" :key="index" />
           </div>
         </div>
         <div class="characteristic__content">
-          <p class="characteristic__code">
-            Код Товара: {{product.code}}
-          </p>
+          <p class="characteristic__code">Код Товара: {{ product.code }}</p>
           <h3 class="characteristic__title">
-            {{product.title}}
+            {{ product.title }}
           </h3>
           <p class="characteristic__price">
-            {{product.new_price}}
+            {{ product.new_price }}
           </p>
           <div class="characteristic__number">
             <p>Кол-во:</p>
@@ -41,51 +39,33 @@
           </div>
           <div class="characteristic__buttons">
             <button class="characteristic__buy">Купить</button>
-            <a
+            <nuxt-link
+              to="/constructor"
               class="characteristic__link characteristic__link-constructor"
-              href="#?"
             >
               Констуктор
-            </a>
-            <a class="characteristic__link characteristic__link-foto" href="#?">
+            </nuxt-link>
+            <nuxt-link
+              to="/shopping"
+              class="characteristic__link characteristic__link-foto"
+            >
               Запросить фото
-            </a>
+            </nuxt-link>
           </div>
           <div class="characteristic__info">
             <div class="characteristic__info-buttons">
-              <button class="characteristic__info-btn active">
-                Характеристики
+              <button
+                v-for="(item, index) in productTubs"
+                :key="index"
+                class="characteristic__info-btn"
+                :class="{ active: item.name === productInfo }"
+                @click="selecProductInfo(item.name)"
+              >
+                {{ item.title }}
               </button>
-              <button class="characteristic__info-btn">Описание</button>
-              <button class="characteristic__info-btn">Отзывы (0)</button>
             </div>
             <div class="characteristic__info-content">
-              <div class="characteristic__info-text">
-                <p class="characteristic__info-bold">Цвет</p>
-                <p class="characteristic__info-medium">Песок</p>
-              </div>
-              <div class="characteristic__info-text">
-                <p class="characteristic__info-bold">Размер</p>
-                <p class="characteristic__info-medium">
-                  Корпус: высота - 31 см, ширина - 39 см, глубина - 14 см;
-                  ручки: длина - 110 см
-                </p>
-              </div>
-              <div class="characteristic__info-text">
-                <p class="characteristic__info-bold">Состав</p>
-                <p class="characteristic__info-medium">
-                  Корпус: 100% XL EXTRALIGHT; подкладка: 50% полиуретан, 50%
-                  полиэстер; ручки: полиэстер - 55%, полиуретан - 45%
-                </p>
-              </div>
-              <div class="characteristic__info-text">
-                <p class="characteristic__info-bold">Модель</p>
-                <p class="characteristic__info-medium">O bag classic.</p>
-              </div>
-              <div class="characteristic__info-text">
-                <p class="characteristic__info-bold">Категория</p>
-                <p class="characteristic__info-medium">Сумка</p>
-              </div>
+              <div v-html="product[productInfo]"></div>
             </div>
           </div>
           <div class="characteristic__accordion">
@@ -167,8 +147,7 @@
         </div>
       </div>
     </div>
-    <div>
-    </div>
+    <div></div>
   </section>
 </template>
 
@@ -186,12 +165,38 @@ export default {
       showAccordionFirst: true,
       showAccordionSecond: false,
       product: {},
+      isFavorite: false,
+      productInfo: null,
+      productTubs: [
+        {
+          id: 1,
+          title: 'Характеристики',
+          name: 'characteristics'
+        },
+        {
+          id: 2,
+          title: 'Описание',
+          name: 'description'
+        },
+        {
+          id: 3,
+          title: 'Отзывы',
+          name: 'reviews.text'
+        },
+      ]
     }
   },
   mounted() {
     this.getProducts(this.$route.params.id)
+    this.productInfo = this.productTubs[0].name
   },
   methods: {
+
+    selecProductInfo(selectInfo) {
+      this.productInfo = selectInfo
+      console.log(this.productInfo)
+    },
+
     toggleShowAccordionFirst() {
       this.showAccordionFirst = !this.showAccordionFirst
     },
@@ -199,9 +204,7 @@ export default {
       this.showAccordionSecond = !this.showAccordionSecond
     },
     getProducts(id) {
-      this.$api
-      .get(`/product/${id}`)
-      .then((res)=> {
+      this.$api.get(`/product/${id}`).then((res) => {
         console.log(res)
         this.product = res.data.product
       })
