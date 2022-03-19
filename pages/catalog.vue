@@ -56,12 +56,19 @@ export default {
   computed: {
     ...mapState('catalog', ['products', 'isLoading', 'categories']),
   },
+  watch: {
+    '$route.params?.term': {
+      handler() {
+        this.loadSearchProducts(this.$route.params?.term)
+      },
+    },
+  },
   mounted() {
     this.routeCategory = this.categories.find(
       (c) => c.id === this.$route?.params?.id
     )
     const termFromRoute = this.$route.params?.term
-    if (termFromRoute !== '') {
+    if (termFromRoute) {
       this.loadSearchProducts(termFromRoute)
     }
   },

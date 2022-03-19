@@ -180,7 +180,7 @@ export default {
   },
   mounted() {
     this.loadAllCategories().then(() => {
-      if (this.routeCategory) {
+      if (this.routeCategory !== -1 && this.routeCategory !== -1) {
         this.loadAllCategoryProducts(this.routeCategory)
         return
       }
