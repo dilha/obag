@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <h2>Заказ офрмлен без регистрации</h2>
+    <h2>Заказ офрмлен</h2>
+    <h4>Статус {{ $route.query.status === '1' ? 'Оплачен' : 'Неоплачен' }}</h4>
   </div>
 </template>
 
@@ -11,10 +12,13 @@ import { actionTypes } from '~/store/profile'
 export default {
   name: 'OrderHistory',
   computed: {
+    ...mapState('auth', { orders: 'isLoggedIn' }),
     ...mapState('profile', { orders: 'data' }),
   },
   created() {
-    this.loadOrders()
+    if (this.isLoggedIn) {
+      this.loadOrders()
+    }
   },
   methods: {
     ...mapActions('profile', { loadOrders: actionTypes.loadOrders }),

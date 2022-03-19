@@ -6,10 +6,13 @@
       </div>
       <div class="modal__contacts">
         <h6 class="modal__contacts-title">Контактные данные для заказа:</h6>
-        <p v-if="error" style="color: red; font-size: 12px margin-bottom:8px;">
-          {{ error }}
+        <p
+          v-if="error || validationError"
+          style="color: red; font-size: 12px margin-bottom:8px;"
+        >
+          {{ error || validationError }}
         </p>
-        <form class="modal__contacts-form">
+        <form class="modal__contacts-form" @submit.prevent="checkout">
           <input
             v-model="name"
             class="modal__contacts-name"
@@ -39,10 +42,18 @@
             placeholder="Адрес доставки"
             required
           />
+          <div class="modal__bottom">
+            <!-- <app-order-price @clickCheckoutButton="checkout" /> -->
+            <div class="order__buttons">
+              <button class="order__buttons-issue" type="submit">
+                Оформить заказ
+              </button>
+              <button class="order__buttons-delete" @click.prevent="clearCart">
+                Очистить корзину
+              </button>
+            </div>
+          </div>
         </form>
-      </div>
-      <div class="modal__bottom">
-        <app-order-price @clickCheckoutButton="checkout" />
       </div>
     </div>
     <button class="modal__close" @click="close">
@@ -53,13 +64,13 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
-import AppOrderPrice from '~/components/order/AppOrderPrice.vue'
+// import AppOrderPrice from '~/components/order/AppOrderPrice.vue'
 import { actionTypes } from '~/store/order'
 
 export default {
   name: 'AppModalProducts',
   components: {
-    AppOrderPrice,
+    // AppOrderPrice,
   },
   data() {
     return {
@@ -67,6 +78,7 @@ export default {
       phone: '',
       email: '',
       address: '',
+      validationError: null,
     }
   },
   computed: {
@@ -100,6 +112,7 @@ export default {
         payment_type: 'card',
         cart_elements: this.products,
       }
+
       this.sendOrder(data)
       console.log('CHEKCOUT STARTTT')
     },

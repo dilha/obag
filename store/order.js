@@ -35,18 +35,20 @@ export const actions = {
         if(response.status === 200){
           commit(mutationTypes.sendOrderSuccess, payload)
           commit('cart/mutation/clearCart', null, {root:true})
+          // this.$router.push(response?.data?.payment?.formUrl)
+        location.href = response?.data?.payment?.formUrl;
           // rootState.cart.clearCart();
-          if(rootState.auth.isLoggedIn){
-            this.$router.push('/my/order-history')
-          }else{
-             this.$router.push('/my/order-history-guest')
-          }
+          // if(rootState.auth.isLoggedIn){
+          //   this.$router.push('/my/order-history')
+          // }else{
+          //    this.$router.push('/my/order-history-guest')
+          // }
 
         }
         resolve(response)
       })
       .then((e)=>{
-          commit(mutationTypes.sendOrderFailure, e?.response.data?.message || 'что-то пошло не так')
+          commit(mutationTypes.sendOrderFailure, e?.response.data?.message)
       })
 
     })

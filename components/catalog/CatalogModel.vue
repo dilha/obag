@@ -49,7 +49,6 @@ export default {
         slideTo: 1,
         slidesPerView: 10,
         responsive: true,
-        loop: true,
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',

@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="catalog__page">
-        <catalog-aside />
+        <catalog-aside :route-category="routeCategory" />
         <div class="catalog__content">
           <catalog-model />
           <div v-if="products.length" class="catalog__inner">
@@ -48,10 +48,17 @@ export default {
     AppNews,
   },
   data() {
-    return {}
+    return {
+      routeCategory: '',
+    }
   },
   computed: {
-    ...mapState('catalog', ['products', 'isLoading']),
+    ...mapState('catalog', ['products', 'isLoading', 'categories']),
+  },
+  mounted() {
+    this.routeCategory = this.categories.find(
+      (c) => c.id === this.$route?.params?.id
+    )
   },
   methods: {},
 }
