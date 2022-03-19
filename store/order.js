@@ -36,7 +36,7 @@ export const actions = {
           commit(mutationTypes.sendOrderSuccess, payload)
           commit('cart/mutation/clearCart', null, {root:true})
           // this.$router.push(response?.data?.payment?.formUrl)
-        location.href = response?.data?.payment?.formUrl;
+            location.href = response?.data?.payment?.formUrl;
           // rootState.cart.clearCart();
           // if(rootState.auth.isLoggedIn){
           //   this.$router.push('/my/order-history')

@@ -142,6 +142,7 @@ export default {
     // eslint-disable-next-line vue/require-default-prop
     routeCategory: {
       type: Number,
+      default: -1,
     },
   },
   data() {

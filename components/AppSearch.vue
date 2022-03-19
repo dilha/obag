@@ -24,7 +24,10 @@ export default {
   methods: {
     search() {
       if (this.searchTerm) {
-        this.$router({ name: 'catalog', params: { term: this.searchTerm } })
+        this.$router.push({
+          name: 'catalog',
+          params: { term: this.searchTerm },
+        })
       }
     },
   },
