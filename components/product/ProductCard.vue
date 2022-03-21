@@ -2,7 +2,7 @@
   <div v-if="item" class="product__card">
     <div class="product__card-image">
       <div class="product__card-top">
-        <div class="product__card-sale">Mid Season Sale -30%</div>
+        <!-- <div class="product__card-sale">Mid Season Sale -30%</div> -->
         <button
           class="product__card-bookmark"
           :class="{ active: item.isFavorite || isFavorite }"
@@ -25,7 +25,7 @@
     <div class="product__card-bottom">
       <button
         class="page__basket-btn product__card-basket"
-        :class="{ active: isAdded}"
+        :class="{ active: isAdded }"
         :disabled="isAdded"
         @click="add(item)"
       >
@@ -58,8 +58,8 @@ export default {
     },
     isActive: {
       type: Boolean,
-      require: true
-    }
+      require: true,
+    },
   },
   data() {
     return {
@@ -71,27 +71,27 @@ export default {
     ...mapState('cart', ['cartProducts']),
   },
   mounted() {
-    this.isAddedCard();
+    this.isAddedCard()
   },
   methods: {
     ...mapActions('cart', { addProductToCart: actionTypes.addProduct }),
     ...mapActions('bookmarks', {
       addBookmark: actionTypesBookmark.addBookmark,
     }),
-    
+
     add(item) {
       this.isAdded = true
       this.addProductToCart(item).then((isExists) => {
         // this.isAdded = isExists
       })
     },
-    
+
     isAddedCard() {
-      this.cartProducts.forEach(element => {
-        if(element.id === this.item.id) {
+      this.cartProducts.forEach((element) => {
+        if (element.id === this.item.id) {
           this.isAdded = true
         }
-      });
+      })
     },
 
     addProductToBookmark(item) {

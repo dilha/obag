@@ -1,11 +1,35 @@
 <template>
-    <form class="header__form">
-          <input class="header__search" type="text" placeholder="Поиск">
-    </form>
+  <form class="header__form">
+    <div class="form-row">
+      <input
+        v-model="searchTerm"
+        class="aside__search-input"
+        type="text"
+        placeholder="Поиск"
+        @keydown.enter="search"
+      />
+      <button class="search__icon" @click.prevent="search"></button>
+    </div>
+  </form>
 </template>
 
 <script>
 export default {
-    name: "AppSearch",
+  name: 'AppSearch',
+  data() {
+    return {
+      searchTerm: '',
+    }
+  },
+  methods: {
+    search() {
+      if (this.searchTerm) {
+        this.$router.push({
+          name: 'catalog',
+          params: { term: this.searchTerm },
+        })
+      }
+    },
+  },
 }
 </script>

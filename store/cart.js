@@ -64,7 +64,12 @@ export const mutations = {
 }
 export const actions = {
   [actionTypes.addProduct]({commit, state}, product){
-    const productWithQuantity = {... product, quantity:1}
+    let productWithQuantity =  null;
+
+    if(!product.quantity){
+        productWithQuantity = {... product, quantity:1}
+    }
+
     const isProductExists = state.cartProducts.some(p=>p.id === product.id);
 
     if(!isProductExists){

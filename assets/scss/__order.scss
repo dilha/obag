@@ -5,8 +5,8 @@
       align-items: flex-start;
       position: relative;
       padding: 24px 0;
-      border-top: 1px solid #F6F6F6;
-      border-bottom: 1px solid #F6F6F6;
+      border-top: 1px solid #f6f6f6;
+      border-bottom: 1px solid #f6f6f6;
     }
     &-img {
       width: 138px;
@@ -24,7 +24,7 @@
       font-weight: 600;
       font-size: 18px;
       line-height: 132%;
-      color: #3D3935;
+      color: #3d3935;
       margin-bottom: 20px;
       margin-right: 20px;
     }
@@ -32,14 +32,14 @@
       font-size: 14px;
       line-height: 17px;
       text-decoration-line: line-through;
-      color: #9C9C9C;
+      color: #9c9c9c;
       margin-bottom: 4px;
     }
     &-newprice {
       font-weight: 600;
       font-size: 18px;
       line-height: 132%;
-      color: #D05871;
+      color: #d05871;
     }
 
     &-btn {
@@ -63,7 +63,7 @@
     &-minus,
     &-plus {
       background: none;
-      border: none; 
+      border: none;
       outline: none;
       width: 16px;
       height: 16px;
@@ -75,15 +75,15 @@
     &-input {
       width: 100%;
       padding: 16px 24px;
-      background: #F6F6F6;
+      background: #f6f6f6;
       border-radius: 100px;
       border: none;
-      
+
       &::placeholder {
         font-weight: 500;
         font-size: 14px;
         line-height: 21px;
-        color: #3D3935;
+        color: #3d3935;
       }
     }
   }
@@ -111,31 +111,33 @@
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
-    color: #3D3935;
+    color: #3d3935;
   }
 
   &__friday {
     font-weight: 600;
     font-size: 18px;
     line-height: 132%;
-    color: #D05871;
+    color: #d05871;
   }
 
   &__deliver {
     font-size: 14px;
     line-height: 21px;
-    color: #3D3935;
+    color: #3d3935;
   }
 
   &__all {
     font-weight: 600;
     font-size: 18px;
     line-height: 132%;
-    color: #3D3935;
+    color: #3d3935;
   }
 
   &__buttons {
     display: flex;
+    padding: 16px 0;
+    justify-content: center;
 
     button {
       font-size: 14px;
@@ -145,17 +147,16 @@
     }
 
     &-issue {
-      background: #D05871;
-      border: 2px solid #D05871;
+      background: #d05871;
+      border: 2px solid #d05871;
       color: #fff;
       margin-right: 16px;
     }
 
     &-delete {
-      border: 2px solid #9C9C9C;
+      border: 2px solid #9c9c9c;
       background: none;
-      color: #9C9C9C;
+      color: #9c9c9c;
     }
   }
-
 }

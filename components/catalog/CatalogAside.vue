@@ -68,6 +68,35 @@
           </div>
         </div>
       </div>
+      <div v-if="complects.length" class="aside__product aside__block">
+        <div class="aside__top">
+          <h6 class="aside__top-title">Комплектующие:</h6>
+          <img
+            class="aside__top-arrow"
+            src="@/assets/images/icons/select-icon.svg"
+            alt=""
+          />
+        </div>
+        <div class="aside__body">
+          <div
+            v-for="complect of complects"
+            :key="complect.id"
+            class="aside__checkbox"
+          >
+            <input
+              :id="complect.id + complect.title"
+              name="complects"
+              class="aside__check"
+              type="checkbox"
+              :checked="selectedComplect.id === complect.id"
+              @change="getFilteredProducts(complect)"
+            />
+            <label class="aside__label" :for="complect.id + complect.title">
+              {{ complect.title }}
+            </label>
+          </div>
+        </div>
+      </div>
 
       <div v-for="(field, index) in Object.keys(filters)" :key="index">
         <div class="aside__colors aside__block">
@@ -109,9 +138,17 @@ import { actionTypes } from '@/store/catalog'
 
 export default {
   name: 'CatalogAside',
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    routeCategory: {
+      type: Number,
+      default: -1,
+    },
+  },
   data() {
     return {
       selectedFilters: [],
+      selectedComplect: {},
       showPrice: false,
       showProduct: false,
       showDiscount: false,
@@ -122,7 +159,12 @@ export default {
     }
   },
   computed: {
-    ...mapState('catalog', ['categories', 'filters', 'selectedSubCategory']),
+    ...mapState('catalog', [
+      'categories',
+      'filters',
+      'selectedSubCategory',
+      'complects',
+    ]),
     ...mapGetters('catalog', ['selectedCategory']),
     defaultCategory() {
       return this.categories.length > 0 ? this.categories[0] : null
@@ -138,6 +180,10 @@ export default {
   },
   mounted() {
     this.loadAllCategories().then(() => {
+      if (this.routeCategory !== -1 && this.routeCategory !== -1) {
+        this.loadAllCategoryProducts(this.routeCategory)
+        return
+      }
       this.loadAllCategoryProducts(this.selectedCategory)
     })
   },
@@ -164,7 +210,10 @@ export default {
       }
       this.getFilteredProducts()
     },
-    getFilteredProducts() {
+    getFilteredProducts(complect) {
+      if (complect?.id) {
+        this.selectedComplect = complect
+      }
       // Бля перепиши
       if (!this.selectedSubCategory) {
         this.loadFilterProducts({
@@ -175,12 +224,22 @@ export default {
         })
         return
       }
-      this.loadFilterProducts({
-        filters: this.selectedFilters,
-        subCategoryId: this.selectedSubCategory,
-        price_from: this.price_from,
-        price_to: this.price_to,
-      })
+      if (this.selectedComplect.id) {
+        this.loadFilterProducts({
+          filters: this.selectedFilters,
+          complete_id: this.selectedComplect.id,
+          subCategoryId: this.selectedSubCategory,
+          price_from: this.price_from,
+          price_to: this.price_to,
+        })
+      } else {
+        this.loadFilterProducts({
+          filters: this.selectedFilters,
+          subCategoryId: this.selectedSubCategory,
+          price_from: this.price_from,
+          price_to: this.price_to,
+        })
+      }
     },
     togglePrice() {
       this.showPrice = !this.showPrice

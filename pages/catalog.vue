@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="catalog__page">
-        <catalog-aside />
+        <catalog-aside :route-category="routeCategory" />
         <div class="catalog__content">
           <catalog-model />
           <div v-if="products.length" class="catalog__inner">
@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { actionTypes } from '@/store/catalog'
 import SortingSelect from '~/components/catalog/SortingSelect.vue'
 import CatalogAside from '~/components/catalog/CatalogAside.vue'
 import CatalogModel from '~/components/catalog/CatalogModel.vue'
@@ -48,11 +49,33 @@ export default {
     AppNews,
   },
   data() {
-    return {}
+    return {
+      routeCategory: '',
+    }
   },
   computed: {
-    ...mapState('catalog', ['products', 'isLoading']),
+    ...mapState('catalog', ['products', 'isLoading', 'categories']),
   },
-  methods: {},
+  watch: {
+    '$route.params?.term': {
+      handler() {
+        this.loadSearchProducts(this.$route.params?.term)
+      },
+    },
+  },
+  mounted() {
+    this.routeCategory = this.categories.find(
+      (c) => c.id === this.$route?.params?.id
+    )
+    const termFromRoute = this.$route.params?.term
+    if (termFromRoute) {
+      this.loadSearchProducts(termFromRoute)
+    }
+  },
+  methods: {
+    ...mapActions('catalog', {
+      loadSearchProducts: actionTypes.loadSearchProducts,
+    }),
+  },
 }
 </script>

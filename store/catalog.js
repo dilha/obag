@@ -3,6 +3,7 @@ export const state = ()=>({
   categories:[],
   products:[],
   filters:[],
+  complects:[],
   selectedCategory:null,
   selectedSubCategory:null,
   error:null,
@@ -17,6 +18,7 @@ export const mutationTypes = {
   setSelectedCategory:'mutation/setSelectedCategory',
   setSelectedSubCategory:'mutation/setSelectedSubCategory',
   setCategoryFilters:'mutation/setCategoryFilters',
+  setComplects:'mutation/setComplects',
 
   loadProductsStart:'mutation/loadProductsStart',
   loadProductsSuccess:'mutation/loadProductsSuccess',
@@ -56,6 +58,9 @@ export const mutations = {
   },
   [mutationTypes.setCategoryFilters](state, payload){
     state.filters = payload;
+  },
+  [mutationTypes.setComplects](state, payload){
+    state.complects = payload;
   },
 
   [mutationTypes.loadProductsStart](state){
@@ -134,8 +139,11 @@ export const actions = {
       .then((response)=>{
         const products = response.data.subcategory.products;
         const filters = response.data?.filters;
+        const complects = response.data.completes;
+        console.log(response.data)
         commit(mutationTypes.loadProductsSuccess, products )
         commit(mutationTypes.setCategoryFilters, filters )
+        commit(mutationTypes.setComplects, complects )
 
         resolve(products);
       })
@@ -173,6 +181,9 @@ export const actions = {
     }
     if(payload?.price_to){
       params.price_to = payload.price_to
+    }
+    if(payload?.complete_id){
+      params.complete_id = payload.complete_id
     }
 
     let url  = `/subcategory/${payload.subCategoryId}/filtered`
