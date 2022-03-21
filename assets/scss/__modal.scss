@@ -207,5 +207,49 @@
     }
   }
 
+  &__edits {
+    display: block;
+
+    &-title {
+      font-size: 20px;
+      line-height: 22px;
+      text-align: center;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    input {
+      width: 100%;
+        background: #F6F6F6;
+        border-radius: 100px;
+        padding: 17px 24px;
+        border: none;
+        outline: none;
+        background-position: 24px;
+        background-color: #f6f6f6;
+        background-repeat: no-repeat;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        color: #9C9C9C;
+        margin-bottom: 20px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &::placeholder {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            color: #9C9C9C;
+        }
+        
+        & + & {
+          margin-top: 16px;
+        }
+    }
+  }
+
 }
 

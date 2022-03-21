@@ -11,7 +11,6 @@
               :item="item"
             />
           </div>
-
           <app-order-price
             @clickCheckoutButton="isVisibleContactModal = true"
           />

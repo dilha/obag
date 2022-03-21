@@ -14,7 +14,11 @@
             </button>
           </div>
           <div class="characteristic__product-inner">
-            <app-parts-card v-for="(item,index) in 3" :key="index" />
+            <app-parts-card
+              v-for="(item, index) in product.complete"
+              :key="index"
+              :item="item"
+            />
           </div>
         </div>
         <div class="characteristic__content">
@@ -23,22 +27,22 @@
             {{ product.title }}
           </h3>
           <p class="characteristic__price">
-            {{ product.new_price }}
+            {{ product.price }}
           </p>
           <div class="characteristic__number">
             <p>Кол-во:</p>
             <div class="order__products-number characteristic__number-num">
-              <button class="order__products-minus">
+              <button class="order__products-minus" @click="minus">
                 <img src="@/assets/images/icons/minus-icon.svg" alt="" />
               </button>
-              <p>1</p>
-              <button class="order__products-plus">
+              <p>{{quantity}}</p>
+              <button class="order__products-plus" @click="plus">
                 <img src="@/assets/images/icons/plus-icon.svg" alt="" />
               </button>
             </div>
           </div>
           <div class="characteristic__buttons">
-            <button class="characteristic__buy">Купить</button>
+            <button class="characteristic__buy" @click="addProductCart">Купить</button>
             <nuxt-link
               to="/constructor"
               class="characteristic__link characteristic__link-constructor"
@@ -152,6 +156,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+import { actionTypes } from '~/store/cart'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
 export default {
@@ -167,30 +173,34 @@ export default {
       product: {},
       isFavorite: false,
       productInfo: null,
+      productPrice: [],
+      quantity: 1,
       productTubs: [
         {
           id: 1,
           title: 'Характеристики',
-          name: 'characteristics'
+          name: 'characteristics',
         },
         {
           id: 2,
           title: 'Описание',
-          name: 'description'
+          name: 'description',
         },
         {
           id: 3,
           title: 'Отзывы',
-          name: 'reviews.text'
+          name: 'reviews.text',
         },
-      ]
+      ],
     }
   },
   mounted() {
-    this.getProducts(this.$route.params.id)
+    // this.getProducts(this.$route.params.id)
+    this.getProducts(9)
     this.productInfo = this.productTubs[0].name
   },
   methods: {
+    ...mapActions('cart', { addProductToCart: actionTypes.addProduct }),
 
     selecProductInfo(selectInfo) {
       this.productInfo = selectInfo
@@ -209,6 +219,24 @@ export default {
         this.product = res.data.product
       })
     },
+    minus() {
+      if(this.quantity === 1) {
+        this.quantity = 1
+      }
+      else {
+      this.quantity--
+      }
+    },
+    plus() {
+      this.quantity++
+    },
+
+    addProductCart() {
+      // const newProduct = JSON.parse(JSON.stringify())
+      this.product.quantity = this.quantity;
+      console.log(this.product.quantity)
+      this.addProductToCart(this.product)
+    }
   },
 }
 </script>

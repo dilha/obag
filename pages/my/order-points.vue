@@ -2,20 +2,20 @@
   <div class="orders">
     <div class="container">
       <h1 class="orders__title page__title" @click="con">
-        История заказов
+        Бонусные баллы
       </h1>
       <div class="orders__inner">
         <profile-navigation />
-        <app-history-cards v-if="orders" :items="orders"/>
-        <!-- <ul v-if="orders">
-          <li
-            v-for="order in orders"
-            :key="order.id"
-            style="margin-bottom: 8px"
-          >
-            <strong>Заказа #{{ order.id }}</strong> сумма {{ order.price }}
-          </li>
-        </ul> -->
+        <div class="orders__points">
+          <p class="orders__points-text">
+            На вашем счету 
+            <span>0</span>
+            бонусов.
+          </p>
+          <button class="orders__points-btn page__border-btn">
+            Продолжить
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -25,13 +25,11 @@
 import { mapState, mapActions } from 'vuex'
 import { actionTypes } from '~/store/profile'
 import ProfileNavigation from '~/components/my/ProfileNavigation.vue'
-import AppHistoryCards from '~/components/cards/AppHistoryCards.vue'
 
 export default {
   name: 'OrderHistory',
   components: {
     ProfileNavigation,
-    AppHistoryCards,
   },
   computed: {
     ...mapState('profile', { orders: 'data' }),

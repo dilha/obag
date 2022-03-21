@@ -4,6 +4,7 @@ export const state = () => ({
   error: null,
   token: null,
   user: null,
+
 })
 export const mutationTypes = {
   setIsLoggedIn:'mutation/setIsLoggedIn',
@@ -19,14 +20,22 @@ export const mutationTypes = {
   logoutStart: 'mutation/logoutStart',
   logoutSuccess: 'mutation/logoutSuccess',
   logoutFailure: 'mutation/logoutFailure',
+
+  editMutation: 'mutation/editStart'
 }
 export const actionTypes = {
   login: 'action/loginAction ',
   register:'actions/register',
   logout: 'action/logoutAction ',
   updateIsLoggedIn: 'action/categoryStart',
+  editAction: 'action/editAction'
 }
 export const mutations = {
+
+  [mutationTypes.editMutation](state, payload) {
+    state.user = payload
+  },
+
   [mutationTypes.setIsLoggedIn](state, payload) {
     state.isLoggedIn = payload
   },
@@ -64,7 +73,7 @@ export const mutations = {
   },
 
   [mutationTypes.logoutSuccess](state) {
-     state.isLoggedIn = false
+    state.isLoggedIn = false
     state.token = null
     state.user = null
   },
@@ -72,10 +81,10 @@ export const mutations = {
     state.isLoggedIn = false
     state.error = payload
   },
-
-
 }
+
 export const actions = {
+
   [actionTypes.login]({ commit }, userData) {
 
     commit(mutationTypes.loginFailure, null)

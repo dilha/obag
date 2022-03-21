@@ -35,7 +35,6 @@
             required
           />
           <input
-            v-if="!isLoggedIn"
             v-model="address"
             class="modal__contacts-email"
             type="text"
@@ -85,6 +84,7 @@ export default {
     ...mapState('auth', ['isLoggedIn', 'user']),
     ...mapState('order', ['error']),
     ...mapGetters('cart', ['totalProductCost', 'products']),
+    
   },
   mounted() {
     if (this.isLoggedIn) {
@@ -99,6 +99,10 @@ export default {
     close() {
       this.$emit('close')
     },
+    con() {
+    console.log(this.totalProductCost)
+      
+    },
     checkout() {
       const data = {
         user_id: this.user?.id,
@@ -106,7 +110,7 @@ export default {
         name: this.name,
         phone: this.phone,
         email: this.email,
-        price: 15250,
+        price: this.totalProductCost,
         bonus_waste: 0,
         delivery_type: 'mail',
         payment_type: 'card',

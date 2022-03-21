@@ -26,22 +26,49 @@
             <p class="account__text">{{ user.address }}</p>
           </div>
           <div class="account__info-link">
-            <a class="account__link" href="#?"> Редактировать данные </a>
-            <a class="account__link" href="#?"> Изменить свой пароль </a>
+            <a
+              class="account__link"
+              href="#?"
+              @click="isVisibleEditModal = true"
+            >
+              Редактировать данные
+            </a>
+            <a
+              class="account__link"
+              href="#?"
+              @click="isVisiblePasswordModal = true"
+            >
+              Изменить свой пароль
+            </a>
           </div>
         </div>
       </div>
     </div>
+    <app-edit-data
+      v-if="isVisibleEditModal"
+      @close="isVisibleEditModal = false"
+    />
+    <app-edit-password
+      v-if="isVisiblePasswordModal"
+      @close="isVisiblePasswordModal = false"
+    />
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import ProfileNavigation from '@/components/my/ProfileNavigation.vue'
-
+import AppEditData from '~/components/modal/AppEditData.vue'
+import AppEditPassword from '~/components/modal/AppEditPassword.vue'
 export default {
   name: 'AccountPage',
-  components: { ProfileNavigation },
+  components: { ProfileNavigation, AppEditData, AppEditPassword },
+  data() {
+    return {
+      isVisibleEditModal: false,
+      isVisiblePasswordModal: false,
+    }
+  },
   computed: {
     ...mapState('auth', ['user', 'isLoggedIn']),
   },

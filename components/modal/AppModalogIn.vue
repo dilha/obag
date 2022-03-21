@@ -22,9 +22,9 @@
         <form class="modal__login-form">
           <input
             v-model="user.phone"
-            class="modal__login-input modal__login-email"
-            type="text"
-            placeholder="Эл. почта"
+            class="modal__login-input modal__login-phone"
+            type="number"
+            placeholder="Телефон"
             autocomplete="false"
           />
           <input
