@@ -4,13 +4,11 @@
       <h6 class="catalog__model-title">Модель:</h6>
       <div class="catalog__model-buttons">
         <button
-          slot="button-prev"
           class="catalog__model-btn catalog__model-prev button-prev"
         >
           <img src="@/assets/images/icons/left-arrow.svg" alt="" />
         </button>
         <button
-          slot="button-next"
           class="catalog__model-btn catalog__model-next button-next"
         >
           <img src="@/assets/images/icons/right-arrow.svg" alt="" />
@@ -49,7 +47,7 @@ export default {
         slideTo: 1,
         slidesPerView: 10,
         responsive: true,
-        loop: true,
+        // loop: true,
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',

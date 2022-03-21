@@ -27,6 +27,11 @@
   &__model {
     width: 100%;
     margin-bottom: 35px;
+
+    &-buttons {
+      position: relative;
+    }
+
     &-top {
       display: flex;
       justify-content: space-between;
