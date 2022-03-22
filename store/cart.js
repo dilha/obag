@@ -1,5 +1,6 @@
 export const state = ()=>({
   cartProducts:[],
+  deliveryPrice:0,
 })
 
 export const mutationTypes = {
@@ -7,17 +8,22 @@ export const mutationTypes = {
   removeProduct:'mutation/removeProduct',
   updatedQuantity:'mutation/updatedQuantity',
   clearCart:'mutation/clearCart',
+  setDeliveryPrice:'mutation/setDeliveryPrice',
 }
 export const actionTypes = {
    addProduct:'action/addProduct',
    updatedQuantity:'action/updatedQuantity',
    removeProduct:'action/removeProduct',
-   clearCart:'action/clearCart'
+   clearCart:'action/clearCart',
+   setDeliveryPrice:'mutation/setDeliveryPrice',
 }
 
 export const mutations = {
   [mutationTypes.addProduct](state, payload){
     state.cartProducts.push(payload)
+  },
+  [mutationTypes.setDeliveryPrice](state, payload){
+    state.deliveryPrice = payload
   },
   [mutationTypes.removeProduct](state, payload){
     state.cartProducts.forEach((p, i)=>{
@@ -90,12 +96,21 @@ export const actions = {
   },
   [actionTypes.clearCart]({commit}){
     commit(mutationTypes.clearCart)
+  },
+  [actionTypes.setDeliveryPrice]({commit}){
+    return new Promise(resolve=>{
+      this.$api.get('/delivery-price')
+      .then((response)=>{
+        commit(mutationTypes.setDeliveryPrice, parseInt(response.data.price))
+        resolve(response)
+      })
+    })
   }
 }
 export const getters = {
   totalProductCount:state=>state.cartProducts.length,
   // eslint-disable-next-line no-return-assign
-  totalProductCost:state=>state.cartProducts.reduce((acc, p) =>  acc +=p.price  * p.quantity,0),
+  totalProductCost:state=>state.cartProducts.reduce((acc, p) =>  acc +=p.price  * p.quantity,0) + state.deliveryPrice,
   products:state=>state.cartProducts,
 
 }

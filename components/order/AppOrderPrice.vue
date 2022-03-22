@@ -7,17 +7,17 @@
           <p class="order__total-text">Итого:</p>
           <p class="order__total-number">{{ totalProductCost }} тг</p>
         </div>
-        <div class="order__friday">
-          <p class="order__friday-text">Black Friday:</p>
-          <p class="order__friday-number">-1506 тг.</p>
-        </div>
+        <!-- <div class="order__friday">
+          <p class="order__friday-text">Доставка:</p>
+          <p class="order__friday-number">- 0тг.</p>
+        </div> -->
         <div class="order__delivery">
           <p class="order__delivery-text">Доставка в отделение Новой Почты:</p>
-          <p class="order__delivery-number">500 тг.</p>
+          <p class="order__delivery-number">{{ deliveryPrice }} тг.</p>
         </div>
         <div class="order__all">
           <p class="order__all-text">Всего:</p>
-          <p class="order__all-number">{{ totalProductCost + 500 - 1506 }} тг.</p>
+          <p class="order__all-number">{{ totalProductCost }} тг.</p>
         </div>
       </div>
       <div class="order__buttons">
@@ -39,15 +39,22 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import { actionTypes } from '~/store/cart'
 export default {
   name: 'AppOrderPrice',
   computed: {
+    ...mapState('cart', ['deliveryPrice']),
     ...mapGetters('cart', ['totalProductCost']),
   },
+  mounted() {
+    this.setDeliveryPrice()
+  },
   methods: {
-    ...mapActions('cart', { clearCart: actionTypes.clearCart }),
+    ...mapActions('cart', {
+      clearCart: actionTypes.clearCart,
+      setDeliveryPrice: actionTypes.setDeliveryPrice,
+    }),
   },
 }
 </script>
