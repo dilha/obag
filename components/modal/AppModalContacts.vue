@@ -65,6 +65,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 // import AppOrderPrice from '~/components/order/AppOrderPrice.vue'
 import { actionTypes } from '~/store/order'
+import { actionTypes as actionTypesCart } from '~/store/cart'
 
 export default {
   name: 'AppModalProducts',
@@ -84,7 +85,6 @@ export default {
     ...mapState('auth', ['isLoggedIn', 'user']),
     ...mapState('order', ['error']),
     ...mapGetters('cart', ['totalProductCost', 'products']),
-    
   },
   mounted() {
     if (this.isLoggedIn) {
@@ -95,13 +95,13 @@ export default {
   },
   methods: {
     ...mapActions('order', { sendOrder: actionTypes.sendOrder }),
+    ...mapActions('cart', { clearCart: actionTypesCart.clearCart }),
 
     close() {
       this.$emit('close')
     },
     con() {
-    console.log(this.totalProductCost)
-      
+      console.log(this.totalProductCost)
     },
     checkout() {
       const data = {

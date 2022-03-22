@@ -1,6 +1,11 @@
 <template>
   <div class="order__products-item">
-    <img class="order__products-img" :src="item.image" :alt="item.title" />
+    <img
+      v-if="item.image"
+      class="order__products-img"
+      :src="item.image"
+      :alt="item.title"
+    />
     <div class="order__products-content">
       <h6 class="order__products-title">{{ item.title }}</h6>
       <div class="order__products-number">

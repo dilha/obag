@@ -74,6 +74,8 @@ export const actions = {
 
     if(!product.quantity){
         productWithQuantity = {... product, quantity:1}
+    }else{
+      productWithQuantity = product
     }
 
     const isProductExists = state.cartProducts.some(p=>p.id === product.id);
@@ -110,7 +112,7 @@ export const actions = {
 export const getters = {
   totalProductCount:state=>state.cartProducts.length,
   // eslint-disable-next-line no-return-assign
-  totalProductCost:state=>state.cartProducts.reduce((acc, p) =>  acc +=p.price  * p.quantity,0) + state.deliveryPrice,
+  totalProductCost:state=>state.cartProducts.reduce((acc, p) =>  acc +=p.price   * p.quantity,0) + state.deliveryPrice,
   products:state=>state.cartProducts,
 
 }

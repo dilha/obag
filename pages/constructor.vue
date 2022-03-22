@@ -5,17 +5,28 @@
         Каждый аксессуар O bag – это конструктор!
       </h3>
       <div v-if="productType" class="constructor__inner">
-         <div v-for="item in productType"  :key="item.id" class="constructor__item" :class="{active : selectedType.id === item.id}" @click="getTypesProducts(item)">
+        <div
+          v-for="item in productType"
+          :key="item.id"
+          class="constructor__item"
+          :class="{ active: selectedType.id === item.id }"
+          @click="getTypesProducts(item)"
+        >
           <div class="constructor__item-images">
-            <img :src="item.square_image" alt="">
+            <img :src="item.square_image" alt="" />
           </div>
           <p class="constructor__item-title">
-            {{item.title}}
+            {{ item.title }}
           </p>
         </div>
       </div>
       <div v-if="selectedConfiguratorMenu" class="constructor__buttons">
-        <button class="constructor__btn page__border-btn" @click="removeElements">Назад</button>
+        <button
+          class="constructor__btn page__border-btn"
+          @click="removeElements"
+        >
+          Назад
+        </button>
         <button
           v-for="(constructor, index) in productConstructor.categories"
           :key="index"
@@ -55,7 +66,12 @@
                 {{ totalAll }}
               </p>
             </div>
-            <button class="constructor__selected-btn" @click="addElementsToCart">В корзину</button>
+            <button
+              class="constructor__selected-btn"
+              @click="addElementsToCart"
+            >
+              В корзину
+            </button>
           </div>
         </div>
         <div class="constructor__elements">
@@ -83,8 +99,8 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
-import{actionTypes} from '@/store/product-constructor';
+import { mapActions, mapState } from 'vuex'
+import { actionTypes } from '@/store/product-constructor'
 import { actionTypes as cartActionTypes } from '~/store/cart'
 
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
@@ -110,93 +126,49 @@ export default {
       totalAll: '0',
       backgroundImages:
         'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp',
-
-      items: [
-        {
-          title: 'Женская сумка O bag Unique Сангрия',
-          priceOld: '1990.00 грн.',
-          priceNew: '1393.00 грн',
-          image:
-            'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
-        },
-        {
-          title: 'Женская сумка O bag Unique Сангрия',
-          priceOld: '1990.00 грн.',
-          priceNew: '1393.00 грн',
-          image:
-            'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
-        },
-        {
-          title: 'Женская сумка O bag Unique Сангрия',
-          priceOld: '1990.00 грн.',
-          priceNew: '1393.00 грн',
-          image:
-            'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
-        },
-        {
-          title: 'Женская сумка O bag Unique Сангрия',
-          priceOld: '1990.00 грн.',
-          priceNew: '1393.00 грн',
-          image:
-            'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
-        },
-        {
-          title: 'Женская сумка O bag Unique Сангрия',
-          priceOld: '1990.00 грн.',
-          priceNew: '1393.00 грн',
-          image:
-            'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
-        },
-        {
-          title: 'Женская сумка O bag Unique Сангрия',
-          priceOld: '1990.00 грн.',
-          priceNew: '1393.00 грн',
-          image:
-            'https://www.freepngimg.com/thumb/anime/120089-uchiha-madara-free-download-image.png',
-        },
-      ],
-      
     }
   },
   computed: {
-    ...mapState('product-constructor', [
-      'productConstructor'
-    ]),
-    ...mapState('product-constructor', [
-      'productType'
-    ]),
+    ...mapState('product-constructor', ['productConstructor']),
+    ...mapState('product-constructor', ['productType']),
   },
   mounted() {
-    this.getTypes().then((types)=> {
-    this.selectedType = types[0]
+    this.getTypes().then((types) => {
+      this.selectedType = types[0]
     })
-    
-    this.getConstructor('bags').then(()=> {
+
+    this.getConstructor('bags').then(() => {
       this.selectedConfiguratorMenu = this.productConstructor.categories[0]
-    });
+    })
   },
   methods: {
-    ...mapActions('product-constructor', {getTypes:actionTypes.loadType}),
-    ...mapActions('product-constructor', {getConstructor:actionTypes.loadConstructor}),
+    ...mapActions('product-constructor', { getTypes: actionTypes.loadType }),
+    ...mapActions('product-constructor', {
+      getConstructor: actionTypes.loadConstructor,
+    }),
     ...mapActions('cart', {
       addElements: cartActionTypes.addProduct,
     }),
 
     getTypesProducts(item) {
       this.selectedType = item
-      this.getConstructor(item.slug)
-      console.log(item)
-    },    
+      this.getConstructor(item.slug).then(() => {
+        if (this.productConstructor?.categories?.length) {
+          this.selectedConfiguratorMenu = this.productConstructor?.categories[0]
+        } else {
+          this.selectedConfiguratorMenu = null
+        }
+      })
+    },
 
     addElementsToCart() {
-      this.selectedElements.forEach((e)=> {
+      this.selectedElements.forEach((e) => {
         this.addElements(e)
       })
-      if(this.selectedElements.length > 0) {
+      if (this.selectedElements.length > 0) {
         this.clearElements()
         alert('Детали добавлены в корзину')
       }
-      
     },
 
     selectConfiguratorMenu(configuratorItem) {
@@ -222,10 +194,8 @@ export default {
         this.selectedConfiguratorMenu.id,
         url.join(',')
       )
-    
+
       console.log(element.id)
-
-
 
       // добавление картинки
       this.configuratorImg = Object.values(this.configuratorBg)
@@ -240,15 +210,10 @@ export default {
 
       // выбранные элементы
 
-      this.$set(
-        this.selectedObject,
-        this.selectedConfiguratorMenu.id,
-        element
-      )
+      this.$set(this.selectedObject, this.selectedConfiguratorMenu.id, element)
 
       this.selectedElements = Object.values(this.selectedObject)
       // console.log(this.selectedElements)
-
 
       // итоговая цена
       this.$set(
@@ -269,20 +234,22 @@ export default {
       console.log(this.selectedElements)
       this.totalAll = this.totalElement.reduce(function (sum, el) {
         return Number(sum) + Number(el)
-      },0)
+      }, 0)
       console.log(this.totalAll)
       this.backgroundImages = this.configuratorImg.join()
-      if(this.configuratorImg.length === 0) {
-        this.backgroundImages = 'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp';
+      if (this.configuratorImg.length === 0) {
+        this.backgroundImages =
+          'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp'
         this.configuratorBg = []
       }
     },
 
     clearElements() {
-      this.backgroundImages = 'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp';
-      this.selectedObject = [];
-      this.selectedElements = [];
-      this.configuratorBg = [];
+      this.backgroundImages =
+        'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp'
+      this.selectedObject = []
+      this.selectedElements = []
+      this.configuratorBg = []
       this.priceElement = []
       this.totalAll = '0'
     },
