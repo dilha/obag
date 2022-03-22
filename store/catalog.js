@@ -8,6 +8,8 @@ export const state = ()=>({
   selectedSubCategory:null,
   error:null,
   isLoading:false,
+  searchTerm:''
+
 })
 
 export const mutationTypes = {
@@ -28,6 +30,9 @@ export const mutationTypes = {
   loadSearchProductsSuccess:'mutation/loadSearchProductsSuccess',
   loadSearchProductsFailure:'mutation/loadSearchProductsFailure',
 
+  setSearchTerm: 'mutation/setSearchTerm changed app header serach input"'
+
+
 }
 export const actionTypes = {
   loadAllCategories:'action/loadAllCategories get all categories',
@@ -35,6 +40,8 @@ export const actionTypes = {
   loadAllSubCategoryProducts:'action/loadAllSubCategoryProducts',
   loadFilterProducts:'action/loadFilterProducts',
   loadSearchProducts:'action/loadSearchProducts',
+  changeSearchTerm:'actions/changeSearchTerm'
+
 
 }
 
@@ -85,6 +92,10 @@ export const mutations = {
   [mutationTypes.loadSearchProductsFailure](state, payload){
     state.isLoading = false;
     state.error = payload;
+  },
+
+  [mutationTypes.setSearchTerm](state, payload){
+    state.searchTerm = payload;
   },
 
 
@@ -203,10 +214,11 @@ export const actions = {
         commit(mutationTypes.loadProductsFailure, e)
       })
     })
-
   },
 
-
+    [actionTypes.changeSearchTerm]({commit}, term){
+      commit(mutationTypes.setSearchTerm, term)
+  },
 
 }
 

@@ -1,6 +1,5 @@
 <template>
   <section class="catalog">
-    {{ $route.params }}
     <div class="container">
       <div class="catalog__top">
         <h3 class="catalog__title page__title">Каталог</h3>
@@ -50,27 +49,17 @@ export default {
   },
   data() {
     return {
-      routeCategory: '',
+      routeCategory: -1,
     }
   },
   computed: {
     ...mapState('catalog', ['products', 'isLoading', 'categories']),
   },
-  watch: {
-    '$route.params?.term': {
-      handler() {
-        this.loadSearchProducts(this.$route.params?.term)
-      },
-    },
-  },
+
   mounted() {
     this.routeCategory = this.categories.find(
       (c) => c.id === this.$route?.params?.id
     )
-    const termFromRoute = this.$route.params?.term
-    if (termFromRoute) {
-      this.loadSearchProducts(termFromRoute)
-    }
   },
   methods: {
     ...mapActions('catalog', {

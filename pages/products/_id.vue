@@ -35,14 +35,16 @@
               <button class="order__products-minus" @click="minus">
                 <img src="@/assets/images/icons/minus-icon.svg" alt="" />
               </button>
-              <p>{{quantity}}</p>
+              <p>{{ quantity }}</p>
               <button class="order__products-plus" @click="plus">
                 <img src="@/assets/images/icons/plus-icon.svg" alt="" />
               </button>
             </div>
           </div>
           <div class="characteristic__buttons">
-            <button class="characteristic__buy" @click="addProductCart">Купить</button>
+            <button class="characteristic__buy" @click="addProductCart">
+              Купить
+            </button>
             <nuxt-link
               to="/constructor"
               class="characteristic__link characteristic__link-constructor"
@@ -156,7 +158,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 import { actionTypes } from '~/store/cart'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
@@ -195,8 +197,10 @@ export default {
     }
   },
   mounted() {
-    // this.getProducts(this.$route.params.id)
-    this.getProducts(9)
+    console.log(this.$route, this.$router)
+    if (this.$route?.params?.id) {
+      this.getProducts(this.$route?.params?.id)
+    }
     this.productInfo = this.productTubs[0].name
   },
   methods: {
@@ -220,11 +224,10 @@ export default {
       })
     },
     minus() {
-      if(this.quantity === 1) {
+      if (this.quantity === 1) {
         this.quantity = 1
-      }
-      else {
-      this.quantity--
+      } else {
+        this.quantity--
       }
     },
     plus() {
@@ -233,10 +236,10 @@ export default {
 
     addProductCart() {
       // const newProduct = JSON.parse(JSON.stringify())
-      this.product.quantity = this.quantity;
+      this.product.quantity = this.quantity
       console.log(this.product.quantity)
       this.addProductToCart(this.product)
-    }
+    },
   },
 }
 </script>

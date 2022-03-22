@@ -11,7 +11,7 @@ export const mutationTypes = {
   loadNewsSuccess:"mutation/newsSuccess load news success",
   loadCategorySuccess:'mutation/CategorySuccess load category success"',
   loadRecomendedSuccess:'mutation/RecomendedSuccess load recomended success"',
-  loadRecomendedFailure: 'mutation/RecomendedFailure load recomended success"'
+  loadRecomendedFailure: 'mutation/RecomendedFailure load recomended success"',
 }
 export const actionTypes = {
   loadNews:'action/newsStart get all news',
@@ -33,6 +33,7 @@ export const mutations = {
   [mutationTypes.loadRecomendedFailure](state, payload){
     state.error = payload;
   },
+
 
 }
 export const actions = {
@@ -75,6 +76,8 @@ export const actions = {
       })
     })
   },
+
+
 
 }
 

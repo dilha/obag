@@ -2,7 +2,7 @@
   <form class="header__form">
     <div class="form-row">
       <input
-        v-model="searchTerm"
+        v-model="term"
         class="aside__search-input"
         type="text"
         placeholder="Поиск"
@@ -14,21 +14,39 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import { actionTypes } from '@/store/catalog'
+
 export default {
   name: 'AppSearch',
   data() {
     return {
-      searchTerm: '',
+      term: '',
     }
   },
+  computed: {
+    ...mapState('catalog', ['searchTerm']),
+  },
+  watch: {
+    searchTerm: {
+      handler(newTerm) {
+        console.log('CHNA', newTerm)
+        this.loadSearchProducts(newTerm)
+      },
+    },
+  },
   methods: {
+    ...mapActions('catalog', {
+      changeSearchTerm: actionTypes.changeSearchTerm,
+      loadSearchProducts: actionTypes.loadSearchProducts,
+    }),
     search() {
-      if (this.searchTerm) {
-        this.$router.push({
-          name: 'catalog',
-          params: { term: this.searchTerm },
-        })
+      console.log(this.$route.path)
+      if (this.$route.path !== 'catalog') {
+        this.$router.push({ name: 'catalog', params: { term: this.term } })
       }
+      console.log('TERM FROM APP HEADER', this.term)
+      this.changeSearchTerm(this.term)
     },
   },
 }

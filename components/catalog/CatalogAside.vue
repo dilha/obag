@@ -179,8 +179,15 @@ export default {
     },
   },
   mounted() {
+    const termFromRoute = this.$route.params?.term
+    console.log(termFromRoute)
+
     this.loadAllCategories().then(() => {
-      if (this.routeCategory !== -1 && this.routeCategory !== -1) {
+      if (termFromRoute) {
+        this.loadSearchProducts(termFromRoute)
+        return
+      }
+      if (this.routeCategory !== -1) {
         this.loadAllCategoryProducts(this.routeCategory)
         return
       }
