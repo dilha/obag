@@ -83,6 +83,8 @@ export default {
     },
     updateUserData() {
       this.$api.post('/user/edit', this.edit).then(() => {
+        // TODO set user data, now don't get from api user data
+
         this.$emit('close')
       })
     },

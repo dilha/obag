@@ -8,7 +8,8 @@ export const state = ()=>({
   selectedSubCategory:null,
   error:null,
   isLoading:false,
-  searchTerm:''
+  searchTerm:'',
+  sortPriceType:'ASC'
 
 })
 
@@ -21,6 +22,7 @@ export const mutationTypes = {
   setSelectedSubCategory:'mutation/setSelectedSubCategory',
   setCategoryFilters:'mutation/setCategoryFilters',
   setComplects:'mutation/setComplects',
+  setSortPriceType:'mutation/setSortPriceType',
 
   loadProductsStart:'mutation/loadProductsStart',
   loadProductsSuccess:'mutation/loadProductsSuccess',
@@ -40,7 +42,8 @@ export const actionTypes = {
   loadAllSubCategoryProducts:'action/loadAllSubCategoryProducts',
   loadFilterProducts:'action/loadFilterProducts',
   loadSearchProducts:'action/loadSearchProducts',
-  changeSearchTerm:'actions/changeSearchTerm'
+  changeSearchTerm:'actions/changeSearchTerm',
+  changeSortPriceType:'action/changeSortPriceType'
 
 
 }
@@ -48,6 +51,9 @@ export const actionTypes = {
 export const mutations = {
   [mutationTypes.loadCategoriesStart](state){
     state.isLoading = true;
+  },
+  [mutationTypes.setSortPriceType](state, payload){
+    state.sortPriceType = payload;
   },
   [mutationTypes.loadCategoriesSuccess](state, payload){
     state.isLoading = false;
@@ -119,14 +125,14 @@ export const actions = {
       })
     })
   },
-  [actionTypes.loadAllCategoryProducts]({commit}, category){
+  [actionTypes.loadAllCategoryProducts]({commit, state}, category){
 
     commit(mutationTypes.setSelectedCategory, category);
     commit(mutationTypes.loadProductsStart);
 
     return new Promise(resolve => {
       this.$api
-      .get(`/category/${category.id}`)
+      .get(`/category/${category.id}?sort_price=${state.sortPriceType}`)
       .then((response)=>{
         const products = response.data.category.products;
         const filters = response.data?.filters;
@@ -141,12 +147,12 @@ export const actions = {
     })
 
   },
-  [actionTypes.loadAllSubCategoryProducts]({commit}, subCategoryId){
+  [actionTypes.loadAllSubCategoryProducts]({commit, state}, subCategoryId){
     commit(mutationTypes.loadProductsStart);
     commit(mutationTypes.setSelectedSubCategory, subCategoryId);
     return new Promise(resolve => {
       this.$api
-      .get(`/subcategory/${subCategoryId}`)
+      .get(`/subcategory/${subCategoryId}?sort_price=${state.sortPriceType}`)
       .then((response)=>{
         const products = response.data.subcategory.products;
         const filters = response.data?.filters;
@@ -164,7 +170,7 @@ export const actions = {
     })
 
   },
-  [actionTypes.loadSearchProducts]({commit}, term){
+  [actionTypes.loadSearchProducts]({commit, state}, term){
 
     commit(mutationTypes.loadSearchProductsStart);
     // commit(mutationTypes.setSelectedSubCategory, null);
@@ -173,7 +179,7 @@ export const actions = {
 
     return new Promise(resolve => {
       this.$api
-      .get(`/products/search/${term}`)
+      .get(`/products/search/${term}?sort_price=${state.sortPriceType}`)
       .then((response)=>{
         const products = response.data?.products;
         commit(mutationTypes.loadSearchProductsSuccess, products )
@@ -184,7 +190,7 @@ export const actions = {
       })
     })
   },
-  [actionTypes.loadFilterProducts]({commit},  payload){
+  [actionTypes.loadFilterProducts]({commit, state},  payload){
     commit(mutationTypes.loadProductsStart);
     const params ={ids:payload.filters};
     if(payload?.price_from){
@@ -196,10 +202,14 @@ export const actions = {
     if(payload?.complete_id){
       params.complete_id = payload.complete_id
     }
+    let url  = `/subcategory/${payload.subCategoryId}/filtered?sort_price=${state.sortPriceType}`
 
-    let url  = `/subcategory/${payload.subCategoryId}/filtered`
+    // if(payload?.sort_price){
+    //   url  = `/subcategory/${payload.subCategoryId}/filtered?sort_price=${payload.sort_price}`
+    // }
+
     if(!payload?.subCategoryId){
-      url = `/category/${payload.categoryId}/filtered`
+      url = `/category/${payload.categoryId}/filtered?sort_price=${state.sortPriceType}`
     }
 
     return new Promise(resolve => {
@@ -216,9 +226,13 @@ export const actions = {
     })
   },
 
-    [actionTypes.changeSearchTerm]({commit}, term){
+  [actionTypes.changeSearchTerm]({commit}, term){
       commit(mutationTypes.setSearchTerm, term)
   },
+  [actionTypes.changeSortPriceType]({commit}, type){
+      commit(mutationTypes.setSortPriceType, type)
+  },
+
 
 }
 
