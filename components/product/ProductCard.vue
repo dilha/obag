@@ -72,6 +72,7 @@ export default {
   },
   mounted() {
     this.isAddedCard()
+    console.log(this.item.image)
   },
   methods: {
     ...mapActions('cart', { addProductToCart: actionTypes.addProduct }),
@@ -96,12 +97,13 @@ export default {
 
     addProductToBookmark(item) {
       this.addBookmark(item).then((payload) => {
-        if (payload.status === 200 && !payload.isDelete) {
+        if (payload?.status === 200 && !payload.isDelete) {
           this.isFavorite = true
         } else {
           this.isFavorite = false
         }
       })
+      
     },
   },
 }

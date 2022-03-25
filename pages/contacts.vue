@@ -62,7 +62,7 @@
                                 Как заинтересованная сторона, ознакомившись с Политикой конфиденциальности, я даю согласие на обработку моих личных данных для ответа на мой запрос к O bag
                             </label>
                         </div>
-                        <button class="contacts__form-btn page__border-btn">
+                        <button class="contacts__form-btn page__border-btn" type="submit">
                             Отправить
                         </button>
                     </form>
@@ -111,8 +111,9 @@ export default {
       .post('/contact', this.feedbackForm)
       .then((res)=> {
         console.log(res)
+        alert('Форма отпралена')
       })
-    }
+    },
   }
 }
 </script>

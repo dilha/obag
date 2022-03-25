@@ -49,7 +49,7 @@
               to="/constructor"
               class="characteristic__link characteristic__link-constructor"
             >
-              Констуктор
+              Конструктор
             </nuxt-link>
             <nuxt-link
               to="/shopping"

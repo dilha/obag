@@ -50,7 +50,7 @@ export const actions = {
         this.$api
           .post(`/product/${bookmark.id}/favourite`)
           .then((response)=>{
-              resolve({status:response.status, isDelete:false})
+              resolve({status:response.status, isDelete:false,})
           })
       })
 
