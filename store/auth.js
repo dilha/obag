@@ -7,7 +7,7 @@ export const state = () => ({
   googleAccount: null,
 })
 export const mutationTypes = {
-  setIsLoggedIn:'mutation/setIsLoggedIn',
+  setIsLoggedIn: 'mutation/setIsLoggedIn',
 
   loginStart: 'mutation/loginStart',
   loginSuccess: 'mutation/loginSuccess',
@@ -29,14 +29,14 @@ export const mutationTypes = {
 }
 export const actionTypes = {
   login: 'action/loginAction ',
-  register:'actions/register',
+  register: 'actions/register',
   logout: 'action/logoutAction ',
   updateIsLoggedIn: 'action/categoryStart',
   editAction: 'action/editAction',
-  googleAction: 'action/googleAction'
+  googleAction: 'action/googleAction',
+  googleLogin: 'action/googleLogin',
 }
 export const mutations = {
-
   [mutationTypes.editMutation](state, payload) {
     state.user = payload
   },
@@ -45,12 +45,12 @@ export const mutations = {
     state.isLoggedIn = payload
   },
 
-  [mutationTypes.loginStart](state){
-    state.isLoading = true;
+  [mutationTypes.loginStart](state) {
+    state.isLoading = true
   },
 
   [mutationTypes.loginSuccess](state, payload) {
-    state.isLoggedIn = true;
+    state.isLoggedIn = true
     state.token = payload.token
     state.user = payload.user
   },
@@ -59,8 +59,8 @@ export const mutations = {
     state.error = payload
   },
 
-  [mutationTypes.googleStart](state){
-    state.isLoading = true;
+  [mutationTypes.googleStart](state) {
+    state.isLoading = true
   },
 
   [mutationTypes.googleSuccess](state, payload) {
@@ -74,8 +74,8 @@ export const mutations = {
     state.error = payload
   },
 
-  [mutationTypes.registerStart](state){
-    state.isLoading = true;
+  [mutationTypes.registerStart](state) {
+    state.isLoading = true
   },
 
   [mutationTypes.registerSuccess](state, payload) {
@@ -88,8 +88,8 @@ export const mutations = {
     state.error = payload
   },
 
-  [mutationTypes.logoutStart](state){
-    state.isLoading = true;
+  [mutationTypes.logoutStart](state) {
+    state.isLoading = true
   },
 
   [mutationTypes.logoutSuccess](state) {
@@ -101,13 +101,10 @@ export const mutations = {
     state.isLoggedIn = false
     state.error = payload
   },
-
 }
 
 export const actions = {
-
   [actionTypes.login]({ commit }, userData) {
-
     commit(mutationTypes.loginFailure, null)
 
     return new Promise((resolve) => {
@@ -119,14 +116,18 @@ export const actions = {
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('user', JSON.stringify(response.data.user))
           }
-           resolve(response);
+          resolve(response)
         })
         .catch((e) => {
           commit(mutationTypes.loginFailure, e?.response?.data?.message)
         })
     })
   },
-  
+  [actionTypes.googleLogin]({ commit }, userData) {
+    commit(mutationTypes.loginSuccess, userData)
+    localStorage.setItem('token', userData.token)
+    localStorage.setItem('user', JSON.stringify(userData.user))
+  },
   [actionTypes.googleAction]({ commit }, userData) {
     commit(mutationTypes.googleFailure, null)
     return new Promise((resolve) => {
@@ -141,7 +142,7 @@ export const actions = {
             localStorage.setItem('user', JSON.stringify(response.data.user))
             this.$router.push('/account')
           }
-          resolve(url);
+          resolve(url)
         })
         .catch((e) => {
           commit(mutationTypes.googleFailure, e?.response?.data?.message)
@@ -150,7 +151,6 @@ export const actions = {
   },
 
   [actionTypes.register]({ commit }, userData) {
-
     commit(mutationTypes.registerStart)
     commit(mutationTypes.registerFailure, null)
 
@@ -164,7 +164,7 @@ export const actions = {
             localStorage.setItem('user', JSON.stringify(response.data.user))
             this.$router.push('/account')
           }
-           resolve(response);
+          resolve(response)
         })
         .catch((e) => {
           commit(mutationTypes.registerFailure, e?.response?.data)
@@ -172,40 +172,42 @@ export const actions = {
     })
   },
   [actionTypes.logout]({ commit }) {
-
     commit(mutationTypes.logoutFailure, null)
 
     return new Promise((resolve) => {
       this.$api
         .post('/logout')
         .then((response) => {
+          // Сделать проверку на 200 статус
 
-            // Сделать проверку на 200 статус
+          commit(mutationTypes.logoutSuccess)
+          localStorage.removeItem('token')
+          localStorage.removeItem('user')
+          this.$router.push('/')
 
-            commit(mutationTypes.logoutSuccess)
-            localStorage.removeItem('token')
-            localStorage.removeItem('user')
-            this.$router.push('/')
-
-           resolve(response);
+          resolve(response)
         })
         .catch((e) => {
           commit(mutationTypes.logoutSuccess)
-            localStorage.removeItem('token')
-            localStorage.removeItem('user')
-            this.$router.push('/')
+          localStorage.removeItem('token')
+          localStorage.removeItem('user')
+          this.$router.push('/')
           commit(mutationTypes.logoutFailure, e?.response?.data?.message)
         })
     })
   },
-  [actionTypes.updateIsLoggedIn]({commit}){
-    const token = localStorage.key('token') ? localStorage.getItem('token') : null;
-    const user = localStorage.key('user') ? JSON.parse(localStorage.getItem('user')) : null;
+  [actionTypes.updateIsLoggedIn]({ commit }) {
+    const token = localStorage.key('token')
+      ? localStorage.getItem('token')
+      : null
+    const user = localStorage.key('user')
+      ? JSON.parse(localStorage.getItem('user'))
+      : null
 
-    if(token){
-        commit(mutationTypes.loginSuccess, {token, user})
-        return
+    if (token) {
+      commit(mutationTypes.loginSuccess, { token, user })
+      return
     }
     commit(mutationTypes.setIsLoggedIn, false)
-  }
+  },
 }

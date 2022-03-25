@@ -29,9 +29,26 @@ export default {
     if (this.isLoggedIn) {
       this.loadFavorites()
     }
+    console.log('QUERY STRING', this.$route.query)
+    const token = this.$route?.query?.token
+    if (token) {
+      this.$api
+        .get('/user', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data)
+          this.googleLogin({ token, user: response.data })
+        })
+    }
   },
   methods: {
-    ...mapActions('auth', { updateIsLoggedIn: actionTypes.updateIsLoggedIn }),
+    ...mapActions('auth', {
+      updateIsLoggedIn: actionTypes.updateIsLoggedIn,
+      googleLogin: actionTypes.googleLogin,
+    }),
     ...mapActions('bookmarks', {
       loadFavorites: bookmarkActionTypes.loadFavorites,
     }),
