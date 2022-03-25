@@ -4,7 +4,7 @@ export const state = () => ({
   error: null,
   token: null,
   user: null,
-
+  googleAccount: null,
 })
 export const mutationTypes = {
   setIsLoggedIn:'mutation/setIsLoggedIn',
@@ -21,14 +21,19 @@ export const mutationTypes = {
   logoutSuccess: 'mutation/logoutSuccess',
   logoutFailure: 'mutation/logoutFailure',
 
-  editMutation: 'mutation/editStart'
+  editMutation: 'mutation/editStart',
+
+  googleStart: 'mutation/googleStart',
+  googleSuccess: 'mutation/googleSuccess',
+  googleFailure: 'mutation/googleFailure',
 }
 export const actionTypes = {
   login: 'action/loginAction ',
   register:'actions/register',
   logout: 'action/logoutAction ',
   updateIsLoggedIn: 'action/categoryStart',
-  editAction: 'action/editAction'
+  editAction: 'action/editAction',
+  googleAction: 'action/googleAction'
 }
 export const mutations = {
 
@@ -54,12 +59,27 @@ export const mutations = {
     state.error = payload
   },
 
+  [mutationTypes.googleStart](state){
+    state.isLoading = true;
+  },
+
+  [mutationTypes.googleSuccess](state, payload) {
+    state.googleAccount = payload
+    // state.isLoggedIn = true;
+    // state.token = payload.token
+    // state.user = payload.user
+  },
+  [mutationTypes.googleFailure](state, payload) {
+    state.isLoggedIn = false
+    state.error = payload
+  },
+
   [mutationTypes.registerStart](state){
     state.isLoading = true;
   },
 
   [mutationTypes.registerSuccess](state, payload) {
-     state.isLoggedIn = true
+    state.isLoggedIn = true
     state.token = payload.token
     state.user = payload.user
   },
@@ -81,6 +101,7 @@ export const mutations = {
     state.isLoggedIn = false
     state.error = payload
   },
+
 }
 
 export const actions = {
@@ -105,6 +126,29 @@ export const actions = {
         })
     })
   },
+  
+  [actionTypes.googleAction]({ commit }, userData) {
+    commit(mutationTypes.googleFailure, null)
+    return new Promise((resolve) => {
+      this.$api
+        .get('/google-register', userData)
+        .then((response) => {
+          const url = response.data.url
+          commit(mutationTypes.googleSuccess, url)
+          // console.log(url)
+          if (response?.data?.token !== '' && response.statue !== 401) {
+            localStorage.setItem('token', this.$route.query.token)
+            localStorage.setItem('user', JSON.stringify(response.data.user))
+            this.$router.push('/account')
+          }
+          resolve(url);
+        })
+        .catch((e) => {
+          commit(mutationTypes.googleFailure, e?.response?.data?.message)
+        })
+    })
+  },
+
   [actionTypes.register]({ commit }, userData) {
 
     commit(mutationTypes.registerStart)
@@ -159,7 +203,7 @@ export const actions = {
     const user = localStorage.key('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
     if(token){
-         commit(mutationTypes.loginSuccess, {token, user})
+        commit(mutationTypes.loginSuccess, {token, user})
         return
     }
     commit(mutationTypes.setIsLoggedIn, false)

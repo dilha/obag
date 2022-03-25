@@ -136,6 +136,12 @@
 
     &-google {
       background: #CD5642;
+      color: #fff;
+      font-size: 20px;
+      padding: 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
     }
 
     &-facebook {
@@ -200,7 +206,9 @@
       justify-content: center;
       font-size: 14px;
       line-height: 21px;
-      color: #9C9C9C;
+      a {
+        color: #D05871;
+      }
       a + a{
         margin-left: 24px;
       }

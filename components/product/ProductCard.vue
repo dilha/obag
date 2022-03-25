@@ -17,7 +17,7 @@
       {{ item.title }}
     </div>
     <div class="product__card-price">
-      <p class="product__card-odlprice">{{ item.price }} тг</p>
+      <p class="product__card-oldprice">{{ item.price }} тг</p>
       <p class="product__card-newprice">
         {{ item.new_price ? item.new_price : item.price }}тг.
       </p>

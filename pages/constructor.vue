@@ -22,12 +22,6 @@
       </div>
       <div v-if="selectedConfiguratorMenu" class="constructor__buttons">
         <button
-          class="constructor__btn page__border-btn"
-          @click="removeElements"
-        >
-          Назад
-        </button>
-        <button
           v-for="(constructor, index) in productConstructor.categories"
           :key="index"
           class="constructor__btn page__border-btn"
@@ -44,7 +38,15 @@
             <div
               ref="obagConstuctor"
               class="constructor__card-img"
-              :style="{ backgroundImage: `${backgroundImages}` }"
+              :style="{
+                backgroundImage: `${
+                  initBackgroundImage
+                    ? initBackgroundImage
+                    : backgroundImagesArray
+                        .filter((element) => element !== '')
+                        .join()
+                }`,
+              }"
             ></div>
             <button
               class="constructor__card-btn page__border-btn"
@@ -86,7 +88,7 @@
               class="constructor__elements-item"
               @click="addBackground(element)"
             >
-              <img :src="element.image" alt="" />
+              <img :src="element.image" alt=""/>
               <p class="constructor__elements-price">
                 {{ element.price }}
               </p>
@@ -113,24 +115,47 @@ export default {
   data() {
     return {
       selectedConfiguratorMenu: null,
-      configuratorBg: {},
-      configuratorImg: [],
-      sortImg: [],
+      orderedBackgroundImages: {
+        handle: '',
+        lining: '',
+        acessory: '',
+        body: '',
+      },
+      lastElement: null,
+      backgroundImagesArray: [],
       priceElement: {},
       totalElement: [],
       selectedObject: {},
       selectedElements: [],
       selectedType: {},
+      firstAddedKey: null,
       // productConstructor: null,
 
       totalAll: '0',
-      backgroundImages:
+      initBackgroundImage:
         'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp',
+      backgroundImages: '',
     }
   },
   computed: {
     ...mapState('product-constructor', ['productConstructor']),
     ...mapState('product-constructor', ['productType']),
+  },
+  watch: {
+    orderedBackgroundImages: {
+      deep: true,
+      handler() {
+      // console.log(this.selectedElements)
+
+        this.backgroundImagesArray = Object.values(this.orderedBackgroundImages)
+
+        this.selectedElements = Object.values(this.selectedObject)
+
+        this.totalAll = this.totalElement.reduce(function (sum, el) {
+          return Number(sum) + Number(el)
+        }, 0)
+      },
+    },
   },
   mounted() {
     this.getTypes().then((types) => {
@@ -174,46 +199,24 @@ export default {
     selectConfiguratorMenu(configuratorItem) {
       this.selectedConfiguratorMenu = configuratorItem
     },
+
     addBackground(element) {
-      const url = []
+      this.initBackgroundImage = null
+      this.lastElement = element
+      console.log(this.lastElement)
+
+      const backgroundImagesUrl = []
       element.images.forEach((e) => {
-        url.push(`url(${e})`)
+        backgroundImagesUrl.push(`url(${e})`)
       })
-
-      // const bg = {order:1,  url:url.join(',')}
-      // switch(this.selectedConfiguratorMenu?.type){
-      //   case 'corpus':
-      //     bg.order = 1
-      //     return;
-      //     case 'ruchka':
-      //      bg.order = 2
-
-      // }
       this.$set(
-        this.configuratorBg,
-        this.selectedConfiguratorMenu.id,
-        url.join(',')
+        this.orderedBackgroundImages,
+        this.selectedConfiguratorMenu.type,
+        backgroundImagesUrl.reverse().join(',')
       )
-
-      console.log(element.id)
-
-      // добавление картинки
-      this.configuratorImg = Object.values(this.configuratorBg)
-      // this.configuratorImg.sort((a, b)=>{
-      //     return a.order > b.order;
-      // })
-      this.configuratorImg.reverse(
-        (previousValue, currentValue) => previousValue + currentValue,
-        0
-      )
-      this.backgroundImages = this.configuratorImg.join()
 
       // выбранные элементы
-
       this.$set(this.selectedObject, this.selectedConfiguratorMenu.id, element)
-
-      this.selectedElements = Object.values(this.selectedObject)
-      // console.log(this.selectedElements)
 
       // итоговая цена
       this.$set(
@@ -222,36 +225,31 @@ export default {
         element.price
       )
       this.totalElement = Object.values(this.priceElement)
-      this.totalAll = this.totalElement.reduce(function (sum, el) {
-        return Number(sum) + Number(el)
-      })
     },
 
-    removeElements() {
-      this.configuratorImg.shift()
-      this.selectedElements.shift()
-      this.totalElement.shift()
-      console.log(this.selectedElements)
-      this.totalAll = this.totalElement.reduce(function (sum, el) {
-        return Number(sum) + Number(el)
-      }, 0)
-      console.log(this.totalAll)
-      this.backgroundImages = this.configuratorImg.join()
-      if (this.configuratorImg.length === 0) {
-        this.backgroundImages =
-          'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp'
-        this.configuratorBg = []
-      }
+    removeElements(item) {
+      // this.$delete(this.selectedObject, item)
+      // this.totalElement.pop()
+
+      // this.totalAll = this.totalElement.reduce(function (sum, el) {
+      //     return Number(sum) + Number(el)
+      //   }, 0) 
+      // this.selectedElements.pop()
+      // this.backgroundImagesArray.pop()
+      console.log(item)
     },
 
     clearElements() {
-      this.backgroundImages =
+      this.orderedBackgroundImages = {
+        handle: '',
+        lining: '',
+        acessory: '',
+        body: '',
+      }
+      this.totalElement = []
+      this.selectedObject = {}
+      this.initBackgroundImage =
         'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp'
-      this.selectedObject = []
-      this.selectedElements = []
-      this.configuratorBg = []
-      this.priceElement = []
-      this.totalAll = '0'
     },
   },
 }

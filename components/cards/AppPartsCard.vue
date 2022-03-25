@@ -1,5 +1,5 @@
 <template>
-  <div v-if="item" class="parts">
+  <div v-if="item" class="parts" >
     <img class="parts__img" :src="item.image" alt="" />
     <div class="parts__content">
       <div class="parts__title">
@@ -23,6 +23,11 @@ export default {
     item: {
       type: Object,
       require: true,
+    }
+  },
+  methods: {
+    removeElement() {
+      this.$emit('deleteElement', this.item)
     }
   }
 }

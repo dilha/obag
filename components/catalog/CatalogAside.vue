@@ -10,7 +10,9 @@
             placeholder="Поиск"
             @keydown.enter="search"
           />
-          <button class="search__icon" @click.prevent="search"></button>
+          <button class="search__icon" @click.prevent="search">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAE9SURBVHgBlVLbbYNAEOQw8E0HoYOQDlyCO7ARAomvJBUYSvAXEiCRDuJUEDoIJbgEvnlmBnMWQcRRVlrfmtvZnZ09ocwsz3OzbduDqqqP06eq7/sPz/MKZWFCBlmW7Yid/pYEwS24DS+apnGCILj8AE6gd/hps9mEjuNUMiGOY0vX9U/GuHuSd4L0uq77EkIUrus6yopJ8DxHxQzsZtV1HSm/GCkOw3CC79hIArecYc5/zTRNe8NhYlZrBI58hbgLosnZoPgVCFAFCvZfwCRJxhzkXgsgOOO00zTd3gOi0zOOi9ypOgUFOudUbw00FT1Aj5uAGn+4XMpNB6UI55kzsZBhGHuwCpmHPT5I4O3lMAnKhei8XzSkBuxk4u4ID7HLSCxpTe/Vpnp4GKXv++WMMgsfUehVKP80gF+o7Df/zJ2q/BFUhgAAAABJRU5ErkJggg==" alt="">
+          </button>
         </div>
       </div>
       <div class="aside__price aside__block">

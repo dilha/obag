@@ -5,9 +5,9 @@
         <div class="modal__login-social">
           <a
             class="modal__login-google"
-            href="https://accounts.google.com/o/oauth2/auth?client_id=568022369523-k07ed3jvobenv0gcue86e41irklim4k8.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A8001%2Fapi%2Fgoogle-callback&scope=openid+profile+email&response_type=code&state=E2CD8aRsHA7qRFH4EzG2I3Ibj2xyu0hyfE6KYZbK"
+            :href="googleAccount"
           >
-            <img src="@/assets/images/icons/google.svg" alt="" /> Google
+            <img src="@/assets/images/icons/google.svg" alt="" />oogle
           </a>
           <!-- <button class="modal__login-facebook">
             <img src="@/assets/images/icons/facebook-white.svg" alt="" />
@@ -15,7 +15,7 @@
           </button>
    -->
         </div>
-        <h6 class="modal__login-title">Вход в аккаунт</h6>
+        <h6 class="modal__login-title" @click="con">Вход в аккаунт</h6>
         <p v-if="error" style="color: red; font-size: 12px margin-bottom:8px;">
           {{ error }}
         </p>
@@ -64,13 +64,18 @@ export default {
         phone: '',
         password: '',
       },
+      googleUser: null,
     }
   },
   computed: {
-    ...mapState('auth', ['error']),
+    ...mapState('auth', ['error', 'googleAccount']),
+  },
+  mounted(){
+    this.loginGoogleAccount()
   },
   methods: {
     ...mapActions('auth', { login: actionTypes.login }),
+    ...mapActions('auth', { loginGoogleAccount: actionTypes.googleAction }),
     close() {
       this.$emit('close')
     },
@@ -79,6 +84,14 @@ export default {
         this.$router.push('/account')
       })
     },
+    getGoogleAccount() {
+      this.loginGoogleAccount(this.googleUser).then(() => {
+        this.$router.push('/account')
+      })
+    },
+    con() {
+      console.log(this.googleUser)
+    }
   },
 }
 </script>
