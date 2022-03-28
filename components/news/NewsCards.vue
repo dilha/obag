@@ -7,9 +7,9 @@
         <p class="news__item-text">
         {{item.text}}
         </p>
-        <a class="news__item-link" href="#?">
+        <nuxt-link :to="{ name: 'news-id', params: { id: item.id } }" class="news__item-link">
         Подробнее
-        </a>
+        </nuxt-link>
     </div>
 </template>
 

@@ -9,18 +9,28 @@
           <p class="mailing__text">
               Всегда будьте в курсе поледних новостей бренда
           </p>
-          <button class="mailing__btn page__border-btn">
+          <button class="mailing__btn page__border-btn" @click="isVisibleEmailModal = true">
               Подписаться
           </button>
         </div>
         <img class="mailing__img" src="@/assets/images/mail-box.png" alt="">
       </div>
     </div>
+    <app-subscription v-if="isVisibleEmailModal"  @close="isVisibleEmailModal = false"/>
   </section>
 </template>
 
 <script>
+import AppSubscription from '~/components/modal/AppSubscription.vue'
 export default {
     name: "AppMail",
+    components: {
+      AppSubscription,
+    },
+    data() {
+      return {
+        isVisibleEmailModal: false,
+      }
+    }
 }
 </script>

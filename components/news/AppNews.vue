@@ -3,7 +3,7 @@
     <div class="container">
       <div class="news__top page__block-top">
         <h3 class="news__title page__title">Новости компании</h3>
-        <nuxt-link class="news__link page__block-link" to="/news">
+        <nuxt-link class="news__link page__block-link" to="/all-news">
           Смотреть все новости
         </nuxt-link>
       </div>

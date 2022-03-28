@@ -46,7 +46,7 @@
             <ul class="footer__list">
               <li class="footer__list-item footer__list-title">Новости</li>
               <li class="footer__list-item">
-                <nuxt-link to="/news" class="footer__list-link" href="#?">
+                <nuxt-link to="/all-news" class="footer__list-link" href="#?">
                   Новости
                 </nuxt-link>
               </li>
@@ -128,7 +128,7 @@
           <ul class="footer__list">
             <li class="footer__list-item footer__list-title">Дополнительно</li>
             <li class="footer__list-item">
-              <nuxt-link to="/news" class="footer__list-link">
+              <nuxt-link to="/all-news" class="footer__list-link">
                 Акции
               </nuxt-link>
             </li>

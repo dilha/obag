@@ -16,9 +16,6 @@
    -->
         </div>
         <h6 class="modal__login-title" @click="con">Вход в аккаунт</h6>
-        <p v-if="error" style="color: red; font-size: 12px margin-bottom:8px;">
-          {{ error }}
-        </p>
         <form class="modal__login-form">
           <input
             v-model="user.phone"
@@ -34,6 +31,9 @@
             placeholder="Пароль"
             autocomplete="false"
           />
+          <p v-if="error" class="modal__error" style="color: red; font-size: 12px margin-bottom:8px;">
+            {{ error }}
+          </p>
           <button class="modal__login-btn" @click.prevent="userLogin">
             Войти
           </button>

@@ -11,6 +11,12 @@
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.4);
 
+  &__error {
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 10px;
+  }
+
   &__close {
     background: none;
     border: none;
@@ -100,6 +106,8 @@
     &-email {
       background-image: url(../images/icons/modal-message.svg) !important;
     }
+
+    
   }
   
   &__login {
@@ -179,13 +187,16 @@
       background-image: url(../images/icons/message-black.svg)
     }
 
-    &-password,
     &-name {
       background-image: url(../images/icons/login-black.svg)
     }
 
     &-phone {
       background-image: url(../images/icons/call-black.svg)
+    }
+
+    &-password {
+      background-image: url(../images/icons/password-icon.svg) !important;
     }
 
     &-btn {
@@ -259,5 +270,25 @@
     }
   }
 
+}
+
+.product__added {
+  position: fixed;
+  right: 10px;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 350px;
+  background-color: #fff;
+  z-index: 99999;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: -1px 3px 5px 4px rgb(0 0 0 / 50%);
+  transition: all .4s linear;
+
+  &-img {
+    width: 50px;
+    height: 50px;
+  }
 }
 

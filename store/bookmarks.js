@@ -43,7 +43,7 @@ export const actions = {
 
   [actionTypes.addBookmark]({commit, state, rootState}, bookmark){
     const isProductExists = state.bookmarksProducts.some(p=>p.id === bookmark.id);
-
+    
     if(!isProductExists && rootState.auth.isLoggedIn){
       commit(mutationTypes.addBookmark, bookmark)
       return new Promise(resolve=>{
@@ -53,8 +53,11 @@ export const actions = {
               resolve({status:response.status, isDelete:false,})
           })
       })
-
-
+    }
+    if(rootState.auth.isLoggedIn) {
+      console.log('cool')
+    } else {
+      alert('Чтобы добавить в закладки необходимо войти в аккаунт!')
     }
 
     if(isProductExists && rootState.auth.isLoggedIn){
