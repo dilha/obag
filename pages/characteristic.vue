@@ -40,7 +40,7 @@
           </div>
           <div class="characteristic__buttons">
             <button class="characteristic__buy" @click="modal3 = true">
-              Купить
+              Уведомить о поступлений
             </button>
             <div class="modal-3" v-if="modal3">
               <div class="modal-3-overlay">
