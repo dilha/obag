@@ -2,16 +2,9 @@
   <section class="accessories page__block">
     <div class="container">
       <div class="card__inner">
-        <div
-          v-for="accessorie in items"
-          :key="accessorie.title"
-          class="card__item"
-          :style="{ backgroundImage: `url(${accessorie.image})` }"
-        >
-          <nuxt-link
-            class="card__item-title"
-            :to="{ name: 'catalog', params: { id: accessorie.id } }"
-          >
+        <div v-for="accessorie in items" :key="accessorie.title" class="card__item"
+          :style="{ backgroundImage: `url(${accessorie.image})` }">
+          <nuxt-link class="card__item-title" :to="{ name: 'catalog', params: { id: categoryId } }">
             {{ accessorie.title }}
           </nuxt-link>
         </div>
@@ -27,6 +20,9 @@ export default {
     items: {
       type: Array,
       require: true,
+    },
+    categoryId: {
+      type: Number
     },
   },
   data() {

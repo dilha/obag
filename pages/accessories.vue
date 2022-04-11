@@ -8,7 +8,7 @@
         {{ category.text }}
       </p>
     </app-intro-button>
-    <app-accessories-cards :items="category.subcategories" />
+    <app-accessories-cards :category-id="category.id" :items="category.subcategories" />
     <app-like :id="category.id" />
     <app-news />
   </div>
