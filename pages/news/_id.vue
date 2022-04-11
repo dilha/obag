@@ -41,7 +41,7 @@ export default {
   methods: {
     getNews(id) {
       this.$api
-      .get(`/news/${id}`)
+      .get(`https://bag.a-lux.dev/api/page/get-news/news/${id}`)
       .then((res)=> {
         this.item = res.data.content
       })

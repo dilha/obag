@@ -124,7 +124,7 @@
                 @change="updateFilter(filterVal)"
               />
               <label class="aside__label" :for="field + filterVal.title">
-                {{ filterVal.title }}
+                {{ filterVal.title}}
               </label>
             </div>
           </div>

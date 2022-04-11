@@ -48,7 +48,7 @@
                   <div class="close" @click="modal3 = false">X</div>
                   <input type="text" v-model="name" placeholder="Имя" />
                   <input type="text" v-model="phone" placeholder="Телефон" />
-                  <button @click="order">Отправить</button>
+                  <button @click="notify">Отправить</button>
                 </div>
               </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="modal-custom">
                   <div class="close" @click="modal4 = false">X</div>
 
-                  <h6>Операция прошла успешно!</h6>
+                  <h6>Операция прошла успешно!</h6> 
                 </div>
               </div>
             </div>
@@ -232,8 +232,8 @@ export default {
       modal3: '',
       modal4: '',
       name: '',
-      res: '',
       phone: '',
+      res: '',
       ip: '',
       showAccordionFirst: true,
       showAccordionSecond: false,
@@ -286,6 +286,7 @@ export default {
 </script>
 
 <style scoped>
+
 .modal-overlay,
 .modal-4-overlay,
 .modal-2-overlay,
