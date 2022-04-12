@@ -4,7 +4,7 @@
       <div class="card__inner">
         <div v-for="shoe in items" :key="shoe.title" class="card__item"
           :style="{ backgroundImage: `url(${shoe.image})` }">
-          <nuxt-link class="card__item-title" :to="{ name: 'catalog', params: { id: categoryId } }">
+          <nuxt-link class="card__item-title" :to="{ name: 'catalog', params: { id: categoryId, subcatid: shoe.id } }">
             {{ shoe.title }}
           </nuxt-link>
         </div>

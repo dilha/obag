@@ -1,4 +1,3 @@
-
 export const state = () => ({
   categories: [],
   products: [],
@@ -10,8 +9,8 @@ export const state = () => ({
   isLoading: false,
   searchTerm: '',
   sortPriceType: 'ASC'
-
 })
+
 
 export const mutationTypes = {
   loadCategoriesStart: 'mutation/removeSelectedCategory loadCategoriesStart',
@@ -33,9 +32,9 @@ export const mutationTypes = {
   loadSearchProductsFailure: 'mutation/loadSearchProductsFailure',
 
   setSearchTerm: 'mutation/setSearchTerm changed app header serach input"'
-
-
 }
+
+
 export const actionTypes = {
   loadAllCategories: 'action/loadAllCategories get all categories',
   loadAllCategoryProducts: 'action/loadAllCategoryProducts',
@@ -44,8 +43,10 @@ export const actionTypes = {
   loadSearchProducts: 'action/loadSearchProducts',
   changeSearchTerm: 'actions/changeSearchTerm',
   changeSortPriceType: 'action/changeSortPriceType',
-  setSelectedCategory: 'action/setSelectedCategory'
+  setSelectedCategory: 'action/setSelectedCategory',
+  setSelectedSubCategory: 'action/setSelectedSubCategory',
 }
+
 
 export const mutations = {
   [mutationTypes.loadCategoriesStart](state) {
@@ -102,10 +103,9 @@ export const mutations = {
   [mutationTypes.setSearchTerm](state, payload) {
     state.searchTerm = payload;
   },
-
-
-
 }
+
+
 export const actions = {
   [actionTypes.loadAllCategories]({ commit }) {
 
@@ -144,11 +144,16 @@ export const actions = {
           commit(mutationTypes.loadProductsFailure, e)
         })
     })
-
   },
+
   [actionTypes.setSelectedCategory]({ commit, state }, category) {
     commit(mutationTypes.setSelectedCategory, category);
   },
+
+  [actionTypes.setSelectedSubCategory]({ commit, state }, subcatId) {
+    commit(mutationTypes.setSelectedSubCategory, subcatId);
+  },
+
   [actionTypes.loadAllSubCategoryProducts]({ commit, state }, subCategoryId) {
     commit(mutationTypes.loadProductsStart);
     commit(mutationTypes.setSelectedSubCategory, subCategoryId);
@@ -234,9 +239,8 @@ export const actions = {
   [actionTypes.changeSortPriceType]({ commit }, type) {
     commit(mutationTypes.setSortPriceType, type)
   },
-
-
 }
+
 
 export const getters = {
   selectedCategory: state => state.selectedCategory ? state.selectedCategory : state.categories[0]

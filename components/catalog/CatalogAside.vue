@@ -3,67 +3,36 @@
     <form class="aside__form">
       <div class="aside__search aside__block">
         <div class="form-row">
-          <input
-            v-model="searchTerm"
-            class="aside__search-input"
-            type="text"
-            placeholder="Поиск"
-            @keydown.enter="search"
-          />
+          <input v-model="searchTerm" class="aside__search-input" type="text" placeholder="Поиск"
+            @keydown.enter="search" />
           <button class="search__icon" @click.prevent="search">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAE9SURBVHgBlVLbbYNAEOQw8E0HoYOQDlyCO7ARAomvJBUYSvAXEiCRDuJUEDoIJbgEvnlmBnMWQcRRVlrfmtvZnZ09ocwsz3OzbduDqqqP06eq7/sPz/MKZWFCBlmW7Yid/pYEwS24DS+apnGCILj8AE6gd/hps9mEjuNUMiGOY0vX9U/GuHuSd4L0uq77EkIUrus6yopJ8DxHxQzsZtV1HSm/GCkOw3CC79hIArecYc5/zTRNe8NhYlZrBI58hbgLosnZoPgVCFAFCvZfwCRJxhzkXgsgOOO00zTd3gOi0zOOi9ypOgUFOudUbw00FT1Aj5uAGn+4XMpNB6UI55kzsZBhGHuwCpmHPT5I4O3lMAnKhei8XzSkBuxk4u4ID7HLSCxpTe/Vpnp4GKXv++WMMgsfUehVKP80gF+o7Df/zJ2q/BFUhgAAAABJRU5ErkJggg==" alt="">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAE9SURBVHgBlVLbbYNAEOQw8E0HoYOQDlyCO7ARAomvJBUYSvAXEiCRDuJUEDoIJbgEvnlmBnMWQcRRVlrfmtvZnZ09ocwsz3OzbduDqqqP06eq7/sPz/MKZWFCBlmW7Yid/pYEwS24DS+apnGCILj8AE6gd/hps9mEjuNUMiGOY0vX9U/GuHuSd4L0uq77EkIUrus6yopJ8DxHxQzsZtV1HSm/GCkOw3CC79hIArecYc5/zTRNe8NhYlZrBI58hbgLosnZoPgVCFAFCvZfwCRJxhzkXgsgOOO00zTd3gOi0zOOi9ypOgUFOudUbw00FT1Aj5uAGn+4XMpNB6UI55kzsZBhGHuwCpmHPT5I4O3lMAnKhei8XzSkBuxk4u4ID7HLSCxpTe/Vpnp4GKXv++WMMgsfUehVKP80gF+o7Df/zJ2q/BFUhgAAAABJRU5ErkJggg=="
+              alt="">
           </button>
         </div>
       </div>
       <div class="aside__price aside__block">
         <div class="aside__top" @click="togglePrice">
           <h6 class="aside__top-title">Цена:</h6>
-          <img
-            class="aside__top-arrow"
-            src="@/assets/images/icons/select-icon.svg"
-            alt=""
-          />
+          <img class="aside__top-arrow" src="@/assets/images/icons/select-icon.svg" alt="" />
         </div>
         <div class="aside__body aside__price-body">
-          <input
-            v-model="price_from"
-            class="aside__price-input aside__price-from"
-            type="number"
-            placeholder="0 ₸"
-            @change="getFilteredProducts"
-          />
-          <input
-            v-model="price_to"
-            class="aside__price-input"
-            type="number"
-            placeholder="15.000 ₸"
-            @change="getFilteredProducts"
-          />
+          <input v-model="price_from" class="aside__price-input aside__price-from" type="number" placeholder="0 ₸"
+            @change="getFilteredProducts" />
+          <input v-model="price_to" class="aside__price-input" type="number" placeholder="15.000 ₸"
+            @change="getFilteredProducts" />
         </div>
       </div>
       <div class="aside__product aside__block">
         <div class="aside__top" @click="toggleProduct">
           <h6 class="aside__top-title">Товар:</h6>
-          <img
-            class="aside__top-arrow"
-            src="@/assets/images/icons/select-icon.svg"
-            alt=""
-          />
+          <img class="aside__top-arrow" src="@/assets/images/icons/select-icon.svg" alt="" />
         </div>
         <div v-if="!showProduct && categories.length" class="aside__body">
-          <div
-            v-for="category of categories"
-            :key="category.id"
-            class="aside__checkbox"
-          >
-            <input
-              :id="category.id"
-              name="category"
-              class="aside__check"
-              type="checkbox"
-              :checked="selectedCategory.id === category.id"
-              @change="loadAllCategoryProducts(category)"
-            />
+          <div v-for="category of categories" :key="category.id" class="aside__checkbox">
+            <input :id="category.id" name="category" class="aside__check" type="checkbox"
+              :checked="selectedCategory.id === category.id" @change="handleToggleCategory(category)" />
             <label class="aside__label" :for="category.id">
               {{ category.title }}
             </label>
@@ -73,26 +42,12 @@
       <div v-if="complects.length" class="aside__product aside__block">
         <div class="aside__top">
           <h6 class="aside__top-title">Комплектующие:</h6>
-          <img
-            class="aside__top-arrow"
-            src="@/assets/images/icons/select-icon.svg"
-            alt=""
-          />
+          <img class="aside__top-arrow" src="@/assets/images/icons/select-icon.svg" alt="" />
         </div>
         <div class="aside__body">
-          <div
-            v-for="complect of complects"
-            :key="complect.id"
-            class="aside__checkbox"
-          >
-            <input
-              :id="complect.id + complect.title"
-              name="complects"
-              class="aside__check"
-              type="checkbox"
-              :checked="selectedComplect.id === complect.id"
-              @change="getFilteredProducts(complect)"
-            />
+          <div v-for="complect of complects" :key="complect.id" class="aside__checkbox">
+            <input :id="complect.id + complect.title" name="complects" class="aside__check" type="checkbox"
+              :checked="selectedComplect.id === complect.id" @change="getFilteredProducts(complect)" />
             <label class="aside__label" :for="complect.id + complect.title">
               {{ complect.title }}
             </label>
@@ -104,25 +59,12 @@
         <div class="aside__colors aside__block">
           <div class="aside__top" @click="toggleColor">
             <h6 class="aside__top-title">{{ field }}:</h6>
-            <img
-              class="aside__top-arrow"
-              src="@/assets/images/icons/select-icon.svg"
-              alt=""
-            />
+            <img class="aside__top-arrow" src="@/assets/images/icons/select-icon.svg" alt="" />
           </div>
           <div class="aside__body">
-            <div
-              v-for="filterVal in filters[field]"
-              :key="field + filterVal.title"
-              class="aside__checkbox"
-            >
-              <input
-                :id="field + filterVal.title"
-                :name="field + filterVal.title"
-                class="aside__check"
-                type="checkbox"
-                @change="updateFilter(filterVal)"
-              />
+            <div v-for="filterVal in filters[field]" :key="field + filterVal.title" class="aside__checkbox">
+              <input :id="field + filterVal.title" :name="field + filterVal.title" class="aside__check" type="checkbox"
+                @change="updateFilter(filterVal)" />
               <label class="aside__label" :for="field + filterVal.title">
                 {{ filterVal.title }}
               </label>
@@ -143,9 +85,15 @@ export default {
   props: {
     // eslint-disable-next-line vue/require-default-prop
     routeCategory: {
+      type: Object,
+      default: () => ({
+        id: -1
+      }),
+    },
+    routeSubcategory: {
       type: Number,
       default: -1,
-    },
+    }
   },
   data() {
     return {
@@ -189,8 +137,15 @@ export default {
         this.loadSearchProducts(termFromRoute)
         return
       }
-      if (this.routeCategory !== -1) {
-        this.loadAllCategoryProducts(this.routeCategory)
+
+      if (this.routeCategory.id !== -1) {
+        if (this.routeSubcategory !== -1) {
+          this.setSelectedCategory(this.routeCategory)
+          this.loadAllSubCategoryProducts(this.routeSubcategory)
+        } else {
+          this.setSelectedSubCategory(null)
+          this.loadAllCategoryProducts(this.routeCategory)
+        }
         return
       }
       this.loadAllCategoryProducts(this.selectedCategory)
@@ -201,8 +156,11 @@ export default {
     ...mapActions('catalog', {
       loadAllCategories: actionTypes.loadAllCategories,
       loadAllCategoryProducts: actionTypes.loadAllCategoryProducts,
+      loadAllSubCategoryProducts: actionTypes.loadAllSubCategoryProducts,
       loadFilterProducts: actionTypes.loadFilterProducts,
       loadSearchProducts: actionTypes.loadSearchProducts,
+      setSelectedCategory: actionTypes.setSelectedCategory,
+      setSelectedSubCategory: actionTypes.setSelectedSubCategory
     }),
     search() {
       console.log('searing...', this.searchTerm)
@@ -249,6 +207,10 @@ export default {
           price_to: this.price_to,
         })
       }
+    },
+    handleToggleCategory(category) {
+      this.setSelectedSubCategory(null)
+      this.loadAllCategoryProducts(category)
     },
     togglePrice() {
       this.showPrice = !this.showPrice
