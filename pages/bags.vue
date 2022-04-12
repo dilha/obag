@@ -14,6 +14,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import { actionTypes } from '@/store'
+import { actionTypes as catalogActionTypes } from '@/store/catalog'
 import AppIntroButton from '~/components/intro/AppIntroButton.vue'
 import AppShoesCards from '~/components/cards/AppShoesCards.vue'
 import AppLike from '~/components/AppLike.vue'
@@ -32,9 +33,13 @@ export default {
   },
   mounted() {
     this.getCategory(2)
+    this.loadAllCategories()
   },
   methods: {
     ...mapActions({ getCategory: actionTypes.loadCategory }),
-  },
+    ...mapActions('catalog', {
+      loadAllCategories: catalogActionTypes.loadAllCategories
+    }),
+  }
 }
 </script>

@@ -130,7 +130,7 @@ export default {
   },
   mounted() {
     const termFromRoute = this.$route.params?.term
-    console.log(termFromRoute)
+    console.log(this.routeCategory.id, this.routeSubcategory)
 
     this.loadAllCategories().then(() => {
       if (termFromRoute) {
