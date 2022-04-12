@@ -236,6 +236,6 @@ export const actions = {
 
 }
 
-export const getters={
+export const getters = {
   selectedCategory:state=>state.selectedCategory ? state.selectedCategory : state.categories[0]
 }

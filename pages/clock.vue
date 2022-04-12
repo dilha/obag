@@ -7,6 +7,7 @@
       <p class="intro__text">
         {{ category.text }}
       </p>
+      
     </app-intro-button>
     <app-clock-cards :items="category.subcategories" />
     <app-combination :items="category['constructor']" />
