@@ -2,10 +2,11 @@
 	<section class="glasses page__block">
 		<div class="container">
 			<div class="card__inner">
-				<div v-for="glasse in items" :key="glasse.title" class="card__item"
-					:style="{ backgroundImage: `url(${glasse.image})` }">
-					<nuxt-link class="card__item-title" :to="{ name: 'catalog', params: { id: categoryId } }">
-						{{ glasse.title }}
+				<div v-for="glasses in items" :key="glasses.title" class="card__item"
+					:style="{ backgroundImage: `url(${glasses.image})` }">
+					<nuxt-link class="card__item-title"
+						:to="{ name: 'catalog', params: { id: categoryId, subcatid: glasses.id } }">
+						{{ glasses.title }}
 					</nuxt-link>
 				</div>
 			</div>

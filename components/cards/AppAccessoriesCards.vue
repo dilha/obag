@@ -2,10 +2,11 @@
   <section class="accessories page__block">
     <div class="container">
       <div class="card__inner">
-        <div v-for="accessorie in items" :key="accessorie.title" class="card__item"
-          :style="{ backgroundImage: `url(${accessorie.image})` }">
-          <nuxt-link class="card__item-title" :to="{ name: 'catalog', params: { id: categoryId } }">
-            {{ accessorie.title }}
+        <div v-for="accessory in items" :key="accessory.title" class="card__item"
+          :style="{ backgroundImage: `url(${accessory.image})` }">
+          <nuxt-link class="card__item-title"
+            :to="{ name: 'catalog', params: { id: categoryId, subcatid: accessory.id } }">
+            {{ accessory.title }}
           </nuxt-link>
         </div>
       </div>

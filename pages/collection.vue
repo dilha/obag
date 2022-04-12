@@ -5,7 +5,7 @@
         {{ category.title }}
       </h3>
     </app-intro-button>
-    <app-collection-cards :items="category.subcategories" />
+    <app-collection-cards :category-id="category.id" :items="category.subcategories" />
     <app-like :id="category.id" />
     <app-news />
   </div>
