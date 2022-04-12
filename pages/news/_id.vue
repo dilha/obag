@@ -19,10 +19,12 @@
 <script>
 import AppIntro from "~/components/intro/AppIntro.vue";
 import AppNews from "~/components/news/AppNews.vue";
+// import NewsCards from "~/components/news/NewsCards.vue";
 
 export default {
   name: 'CollectionPage',
   components: {
+    // NewsCards,
     AppIntro,
     AppNews,
   },
@@ -41,9 +43,9 @@ export default {
   methods: {
     getNews(id) {
       this.$api
-      .get(`/news/${id}`)
+      .get(`https://bag.a-lux.dev/api/page/get-news/${id}`)
       .then((res)=> {
-        this.item = res.data.content
+        this.item = res.data
       })
     }
   }
