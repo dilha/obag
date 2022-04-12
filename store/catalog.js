@@ -241,12 +241,7 @@ export const actions = {
   },
 }
 
-<<<<<<< HEAD
 
 export const getters = {
   selectedCategory: state => state.selectedCategory ? state.selectedCategory : state.categories[0]
-=======
-export const getters = {
-  selectedCategory:state=>state.selectedCategory ? state.selectedCategory : state.categories[0]
->>>>>>> origin/dias
 }
