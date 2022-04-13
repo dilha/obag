@@ -48,10 +48,7 @@
               </button>
             </div>
             <div v-if="!isExist">
-              <button
-                class="characteristic__buy"
-                @click="NotifyModal = true"
-              >
+              <button class="characteristic__buy" @click="NotifyModal = true">
                 Уведомить о поступлении
               </button>
               <div v-if="NotifyModal" class="modal">
@@ -79,10 +76,7 @@
                     </form>
                   </div>
                 </div>
-                <button
-                  class="modal__close"
-                  @click="NotifyModal = false"
-                >
+                <button class="modal__close" @click="NotifyModal = false">
                   <img src="@/assets/images/icons/close-modal.svg" alt="" />
                 </button>
               </div>
@@ -99,72 +93,11 @@
                     </p> -->
                   </div>
                 </div>
-                <button
-                  class="modal__close"
-                  @click="NotifyModalEnd = false"
-                >
+                <button class="modal__close" @click="NotifyModalEnd = false">
                   <img src="@/assets/images/icons/close-modal.svg" alt="" />
                 </button>
               </div>
 
-               <div v-if="OrderModal" class="modal">
-                <div class="modal__container">
-                  <div class="modal__login">
-                    <h6 class="modal__login-title">Заказать в 1 клик!</h6>
-                    <!-- <p
-                      v-if="error"
-                      style="color: red; font-size: 12px margin-bottom:8px;"
-                    >
-                      {{ error }}
-                    </p> -->
-                    <form class="modal__login-form" @submit.prevent="order">
-                      <input
-                        v-model="phone"
-                        class="modal__login-input "
-                        type="text"
-                        placeholder="Номер телефона"
-                        required
-                      />
-                       <input
-                        v-model="name"
-                        class="modal__login-input"
-                        type="text"
-                        placeholder="Имя"
-                        required
-                      />
-                      <button class="modal__login-btn" type="submit">
-                        Заказать
-                      </button>
-                    </form>
-                  </div>
-                </div>
-                <button
-                  class="modal__close"
-                  @click="OrderModal = false"
-                >
-                  <img src="@/assets/images/icons/close-modal.svg" alt="" />
-                </button>
-              </div>
-
-              <div v-if="OrderModalEnd" class="modal">
-                <div class="modal__container">
-                  <div class="modal__login">
-                    <h6 class="modal__login-title">Готово!</h6>
-                    <!-- <p
-                      v-if="error"
-                      style="color: red; font-size: 12px margin-bottom:8px;"
-                    >
-                      {{ error }}
-                    </p> -->
-                  </div>
-                </div>
-                <button
-                  class="modal__close"
-                  @click="OrderModalEnd = false"
-                >
-                  <img src="@/assets/images/icons/close-modal.svg" alt="" />
-                </button>
-              </div>
               <nuxt-link
                 to="/constructor"
                 class="characteristic__link characteristic__link-constructor"
@@ -177,6 +110,58 @@
               >
                 Запросить фото
               </nuxt-link>
+            </div>
+            <div v-if="OrderModal" class="modal">
+              <div class="modal__container">
+                <div class="modal__login">
+                  <h6 class="modal__login-title">Заказать в 1 клик!</h6>
+                  <!-- <p
+                      v-if="error"
+                      style="color: red; font-size: 12px margin-bottom:8px;"
+                    >
+                      {{ error }}
+                    </p> -->
+                  <form class="modal__login-form" @submit.prevent="order">
+                    <input
+                      v-model="phone"
+                      class="modal__login-input"
+                      type="text"
+                      placeholder="Номер телефона"
+                      required
+                    />
+                    <input
+                      v-model="name"
+                      class="modal__login-input"
+                      type="text"
+                      placeholder="Имя"
+                      required
+                    />
+                    <button class="modal__login-btn" type="submit">
+                      Заказать
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <button class="modal__close" @click="OrderModal = false">
+                <img src="@/assets/images/icons/close-modal.svg" alt="" />
+              </button>
+            </div>
+
+            <div v-if="OrderModalEnd" class="modal">
+              <div class="modal__container">
+                <div class="modal__login">
+                  <h6 class="modal__login-title">Готово!</h6>
+                  <!-- <p
+                      v-if="error"
+                      style="color: red; font-size: 12px margin-bottom:8px;"
+                    >
+                      {{ error }}
+                    </p> -->
+                </div>
+              </div>
+              <button class="modal__close" @click="OrderModalEnd = false">
+                <img src="@/assets/images/icons/close-modal.svg" alt="" />
+              </button>
             </div>
             <div class="characteristic__info">
               <div class="characteristic__info-buttons">
@@ -299,8 +284,8 @@ export default {
       phone: '',
       NotifyModal: false,
       NotifyModalEnd: false,
-      OrderModal : false,
-      OrderModalEnd : false,
+      OrderModal: false,
+      OrderModalEnd: false,
       showAccordionFirst: true,
       showAccordionSecond: false,
       product: {},
@@ -419,8 +404,8 @@ export default {
 }
 </script>
 <style scoped>
-#mail-input{
-      padding: 12px 52px;
+#mail-input {
+  padding: 12px 52px;
 }
 .modal-overlay,
 .modal-4-overlay,
