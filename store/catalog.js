@@ -2,7 +2,7 @@ export const state = () => ({
   categories: [],
   products: [],
   filters: [],
-  complects: [],
+  completes: [],
   selectedCategory: null,
   selectedSubCategory: null,
   error: null,
@@ -20,7 +20,7 @@ export const mutationTypes = {
   setSelectedCategory: 'mutation/setSelectedCategory',
   setSelectedSubCategory: 'mutation/setSelectedSubCategory',
   setCategoryFilters: 'mutation/setCategoryFilters',
-  setComplects: 'mutation/setComplects',
+  setCompletes: 'mutation/setCompletes',
   setSortPriceType: 'mutation/setSortPriceType',
 
   loadProductsStart: 'mutation/loadProductsStart',
@@ -72,8 +72,8 @@ export const mutations = {
   [mutationTypes.setCategoryFilters](state, payload) {
     state.filters = payload;
   },
-  [mutationTypes.setComplects](state, payload) {
-    state.complects = payload;
+  [mutationTypes.setCompletes](state, payload) {
+    state.completes = payload;
   },
 
   [mutationTypes.loadProductsStart](state) {
@@ -163,11 +163,11 @@ export const actions = {
         .then((response) => {
           const products = response.data.subcategory.products;
           const filters = response.data?.filters;
-          const complects = response.data.completes;
+          const completes = response.data.completes;
           console.log(response.data)
           commit(mutationTypes.loadProductsSuccess, products)
           commit(mutationTypes.setCategoryFilters, filters)
-          commit(mutationTypes.setComplects, complects)
+          commit(mutationTypes.setCompletes, completes)
 
           resolve(products);
         })

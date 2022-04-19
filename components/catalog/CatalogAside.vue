@@ -39,14 +39,14 @@
           </div>
         </div>
       </div>
-      <div v-if="complects.length" class="aside__product aside__block">
+      <div v-if="completes.length" class="aside__product aside__block">
         <div class="aside__top">
           <h6 class="aside__top-title">Комплектующие:</h6>
           <img class="aside__top-arrow" src="@/assets/images/icons/select-icon.svg" alt="" />
         </div>
         <div class="aside__body">
-          <div v-for="complect of complects" :key="complect.id" class="aside__checkbox">
-            <input :id="complect.id + complect.title" name="complects" class="aside__check" type="checkbox"
+          <div v-for="complect of completes" :key="complect.id" class="aside__checkbox">
+            <input :id="complect.id + complect.title" name="completes" class="aside__check" type="checkbox"
               :checked="selectedComplect.id === complect.id" @change="getFilteredProducts(complect)" />
             <label class="aside__label" :for="complect.id + complect.title">
               {{ complect.title }}
@@ -113,7 +113,7 @@ export default {
       'categories',
       'filters',
       'selectedSubCategory',
-      'complects',
+      'completes',
     ]),
     ...mapGetters('catalog', ['selectedCategory']),
     defaultCategory() {
