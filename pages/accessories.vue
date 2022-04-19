@@ -8,7 +8,7 @@
         {{ category.text }}
       </p>
     </app-intro-button>
-    <app-accessories-cards :items="category.subcategories" />
+    <app-accessories-cards :category-id="category.id" :items="category.subcategories" />
     <app-like :id="category.id" />
     <app-news />
   </div>
@@ -17,6 +17,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import { actionTypes } from '@/store'
+import { actionTypes as catalogActionTypes } from '@/store/catalog'
 import AppIntroButton from '~/components/intro/AppIntroButton.vue'
 import AppAccessoriesCards from '~/components/cards/AppAccessoriesCards.vue'
 import AppLike from '~/components/AppLike.vue'
@@ -35,9 +36,13 @@ export default {
   },
   mounted() {
     this.getCategory(5)
+    this.loadAllCategories()
   },
   methods: {
     ...mapActions({ getCategory: actionTypes.loadCategory }),
+    ...mapActions('catalog', {
+      loadAllCategories: catalogActionTypes.loadAllCategories
+    }),
   },
 }
 </script>

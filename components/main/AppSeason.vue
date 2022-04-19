@@ -16,7 +16,7 @@
           <VueSlickCarousel :arrows="true">
             <product-card
               v-for="item in items.products"
-              :key="item"
+              :key="item.id"
               :item="item"
             />
           </VueSlickCarousel>

@@ -5,7 +5,7 @@
         {{ category.title }}
       </h3>
     </app-intro-button>
-    <app-collection-cards :items="category.subcategories" />
+    <app-collection-cards :category-id="category.id" :items="category.subcategories" />
     <app-like :id="category.id" />
     <app-news />
   </div>
@@ -14,6 +14,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import { actionTypes } from '@/store'
+import { actionTypes as catalogActionTypes } from '@/store/catalog'
 import AppIntroButton from '~/components/intro/AppIntroButton.vue'
 import AppCollectionCards from '~/components/cards/AppCollectionCards.vue'
 import AppLike from '~/components/AppLike.vue'
@@ -32,9 +33,13 @@ export default {
   },
   mounted() {
     this.getCategory(1)
+    this.loadAllCategories()
   },
   methods: {
     ...mapActions({ getCategory: actionTypes.loadCategory }),
+    ...mapActions('catalog', {
+      loadAllCategories: catalogActionTypes.loadAllCategories
+    }),
   },
 }
 </script>

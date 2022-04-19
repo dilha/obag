@@ -108,7 +108,6 @@ export default {
   },
   mounted() {
     this.isAddedCard()
-    console.log(this.item.image)
   },
   methods: {
     ...mapActions('cart', { addProductToCart: actionTypes.addProduct }),

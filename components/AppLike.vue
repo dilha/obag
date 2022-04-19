@@ -45,8 +45,7 @@ export default {
   },
   props: {
     id: {
-      type: String,
-      required: true,
+      type: Number,
     },
   },
   data() {

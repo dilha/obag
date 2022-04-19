@@ -2,18 +2,10 @@
   <section v-if="items" class="collection page__block">
     <div class="container">
       <div class="card__inner">
-        <div
-          v-for="item in items"
-          :key="item.id"
-          class="card__item"
-          :style="{ backgroundImage: `url(${item.image})` }"
-        >
-          <nuxt-link
-            class="card__item-title"
-            :to="{ name: 'catalog', params: { id: item.id } }"
-            >
+        <div v-for="item in items" :key="item.id" class="card__item" :style="{ backgroundImage: `url(${item.image})` }">
+          <nuxt-link class="card__item-title" :to="{ name: 'catalog', params: { id: categoryId, subcatid: item.id } }">
             {{ item.title }}
-        </nuxt-link>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -24,6 +16,9 @@
 export default {
   name: 'AppCollectionCards',
   props: {
+    categoryId: {
+      type: Number
+    },
     items: {
       type: Array,
       require: true,

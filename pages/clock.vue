@@ -9,7 +9,7 @@
       </p>
       
     </app-intro-button>
-    <app-clock-cards :items="category.subcategories" />
+    <app-clock-cards :category-id="category.id" :items="category.subcategories" />
     <app-combination :items="category['constructor']" />
     <app-like :id="category.id" />
     <app-news />
@@ -19,6 +19,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import { actionTypes } from '@/store'
+import { actionTypes as catalogActionTypes } from '@/store/catalog'
 import AppIntroButton from '~/components/intro/AppIntroButton.vue'
 import AppClockCards from '~/components/cards/AppClockCards.vue'
 import AppCombination from '~/components/AppCombination.vue'
@@ -39,9 +40,13 @@ export default {
   },
   mounted() {
     this.getCategory(3)
+    this.loadAllCategories()
   },
   methods: {
     ...mapActions({ getCategory: actionTypes.loadCategory }),
+    ...mapActions('catalog', {
+      loadAllCategories: catalogActionTypes.loadAllCategories
+    }),
   },
 }
 </script>

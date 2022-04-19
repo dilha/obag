@@ -3,31 +3,18 @@
     <div class="catalog__model-top">
       <h6 class="catalog__model-title">Модель:</h6>
       <div class="catalog__model-buttons">
-        <button
-          class="catalog__model-btn catalog__model-prev button-prev"
-        >
+        <button class="catalog__model-btn catalog__model-prev button-prev">
           <img src="@/assets/images/icons/left-arrow.svg" alt="" />
         </button>
-        <button
-          class="catalog__model-btn catalog__model-next button-next"
-        >
+        <button class="catalog__model-btn catalog__model-next button-next">
           <img src="@/assets/images/icons/right-arrow.svg" alt="" />
         </button>
       </div>
     </div>
-    <swiper
-      v-if="selectedCategory"
-      ref="reviewsSlider"
-      class="catalog__model-slider"
-      :options="swiperOption"
-    >
-      <swiper-slide
-        v-for="item in selectedCategory.subcategories"
-        :key="item.id"
-        class="catalog__model-item"
-        :data-id="item.id"
-        @click.native.stop="loadAllSubCategoryProducts(item.id)"
-      >
+    <swiper v-if="selectedCategory" ref="reviewsSlider" class="catalog__model-slider" :options="swiperOption">
+      <swiper-slide v-for="item in selectedCategory.subcategories" :key="item.id"
+        :class="['catalog__model-item', { 'is-active': selectedSubCategory === item.id }]" :data-id="item.id"
+        @click.native.stop="loadAllSubCategoryProducts(item.id)">
         <img :src="item.image" :alt="item.title" />
       </swiper-slide>
     </swiper>
@@ -41,6 +28,8 @@ import { actionTypes } from '~/store/catalog'
 export default {
   name: 'CatalogModel',
   components: {},
+  props: {
+  },
   data() {
     return {
       swiperOption: {
@@ -55,7 +44,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('catalog', ['selectedCategory']),
+    ...mapState('catalog', ['selectedCategory', 'selectedSubCategory']),
     swiper() {
       return this.$refs.reviewsSlider?.$swiper
     },

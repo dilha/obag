@@ -8,16 +8,12 @@
           <sorting-select />
         </div>
       </div>
-      <div class="catalog__page">
-        <catalog-aside :route-category="routeCategory" />
+      <div class="catalog__page"> 
+        <catalog-aside :route-category="routeCategory" :route-subcategory="routeSubcategory" />
         <div class="catalog__content">
           <catalog-model />
           <div v-if="products.length" class="catalog__inner">
-            <product-card
-              v-for="item in products"
-              :key="item.id"
-              :item="item"
-            />
+            <product-card v-for="item in products" :key="item.id" :item="item" />
           </div>
           <div v-else>
             <img v-if="isLoading" src="@/assets/images/loader.gif" alt="" />
@@ -49,7 +45,10 @@ export default {
   },
   data() {
     return {
-      routeCategory: -1,
+      routeCategory: {
+        id: -1
+      },
+      routeSubcategory: -1,
     }
   },
   computed: {
@@ -59,7 +58,8 @@ export default {
   mounted() {
     this.routeCategory = this.categories.find(
       (c) => c.id === this.$route?.params?.id
-    )
+    );
+    this.routeSubcategory = this.$route?.params?.subcatid || -1;
   },
   methods: {
     ...mapActions('catalog', {
