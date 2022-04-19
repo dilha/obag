@@ -135,18 +135,19 @@ export default {
   },
   mounted() {
     const termFromRoute = this.$route.params?.term
-    console.log(this.routeCategory.id, this.routeSubcategory)
 
     this.loadAllCategories().then(() => {
       if (termFromRoute) {
         this.loadSearchProducts(termFromRoute)
         return
       }
+      // console.log(this.routeCategory.id, this.routeSubcategory, this.routeComplete)
 
       if (this.routeCategory.id !== -1) {
         if (this.routeSubcategory !== -1) {
           this.setSelectedCategory(this.routeCategory)
           this.loadAllSubCategoryProducts(this.routeSubcategory)
+          if (this.routeComplete !== -1) this.getFilteredProducts({ id: this.routeComplete })
         } else {
           this.setSelectedSubCategory(null)
           this.loadAllCategoryProducts(this.routeCategory)
@@ -214,6 +215,7 @@ export default {
       }
     },
     handleToggleCategory(category) {
+      this.selectedComplect = {}
       this.setSelectedSubCategory(null)
       this.loadAllCategoryProducts(category)
     },
