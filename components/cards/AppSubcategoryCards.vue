@@ -1,12 +1,12 @@
 <template>
-   <section class="completes page__block">
+   <section class="shoes page__block">
       <div class="container">
          <div class="card__inner">
-            <div v-for="complete in items" :key="complete.title" class="card__item"
-               :style="{ backgroundImage: `url(${complete.image})` }">
+            <div v-for="item in items" :key="item.title" class="card__item"
+               :style="{ backgroundImage: `url(${item.image})` }">
                <nuxt-link class="card__item-title"
-                  :to="{ name: 'catalog', params: { id: categoryId, subcatId: complete.id } }">
-                  {{ complete.title }}
+                  :to="{ name: 'completes', params: { id: categoryId, subcatId: item.id } }">
+                  {{ item.title }}
                </nuxt-link>
             </div>
          </div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-   name: 'AppCompleteCards',
+   name: 'AppSubcategoryCards',
    props: {
       categoryId: {
          type: Number
@@ -27,8 +27,7 @@ export default {
       },
    },
    data() {
-      return {
-      }
+      return {}
    },
 }
 </script>

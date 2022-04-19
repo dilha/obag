@@ -8,7 +8,7 @@
           <sorting-select />
         </div>
       </div>
-      <div class="catalog__page"> 
+      <div class="catalog__page">
         <catalog-aside :route-category="routeCategory" :route-subcategory="routeSubcategory" />
         <div class="catalog__content">
           <catalog-model />
@@ -59,7 +59,7 @@ export default {
     this.routeCategory = this.categories.find(
       (c) => c.id === this.$route?.params?.id
     );
-    this.routeSubcategory = this.$route?.params?.subcatid || -1;
+    this.routeSubcategory = this.$route?.params?.subcatId || -1;
   },
   methods: {
     ...mapActions('catalog', {
