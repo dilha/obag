@@ -11,7 +11,7 @@
         <news-cards  v-for="item in blockNews" :key="item.title" :item="item" />
       </div>
       <div class="news__button">
-        <nuxt-link class="news__btn page__border-btn" to="/news">
+        <nuxt-link class="news__btn page__border-btn" to="/all-news">
           Смотреть все новости
         </nuxt-link>
       </div>
