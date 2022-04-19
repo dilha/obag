@@ -2,7 +2,7 @@
    <section class="shoes page__block">
       <div class="container">
          <div class="card__inner">
-            <div v-for="item in items" :key="item.title" class="card__item"
+            <div v-for="item in items" :key="item.id" class="card__item"
                :style="{ backgroundImage: `url(${item.image})` }">
                <nuxt-link class="card__item-title"
                   :to="{ name: 'completes', params: { id: categoryId, subcatId: item.id } }">

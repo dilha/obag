@@ -5,7 +5,7 @@
             <div v-for="complete in items" :key="complete.title" class="card__item"
                :style="{ backgroundImage: `url(${complete.image})` }">
                <nuxt-link class="card__item-title"
-                  :to="{ name: 'catalog', params: { id: categoryId, subcatId: complete.id } }">
+                  :to="{ name: 'catalog', params: { id: categoryId, subcatId: subcatId, completeId: complete.id } }">
                   {{ complete.title }}
                </nuxt-link>
             </div>
@@ -20,6 +20,9 @@ export default {
    props: {
       categoryId: {
          type: Number
+      },
+      subcatId: {
+         type: Number,
       },
       items: {
          type: Array,

@@ -39,8 +39,8 @@
           </div>
         </div>
       </div>
-    
-      <div v-if="completes.length"  class="aside__product aside__block">
+
+      <div v-if="completes.length" class="aside__product aside__block">
         <div class="aside__top">
           <h6 class="aside__top-title">Комплектующие:</h6>
           <img class="aside__top-arrow" src="@/assets/images/icons/select-icon.svg" alt="" />
@@ -92,6 +92,10 @@ export default {
       }),
     },
     routeSubcategory: {
+      type: Number,
+      default: -1,
+    },
+    routeComplete: {
       type: Number,
       default: -1,
     }

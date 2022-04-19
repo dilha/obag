@@ -5,6 +5,7 @@ export const state = () => ({
   completes: [],
   selectedCategory: null,
   selectedSubCategory: null,
+  selectedComplete: null,
   error: null,
   isLoading: false,
   searchTerm: '',
@@ -19,6 +20,7 @@ export const mutationTypes = {
 
   setSelectedCategory: 'mutation/setSelectedCategory',
   setSelectedSubCategory: 'mutation/setSelectedSubCategory',
+  setSelectedComplete: 'mutation/setSelectedComplete',
   setCategoryFilters: 'mutation/setCategoryFilters',
   setCompletes: 'mutation/setCompletes',
   setSortPriceType: 'mutation/setSortPriceType',
@@ -45,6 +47,7 @@ export const actionTypes = {
   changeSortPriceType: 'action/changeSortPriceType',
   setSelectedCategory: 'action/setSelectedCategory',
   setSelectedSubCategory: 'action/setSelectedSubCategory',
+  setSelectedComplete: 'action/setSelectedComplete',
 }
 
 
@@ -68,6 +71,9 @@ export const mutations = {
   },
   [mutationTypes.setSelectedSubCategory](state, payload) {
     state.selectedSubCategory = payload;
+  },
+  [mutationTypes.setSelectedComplete](state, payload) {
+    state.selectedComplete = payload;
   },
   [mutationTypes.setCategoryFilters](state, payload) {
     state.filters = payload;
@@ -153,6 +159,11 @@ export const actions = {
   [actionTypes.setSelectedSubCategory]({ commit, state }, subcatId) {
     commit(mutationTypes.setSelectedSubCategory, subcatId);
   },
+
+  [actionTypes.setSelectedComplete]({ commit, state }, completeId) {
+    commit(mutationTypes.setSelectedComplete, completeId);
+  },
+
 
   [actionTypes.loadAllSubCategoryProducts]({ commit, state }, subCategoryId) {
     commit(mutationTypes.loadProductsStart);

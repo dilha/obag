@@ -2,10 +2,10 @@
    <div>
       <app-subcat-intro-button :image="category.image" :category-id="сategoryId" :subcat-id="subcategoryId">
          <h3 class="intro__title">
-            {{ subcategory.subcategory.title }}
+            {{ pageTitle }}
          </h3>
       </app-subcat-intro-button>
-      <app-complete-cards :category-id="category.id" :items="subcategory.completes" />
+      <app-complete-cards :category-id="category.id" :subcat-id="subcategoryId" :items="subcategory.completes" />
       <app-like :id="category.id" />
       <app-news />
    </div>
@@ -40,6 +40,9 @@ export default {
          'selectedSubCategory',
          'completes',
       ]),
+      pageTitle() {
+         return this.subcategory?.subcategory?.title || ''
+      }
    },
    mounted() {
       this.сategoryId = this.$route?.params?.id
