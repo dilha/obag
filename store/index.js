@@ -1,7 +1,7 @@
-
 export const state = () => ({
   news: [],
   category: [],
+  subcategory: [],
   recomended: [],
   error: null,
   isLoading: false,
@@ -10,12 +10,14 @@ export const state = () => ({
 export const mutationTypes = {
   loadNewsSuccess: "mutation/newsSuccess load news success",
   loadCategorySuccess: 'mutation/CategorySuccess load category success"',
+  loadSubcategorySuccess: 'mutation/SubcategorySuccess load subcategory success',
   loadRecomendedSuccess: 'mutation/RecomendedSuccess load recomended success"',
   loadRecomendedFailure: 'mutation/RecomendedFailure load recomended success"',
 }
 export const actionTypes = {
   loadNews: 'action/newsStart get all news',
   loadCategory: 'action/categoryStart get all category',
+  loadSubcategory: 'action/categoryStart get subcategory',
   loadRecomended: 'action/recomendedStart get all recomended',
 }
 
@@ -26,10 +28,12 @@ export const mutations = {
   [mutationTypes.loadCategorySuccess](state, payload) {
     state.category = payload;
   },
+  [mutationTypes.loadSubcategorySuccess](state, payload) {
+    state.subcategory = payload;
+  },
   [mutationTypes.loadRecomendedSuccess](state, payload) {
     state.recomended = payload;
   },
-
   [mutationTypes.loadRecomendedFailure](state, payload) {
     state.error = payload;
   },
@@ -57,6 +61,19 @@ export const actions = {
           const category = response.data.category;
           commit(mutationTypes.loadCategorySuccess, category)
           resolve(category);
+        })
+    })
+  },
+
+  [actionTypes.loadSubcategory]({ commit }, id) {
+    return new Promise(resolve => {
+      this.$api
+        .get(`/subcategory/${id}`)
+        .then((response) => {
+          const subcategory = response.data;
+          console.log(subcategory)
+          commit(mutationTypes.loadSubcategorySuccess, subcategory)
+          resolve(subcategory);
         })
     })
   },

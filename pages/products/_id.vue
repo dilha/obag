@@ -48,169 +48,223 @@
               </button>
             </div>
             <div v-if="!isExist">
-              <button class="characteristic__buy" @click="modal3 = true">
+              <button class="characteristic__buy" @click="NotifyModal = true">
                 Уведомить о поступлении
               </button>
-              <div class="modal-3" v-if="modal3">
-                <div class="modal-3-overlay">
-                  <div class="modal-custom">
-                    <div class="close" @click="modal3 = false">X</div>
-                    <!-- <input type="text" v-model="product_id" placeholder="ID товара" /> -->
-                    <input type="text" v-model="email" placeholder="Почта" />
-                    <button @click="notify">Отправить</button>
+              <div v-if="NotifyModal" class="modal">
+                <div class="modal__container">
+                  <div class="modal__login">
+                    <h6 class="modal__login-title">Подписаться на рассылку</h6>
+                    <!-- <p
+                      v-if="error"
+                      style="color: red; font-size: 12px margin-bottom:8px;"
+                    >
+                      {{ error }}
+                    </p> -->
+                    <form class="modal__login-form" @submit.prevent="notify">
+                      <input
+                        v-model="email"
+                        id="mail-input"
+                        class="modal__login-input modal__login-email"
+                        type="email"
+                        placeholder="Эл. почта"
+                        required
+                      />
+                      <button class="modal__login-btn" type="submit">
+                        Подписаться
+                      </button>
+                    </form>
                   </div>
                 </div>
+                <button class="modal__close" @click="NotifyModal = false">
+                  <img src="@/assets/images/icons/close-modal.svg" alt="" />
+                </button>
               </div>
-              <div class="modal-4" v-if="modal4">
-                <div class="modal-4-overlay">
-                  <div class="modal-custom">
-                    <div class="close" @click="modal4 = false">X</div>
 
-                    <h6>Операция прошла успешно!</h6>
+              <div v-if="NotifyModalEnd" class="modal">
+                <div class="modal__container">
+                  <div class="modal__login">
+                    <h6 class="modal__login-title">Готово!</h6>
+                    <!-- <p
+                      v-if="error"
+                      style="color: red; font-size: 12px margin-bottom:8px;"
+                    >
+                      {{ error }}
+                    </p> -->
                   </div>
                 </div>
+                <button class="modal__close" @click="NotifyModalEnd = false">
+                  <img src="@/assets/images/icons/close-modal.svg" alt="" />
+                </button>
               </div>
-            </div>
-            <nuxt-link
-              to="/constructor"
-              class="characteristic__link characteristic__link-constructor"
-            >
-              Конструктор
-            </nuxt-link>
-            <nuxt-link
-              to="/shopping"
-              class="characteristic__link characteristic__link-foto"
-            >
-              Запросить фото
-            </nuxt-link>
-          </div>
-          <div class="characteristic__info">
-            <div class="characteristic__info-buttons">
-              <button
-                v-for="(item, index) in productTubs"
-                :key="index"
-                class="characteristic__info-btn"
-                :class="{ active: item.name === productInfo }"
-                @click="selecProductInfo(item.name)"
+
+              <nuxt-link
+                to="/constructor"
+                class="characteristic__link characteristic__link-constructor"
               >
-                {{ item.title }}
+                Конструктор
+              </nuxt-link>
+              <nuxt-link
+                to="/shopping"
+                class="characteristic__link characteristic__link-foto"
+              >
+                Запросить фото
+              </nuxt-link>
+            </div>
+            <div v-if="OrderModal" class="modal">
+              <div class="modal__container">
+                <div class="modal__login">
+                  <h6 class="modal__login-title">Заказать в 1 клик!</h6>
+                  <!-- <p
+                      v-if="error"
+                      style="color: red; font-size: 12px margin-bottom:8px;"
+                    >
+                      {{ error }}
+                    </p> -->
+                  <form class="modal__login-form" @submit.prevent="order">
+                    <input
+                      v-model="phone"
+                      class="modal__login-input"
+                      type="text"
+                      placeholder="Номер телефона"
+                      required
+                    />
+                    <input
+                      v-model="name"
+                      class="modal__login-input"
+                      type="text"
+                      placeholder="Имя"
+                      required
+                    />
+                    <button class="modal__login-btn" type="submit">
+                      Заказать
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <button class="modal__close" @click="OrderModal = false">
+                <img src="@/assets/images/icons/close-modal.svg" alt="" />
               </button>
+            </div>
 
-              <a href="#" class="order-btn" @click="modal = true"
-                >Заказать в 1 клик</a
+            <div v-if="OrderModalEnd" class="modal">
+              <div class="modal__container">
+                <div class="modal__login">
+                  <h6 class="modal__login-title">Готово!</h6>
+                  <!-- <p
+                      v-if="error"
+                      style="color: red; font-size: 12px margin-bottom:8px;"
+                    >
+                      {{ error }}
+                    </p> -->
+                </div>
+              </div>
+              <button class="modal__close" @click="OrderModalEnd = false">
+                <img src="@/assets/images/icons/close-modal.svg" alt="" />
+              </button>
+            </div>
+            <div class="characteristic__info">
+              <div class="characteristic__info-buttons">
+                <button
+                  v-for="(item, index) in productTubs"
+                  :key="index"
+                  class="characteristic__info-btn"
+                  :class="{ active: item.name === productInfo }"
+                  @click="selecProductInfo(item.name)"
+                >
+                  {{ item.title }}
+                </button>
+
+                <a href="#" class="order-btn" @click="OrderModal = true"
+                  >Заказать в 1 клик</a
+                >
+              </div>
+              <div class="characteristic__info-content">
+                <div v-html="product[productInfo]"></div>
+              </div>
+            </div>
+            <div class="characteristic__accordion">
+              <div
+                class="characteristic__accordion-title"
+                @click="toggleShowAccordionFirst"
               >
-              <div v-if="modal" class="modal-overlay">
-                <div class="modal-custom">
-                  <div class="close" @click="modal = false">X</div>
-                  <h6>Заказать в 1 клик!</h6>
-                  <!-- <form @submit="order"> -->
-                  <input
-                    type="text"
-                    v-model="phone"
-                    placeholder="Эл.почта/номер телефона"
-                  />
-                  <input type="text" v-model="name" placeholder="Имя" />
-                  <button @click="order">Отправить</button>
-
-                  <!-- </form> -->
-                </div>
+                Оплата и доставка
+                <img
+                  class="characteristic__accordion-arrow"
+                  src="@/assets/images/icons/red-arrow.svg"
+                  alt=""
+                />
               </div>
-              <div class="modal-2" v-if="modal2">
-                <div class="modal-2-overlay">
-                  <div class="modal-custom">
-                    <div class="close" @click="modal2 = false">X</div>
-                    <h6>Операция прошла успешно!</h6>
-                  </div>
+              <transition name="fade">
+                <div
+                  v-if="showAccordionFirst"
+                  class="characteristic__accordion-text"
+                >
+                  <p>Варианты оплаты заказа:</p>
+                  <ol>
+                    <li>Оплата после получения</li>
+                    <li>
+                      Оплата через приложение WayForPay которое дает возможность
+                      оплатить карточкой или оформить оплату частями от Monobank
+                      или ПриватБанк
+                    </li>
+                  </ol>
+                  <p>
+                    Доставка осуществляется по территории Украины и может
+                    занимать от 2 до 5 дней. На срок доставки могут повлиять
+                    праздничные дни и периоды акций и распродаж, о чем мы
+                    сообщаем дополнительно. Наша Служба по работе с клиентами
+                    работает ежедневно. После размещения заказа на сайте, мы
+                    свяжемся с вами и согласуем детали доставки, если иное не
+                    указано в примечании к вашему заказу.
+                  </p>
                 </div>
-              </div>
+              </transition>
             </div>
-            <div class="characteristic__info-content">
-              <div v-html="product[productInfo]"></div>
-            </div>
-          </div>
-          <div class="characteristic__accordion">
             <div
-              class="characteristic__accordion-title"
-              @click="toggleShowAccordionFirst"
+              class="characteristic__accordion"
+              @click="toggleShowAccordionSecond"
             >
-              Оплата и доставка
-              <img
-                class="characteristic__accordion-arrow"
-                src="@/assets/images/icons/red-arrow.svg"
-                alt=""
-              />
-            </div>
-            <transition name="fade">
-              <div
-                v-if="showAccordionFirst"
-                class="characteristic__accordion-text"
-              >
-                <p>Варианты оплаты заказа:</p>
-                <ol>
-                  <li>Оплата после получения</li>
-                  <li>
-                    Оплата через приложение WayForPay которое дает возможность
-                    оплатить карточкой или оформить оплату частями от Monobank
-                    или ПриватБанк
-                  </li>
-                </ol>
-                <p>
-                  Доставка осуществляется по территории Украины и может занимать
-                  от 2 до 5 дней. На срок доставки могут повлиять праздничные
-                  дни и периоды акций и распродаж, о чем мы сообщаем
-                  дополнительно. Наша Служба по работе с клиентами работает
-                  ежедневно. После размещения заказа на сайте, мы свяжемся с
-                  вами и согласуем детали доставки, если иное не указано в
-                  примечании к вашему заказу.
-                </p>
+              <div class="characteristic__accordion-title">
+                Поддержка Клиентов
+                <img
+                  class="characteristic__accordion-arrow"
+                  src="@/assets/images/icons/red-arrow.svg"
+                  alt=""
+                />
               </div>
-            </transition>
-          </div>
-          <div
-            class="characteristic__accordion"
-            @click="toggleShowAccordionSecond"
-          >
-            <div class="characteristic__accordion-title">
-              Поддержка Клиентов
-              <img
-                class="characteristic__accordion-arrow"
-                src="@/assets/images/icons/red-arrow.svg"
-                alt=""
-              />
+              <transition name="fade">
+                <div
+                  v-if="showAccordionSecond"
+                  class="characteristic__accordion-text"
+                >
+                  <p>Варианты оплаты заказа:</p>
+                  <ol>
+                    <li>Оплата после получения</li>
+                    <li>
+                      Оплата через приложение WayForPay которое дает возможность
+                      оплатить карточкой или оформить оплату частями от Monobank
+                      или ПриватБанк
+                    </li>
+                  </ol>
+                  <p>
+                    Доставка осуществляется по территории Украины и может
+                    занимать от 2 до 5 дней. На срок доставки могут повлиять
+                    праздничные дни и периоды акций и распродаж, о чем мы
+                    сообщаем дополнительно. Наша Служба по работе с клиентами
+                    работает ежедневно. После размещения заказа на сайте, мы
+                    свяжемся с вами и согласуем детали доставки, если иное не
+                    указано в примечании к вашему заказу.
+                  </p>
+                </div>
+              </transition>
             </div>
-            <transition name="fade">
-              <div
-                v-if="showAccordionSecond"
-                class="characteristic__accordion-text"
-              >
-                <p>Варианты оплаты заказа:</p>
-                <ol>
-                  <li>Оплата после получения</li>
-                  <li>
-                    Оплата через приложение WayForPay которое дает возможность
-                    оплатить карточкой или оформить оплату частями от Monobank
-                    или ПриватБанк
-                  </li>
-                </ol>
-                <p>
-                  Доставка осуществляется по территории Украины и может занимать
-                  от 2 до 5 дней. На срок доставки могут повлиять праздничные
-                  дни и периоды акций и распродаж, о чем мы сообщаем
-                  дополнительно. Наша Служба по работе с клиентами работает
-                  ежедневно. После размещения заказа на сайте, мы свяжемся с
-                  вами и согласуем детали доставки, если иное не указано в
-                  примечании к вашему заказу.
-                </p>
-              </div>
-            </transition>
           </div>
         </div>
       </div>
     </div>
-    <div></div>
   </section>
 </template>
-
 <script>
 import { mapActions } from 'vuex'
 import { actionTypes } from '~/store/cart'
@@ -225,14 +279,13 @@ export default {
   data() {
     return {
       isExist: '',
-      modal: '',
-      modal2: '',
-      modal3: '',
-      modal4: '',
-      // product_id:'',
       email: '',
       name: '',
       phone: '',
+      NotifyModal: false,
+      NotifyModalEnd: false,
+      OrderModal: false,
+      OrderModalEnd: false,
       showAccordionFirst: true,
       showAccordionSecond: false,
       product: {},
@@ -276,8 +329,8 @@ export default {
         })
         .then((response) => {
           console.log(response)
-          this.modal = false
-          this.modal2 = true
+          this.OrderModal = false
+          this.OrderModalEnd = true
           // this.res = response.message
         })
         .catch((err) => {
@@ -301,7 +354,7 @@ export default {
       this.$api.get(`/product/${id}`).then((res) => {
         console.log(res)
         this.product = res.data.product
-        if (res.data.product.available === 0) {
+        if (res.data.product.available === 1) {
           this.isExist = true
         } else this.isExist = false
       })
@@ -316,9 +369,8 @@ export default {
           if (
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email) //eslint-disable-line
           ) {
-    
-            this.modal3 = false
-            this.modal4 = true
+            this.NotifyModalEnd = true
+            this.NotifyModal = false
           } else {
             alert('Введите коректный email')
           }
@@ -352,6 +404,9 @@ export default {
 }
 </script>
 <style scoped>
+#mail-input {
+  padding: 12px 52px;
+}
 .modal-overlay,
 .modal-4-overlay,
 .modal-2-overlay,

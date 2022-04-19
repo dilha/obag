@@ -7,9 +7,8 @@
       <p class="intro__text">
         {{ category.text }}
       </p>
-      
     </app-intro-button>
-    <app-clock-cards :category-id="category.id" :items="category.subcategories" />
+    <app-subcategory-cards :category-id="category.id" :items="category.subcategories" />
     <app-combination :items="category['constructor']" />
     <app-like :id="category.id" />
     <app-news />
@@ -21,16 +20,17 @@ import { mapActions, mapState } from 'vuex'
 import { actionTypes } from '@/store'
 import { actionTypes as catalogActionTypes } from '@/store/catalog'
 import AppIntroButton from '~/components/intro/AppIntroButton.vue'
-import AppClockCards from '~/components/cards/AppClockCards.vue'
+import AppSubcategoryCards from '~/components/cards/AppSubcategoryCards.vue'
 import AppCombination from '~/components/AppCombination.vue'
 import AppLike from '~/components/AppLike.vue'
 import AppNews from '~/components/news/AppNews.vue'
+
 
 export default {
   name: 'ClockPage',
   components: {
     AppIntroButton,
-    AppClockCards,
+    AppSubcategoryCards,
     AppCombination,
     AppLike,
     AppNews,

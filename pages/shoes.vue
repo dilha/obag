@@ -5,7 +5,7 @@
         {{ category.title }}
       </h2>
     </app-intro-button>
-    <app-shoes-cards :category-id="category.id" :items="category.subcategories" />
+    <app-subcategory-cards :category-id="category.id" :items="category.subcategories" />
     <app-like :id="category.id" />
     <app-news />
   </div>
@@ -15,15 +15,15 @@
 import { mapActions, mapState } from 'vuex'
 import { actionTypes } from '@/store'
 import AppIntroButton from '~/components/intro/AppIntroButton.vue'
-import AppShoesCards from '~/components/cards/AppShoesCards.vue'
+import AppSubcategoryCards from '~/components/cards/AppSubcategoryCards.vue'
 import AppLike from '~/components/AppLike.vue'
 import AppNews from '~/components/news/AppNews.vue'
 
 export default {
-  name: 'ChoesPage',
+  name: 'ShoesPage',
   components: {
     AppIntroButton,
-    AppShoesCards,
+    AppSubcategoryCards,
     AppLike,
     AppNews,
   },

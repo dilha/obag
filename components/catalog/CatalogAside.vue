@@ -39,14 +39,15 @@
           </div>
         </div>
       </div>
-      <div v-if="complects.length" class="aside__product aside__block">
+
+      <div v-if="completes.length" class="aside__product aside__block">
         <div class="aside__top">
           <h6 class="aside__top-title">Комплектующие:</h6>
           <img class="aside__top-arrow" src="@/assets/images/icons/select-icon.svg" alt="" />
         </div>
         <div class="aside__body">
-          <div v-for="complect of complects" :key="complect.id" class="aside__checkbox">
-            <input :id="complect.id + complect.title" name="complects" class="aside__check" type="checkbox"
+          <div v-for="complect of completes" :key="complect.id" class="aside__checkbox">
+            <input :id="complect.id + complect.title" name="completes" class="aside__check" type="checkbox"
               :checked="selectedComplect.id === complect.id" @change="getFilteredProducts(complect)" />
             <label class="aside__label" :for="complect.id + complect.title">
               {{ complect.title }}
@@ -93,6 +94,10 @@ export default {
     routeSubcategory: {
       type: Number,
       default: -1,
+    },
+    routeComplete: {
+      type: Number,
+      default: -1,
     }
   },
   data() {
@@ -113,7 +118,7 @@ export default {
       'categories',
       'filters',
       'selectedSubCategory',
-      'complects',
+      'completes',
     ]),
     ...mapGetters('catalog', ['selectedCategory']),
     defaultCategory() {
@@ -130,18 +135,19 @@ export default {
   },
   mounted() {
     const termFromRoute = this.$route.params?.term
-    console.log(this.routeCategory.id, this.routeSubcategory)
 
     this.loadAllCategories().then(() => {
       if (termFromRoute) {
         this.loadSearchProducts(termFromRoute)
         return
       }
+      // console.log(this.routeCategory.id, this.routeSubcategory, this.routeComplete)
 
       if (this.routeCategory.id !== -1) {
         if (this.routeSubcategory !== -1) {
           this.setSelectedCategory(this.routeCategory)
           this.loadAllSubCategoryProducts(this.routeSubcategory)
+          if (this.routeComplete !== -1) this.getFilteredProducts({ id: this.routeComplete })
         } else {
           this.setSelectedSubCategory(null)
           this.loadAllCategoryProducts(this.routeCategory)
@@ -209,6 +215,7 @@ export default {
       }
     },
     handleToggleCategory(category) {
+      this.selectedComplect = {}
       this.setSelectedSubCategory(null)
       this.loadAllCategoryProducts(category)
     },

@@ -8,8 +8,9 @@
           <sorting-select />
         </div>
       </div>
-      <div class="catalog__page"> 
-        <catalog-aside :route-category="routeCategory" :route-subcategory="routeSubcategory" />
+      <div class="catalog__page">
+        <catalog-aside :route-category="routeCategory" :route-subcategory="routeSubcategory"
+          :route-complete="routeComplete" />
         <div class="catalog__content">
           <catalog-model />
           <div v-if="products.length" class="catalog__inner">
@@ -49,17 +50,18 @@ export default {
         id: -1
       },
       routeSubcategory: -1,
+      routeComplete: -1,
     }
   },
   computed: {
     ...mapState('catalog', ['products', 'isLoading', 'categories']),
   },
-
   mounted() {
     this.routeCategory = this.categories.find(
       (c) => c.id === this.$route?.params?.id
     );
-    this.routeSubcategory = this.$route?.params?.subcatid || -1;
+    this.routeSubcategory = this.$route?.params?.subcatId || -1;
+    this.routeComplete = this.$route?.params?.completeId || -1;
   },
   methods: {
     ...mapActions('catalog', {

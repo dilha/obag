@@ -49,7 +49,7 @@ export default {
       return this.$refs.reviewsSlider?.$swiper
     },
   },
-  mounted() {},
+  mounted() { },
   methods: {
     ...mapActions('catalog', {
       loadAllSubCategoryProducts: actionTypes.loadAllSubCategoryProducts,

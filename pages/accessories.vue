@@ -8,7 +8,7 @@
         {{ category.text }}
       </p>
     </app-intro-button>
-    <app-accessories-cards :category-id="category.id" :items="category.subcategories" />
+    <app-subcategory-cards :category-id="category.id" :items="category.subcategories" />
     <app-like :id="category.id" />
     <app-news />
   </div>
@@ -19,15 +19,15 @@ import { mapActions, mapState } from 'vuex'
 import { actionTypes } from '@/store'
 import { actionTypes as catalogActionTypes } from '@/store/catalog'
 import AppIntroButton from '~/components/intro/AppIntroButton.vue'
-import AppAccessoriesCards from '~/components/cards/AppAccessoriesCards.vue'
+import AppSubcategoryCards from '~/components/cards/AppSubcategoryCards.vue'
 import AppLike from '~/components/AppLike.vue'
 import AppNews from '~/components/news/AppNews.vue'
 
 export default {
-  name: 'GlasesPAge',
+  name: 'AccessoriesPage',
   components: {
     AppIntroButton,
-    AppAccessoriesCards,
+    AppSubcategoryCards,
     AppLike,
     AppNews,
   },
@@ -41,7 +41,7 @@ export default {
   methods: {
     ...mapActions({ getCategory: actionTypes.loadCategory }),
     ...mapActions('catalog', {
-      loadAllCategories: catalogActionTypes.loadAllCategories
+      loadAllCategories: catalogActionTypes.loadAllCategories,
     }),
   },
 }
