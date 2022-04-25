@@ -4,20 +4,22 @@
       <div class="characteristic__inner">
         <div class="characteristic__product">
           <div class="characteristic__product-images">
-            <hooper v-if="HooperIsActive">
-              <slide
-                v-for="(item, index) in product.image"
-                :key="index"
-                class="image-wrapper"
-              >
-                <img
-                  class="characteristic__product-img"
-                  :src="item"
-                  :alt="product.title"
-                />
-              </slide>
-              <hooper-pagination slot="hooper-addons"></hooper-pagination>
-            </hooper>
+            <div v-if="HooperIsActive">
+              <hooper>
+                <slide
+                  v-for="(item, index) in product.image"
+                  :key="index"
+                  class="image-wrapper"
+                >
+                  <img
+                    class="characteristic__product-img"
+                    :src="item"
+                    :alt="product.title"
+                  />
+                </slide>
+                <hooper-pagination slot="hooper-addons"></hooper-pagination>
+              </hooper>
+            </div>
             <div v-if="HooperIsNotActive">
               <img
                 class="characteristic__product-img"
@@ -29,23 +31,23 @@
               <icon-bookmark />
             </button>
           </div>
-          <div v-if="product" class="clip">
-            <iframe
-              width="460"
-              height="280"
-              :src="videoId"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
           <div class="characteristic__product-inner">
             <app-parts-card
               v-for="(item, index) in product.complete"
               :key="index"
               :item="item"
             />
+          </div>
+          <div v-if="HooperIsActive" class="clip">
+            <iframe
+              width="460"
+              height="280"
+              :src="'https://www.youtube.com/embed/' + product.video.slice(17)"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
         <div class="characteristic__content">
@@ -439,23 +441,17 @@ export default {
       this.addProductToCart(this.product)
     },
   },
-   computed:{
-      videoId(){
-        // this.product.video
-        return this.product?.video ? 'https://youtube.com/embded/'+this.product?.video?.replaceAll('https://youtu.be/') : ''
-      }
-  },
 }
 </script>
 <style scoped>
-.clip{
+.clip {
   margin: 100px 0;
 }
 @media (max-width: 1000px) {
-iframe{
-  width: 260px;
-  height: 120px;
-}
+  iframe {
+    width: 260px;
+    height: 120px;
+  }
 }
 @media (max-width: 900px) {
   .characteristic__product,
