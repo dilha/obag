@@ -4,11 +4,7 @@
       <div class="characteristic__inner">
         <div class="characteristic__product">
           <div class="characteristic__product-images">
-            <img
-              class="characteristic__product-img"
-              src="@/assets/images/characteristic/characteristic-1.jpg"
-              alt=""
-            />
+            <img class="characteristic__product-img" src="@/assets/images/characteristic/characteristic-1.jpg" alt="" />
             <button class="characteristic__product-bookmark">
               <icon-bookmark />
             </button>
@@ -42,10 +38,7 @@
             <button class="characteristic__buy" @click="modal3 = true">
               Уведомить о поступлений
             </button>
-            <a
-              class="characteristic__link characteristic__link-constructor"
-              href="#?"
-            >
+            <a class="characteristic__link characteristic__link-constructor" href="#?">
               Констуктор
             </a>
             <a class="characteristic__link characteristic__link-foto" href="#?">
@@ -59,9 +52,7 @@
               </button>
               <button class="characteristic__info-btn">Описание</button>
               <button class="characteristic__info-btn">Отзывы (0)</button>
-              <a href="#" class="order-btn" @click="modal = true"
-                >Заказать в 1 клик</a
-              >
+              <a href="#" class="order-btn" @click="modal = true">Заказать в 1 клик</a>
             </div>
             <div class="characteristic__info-content">
               <div class="characteristic__info-text">
@@ -93,22 +84,12 @@
             </div>
           </div>
           <div class="characteristic__accordion">
-            <div
-              class="characteristic__accordion-title"
-              @click="toggleShowAccordionFirst"
-            >
+            <div class="characteristic__accordion-title" @click="toggleShowAccordionFirst">
               Оплата и доставка
-              <img
-                class="characteristic__accordion-arrow"
-                src="@/assets/images/icons/red-arrow.svg"
-                alt=""
-              />
+              <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
             </div>
             <transition name="fade">
-              <div
-                v-if="showAccordionFirst"
-                class="characteristic__accordion-text"
-              >
+              <div v-if="showAccordionFirst" class="characteristic__accordion-text">
                 <p>Варианты оплаты заказа:</p>
                 <ol>
                   <li>Оплата после получения</li>
@@ -130,23 +111,13 @@
               </div>
             </transition>
           </div>
-          <div
-            class="characteristic__accordion"
-            @click="toggleShowAccordionSecond"
-          >
+          <div class="characteristic__accordion" @click="toggleShowAccordionSecond">
             <div class="characteristic__accordion-title">
               Поддержка Клиентов
-              <img
-                class="characteristic__accordion-arrow"
-                src="@/assets/images/icons/red-arrow.svg"
-                alt=""
-              />
+              <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
             </div>
             <transition name="fade">
-              <div
-                v-if="showAccordionSecond"
-                class="characteristic__accordion-text"
-              >
+              <div v-if="showAccordionSecond" class="characteristic__accordion-text">
                 <p>Варианты оплаты заказа:</p>
                 <ol>
                   <li>Оплата после получения</li>
