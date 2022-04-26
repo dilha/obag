@@ -8,13 +8,33 @@
           <sorting-select />
         </div>
       </div>
+      <div @click="isAppear = true" class="bar-logo">
+        <img src="../assets/images/bar.jpg" alt="" />
+      </div>
+      <div v-bind:class="{ appear: isAppear }" class="aside-burger">
+        <p class="close-btn" @click="isAppear = false">x</p>
+        <catalog-aside
+          :route-category="routeCategory"
+          :route-subcategory="routeSubcategory"
+          :route-complete="routeComplete"
+        />
+      </div>
       <div class="catalog__page">
-        <catalog-aside :route-category="routeCategory" :route-subcategory="routeSubcategory"
-          :route-complete="routeComplete" />
+        <catalog-aside
+          class="old-aside"
+          :route-category="routeCategory"
+          :route-subcategory="routeSubcategory"
+          :route-complete="routeComplete"
+        />
+
         <div class="catalog__content">
           <catalog-model />
           <div v-if="products.length" class="catalog__inner">
-            <product-card v-for="item in products" :key="item.id" :item="item" />
+            <product-card
+              v-for="item in products"
+              :key="item.id"
+              :item="item"
+            />
           </div>
           <div v-else>
             <img v-if="isLoading" src="@/assets/images/loader.gif" alt="" />
@@ -46,8 +66,9 @@ export default {
   },
   data() {
     return {
+      isAppear: false,
       routeCategory: {
-        id: -1
+        id: -1,
       },
       routeSubcategory: -1,
       routeComplete: -1,
@@ -59,9 +80,9 @@ export default {
   mounted() {
     this.routeCategory = this.categories.find(
       (c) => c.id === this.$route?.params?.id
-    );
-    this.routeSubcategory = this.$route?.params?.subcatId || -1;
-    this.routeComplete = this.$route?.params?.completeId || -1;
+    )
+    this.routeSubcategory = this.$route?.params?.subcatId || -1
+    this.routeComplete = this.$route?.params?.completeId || -1
   },
   methods: {
     ...mapActions('catalog', {
@@ -70,3 +91,47 @@ export default {
   },
 }
 </script>
+<style scoped>
+.appear {
+  transition: 0.5s;
+  position: fixed;
+  left: 0px !important;
+}
+.bar-logo {
+  display: none;
+}
+.aside-burger {
+  overflow: auto;
+  /* color: white; */
+  font-family: sans-serif;
+  z-index: 100;
+  transition: 0.5s;
+  position: fixed;
+  left: -339px;
+  padding: 20px 20px 20px 20px;
+  top: 0px;
+  width: 339px;
+  background: white;
+  height: 100vh;
+}
+.close-btn {
+  cursor: pointer;
+  position: relative;
+  bottom: 16px;
+  left: 4px;
+  color: black;
+  font-size: 31px;
+  font-weight: 600;
+  font-family: cursive;
+}
+@media (max-width: 700px) {
+  .old-aside {
+    display: none;
+  }
+  .bar-logo {
+    /* background-color: black; */
+    width: 100px;
+    display: inline-block !important;
+  }
+}
+</style>

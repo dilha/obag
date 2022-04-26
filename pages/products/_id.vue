@@ -4,11 +4,29 @@
       <div class="characteristic__inner">
         <div class="characteristic__product">
           <div class="characteristic__product-images">
-            <img
-              class="characteristic__product-img"
-              :src="product.image"
-              :alt="product.title"
-            />
+            <div v-if="HooperIsActive">
+              <hooper>
+                <slide
+                  v-for="(item, index) in product.image"
+                  :key="index"
+                  class="image-wrapper"
+                >
+                  <img
+                    class="characteristic__product-img"
+                    :src="item"
+                    :alt="product.title"
+                  />
+                </slide>
+                <hooper-pagination slot="hooper-addons"></hooper-pagination>
+              </hooper>
+            </div>
+            <div v-if="HooperIsNotActive">
+              <img
+                class="characteristic__product-img"
+                :src="product.image"
+                :alt="product.title"
+              />
+            </div>
             <button class="characteristic__product-bookmark">
               <icon-bookmark />
             </button>
@@ -20,15 +38,24 @@
               :item="item"
             />
           </div>
+          <div v-if="HooperIsActive" class="clip">
+            <iframe
+              width="460"
+              height="280"
+              :src="'https://www.youtube.com/embed/' + product.video.slice(17)"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
         <div class="characteristic__content">
           <p class="characteristic__code">Код Товара: {{ product.code }}</p>
           <h3 class="characteristic__title">
             {{ product.title }}
           </h3>
-          <p class="characteristic__price">
-            {{ product.price }}
-          </p>
+          <p class="characteristic__price">{{ product.price }}тг</p>
           <div class="characteristic__number">
             <p>Кол-во:</p>
             <div class="order__products-number characteristic__number-num">
@@ -266,6 +293,10 @@
   </section>
 </template>
 <script>
+// import { Hooper, Slide } from 'hooper'
+import 'hooper/dist/hooper.css'
+import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
+
 import { mapActions } from 'vuex'
 import { actionTypes } from '~/store/cart'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
@@ -275,9 +306,14 @@ export default {
   components: {
     IconBookmark,
     AppPartsCard,
+    Hooper,
+    Slide,
+    HooperPagination,
   },
   data() {
     return {
+      HooperIsActive: '',
+      HooperIsNotActive: '',
       isExist: '',
       email: '',
       name: '',
@@ -352,11 +388,15 @@ export default {
     },
     getProducts(id) {
       this.$api.get(`/product/${id}`).then((res) => {
-        console.log(res)
         this.product = res.data.product
         if (res.data.product.available === 1) {
           this.isExist = true
         } else this.isExist = false
+        if (Array.isArray(this.product.image)) {
+          this.HooperIsActive = true
+        } else {
+          this.HooperIsNotActive = true
+        }
       })
     },
     async notify(id) {
@@ -404,6 +444,36 @@ export default {
 }
 </script>
 <style scoped>
+.clip {
+  margin: 100px 0;
+}
+@media (max-width: 1000px) {
+  iframe {
+    width: 260px;
+    height: 120px;
+  }
+}
+@media (max-width: 900px) {
+  .characteristic__product,
+  .characteristic__content {
+    max-width: 100%;
+    width: 50vw;
+  }
+  .characteristic__buttons {
+    display: flex;
+    /* align-items: center; */
+    justify-content: left !important;
+    flex-wrap: wrap;
+  }
+}
+img.characteristic__product-img[data-v-70c6f7f0] {
+  max-width: 300px;
+  margin: 0 auto;
+  width: 100%;
+}
+li.image-wrapper.hooper-slide {
+  text-align: center;
+}
 #mail-input {
   padding: 12px 52px;
 }
