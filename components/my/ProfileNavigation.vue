@@ -18,6 +18,9 @@
       <nuxt-link to="/my/order-subscribe" class="account__link"> Рассылка </nuxt-link>
     </li>
     <li>
+      <a class="account__link" @click.prevent="$emit('show-review-modal')"> Оставить отзыв </a>
+    </li>
+    <li>
       <a class="account__link" @click.prevent="logout"> Выход </a>
     </li>
   </ul>

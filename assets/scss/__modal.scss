@@ -38,12 +38,12 @@
       font-weight: 600;
       font-size: 18px;
       line-height: 132%;
-      color: #3D3935;
+      color: #3d3935;
       position: relative;
       padding-left: 32px;
 
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         transform: translateY(-50%);
         left: 0;
@@ -63,33 +63,33 @@
       font-weight: 600;
       font-size: 18px;
       line-height: 132%;
-      color: #3D3935;
+      color: #3d3935;
       padding: 24px 0;
-      border-top: 1px solid #F6F6F6;
-      border-bottom: 1px solid #F6F6F6;
+      border-top: 1px solid #f6f6f6;
+      border-bottom: 1px solid #f6f6f6;
     }
 
     input {
-        width: 100%;
-        background: #F6F6F6;
-        border-radius: 100px;
-        padding: 17px 24px 17px 64px;
-        border: none;
-        outline: none;
-        background-position: 24px;
-        background-color: #f6f6f6;
-        background-repeat: no-repeat;
+      width: 100%;
+      background: #f6f6f6;
+      border-radius: 100px;
+      padding: 17px 24px 17px 64px;
+      border: none;
+      outline: none;
+      background-position: 24px;
+      background-color: #f6f6f6;
+      background-repeat: no-repeat;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #9c9c9c;
+
+      &::placeholder {
         font-weight: 500;
         font-size: 14px;
         line-height: 21px;
-        color: #9C9C9C;
-
-        &::placeholder {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            color: #9C9C9C;
-        }
+        color: #9c9c9c;
+      }
     }
     input + input {
       margin-top: 16px;
@@ -106,10 +106,8 @@
     &-email {
       background-image: url(../images/icons/modal-message.svg) !important;
     }
-
-    
   }
-  
+
   &__login {
     text-align: center;
 
@@ -117,7 +115,7 @@
       font-weight: 600;
       font-size: 18px;
       line-height: 132%;
-      color: #3D3935;
+      color: #3d3935;
       margin-bottom: 24px;
     }
 
@@ -133,7 +131,7 @@
         align-items: center;
         font-size: 14px;
         line-height: 21px;
-        color: #FFFFFF;
+        color: #ffffff;
         border: none;
       }
 
@@ -143,7 +141,7 @@
     }
 
     &-google {
-      background: #CD5642;
+      background: #cd5642;
       color: #fff;
       font-size: 20px;
       padding: 10px;
@@ -157,42 +155,42 @@
     }
 
     &-input {
-        width: 100%;
-        background: #F6F6F6;
-        border-radius: 100px;
-        padding: 17px 24px 17px 64px;
-        border: none;
-        outline: none;
-        background-position: 24px;
-        background-color: #f6f6f6;
-        background-repeat: no-repeat;
+      width: 100%;
+      background: #f6f6f6;
+      border-radius: 100px;
+      padding: 17px 24px 17px 64px;
+      border: none;
+      outline: none;
+      background-position: 24px;
+      background-color: #f6f6f6;
+      background-repeat: no-repeat;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #9c9c9c;
+
+      &::placeholder {
         font-weight: 500;
         font-size: 14px;
         line-height: 21px;
-        color: #9C9C9C;
+        color: #9c9c9c;
+      }
 
-        &::placeholder {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            color: #9C9C9C;
-        }
-        
-        & + & {
-          margin-top: 16px;
-        }
+      & + & {
+        margin-top: 16px;
+      }
     }
 
     &-email {
-      background-image: url(../images/icons/message-black.svg)
+      background-image: url(../images/icons/message-black.svg);
     }
 
     &-name {
-      background-image: url(../images/icons/login-black.svg)
+      background-image: url(../images/icons/login-black.svg);
     }
 
     &-phone {
-      background-image: url(../images/icons/call-black.svg)
+      background-image: url(../images/icons/call-black.svg);
     }
 
     &-password {
@@ -201,13 +199,13 @@
 
     &-btn {
       display: inline-block;
-      background: #D05871;
+      background: #d05871;
       border-radius: 100px;
       font-size: 14px;
       line-height: 17px;
       padding: 16px 72px;
-      border: 2px solid #D05871;
-      color: #FFFFFF;
+      border: 2px solid #d05871;
+      color: #ffffff;
       margin: 24px auto;
     }
 
@@ -218,11 +216,71 @@
       font-size: 14px;
       line-height: 21px;
       a {
-        color: #D05871;
+        color: #d05871;
       }
-      a + a{
+      a + a {
         margin-left: 24px;
       }
+    }
+  }
+
+  &__review {
+    text-align: center;
+
+    &-title {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 132%;
+      color: #3d3935;
+      margin-bottom: 24px;
+    }
+
+    &-input {
+      width: 100%;
+      background: #f6f6f6;
+      border-radius: 100px;
+      padding: 17px 24px 17px 64px;
+      border: none;
+      outline: none;
+      background-position: 24px;
+      background-color: #f6f6f6;
+      background-repeat: no-repeat;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #9c9c9c;
+
+      &::placeholder {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        color: #9c9c9c;
+      }
+
+      & + & {
+        margin-top: 16px;
+      }
+    }
+
+    &-textarea {
+      height: 100px;
+      resize: none;
+    }
+
+    &-email {
+      background-image: url(../images/icons/modal-message.svg) !important;
+    }
+
+    &-btn {
+      display: inline-block;
+      background: #d05871;
+      border-radius: 100px;
+      font-size: 14px;
+      line-height: 17px;
+      padding: 16px 72px;
+      border: 2px solid #d05871;
+      color: #ffffff;
+      margin: 24px auto;
     }
   }
 
@@ -239,37 +297,36 @@
 
     input {
       width: 100%;
-        background: #F6F6F6;
-        border-radius: 100px;
-        padding: 17px 24px;
-        border: none;
-        outline: none;
-        background-position: 24px;
-        background-color: #f6f6f6;
-        background-repeat: no-repeat;
+      background: #f6f6f6;
+      border-radius: 100px;
+      padding: 17px 24px;
+      border: none;
+      outline: none;
+      background-position: 24px;
+      background-color: #f6f6f6;
+      background-repeat: no-repeat;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #9c9c9c;
+      margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &::placeholder {
         font-weight: 500;
         font-size: 14px;
         line-height: 21px;
-        color: #9C9C9C;
-        margin-bottom: 20px;
+        color: #9c9c9c;
+      }
 
-        &:last-child {
-          margin-bottom: 0;
-        }
-
-        &::placeholder {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            color: #9C9C9C;
-        }
-        
-        & + & {
-          margin-top: 16px;
-        }
+      & + & {
+        margin-top: 16px;
+      }
     }
   }
-
 }
 
 .product__added {
@@ -284,11 +341,10 @@
   border-radius: 15px;
   padding: 10px;
   box-shadow: -1px 3px 5px 4px rgb(0 0 0 / 50%);
-  transition: all .4s linear;
+  transition: all 0.4s linear;
 
   &-img {
     width: 50px;
     height: 50px;
   }
 }
-
