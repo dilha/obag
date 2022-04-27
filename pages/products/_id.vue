@@ -6,48 +6,27 @@
           <div class="characteristic__product-images">
             <div v-if="HooperIsActive">
               <hooper>
-                <slide
-                  v-for="(item, index) in product.image"
-                  :key="index"
-                  class="image-wrapper"
-                >
-                  <img
-                    class="characteristic__product-img"
-                    :src="item"
-                    :alt="product.title"
-                  />
+                <slide v-for="(item, index) in product.image" :key="index" class="image-wrapper">
+                  <img class="characteristic__product-img" :src="item" :alt="product.title" />
                 </slide>
                 <hooper-pagination slot="hooper-addons"></hooper-pagination>
               </hooper>
             </div>
             <div v-if="HooperIsNotActive">
-              <img
-                class="characteristic__product-img"
-                :src="product.image"
-                :alt="product.title"
-              />
+              <img class="characteristic__product-img" :src="product.image" :alt="product.title" />
             </div>
             <button class="characteristic__product-bookmark">
               <icon-bookmark />
             </button>
           </div>
           <div class="characteristic__product-inner">
-            <app-parts-card
-              v-for="(item, index) in product.complete"
-              :key="index"
-              :item="item"
-            />
+            <app-parts-card v-for="(item, index) in product.complete" :key="index" :item="item" />
           </div>
           <div v-if="HooperIsActive" class="clip">
-            <iframe
-              width="460"
-              height="280"
-              :src="'https://www.youtube.com/embed/' + product.video.slice(17)"
-              title="YouTube video player"
-              frameborder="0"
+            <iframe width="460" height="280" :src="'https://www.youtube.com/embed/' + product.video.slice(17)"
+              title="YouTube video player" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+              allowfullscreen></iframe>
           </div>
         </div>
         <div class="characteristic__content">
@@ -89,14 +68,8 @@
                       {{ error }}
                     </p> -->
                     <form class="modal__login-form" @submit.prevent="notify">
-                      <input
-                        v-model="email"
-                        id="mail-input"
-                        class="modal__login-input modal__login-email"
-                        type="email"
-                        placeholder="Эл. почта"
-                        required
-                      />
+                      <input v-model="email" id="mail-input" class="modal__login-input modal__login-email" type="email"
+                        placeholder="Эл. почта" required />
                       <button class="modal__login-btn" type="submit">
                         Подписаться
                       </button>
@@ -125,16 +98,10 @@
                 </button>
               </div>
 
-              <nuxt-link
-                to="/constructor"
-                class="characteristic__link characteristic__link-constructor"
-              >
+              <nuxt-link to="/constructor" class="characteristic__link characteristic__link-constructor">
                 Конструктор
               </nuxt-link>
-              <nuxt-link
-                to="/shopping"
-                class="characteristic__link characteristic__link-foto"
-              >
+              <nuxt-link to="/shopping" class="characteristic__link characteristic__link-foto">
                 Запросить фото
               </nuxt-link>
             </div>
@@ -149,20 +116,9 @@
                       {{ error }}
                     </p> -->
                   <form class="modal__login-form" @submit.prevent="order">
-                    <input
-                      v-model="phone"
-                      class="modal__login-input"
-                      type="text"
-                      placeholder="Номер телефона"
-                      required
-                    />
-                    <input
-                      v-model="name"
-                      class="modal__login-input"
-                      type="text"
-                      placeholder="Имя"
-                      required
-                    />
+                    <input v-model="phone" class="modal__login-input" type="text" placeholder="Номер телефона"
+                      required />
+                    <input v-model="name" class="modal__login-input" type="text" placeholder="Имя" required />
                     <button class="modal__login-btn" type="submit">
                       Заказать
                     </button>
@@ -192,41 +148,24 @@
             </div>
             <div class="characteristic__info">
               <div class="characteristic__info-buttons">
-                <button
-                  v-for="(item, index) in productTubs"
-                  :key="index"
-                  class="characteristic__info-btn"
-                  :class="{ active: item.name === productInfo }"
-                  @click="selecProductInfo(item.name)"
-                >
+                <button v-for="(item, index) in productTubs" :key="index" class="characteristic__info-btn"
+                  :class="{ active: item.name === productInfo }" @click="selecProductInfo(item.name)">
                   {{ item.title }}
                 </button>
 
-                <a href="#" class="order-btn" @click="OrderModal = true"
-                  >Заказать в 1 клик</a
-                >
+                <a href="#" class="order-btn" @click="OrderModal = true">Заказать в 1 клик</a>
               </div>
               <div class="characteristic__info-content">
                 <div v-html="product[productInfo]"></div>
               </div>
             </div>
             <div class="characteristic__accordion">
-              <div
-                class="characteristic__accordion-title"
-                @click="toggleShowAccordionFirst"
-              >
+              <div class="characteristic__accordion-title" @click="toggleShowAccordionFirst">
                 Оплата и доставка
-                <img
-                  class="characteristic__accordion-arrow"
-                  src="@/assets/images/icons/red-arrow.svg"
-                  alt=""
-                />
+                <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
               </div>
               <transition name="fade">
-                <div
-                  v-if="showAccordionFirst"
-                  class="characteristic__accordion-text"
-                >
+                <div v-if="showAccordionFirst" class="characteristic__accordion-text">
                   <p>Варианты оплаты заказа:</p>
                   <ol>
                     <li>Оплата после получения</li>
@@ -248,23 +187,13 @@
                 </div>
               </transition>
             </div>
-            <div
-              class="characteristic__accordion"
-              @click="toggleShowAccordionSecond"
-            >
+            <div class="characteristic__accordion" @click="toggleShowAccordionSecond">
               <div class="characteristic__accordion-title">
                 Поддержка Клиентов
-                <img
-                  class="characteristic__accordion-arrow"
-                  src="@/assets/images/icons/red-arrow.svg"
-                  alt=""
-                />
+                <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
               </div>
               <transition name="fade">
-                <div
-                  v-if="showAccordionSecond"
-                  class="characteristic__accordion-text"
-                >
+                <div v-if="showAccordionSecond" class="characteristic__accordion-text">
                   <p>Варианты оплаты заказа:</p>
                   <ol>
                     <li>Оплата после получения</li>
@@ -447,18 +376,22 @@ export default {
 .clip {
   margin: 100px 0;
 }
+
 @media (max-width: 1000px) {
   iframe {
     width: 260px;
     height: 120px;
   }
 }
+
 @media (max-width: 900px) {
+
   .characteristic__product,
   .characteristic__content {
     max-width: 100%;
     width: 50vw;
   }
+
   .characteristic__buttons {
     display: flex;
     /* align-items: center; */
@@ -466,17 +399,21 @@ export default {
     flex-wrap: wrap;
   }
 }
+
 img.characteristic__product-img[data-v-70c6f7f0] {
   max-width: 300px;
   margin: 0 auto;
   width: 100%;
 }
+
 li.image-wrapper.hooper-slide {
   text-align: center;
 }
+
 #mail-input {
   padding: 12px 52px;
 }
+
 .modal-overlay,
 .modal-4-overlay,
 .modal-2-overlay,
@@ -490,6 +427,7 @@ li.image-wrapper.hooper-slide {
   justify-content: center;
   background-color: #000000da;
 }
+
 input {
   display: block;
   margin: 0 auto;
@@ -502,6 +440,7 @@ input {
   /* padding: 20px; */
   margin-top: 30px;
 }
+
 .modal-custom {
   text-align: center;
   background-color: white;
@@ -512,6 +451,7 @@ input {
   margin-top: 10%;
   border-radius: 20px;
 }
+
 .close {
   cursor: pointer;
   text-align: right;
@@ -524,10 +464,12 @@ input {
 .modal-overlay .check {
   width: 150px;
 }
+
 .modal-2 h6 {
   text-align: center;
   margin: 0 auto;
 }
+
 .modal-overlay h6,
 .modal-3-overlay h6,
 .modal-4-overlay h6,
@@ -580,7 +522,12 @@ input {
 .fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active до версии 2.1.8 */
+  {
   opacity: 0;
 }
 </style>

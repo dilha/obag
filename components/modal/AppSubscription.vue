@@ -9,13 +9,8 @@
           {{ error }}
         </p>
         <form class="modal__login-form" @submit.prevent="subscription">
-          <input
-            v-model="user.email"
-            class="modal__login-input modal__login-email"
-            type="email"
-            placeholder="Эл. почта"
-            required
-          />
+          <input v-model="user.email" class="modal__login-input modal__login-email" type="email" placeholder="Эл. почта"
+            required />
           <button class="modal__login-btn" type="submit">
             Подписаться
           </button>

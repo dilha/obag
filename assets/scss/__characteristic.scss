@@ -35,7 +35,7 @@
   &__code {
     font-size: 14px;
     line-height: 21px;
-    color: #9C9C9C;
+    color: #9c9c9c;
     margin-bottom: 48px;
   }
 
@@ -43,7 +43,7 @@
     font-weight: 600;
     font-size: 18px;
     line-height: 132%;
-    color: #3D3935;
+    color: #3d3935;
     margin-bottom: 24px;
   }
 
@@ -51,7 +51,7 @@
     font-weight: 600;
     font-size: 18px;
     line-height: 132%;
-    color: #D05871;
+    color: #d05871;
     margin-bottom: 24px;
   }
 
@@ -59,9 +59,9 @@
     display: flex;
     font-size: 14px;
     line-height: 21px;
-    color: #3D3935;
+    color: #3d3935;
     margin-bottom: 35px;
-    
+
     p {
       margin-right: 16px;
     }
@@ -81,10 +81,10 @@
   &__buy {
     font-size: 14px;
     line-height: 17px;
-    color: #FFFFFF;
+    color: #ffffff;
     padding: 16px 72px;
     margin-right: 36px;
-    background: #D05871;
+    background: #d05871;
     border: none;
     border-radius: 100px;
     margin-bottom: 24px;
@@ -94,13 +94,13 @@
     font-size: 14px;
     line-height: 21px;
     text-decoration-line: underline;
-    color: #D05871;
+    color: #d05871;
     padding-left: 32px;
     position: relative;
     margin-bottom: 24px;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -126,8 +126,8 @@
   &__info {
     margin-bottom: 24px;
     padding: 24px 0;
-    border-top: 1px solid #F6F6F6;
-    border-bottom: 1px solid #F6F6F6;
+    border-top: 1px solid #f6f6f6;
+    border-bottom: 1px solid #f6f6f6;
 
     &-buttons {
       display: flex;
@@ -137,21 +137,21 @@
     }
 
     &-btn {
-      background: #F6F6F6;
+      background: #f6f6f6;
       border-radius: 100px;
       border: none;
       padding: 8px 16px;
       font-size: 12px;
       line-height: 15px;
-      color: #9C9C9C;
+      color: #9c9c9c;
       margin-bottom: 15px;
 
       &.active {
-        background: #FFD0DA;
-        color: #D05871;
+        background: #ffd0da;
+        color: #d05871;
       }
 
-      &+& {
+      & + & {
         margin-left: 16px;
       }
     }
@@ -176,19 +176,21 @@
       width: 70%;
       font-size: 14px;
       line-height: 21px;
-      color: #9C9C9C;
+      color: #9c9c9c;
     }
   }
 
   &__accordion {
+    width: 100%;
     & + & {
       margin-top: 24px;
     }
     &-title {
+      width: 100%;
       font-weight: bold;
       font-size: 14px;
       line-height: 17px;
-      color: #D05871;
+      color: #d05871;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -198,10 +200,9 @@
     &-text {
       font-size: 14px;
       line-height: 132%;
-      color: #9C9C9C;
+      color: #9c9c9c;
       padding: 25px 0;
-    border-bottom: 1px solid #F6F6F6;
-
+      border-bottom: 1px solid #f6f6f6;
 
       ol {
         margin: 16px 0 24px;
@@ -212,5 +213,4 @@
       }
     }
   }
-
 }

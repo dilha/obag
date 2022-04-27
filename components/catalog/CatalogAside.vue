@@ -80,6 +80,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { actionTypes } from '@/store/catalog'
+import productStorage from '@/helpers/products-storage'
 
 export default {
   name: 'CatalogAside',
@@ -184,8 +185,9 @@ export default {
       this.getFilteredProducts()
     },
     getFilteredProducts(complect) {
-      if (complect?.id) {
+      if (complect) {
         this.selectedComplect = complect
+        productStorage.setRootComplete(complect.id)
       }
       // Бля перепиши
       if (!this.selectedSubCategory) {
@@ -215,6 +217,7 @@ export default {
       }
     },
     handleToggleCategory(category) {
+      productStorage.setRootCategory(category.id)
       this.selectedComplect = {}
       this.setSelectedSubCategory(null)
       this.loadAllCategoryProducts(category)
