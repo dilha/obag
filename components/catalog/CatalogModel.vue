@@ -1,5 +1,5 @@
 <template>
-  <div class="catalog__model">
+  <div v-if="selectedCategory && selectedCategory.subcategories.length" class="catalog__model">
     <div class="catalog__model-top">
       <h6 class="catalog__model-title">Модель:</h6>
       <div class="catalog__model-buttons">

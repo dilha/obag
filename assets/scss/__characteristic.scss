@@ -12,6 +12,12 @@
     &-images {
       position: relative;
       margin-bottom: 48px;
+      &-inner {
+        height: 100%;
+      }
+      &-hooper {
+        height: 325px !important;
+      }
     }
     &-img {
       width: 100%;

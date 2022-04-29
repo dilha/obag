@@ -4,8 +4,8 @@
       <div class="characteristic__inner">
         <div class="characteristic__product">
           <div class="characteristic__product-images">
-            <div v-if="HooperIsActive">
-              <hooper>
+            <div v-if="HooperIsActive" class="characteristic__product-images-inner">
+              <hooper class="characteristic__product-images-hooper">
                 <slide v-for="(item, index) in product.image" :key="index" class="image-wrapper">
                   <img class="characteristic__product-img" :src="item" :alt="product.title" />
                 </slide>
@@ -22,9 +22,9 @@
           <div class="characteristic__product-inner">
             <app-parts-card v-for="(item, index) in product.complete" :key="index" :item="item" />
           </div>
-          <div v-if="HooperIsActive" class="clip">
-            <iframe width="460" height="280" :src="'https://www.youtube.com/embed/' + product.video.slice(17)"
-              title="YouTube video player" frameborder="0"
+          <div v-if="HooperIsActive && product.video" class="clip">
+            <iframe width="460" height="280" :src="loadProductVideo(product.video)" title="YouTube video player"
+              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen></iframe>
           </div>
@@ -225,11 +225,12 @@
 // import { Hooper, Slide } from 'hooper'
 import 'hooper/dist/hooper.css'
 import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
-
 import { mapActions } from 'vuex'
 import { actionTypes } from '~/store/cart'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
+import { loadProductVideo } from '~/helpers/product-helpers'
+
 export default {
   name: 'CharacteristicPage',
   components: {
@@ -251,7 +252,7 @@ export default {
       NotifyModalEnd: false,
       OrderModal: false,
       OrderModalEnd: false,
-      showAccordionFirst: true,
+      showAccordionFirst: false,
       showAccordionSecond: false,
       product: {},
       isFavorite: false,
@@ -286,6 +287,7 @@ export default {
     this.productInfo = this.productTubs[0].name
   },
   methods: {
+    loadProductVideo,
     async order() {
       await this.$axios
         .post('order-callback', {
@@ -402,6 +404,7 @@ export default {
 
 img.characteristic__product-img[data-v-70c6f7f0] {
   max-width: 300px;
+  max-height: 300px;
   margin: 0 auto;
   width: 100%;
 }

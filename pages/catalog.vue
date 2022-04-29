@@ -27,7 +27,7 @@
           </div>
           <div v-else>
             <img v-if="isLoading" src="@/assets/images/loader.gif" alt="" />
-            <h2 v-else>Нет товара</h2>
+            <h2 v-else>В данной категории нет товаров</h2>
           </div>
         </div>
       </div>
