@@ -105,47 +105,7 @@
                 Запросить фото
               </nuxt-link>
             </div>
-            <div v-if="OrderModal" class="modal">
-              <div class="modal__container">
-                <div class="modal__login">
-                  <h6 class="modal__login-title">Заказать в 1 клик!</h6>
-                  <!-- <p
-                      v-if="error"
-                      style="color: red; font-size: 12px margin-bottom:8px;"
-                    >
-                      {{ error }}
-                    </p> -->
-                  <form class="modal__login-form" @submit.prevent="order">
-                    <input v-model="phone" class="modal__login-input" type="text" placeholder="Номер телефона"
-                      required />
-                    <input v-model="name" class="modal__login-input" type="text" placeholder="Имя" required />
-                    <button class="modal__login-btn" type="submit">
-                      Заказать
-                    </button>
-                  </form>
-                </div>
-              </div>
-              <button class="modal__close" @click="OrderModal = false">
-                <img src="@/assets/images/icons/close-modal.svg" alt="" />
-              </button>
-            </div>
 
-            <div v-if="OrderModalEnd" class="modal">
-              <div class="modal__container">
-                <div class="modal__login">
-                  <h6 class="modal__login-title">Готово!</h6>
-                  <!-- <p
-                      v-if="error"
-                      style="color: red; font-size: 12px margin-bottom:8px;"
-                    >
-                      {{ error }}
-                    </p> -->
-                </div>
-              </div>
-              <button class="modal__close" @click="OrderModalEnd = false">
-                <img src="@/assets/images/icons/close-modal.svg" alt="" />
-              </button>
-            </div>
             <div class="characteristic__info">
               <div class="characteristic__info-buttons">
                 <button v-for="(item, index) in productTubs" :key="index" class="characteristic__info-btn"
@@ -219,26 +179,29 @@
         </div>
       </div>
     </div>
+    <modal-one-click-order v-if="OrderModal" @close="OrderModal = false" />
   </section>
 </template>
+
 <script>
-// import { Hooper, Slide } from 'hooper'
-import 'hooper/dist/hooper.css'
-import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
 import { mapActions } from 'vuex'
+import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
 import { actionTypes } from '~/store/cart'
+import { loadProductVideo } from '~/helpers/product-helpers'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
-import { loadProductVideo } from '~/helpers/product-helpers'
+import ModalOneClickOrder from '@/components/modal/AppModalOneClickOrder.vue'
+import 'hooper/dist/hooper.css'
 
 export default {
   name: 'CharacteristicPage',
   components: {
-    IconBookmark,
-    AppPartsCard,
     Hooper,
     Slide,
     HooperPagination,
+    IconBookmark,
+    AppPartsCard,
+    ModalOneClickOrder
   },
   data() {
     return {
@@ -246,12 +209,9 @@ export default {
       HooperIsNotActive: '',
       isExist: '',
       email: '',
-      name: '',
-      phone: '',
       NotifyModal: false,
       NotifyModalEnd: false,
       OrderModal: false,
-      OrderModalEnd: false,
       showAccordionFirst: false,
       showAccordionSecond: false,
       product: {},
@@ -288,22 +248,6 @@ export default {
   },
   methods: {
     loadProductVideo,
-    async order() {
-      await this.$axios
-        .post('order-callback', {
-          phone: this.phone,
-          name: this.name,
-        })
-        .then((response) => {
-          console.log(response)
-          this.OrderModal = false
-          this.OrderModalEnd = true
-          // this.res = response.message
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
     ...mapActions('cart', { addProductToCart: actionTypes.addProduct }),
 
     selecProductInfo(selectInfo) {

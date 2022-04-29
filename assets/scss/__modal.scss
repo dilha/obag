@@ -284,6 +284,65 @@
     }
   }
 
+  &__one-click-order {
+    text-align: center;
+
+    &-title {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 132%;
+      color: #3d3935;
+      margin-bottom: 24px;
+    }
+
+    &-input {
+      width: 100%;
+      background: #f6f6f6;
+      border-radius: 100px;
+      padding: 17px 24px 17px 64px;
+      border: none;
+      outline: none;
+      background-position: 24px;
+      background-color: #f6f6f6;
+      background-repeat: no-repeat;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #9c9c9c;
+
+      &::placeholder {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        color: #9c9c9c;
+      }
+
+      & + & {
+        margin-top: 16px;
+      }
+    }
+
+    &-name {
+      background-image: url(../images/icons/login-black.svg);
+    }
+
+    &-phone {
+      background-image: url(../images/icons/modal-call.svg) !important;
+    }
+
+    &-btn {
+      display: inline-block;
+      background: #d05871;
+      border-radius: 100px;
+      font-size: 14px;
+      line-height: 17px;
+      padding: 16px 72px;
+      border: 2px solid #d05871;
+      color: #ffffff;
+      margin: 24px auto;
+    }
+  }
+
   &__edits {
     display: block;
 
