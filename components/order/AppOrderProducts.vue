@@ -1,29 +1,18 @@
 <template>
   <div class="order__products-item">
-    <img
-      v-if="item.image"
-      class="order__products-img"
-      :src="item.image"
-      :alt="item.title"
-    />
+    <nuxt-link :to="`/products/${item.id}`" class="order__products-img">
+      <img v-if="item.image" :src="item.image" :alt="item.title" />
+    </nuxt-link>
     <div class="order__products-content">
-      <h6 class="order__products-title">{{ item.title }}</h6>
+      <nuxt-link :to="`/products/${item.id}`" class="order__products-title">{{ item.title }}</nuxt-link>
+
       <div class="order__products-number">
-        <button
-          class="order__products-minus"
-          @click.prevent="updatedQuantity({ type: 'decrease', product: item })"
-        >
+        <button class="order__products-minus" @click.prevent="updatedQuantity({ type: 'decrease', product: item })">
           <img src="@/assets/images/icons/minus-icon.svg" :alt="item.title" />
         </button>
         <p>{{ item.quantity }}</p>
-        <button
-          class="order__products-plus"
-          @click.prevent="updatedQuantity({ type: 'increase', product: item })"
-        >
-          <img
-            src="@/assets/images/icons/plus-icon.svg"
-            alt="add product shop cart"
-          />
+        <button class="order__products-plus" @click.prevent="updatedQuantity({ type: 'increase', product: item })">
+          <img src="@/assets/images/icons/plus-icon.svg" alt="add product shop cart" />
         </button>
       </div>
       <div class="order__products-price">
@@ -34,10 +23,7 @@
       </div>
     </div>
     <button class="order__products-btn" @click.prevent="removeProduct(item.id)">
-      <img
-        src="@/assets/images/icons/delete-icon.svg"
-        alt="remove product shop cart"
-      />
+      <img src="@/assets/images/icons/delete-icon.svg" alt="remove product shop cart" />
     </button>
   </div>
 </template>

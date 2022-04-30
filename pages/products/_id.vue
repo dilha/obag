@@ -4,8 +4,8 @@
       <div class="characteristic__inner">
         <div class="characteristic__product">
           <div class="characteristic__product-images">
-            <div v-if="HooperIsActive">
-              <hooper>
+            <div v-if="HooperIsActive" class="characteristic__product-images-inner">
+              <hooper class="characteristic__product-images-hooper">
                 <slide v-for="(item, index) in product.image" :key="index" class="image-wrapper">
                   <img class="characteristic__product-img" :src="item" :alt="product.title" />
                 </slide>
@@ -22,9 +22,9 @@
           <div class="characteristic__product-inner">
             <app-parts-card v-for="(item, index) in product.complete" :key="index" :item="item" />
           </div>
-          <div v-if="HooperIsActive" class="clip">
-            <iframe width="460" height="280" :src="'https://www.youtube.com/embed/' + product.video.slice(17)"
-              title="YouTube video player" frameborder="0"
+          <div v-if="HooperIsActive && product.video" class="clip">
+            <iframe width="460" height="280" :src="loadProductVideo(product.video)" title="YouTube video player"
+              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen></iframe>
           </div>
@@ -35,209 +35,185 @@
             {{ product.title }}
           </h3>
           <p class="characteristic__price">{{ product.price }}тг</p>
-          <div class="characteristic__number">
+
+          <!-- Quantity block -->
+          <div v-if="getProductQuantityById(product.id)" class="characteristic__number">
             <p>Кол-во:</p>
             <div class="order__products-number characteristic__number-num">
-              <button class="order__products-minus" @click="minus">
-                <img src="@/assets/images/icons/minus-icon.svg" alt="" />
+              <button class="order__products-minus" @click.prevent="updatedQuantity({ type: 'decrease', product })">
+                <img src="@/assets/images/icons/minus-icon.svg" alt="-" />
               </button>
-              <p>{{ quantity }}</p>
-              <button class="order__products-plus" @click="plus">
-                <img src="@/assets/images/icons/plus-icon.svg" alt="" />
+              <p>{{ getProductQuantityById(product.id) }}</p>
+              <button class="order__products-plus" @click.prevent="updatedQuantity({ type: 'increase', product })">
+                <img src="@/assets/images/icons/plus-icon.svg" alt="+" />
               </button>
             </div>
           </div>
-          <div class="characteristic__buttons">
-            <div v-if="isExist">
-              <button class="characteristic__buy" @click="addProductCart">
-                Купить
-              </button>
-            </div>
-            <div v-if="!isExist">
-              <button class="characteristic__buy" @click="NotifyModal = true">
-                Уведомить о поступлении
-              </button>
-              <div v-if="NotifyModal" class="modal">
-                <div class="modal__container">
-                  <div class="modal__login">
-                    <h6 class="modal__login-title">Подписаться на рассылку</h6>
-                    <!-- <p
+
+          <!-- Buy buttons -->
+          <div v-else class="characteristic__buttons">
+            <template>
+              <div v-if="isExist">
+                <button class="characteristic__buy" @click="addProductCart">
+                  Купить
+                </button>
+              </div>
+
+              <div v-else>
+                <button class="characteristic__buy" @click="NotifyModal = true">
+                  Уведомить о поступлении
+                </button>
+                <div v-if="NotifyModal" class="modal">
+                  <div class="modal__container">
+                    <div class="modal__login">
+                      <h6 class="modal__login-title">Подписаться на рассылку</h6>
+                      <!-- <p
                       v-if="error"
                       style="color: red; font-size: 12px margin-bottom:8px;"
                     >
                       {{ error }}
                     </p> -->
-                    <form class="modal__login-form" @submit.prevent="notify">
-                      <input v-model="email" id="mail-input" class="modal__login-input modal__login-email" type="email"
-                        placeholder="Эл. почта" required />
-                      <button class="modal__login-btn" type="submit">
-                        Подписаться
-                      </button>
-                    </form>
+                      <form class="modal__login-form" @submit.prevent="notify">
+                        <input id="mail-input" v-model="email" class="modal__login-input modal__login-email"
+                          type="email" placeholder="Эл. почта" required />
+                        <button class="modal__login-btn" type="submit">
+                          Подписаться
+                        </button>
+                      </form>
+                    </div>
                   </div>
+                  <button class="modal__close" @click="NotifyModal = false">
+                    <img src="@/assets/images/icons/close-modal.svg" alt="" />
+                  </button>
                 </div>
-                <button class="modal__close" @click="NotifyModal = false">
-                  <img src="@/assets/images/icons/close-modal.svg" alt="" />
-                </button>
-              </div>
 
-              <div v-if="NotifyModalEnd" class="modal">
-                <div class="modal__container">
-                  <div class="modal__login">
-                    <h6 class="modal__login-title">Готово!</h6>
-                    <!-- <p
+                <div v-if="NotifyModalEnd" class="modal">
+                  <div class="modal__container">
+                    <div class="modal__login">
+                      <h6 class="modal__login-title">Готово!</h6>
+                      <!-- <p
                       v-if="error"
                       style="color: red; font-size: 12px margin-bottom:8px;"
                     >
                       {{ error }}
                     </p> -->
+                    </div>
                   </div>
+                  <button class="modal__close" @click="NotifyModalEnd = false">
+                    <img src="@/assets/images/icons/close-modal.svg" alt="" />
+                  </button>
                 </div>
-                <button class="modal__close" @click="NotifyModalEnd = false">
-                  <img src="@/assets/images/icons/close-modal.svg" alt="" />
-                </button>
-              </div>
 
-              <nuxt-link to="/constructor" class="characteristic__link characteristic__link-constructor">
-                Конструктор
-              </nuxt-link>
-              <nuxt-link to="/shopping" class="characteristic__link characteristic__link-foto">
-                Запросить фото
-              </nuxt-link>
-            </div>
-            <div v-if="OrderModal" class="modal">
-              <div class="modal__container">
-                <div class="modal__login">
-                  <h6 class="modal__login-title">Заказать в 1 клик!</h6>
-                  <!-- <p
-                      v-if="error"
-                      style="color: red; font-size: 12px margin-bottom:8px;"
-                    >
-                      {{ error }}
-                    </p> -->
-                  <form class="modal__login-form" @submit.prevent="order">
-                    <input v-model="phone" class="modal__login-input" type="text" placeholder="Номер телефона"
-                      required />
-                    <input v-model="name" class="modal__login-input" type="text" placeholder="Имя" required />
-                    <button class="modal__login-btn" type="submit">
-                      Заказать
-                    </button>
-                  </form>
-                </div>
+                <nuxt-link to="/constructor" class="characteristic__link characteristic__link-constructor">
+                  Конструктор
+                </nuxt-link>
+                <nuxt-link to="/shopping" class="characteristic__link characteristic__link-foto">
+                  Запросить фото
+                </nuxt-link>
               </div>
-              <button class="modal__close" @click="OrderModal = false">
-                <img src="@/assets/images/icons/close-modal.svg" alt="" />
+            </template>
+          </div>
+
+          <div class="characteristic__info">
+            <div class="characteristic__info-buttons">
+              <button v-for="(item, index) in productTubs" :key="index" class="characteristic__info-btn"
+                :class="{ active: item.name === productInfo }" @click="selecProductInfo(item.name)">
+                {{ item.title }}
               </button>
-            </div>
 
-            <div v-if="OrderModalEnd" class="modal">
-              <div class="modal__container">
-                <div class="modal__login">
-                  <h6 class="modal__login-title">Готово!</h6>
-                  <!-- <p
-                      v-if="error"
-                      style="color: red; font-size: 12px margin-bottom:8px;"
-                    >
-                      {{ error }}
-                    </p> -->
-                </div>
-              </div>
-              <button class="modal__close" @click="OrderModalEnd = false">
-                <img src="@/assets/images/icons/close-modal.svg" alt="" />
-              </button>
+              <a href="#" class="order-btn" @click="OrderModal = true">Заказать в 1 клик</a>
             </div>
-            <div class="characteristic__info">
-              <div class="characteristic__info-buttons">
-                <button v-for="(item, index) in productTubs" :key="index" class="characteristic__info-btn"
-                  :class="{ active: item.name === productInfo }" @click="selecProductInfo(item.name)">
-                  {{ item.title }}
-                </button>
-
-                <a href="#" class="order-btn" @click="OrderModal = true">Заказать в 1 клик</a>
-              </div>
-              <div class="characteristic__info-content">
-                <div v-html="product[productInfo]"></div>
-              </div>
+            <div class="characteristic__info-content">
+              <div v-html="product[productInfo]"></div>
             </div>
-            <div class="characteristic__accordion">
-              <div class="characteristic__accordion-title" @click="toggleShowAccordionFirst">
-                Оплата и доставка
-                <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
-              </div>
-              <transition name="fade">
-                <div v-if="showAccordionFirst" class="characteristic__accordion-text">
-                  <p>Варианты оплаты заказа:</p>
-                  <ol>
-                    <li>Оплата после получения</li>
-                    <li>
-                      Оплата через приложение WayForPay которое дает возможность
-                      оплатить карточкой или оформить оплату частями от Monobank
-                      или ПриватБанк
-                    </li>
-                  </ol>
-                  <p>
-                    Доставка осуществляется по территории Украины и может
-                    занимать от 2 до 5 дней. На срок доставки могут повлиять
-                    праздничные дни и периоды акций и распродаж, о чем мы
-                    сообщаем дополнительно. Наша Служба по работе с клиентами
-                    работает ежедневно. После размещения заказа на сайте, мы
-                    свяжемся с вами и согласуем детали доставки, если иное не
-                    указано в примечании к вашему заказу.
-                  </p>
-                </div>
-              </transition>
+          </div>
+          <div class="characteristic__accordion">
+            <div class="characteristic__accordion-title" @click="toggleShowAccordionFirst">
+              Оплата и доставка
+              <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
             </div>
-            <div class="characteristic__accordion" @click="toggleShowAccordionSecond">
-              <div class="characteristic__accordion-title">
-                Поддержка Клиентов
-                <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
+            <transition name="fade">
+              <div v-if="showAccordionFirst" class="characteristic__accordion-text">
+                <p>Варианты оплаты заказа:</p>
+                <ol>
+                  <li>Оплата после получения</li>
+                  <li>
+                    Оплата через приложение WayForPay которое дает возможность
+                    оплатить карточкой или оформить оплату частями от Monobank
+                    или ПриватБанк
+                  </li>
+                </ol>
+                <p>
+                  Доставка осуществляется по территории Украины и может
+                  занимать от 2 до 5 дней. На срок доставки могут повлиять
+                  праздничные дни и периоды акций и распродаж, о чем мы
+                  сообщаем дополнительно. Наша Служба по работе с клиентами
+                  работает ежедневно. После размещения заказа на сайте, мы
+                  свяжемся с вами и согласуем детали доставки, если иное не
+                  указано в примечании к вашему заказу.
+                </p>
               </div>
-              <transition name="fade">
-                <div v-if="showAccordionSecond" class="characteristic__accordion-text">
-                  <p>Варианты оплаты заказа:</p>
-                  <ol>
-                    <li>Оплата после получения</li>
-                    <li>
-                      Оплата через приложение WayForPay которое дает возможность
-                      оплатить карточкой или оформить оплату частями от Monobank
-                      или ПриватБанк
-                    </li>
-                  </ol>
-                  <p>
-                    Доставка осуществляется по территории Украины и может
-                    занимать от 2 до 5 дней. На срок доставки могут повлиять
-                    праздничные дни и периоды акций и распродаж, о чем мы
-                    сообщаем дополнительно. Наша Служба по работе с клиентами
-                    работает ежедневно. После размещения заказа на сайте, мы
-                    свяжемся с вами и согласуем детали доставки, если иное не
-                    указано в примечании к вашему заказу.
-                  </p>
-                </div>
-              </transition>
+            </transition>
+          </div>
+          <div class="characteristic__accordion" @click="toggleShowAccordionSecond">
+            <div class="characteristic__accordion-title">
+              Поддержка Клиентов
+              <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
             </div>
+            <transition name="fade">
+              <div v-if="showAccordionSecond" class="characteristic__accordion-text">
+                <p>Варианты оплаты заказа:</p>
+                <ol>
+                  <li>Оплата после получения</li>
+                  <li>
+                    Оплата через приложение WayForPay которое дает возможность
+                    оплатить карточкой или оформить оплату частями от Monobank
+                    или ПриватБанк
+                  </li>
+                </ol>
+                <p>
+                  Доставка осуществляется по территории Украины и может
+                  занимать от 2 до 5 дней. На срок доставки могут повлиять
+                  праздничные дни и периоды акций и распродаж, о чем мы
+                  сообщаем дополнительно. Наша Служба по работе с клиентами
+                  работает ежедневно. После размещения заказа на сайте, мы
+                  свяжемся с вами и согласуем детали доставки, если иное не
+                  указано в примечании к вашему заказу.
+                </p>
+              </div>
+            </transition>
           </div>
         </div>
       </div>
     </div>
+    <modal-one-click-order v-if="OrderModal" @close="OrderModal = false" />
+    <transition name="fade">
+      <app-product-added v-if="isShownAddedTransition" />
+    </transition>
   </section>
 </template>
-<script>
-// import { Hooper, Slide } from 'hooper'
-import 'hooper/dist/hooper.css'
-import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
 
-import { mapActions } from 'vuex'
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
 import { actionTypes } from '~/store/cart'
+import { loadProductVideo } from '~/helpers/product-helpers'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
+import ModalOneClickOrder from '@/components/modal/AppModalOneClickOrder.vue'
+import AppProductAdded from '~/components/modal/AppProductAdded.vue'
+import 'hooper/dist/hooper.css'
+
 export default {
   name: 'CharacteristicPage',
   components: {
-    IconBookmark,
-    AppPartsCard,
     Hooper,
     Slide,
     HooperPagination,
+    IconBookmark,
+    AppPartsCard,
+    ModalOneClickOrder,
+    AppProductAdded
   },
   data() {
     return {
@@ -245,19 +221,16 @@ export default {
       HooperIsNotActive: '',
       isExist: '',
       email: '',
-      name: '',
-      phone: '',
       NotifyModal: false,
       NotifyModalEnd: false,
       OrderModal: false,
-      OrderModalEnd: false,
-      showAccordionFirst: true,
+      showAccordionFirst: false,
       showAccordionSecond: false,
+      isShownAddedTransition: false,
       product: {},
       isFavorite: false,
       productInfo: null,
       productPrice: [],
-      quantity: 1,
       productTubs: [
         {
           id: 1,
@@ -277,6 +250,9 @@ export default {
       ],
     }
   },
+  computed: {
+    ...mapGetters('cart', ['getProductQuantityById']),
+  },
   mounted() {
     console.log(this.$route, this.$router)
     if (this.$route?.params?.id) {
@@ -286,23 +262,12 @@ export default {
     this.productInfo = this.productTubs[0].name
   },
   methods: {
-    async order() {
-      await this.$axios
-        .post('order-callback', {
-          phone: this.phone,
-          name: this.name,
-        })
-        .then((response) => {
-          console.log(response)
-          this.OrderModal = false
-          this.OrderModalEnd = true
-          // this.res = response.message
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
-    ...mapActions('cart', { addProductToCart: actionTypes.addProduct }),
+    loadProductVideo,
+    ...mapActions('cart', {
+      addProductToCart: actionTypes.addProduct,
+      updatedQuantity: actionTypes.updatedQuantity,
+      removeProduct: actionTypes.removeProduct,
+    }),
 
     selecProductInfo(selectInfo) {
       this.productInfo = selectInfo
@@ -318,9 +283,8 @@ export default {
     getProducts(id) {
       this.$api.get(`/product/${id}`).then((res) => {
         this.product = res.data.product
-        if (res.data.product.available === 1) {
-          this.isExist = true
-        } else this.isExist = false
+        this.isExist = (res.data.product.available === 1)
+
         if (Array.isArray(this.product.image)) {
           this.HooperIsActive = true
         } else {
@@ -352,26 +316,16 @@ export default {
           console.log(err)
         })
     },
-    minus() {
-      if (this.quantity === 1) {
-        this.quantity = 1
-      } else {
-        this.quantity--
-      }
-    },
-    plus() {
-      this.quantity++
-    },
 
     addProductCart() {
-      // const newProduct = JSON.parse(JSON.stringify())
-      this.product.quantity = this.quantity
-      console.log(this.product.quantity)
+      this.isShownAddedTransition = true
+      setTimeout(() => { this.isShownAddedTransition = false }, 3000);
       this.addProductToCart(this.product)
     },
   },
 }
 </script>
+
 <style scoped>
 .clip {
   margin: 100px 0;
@@ -402,6 +356,7 @@ export default {
 
 img.characteristic__product-img[data-v-70c6f7f0] {
   max-width: 300px;
+  max-height: 300px;
   margin: 0 auto;
   width: 100%;
 }

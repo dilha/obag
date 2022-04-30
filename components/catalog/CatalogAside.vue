@@ -65,7 +65,7 @@
           <div class="aside__body">
             <div v-for="filterVal in filters[field]" :key="field + filterVal.title" class="aside__checkbox">
               <input :id="field + filterVal.title" :name="field + filterVal.title" class="aside__check" type="checkbox"
-                @change="updateFilter(filterVal)" />
+                @change="updateFilter(filterVal)" :checked="selectedFilters.includes(parseInt(filterVal.id))" />
               <label class="aside__label" :for="field + filterVal.title">
                 {{ filterVal.title }}
               </label>
@@ -175,13 +175,13 @@ export default {
       this.loadSearchProducts(this.searchTerm)
     },
     updateFilter(filter) {
-      console.log(filter)
       const indexOf = this.selectedFilters.indexOf(filter.id)
       if (indexOf !== -1) {
         this.selectedFilters.splice(indexOf, 1)
       } else {
-        this.selectedFilters.push(filter.id)
+        this.selectedFilters.push(parseInt(filter.id))
       }
+      console.log(this.selectedFilters)
       this.getFilteredProducts()
     },
     getFilteredProducts(complect) {
@@ -218,6 +218,7 @@ export default {
     },
     handleToggleCategory(category) {
       productStorage.setRootCategory(category.id)
+      this.selectedFilters = []
       this.selectedComplect = {}
       this.setSelectedSubCategory(null)
       this.loadAllCategoryProducts(category)
@@ -234,6 +235,13 @@ export default {
     toggleColor() {
       this.showColor = !this.showColor
     },
+    isFilterChecked(id) {
+      return this.selectedFilters.includes(id)
+    },
+    clearAllFilters() {
+      this.selectedFilters = []
+      this.selectedComplect = {}
+    }
   },
 }
 </script>

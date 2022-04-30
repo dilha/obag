@@ -24,12 +24,12 @@ export default {
           src: '/season',
         },
         {
-          text: 'Коллекции',
-          src: '/collection',
-        },
-        {
           text: 'Сумки',
           src: '/bags',
+        },
+        {
+          text: 'Рюкзаки',
+          src: '/backpacks',
         },
         {
           text: 'Часы',
