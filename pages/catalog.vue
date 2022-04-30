@@ -11,17 +11,16 @@
       <div @click="isAppear = true" class="bar-logo">
         <img src="../assets/images/bar.jpg" alt="" />
       </div>
-      <div v-bind:class="{ appear: isAppear }" class="aside-burger">
-        <p class="close-btn" @click="isAppear = false">x</p>
-        <catalog-aside :route-category="routeCategory" :route-subcategory="routeSubcategory"
-          :route-complete="routeComplete" />
-      </div>
+
       <div class="catalog__page">
-        <catalog-aside class="old-aside" :route-category="routeCategory" :route-subcategory="routeSubcategory"
-          :route-complete="routeComplete" />
+        <div :class="['aside-wrapper', { appear: isAppear }]">
+          <p class="close-btn" @click="isAppear = false">x</p>
+          <catalog-aside ref="catalogAside" :route-category="routeCategory" :route-subcategory="routeSubcategory"
+            :route-complete="routeComplete" />
+        </div>
 
         <div class="catalog__content">
-          <catalog-model />
+          <catalog-model ref="catalogModel" @clear-filters="handleClearFilters" />
           <div v-if="products.length" class="catalog__inner">
             <product-card v-for="item in products" :key="item.id" :item="item" />
           </div>
@@ -119,36 +118,19 @@ export default {
     ...mapActions('catalog', {
       loadSearchProducts: actionTypes.loadSearchProducts,
     }),
+    handleClearFilters() {
+      this.$refs.catalogAside?.clearAllFilters()
+    }
   },
 }
 </script>
 <style scoped>
-.appear {
-  transition: 0.5s;
-  position: fixed;
-  left: 0px !important;
-}
-
 .bar-logo {
   display: none;
 }
 
-.aside-burger {
-  overflow: auto;
-  /* color: white; */
-  font-family: sans-serif;
-  z-index: 100;
-  transition: 0.5s;
-  position: fixed;
-  left: -339px;
-  padding: 20px 20px 20px 20px;
-  top: 0px;
-  width: 339px;
-  background: white;
-  height: 100vh;
-}
-
 .close-btn {
+  display: none;
   cursor: pointer;
   position: relative;
   bottom: 16px;
@@ -160,14 +142,37 @@ export default {
 }
 
 @media (max-width: 700px) {
-  .old-aside {
-    display: none;
+  .aside-wrapper {
+    overflow: auto;
+    /* color: white; */
+    font-family: sans-serif;
+    z-index: 100;
+    transition: 0.5s;
+    position: fixed;
+    left: -339px;
+    padding: 20px 20px 20px 20px;
+    top: 0px;
+    max-width: 339px;
+    background: white;
+    height: 100vh;
+  }
+
+  .aside-wrapper.appear {
+    transition: 0.5s;
+    position: fixed;
+    left: 0px !important;
+  }
+
+  .close-btn {
+    display: block;
   }
 
   .bar-logo {
     /* background-color: black; */
-    width: 100px;
+    width: 45px;
+    height: 32px;
     display: inline-block !important;
+    cursor: pointer;
   }
 }
 </style>

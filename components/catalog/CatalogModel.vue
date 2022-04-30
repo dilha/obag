@@ -62,7 +62,11 @@ export default {
     handleToggleSubcategory(subcategory) {
       productStorage.setRootSubcategory(subcategory.id)
       this.loadAllSubCategoryProducts(subcategory.id)
+      this.handleClearFilters()
     },
+    handleClearFilters() {
+      this.$emit('clear-filters')
+    }
   },
 }
 </script>
