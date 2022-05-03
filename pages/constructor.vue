@@ -6,7 +6,8 @@
       </h3>
 
       <div v-if="productType" class="constructor__inner">
-        <div v-for="item in productType" :key="item.id" class="constructor__item"
+        <div
+v-for="item in productType" :key="item.id" class="constructor__item"
           :class="{ active: selectedType.id === item.id }" @click="getTypesProducts(item)">
           <div class="constructor__item-images">
             <img :src="item.square_image" alt="" />
@@ -18,7 +19,8 @@
       </div>
 
       <div v-if="selectedConfiguratorMenu" class="constructor__buttons">
-        <button v-for="(constructor, index) in productConstructor.categories" :key="index"
+        <button
+v-for="(constructor, index) in productConstructor.categories" :key="index"
           class="constructor__btn page__border-btn" :class="{ active: constructor.id === selectedConfiguratorMenu.id }"
           @click="selectConfiguratorMenu(constructor)">
           {{ constructor.title }}
@@ -29,7 +31,8 @@
         <div class="constructor__product">
           <h3 class="constructor__product-title">O bag Classic</h3>
           <div class="constructor__card">
-            <div ref="obagConstuctor" class="constructor__card-img" :style="{
+            <div
+ref="obagConstuctor" class="constructor__card-img" :style="{
               backgroundImage: `${initBackgroundImage
                 ? initBackgroundImage
                 : backgroundImagesArray
@@ -58,7 +61,8 @@
         <div class="constructor__elements">
           <h6 class="constructor__elements-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
           <div v-if="selectedConfiguratorMenu" class="constructor__elements-inner">
-            <div v-for="element in selectedConfiguratorMenu.constructor_elements" :key="element.id"
+            <div
+v-for="element in selectedConfiguratorMenu.constructor_elements" :key="element.id"
               class="constructor__elements-item" @click="addBackground(element)">
               <img :src="element.image" alt="" />
               <p class="constructor__elements-price">
@@ -176,7 +180,6 @@ export default {
     addBackground(element) {
       this.initBackgroundImage = null
       this.lastElement = element
-      console.log(this.lastElement)
 
       const backgroundImagesUrl = []
       element.images.forEach((e) => {
