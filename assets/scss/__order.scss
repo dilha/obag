@@ -167,6 +167,31 @@
       color: #9c9c9c;
     }
   }
+  &__methods {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__method {
+    &-title {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
+      color: #3D3935;
+    }
+    &-btn {
+      background: #F6F6F6;
+      border-radius: 100px;
+      padding: 8px 16px;
+      color: #9C9C9C;
+      border: none;
+      &.active {
+        background: #FFD0DA;
+        color: #D05871;
+      }
+    }
+  }
 }
 
 .orders {
