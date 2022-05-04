@@ -20,6 +20,31 @@
           <p class="order__all-number">{{ totalProductCost }} тг.</p>
         </div>
       </div>
+      <div class="order__methods">
+        <div class="order__method">
+          <div class="order__method-title">
+            Метод доставки:
+          </div>
+          <button class="order__method-btn" :class="{active: deliveryMethod ==='Самовывоз'}" @click="setDeliveryMethod('Самовывоз')"> 
+            Самовывоз
+          </button>
+          <button class="order__method-btn" :class="{active: deliveryMethod === 'Доставка' }" @click="setDeliveryMethod('Доставка')">
+            Доставка
+          </button>
+        </div>
+        <div class="order__method">
+          <div class="order__method-title">
+            Метод оплаты:
+          </div>
+          <button class="order__method-btn" :class="{active: paymentMethod ==='Онлайн-оплата'}" @click="setPaymentMethod('Онлайн-оплата')">
+            Онлайн-оплата
+          </button>
+          <button class="order__method-btn" :class="{active: paymentMethod ==='Наличными'}" @click="setPaymentMethod('Наличными')">
+            Наличными
+          </button>
+        </div>
+      </div>
+      
       <div class="order__buttons">
         <button class="order__buttons-issue" @click.prevent="$emit('clickCheckoutButton')">
           Оформить заказ
@@ -40,10 +65,17 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { actionTypes } from '~/store/cart'
 export default {
   name: 'AppOrderPrice',
+  // data() {
+  //   return {
+  //     deliveryMethod: null,
+  //     paymentMethod: null,
+  //   }
+  // },
   computed: {
-    ...mapState('cart', ['deliveryPrice']),
+    ...mapState('cart', ['deliveryPrice', 'deliveryMethod', 'paymentMethod']),
     ...mapGetters('cart', ['totalProductCost']),
   },
+  
   mounted() {
     this.setDeliveryPrice()
   },
@@ -51,6 +83,8 @@ export default {
     ...mapActions('cart', {
       clearCart: actionTypes.clearCart,
       setDeliveryPrice: actionTypes.setDeliveryPrice,
+      setDeliveryMethod: actionTypes.setDeliveryMethod,
+      setPaymentMethod: actionTypes.setPaymentMethod
     }),
   },
 }
