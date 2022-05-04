@@ -1,6 +1,8 @@
 export const state = () => ({
   cartProducts: [],
   deliveryPrice: 0,
+  deliveryMethod: null,
+  paymentMethod: null,
 })
 
 export const mutationTypes = {
@@ -9,13 +11,19 @@ export const mutationTypes = {
   updatedQuantity: 'mutation/updatedQuantity',
   clearCart: 'mutation/clearCart',
   setDeliveryPrice: 'mutation/setDeliveryPrice',
+
+  setPaymentMethod: 'mutation/setPaymentMethod',
+  setDeliveryMethod: 'mutation/setDeliveryMethod'
 }
 export const actionTypes = {
   addProduct: 'action/addProduct',
   updatedQuantity: 'action/updatedQuantity',
   removeProduct: 'action/removeProduct',
   clearCart: 'action/clearCart',
-  setDeliveryPrice: 'mutation/setDeliveryPrice',
+  setDeliveryPrice: 'action/setDeliveryPrice',
+
+  setPaymentMethod: 'action/setPaymentMethod',
+  setDeliveryMethod: 'action/setDeliveryMethod'
 }
 
 export const mutations = {
@@ -67,6 +75,13 @@ export const mutations = {
   [mutationTypes.clearCart](state) {
     state.cartProducts = []
   },
+
+  [mutationTypes.setPaymentMethod](state, payload) {
+    state.paymentMethod = payload
+  },
+  [mutationTypes.setDeliveryMethod](state, payload) {
+    state.deliveryMethod = payload
+  },
 }
 export const actions = {
   [actionTypes.addProduct]({ commit, state }, product) {
@@ -107,7 +122,14 @@ export const actions = {
           resolve(response)
         })
     })
-  }
+  },
+
+  [actionTypes.setPaymentMethod]({ commit }, payload) {
+    commit(mutationTypes.setPaymentMethod,payload)
+  },
+  [actionTypes.setDeliveryMethod]({ commit }, payload) {
+    commit(mutationTypes.setDeliveryMethod,payload)
+  },
 }
 export const getters = {
   totalProductCount: state => state.cartProducts.length,

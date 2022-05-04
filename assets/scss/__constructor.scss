@@ -162,6 +162,9 @@
       img {
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
       }
     }
     &-price {

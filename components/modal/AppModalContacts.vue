@@ -34,13 +34,16 @@
             placeholder="Введите Ваш почтовый адрес"
             required
           />
-          <input
-            v-model="address"
-            class="modal__contacts-email"
-            type="text"
-            placeholder="Адрес доставки"
-            required
-          />
+          <template v-if="deliveryMethod==='Доставка'">
+            <input
+              v-model="address"
+              class="modal__contacts-email"
+              type="text"
+              placeholder="Адрес доставки"
+              required
+            />
+          </template>
+          
           <div class="modal__bottom">
             <!-- <app-order-price @clickCheckoutButton="checkout" /> -->
             <div class="order__buttons">
@@ -79,18 +82,25 @@ export default {
       email: '',
       address: '',
       validationError: null,
+      isShowAddressInput: false
     }
   },
   computed: {
     ...mapState('auth', ['isLoggedIn', 'user']),
     ...mapState('order', ['error']),
-    ...mapGetters('cart', ['totalProductCost', 'products']),
+    ...mapState('cart', ['deliveryMethod', 'paymentMethod']),
+    ...mapGetters('cart', ['totalProductCost', 'products', ]),
   },
   mounted() {
     if (this.isLoggedIn) {
       this.name = this.user?.name
       this.phone = this.user?.phone
       this.email = this.user?.email
+    }
+    if(this.deliveryMethod === null) {
+      this.isShowAddressInput = true
+    } else {
+      this.isShowAddressInput = false
     }
   },
   methods: {
@@ -106,14 +116,14 @@ export default {
     checkout() {
       const data = {
         user_id: this.user?.id,
-        address: this.user?.address || this.address,
+        address: this.user?.address || this.address || 0,
         name: this.name,
         phone: this.phone,
         email: this.email,
         price: this.totalProductCost,
         bonus_waste: 0,
-        delivery_type: 'mail',
-        payment_type: 'card',
+        delivery_type: this.deliveryMethod,
+        payment_type: this.paymentMethod,
         cart_elements: this.products,
       }
 
