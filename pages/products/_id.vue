@@ -343,7 +343,7 @@ export default {
   .characteristic__product,
   .characteristic__content {
     max-width: 100%;
-    width: 50vw;
+    width: 100%;
   }
 
   .characteristic__buttons {
@@ -352,13 +352,19 @@ export default {
     justify-content: left !important;
     flex-wrap: wrap;
   }
+
+  .characteristic__product-images-hooper {
+    max-width: 350px !important;
+    max-height: 350px !important;
+    margin: 0 auto;
+  }
 }
 
-img.characteristic__product-img[data-v-70c6f7f0] {
-  max-width: 300px;
-  max-height: 300px;
+.characteristic__product-img {
   margin: 0 auto;
   width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 li.image-wrapper.hooper-slide {
