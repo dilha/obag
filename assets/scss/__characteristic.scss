@@ -16,7 +16,10 @@
         height: 100%;
       }
       &-hooper {
-        height: 325px !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 540px !important; 
+        max-height: 540px !important;
       }
     }
     &-img {

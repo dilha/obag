@@ -33,10 +33,10 @@
     &.active {
       svg {
         circle {
-          fill: #3D3935;
+          fill: #3d3935;
         }
         path {
-          fill: #fff
+          fill: #fff;
         }
       }
     }
@@ -55,6 +55,7 @@
     line-height: 132%;
     color: #3d3935;
     margin-top: 16px;
+    overflow-wrap: break-word;
   }
 
   &-price {
