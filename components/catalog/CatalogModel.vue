@@ -21,7 +21,7 @@ v-for="item in selectedCategory.subcategories" :key="item.id"
           <!-- <img v-if="selectedSubCategory === item.id" :src="item.preview_image" :alt="item.title" /> -->
           <!-- <img v-else :src="item.image" :alt="item.title" /> -->
         </template>
-        <img v-else :src="item.image" :alt="item.title" />
+        <img v-else src="@/assets/images/icons/obag.png" :alt="item.title" />
       </swiper-slide>
     </swiper>
   </div>
