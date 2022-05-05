@@ -8,14 +8,14 @@
           <sorting-select />
         </div>
       </div>
-      <div @click="isAppear = true" class="bar-logo">
-        <img src="../assets/images/bar.jpg" alt="" />
-      </div>
+        <div class="burger bar-logo" :class="{ 'active': isAppear }" @click="isAppear = !isAppear">
+      <span class="burger-line"></span>
+    </div>
 
       <div class="catalog__page">
         <div :class="['aside-wrapper', { appear: isAppear }]">
-          <p class="close-btn" @click="isAppear = false">x</p>
-          <catalog-aside ref="catalogAside" :route-category="routeCategory" :route-subcategory="routeSubcategory"
+          <catalog-aside
+ref="catalogAside" :route-category="routeCategory" :route-subcategory="routeSubcategory"
             :route-complete="routeComplete" />
         </div>
 
@@ -148,8 +148,8 @@ export default {
     font-family: sans-serif;
     z-index: 100;
     transition: 0.5s;
-    position: fixed;
-    left: -339px;
+    position: absolute;
+    left: -500%;
     padding: 20px 20px 20px 20px;
     top: 0px;
     max-width: 339px;
@@ -159,7 +159,6 @@ export default {
 
   .aside-wrapper.appear {
     transition: 0.5s;
-    position: fixed;
     left: 0px !important;
   }
 

@@ -3,7 +3,8 @@
     <form class="aside__form">
       <div class="aside__search aside__block">
         <div class="form-row">
-          <input v-model="searchTerm" class="aside__search-input" type="text" placeholder="Поиск"
+          <input
+v-model="searchTerm" class="aside__search-input" type="text" placeholder="Поиск"
             @keydown.enter="search" />
           <button class="search__icon" @click.prevent="search">
             <img
@@ -18,9 +19,11 @@
           <img class="aside__top-arrow" src="@/assets/images/icons/select-icon.svg" alt="" />
         </div>
         <div class="aside__body aside__price-body">
-          <input v-model="price_from" class="aside__price-input aside__price-from" type="number" placeholder="0 ₸"
+          <input
+v-model="price_from" class="aside__price-input aside__price-from" type="number" placeholder="0 ₸"
             @change="getFilteredProducts" />
-          <input v-model="price_to" class="aside__price-input" type="number" placeholder="15.000 ₸"
+          <input
+v-model="price_to" class="aside__price-input" type="number" placeholder="15.000 ₸"
             @change="getFilteredProducts" />
         </div>
       </div>
@@ -31,7 +34,8 @@
         </div>
         <div v-if="!showProduct && categories.length" class="aside__body">
           <div v-for="category of categories" :key="category.id" class="aside__checkbox">
-            <input :id="category.id" name="category" class="aside__check" type="checkbox"
+            <input
+:id="category.id" name="category" class="aside__check" type="checkbox"
               :checked="selectedCategory.id === category.id" @change="handleToggleCategory(category)" />
             <label class="aside__label" :for="category.id">
               {{ category.title }}
@@ -47,7 +51,8 @@
         </div>
         <div class="aside__body">
           <div v-for="complect of completes" :key="complect.id" class="aside__checkbox">
-            <input :id="complect.id + complect.title" name="completes" class="aside__check" type="checkbox"
+            <input
+:id="complect.id + complect.title" name="completes" class="aside__check" type="checkbox"
               :checked="selectedComplect.id === complect.id" @change="getFilteredProducts(complect)" />
             <label class="aside__label" :for="complect.id + complect.title">
               {{ complect.title }}
@@ -64,8 +69,9 @@
           </div>
           <div class="aside__body">
             <div v-for="filterVal in filters[field]" :key="field + filterVal.title" class="aside__checkbox">
-              <input :id="field + filterVal.title" :name="field + filterVal.title" class="aside__check" type="checkbox"
-                @change="updateFilter(filterVal)" :checked="selectedFilters.includes(parseInt(filterVal.id))" />
+              <input
+:id="field + filterVal.title" :name="field + filterVal.title" class="aside__check" type="checkbox"
+                :checked="selectedFilters.includes(parseInt(filterVal.id))" @change="updateFilter(filterVal)" />
               <label class="aside__label" :for="field + filterVal.title">
                 {{ filterVal.title }}
               </label>
