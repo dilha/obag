@@ -10,32 +10,17 @@
                 <div v-if="contact" class="contacts__inner">
                     <div class="contacts__content">
                         <div  class="contacts__content-item contacts__content-message">
-                            <h5 class="contacts__content-title">
-                                {{contact['1_email']}}
+                            <h5 class="contacts__content-title"> <a :href="`mailto:${contact[`1_email`]}`">
+                                {{contact['1_email']}} </a>
                             </h5>
                             <p class="contacts__content-text">
                                 сотрудничество
                             </p>
                         </div>
-                        <div class="contacts__content-item contacts__content-message">
-                            <h5 class="contacts__content-title">
-                                 {{contact['2_email']}}
-                            </h5>
-                            <p class="contacts__content-text">
-                                оптовые закупки
-                            </p>
-                        </div>
-                        <div class="contacts__content-item contacts__content-message">
-                            <h5 class="contacts__content-title">
-                                 {{contact['3_email']}}
-                            </h5>
-                            <p class="contacts__content-text">
-                                интернет магазин
-                            </p>
-                        </div>
+
                         <div class="contacts__content-item contacts__content-phone">
-                            <h5 class="contacts__content-title">
-                                {{contact.number}}
+                            <h5 class="contacts__content-title"> <a :href="`tel:${contact.number}`">
+                                {{contact.number}} </a>
                             </h5>
                             <p class="contacts__content-text">
                                 (многоканальный)

@@ -83,6 +83,7 @@
               </div>
             </div>
           </div>
+          
           <div class="characteristic__accordion">
             <div class="characteristic__accordion-title" @click="toggleShowAccordionFirst">
               Оплата и доставка
@@ -127,7 +128,7 @@
                     или ПриватБанк
                   </li>
                 </ol>
-                <p>
+                <p> 
                   Доставка осуществляется по территории Украины и может занимать
                   от 2 до 5 дней. На срок доставки могут повлиять праздничные
                   дни и периоды акций и распродаж, о чем мы сообщаем
@@ -139,6 +140,7 @@
               </div>
             </transition>
           </div>
+         
         </div>
       </div>
     </div>

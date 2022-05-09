@@ -29,7 +29,7 @@ v-for="(constructor, index) in productConstructor.categories" :key="index"
 
       <div class="constructor__container">
         <div class="constructor__product">
-          <h3 class="constructor__product-title">O bag Classic</h3>
+          <h3 class="constructor__product-title"></h3>
           <div class="constructor__card">
             <div
 ref="obagConstuctor" class="constructor__card-img" :style="{
@@ -66,7 +66,7 @@ v-for="element in selectedConfiguratorMenu.constructor_elements" :key="element.i
               class="constructor__elements-item" @click="addBackground(element)">
               <img :src="element.image" alt="" />
               <p class="constructor__elements-price">
-                {{ element.price }}
+                {{ element.price }}₸
               </p>
             </div>
           </div>

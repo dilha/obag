@@ -32,7 +32,7 @@
         <div class="characteristic__content">
           <p class="characteristic__code">Код Товара: {{ product.code }}</p>
           <h3 class="characteristic__title">
-            {{ product.title }}
+            {{ product.title }} 
           </h3>
           <p class="characteristic__price">{{ product.price }}тг</p>
 
@@ -122,6 +122,7 @@
               </button>
 
               <a href="#" class="order-btn" @click="OrderModal = true">Заказать в 1 клик</a>
+
             </div>
             <div class="characteristic__info-content">
               <div v-html="product[productInfo]"></div>
@@ -183,6 +184,9 @@
               </div>
             </transition>
           </div>
+
+
+              <div class="characteristic__accordion"><a class="characteristic__accordion-title" href="https://obag.ua/zaprosit-photo"> Запросить фото </a></div>
         </div>
       </div>
     </div>
