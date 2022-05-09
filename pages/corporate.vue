@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import MetaSeo from '@/mixins/MetaSeo.vue'
 import AppIntro from '~/components/intro/AppIntro.vue'
 import AppNews from '~/components/news/AppNews.vue'
 
@@ -20,6 +21,7 @@ export default {
     AppIntro,
     AppNews,
   },
+  mixins: [MetaSeo],
   data() {
     return {
       content: null,

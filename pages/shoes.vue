@@ -5,7 +5,10 @@
         {{ category.title }}
       </h2>
     </app-intro-button>
-    <app-subcategory-cards :category-id="category.id" :items="category.subcategories" />
+    <app-subcategory-cards
+      :category-id="category.id"
+      :items="category.subcategories"
+    />
     <app-like :id="category.id" />
     <app-news />
   </div>
@@ -13,6 +16,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '@/store'
 import AppIntroButton from '~/components/intro/AppIntroButton.vue'
 import AppSubcategoryCards from '~/components/cards/AppSubcategoryCards.vue'
@@ -27,6 +31,7 @@ export default {
     AppLike,
     AppNews,
   },
+  mixins: [MetaSeo],
   computed: {
     ...mapState(['category']),
   },
