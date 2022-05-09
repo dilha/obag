@@ -17,7 +17,7 @@
       >
         В корзину
       </button>
-      <a class="certificates__item-link" href="#?"> Подробнее </a>
+      <!-- <a class="certificates__item-link" href="#?"> Подробнее </a> -->
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
     item: {
       type: Object,
       require: true,
-    }
+    },
   },
   data() {
     return {
