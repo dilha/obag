@@ -1,20 +1,30 @@
+/* eslint-disable dot-notation */
 <template>
   <section class="constructor">
     <div class="container">
       <h3 class="intro__title constructor__title">
         Каждый аксессуар O bag – это конструктор!
       </h3>
-
-      <div v-if="productType" class="constructor__inner">
-        <div
+      <div class="constructor__top">
+        <button
           v-for="item in productType"
           :key="item.id"
-          class="constructor__item"
+          class="constructor__top-btn"
           :class="{ active: selectedType.id === item.id }"
           @click="getTypesProducts(item)"
         >
+          {{ item.title }}
+        </button>
+      </div>
+      <div v-if="selectedType" class="constructor__inner">
+        <div
+          v-for="item in selectedType['constructor']"
+          :key="item.id"
+          class="constructor__item"
+          @click="selectCategory(item.id)"
+        >
           <div class="constructor__item-images">
-            <img :src="item.square_image" alt="" />
+            <img :src="item.preview_image" alt="" />
           </div>
           <p class="constructor__item-title">
             {{ item.title }}
@@ -24,7 +34,7 @@
 
       <div v-if="selectedConfiguratorMenu" class="constructor__buttons">
         <button
-          v-for="(constructor, index) in productConstructor.categories"
+          v-for="(constructor, index) in categories"
           :key="index"
           class="constructor__btn page__border-btn"
           :class="{ active: constructor.id === selectedConfiguratorMenu.id }"
@@ -86,7 +96,7 @@
             class="constructor__elements-inner"
           >
             <div
-              v-for="element in selectedConfiguratorMenu.constructor_elements"
+              v-for="element in selectedConfiguratorMenu.constructorElements"
               :key="element.id"
               class="constructor__elements-item"
               @click="addBackground(element)"
@@ -121,6 +131,8 @@ export default {
   data() {
     return {
       selectedConfiguratorMenu: null,
+      categories: null,
+      categoriesId: null,
       orderedBackgroundImages: {
         handle: '',
         lining: '',
@@ -144,15 +156,13 @@ export default {
     }
   },
   computed: {
-    ...mapState('product-constructor', ['productConstructor']),
+    ...mapState('product-constructor', ['productCategory']),
     ...mapState('product-constructor', ['productType']),
   },
   watch: {
     orderedBackgroundImages: {
       deep: true,
       handler() {
-        // console.log(this.selectedElements)
-
         this.backgroundImagesArray = Object.values(this.orderedBackgroundImages)
 
         this.selectedElements = Object.values(this.selectedObject)
@@ -166,16 +176,28 @@ export default {
   mounted() {
     this.getTypes().then((types) => {
       this.selectedType = types[0]
+      // eslint-disable-next-line dot-notation
+      console.log(this.selectedType['constructor'][0])
+      // eslint-disable-next-line dot-notation
+      this.getCategory(this.selectedType['constructor'][0].id).then((category) => {
+        console.log(category)
+        // eslint-disable-next-line dot-notation
+        this.categories = category['constructor'].categories
+        // eslint-disable-next-line dot-notation
+        this.selectedConfiguratorMenu = category['constructor'].categories
+      })
     })
-
-    this.getConstructor('bags').then(() => {
-      this.selectedConfiguratorMenu = this.productConstructor.categories[0]
-    })
+    // this.getCategory(this.selectedType.id).then((category) => {
+    //     // eslint-disable-next-line dot-notation
+    //     this.categories = category['constructor'].categories
+    //     // eslint-disable-next-line dot-notation
+    //     this.selectedConfiguratorMenu = category['constructor'].categories
+    //   })
   },
   methods: {
     ...mapActions('product-constructor', { getTypes: actionTypes.loadType }),
     ...mapActions('product-constructor', {
-      getConstructor: actionTypes.loadConstructor,
+      getCategory: actionTypes.loadCategory,
     }),
     ...mapActions('cart', {
       addElements: cartActionTypes.addProduct,
@@ -184,12 +206,22 @@ export default {
     getTypesProducts(item) {
       this.clearElements()
       this.selectedType = item
-      this.getConstructor(item.slug).then(() => {
-        if (this.productConstructor?.categories?.length) {
-          this.selectedConfiguratorMenu = this.productConstructor?.categories[0]
-        } else {
-          this.selectedConfiguratorMenu = null
-        }
+      this.selectCategory(item.id)
+      // this.getConstructor(item.slug).then(() => {
+      //   if (this.productConstructor?.categories?.length) {
+      //     this.selectedConfiguratorMenu = this.productConstructor?.categories[0]
+      //   } else {
+      //     this.selectedConfiguratorMenu = null
+      //   }
+      // })
+    },
+
+    selectCategory(id) {
+      this.getCategory(id).then((category) => {
+        // eslint-disable-next-line dot-notation
+        this.categories = category['constructor'].categories
+        // eslint-disable-next-line dot-notation
+        this.selectedConfiguratorMenu = category['constructor'].categories
       })
     },
 
@@ -242,7 +274,6 @@ export default {
       //   }, 0)
       // this.selectedElements.pop()
       // this.backgroundImagesArray.pop()
-      console.log(item)
     },
 
     clearElements() {
