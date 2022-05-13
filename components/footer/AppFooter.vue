@@ -37,11 +37,7 @@
                   О продукции
                 </nuxt-link>
               </li>
-              <li class="footer__list-item">
-                <nuxt-link to="/collection" class="footer__list-link" href="#?">
-                  Коллекции
-                </nuxt-link>
-              </li>
+           
             </ul>
             <ul class="footer__list">
               <li class="footer__list-item footer__list-title">Новости</li>
@@ -58,11 +54,8 @@
             </ul>
           </div>
           <div class="footer__info">
-            <a
-              href="tel:+38 044 333 43 42"
-              class="footer__info-text footer__info-phone"
-            >
-              +38 044 333 43 42 ( многоканальный )
+            <a href="tel:+7 701 348 1947" class="footer__info-text footer__info-phone">
+              +7 701 348 1947 ( многоканальный )
             </a>
             <p class="footer__info-text footer__info-schedule">
               Время работы пн-вс с 9:00 до 20:00
@@ -137,11 +130,7 @@
                 Подарочные сертификаты
               </nuxt-link>
             </li>
-            <li class="footer__list-item">
-              <nuxt-link to="loyalty" class="footer__list-link">
-                Система лояльности
-              </nuxt-link>
-            </li>
+
             <li class="footer__list-item">
               <nuxt-link to="/corporate" class="footer__list-link" href="#?">
                 Корпоративным клиентам

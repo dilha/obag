@@ -46,7 +46,7 @@
 
       <div class="constructor__container">
         <div class="constructor__product">
-          <h3 class="constructor__product-title">O bag Classic</h3>
+          <h3 class="constructor__product-title"></h3>
           <div class="constructor__card">
             <div
               ref="obagConstuctor"
@@ -103,7 +103,7 @@
             >
               <img :src="element.image" alt="" />
               <p class="constructor__elements-price">
-                {{ element.price }}
+                {{ element.price }}₸
               </p>
             </div>
           </div>

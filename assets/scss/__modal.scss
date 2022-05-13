@@ -102,10 +102,13 @@
     &-phone {
       background-image: url(../images/icons/modal-call.svg) !important;
     }
-
     &-email {
+      background-image: url(../images/icons/email.png) !important;
+    }
+    &-adress {
       background-image: url(../images/icons/modal-message.svg) !important;
     }
+    
   }
 
   &__login {

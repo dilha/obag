@@ -7,7 +7,7 @@
     </app-intro>
     <div class="mission">
       <div class="container">
-        <div class="mission__content" v-html="content.text"></div>
+        <div class="mission__content" v-html="content.text" ></div>
       </div>
     </div>
     <app-news />
@@ -38,6 +38,7 @@ export default {
     getMission() {
       this.$api.get('/page/mission').then((res) => {
         this.content = res.data.content
+        console.log(this.content)
       })
     },
   },

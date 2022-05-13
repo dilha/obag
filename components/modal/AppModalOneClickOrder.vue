@@ -12,7 +12,7 @@
                <form class="modal__one-click-order-form" @submit.prevent="handleOrder">
                   <input v-model="user.name" class="modal__one-click-order-input modal__one-click-order-name"
                      type="text" placeholder="Имя" required />
-                  <input v-model="user.phone" class="modal__one-click-order-input modal__one-click-order-phone"
+                  <input v-model="user.phone" @keydown="phonemusk" id="phone-mask" class="modal__one-click-order-input modal__one-click-order-phone"
                      type="text" placeholder="Номер телефона" required />
                   <button class="modal__one-click-order-btn" type="submit">
                      Заказать
@@ -46,6 +46,7 @@
 </template>
 
    <script>
+   import IMask from 'imask'
 export default {
    name: 'AppModalOneClickOrder',
    data() {
@@ -80,6 +81,12 @@ export default {
                console.log(err)
             })
       },
+          phonemusk(){  
+      IMask(
+      document.getElementById('phone-mask'), {
+        mask: '+{7}(000)000-00-00'
+      });
+    }
    },
 }
 </script>

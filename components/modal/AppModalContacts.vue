@@ -22,6 +22,10 @@
           />
           <input
             v-model="phone"
+            @keydown="phonemusk"
+            minlength="17"
+
+            id="phone-mask"
             class="modal__contacts-phone"
             type="text"
             placeholder="Введите Ваш номер телефона"
@@ -37,7 +41,7 @@
           <template v-if="deliveryMethod==='Доставка'">
             <input
               v-model="address"
-              class="modal__contacts-email"
+              class="modal__contacts-adress"
               type="text"
               placeholder="Адрес доставки"
               required
@@ -65,6 +69,7 @@
 </template>
 
 <script>
+import IMask from 'imask'
 import { mapState, mapActions, mapGetters } from 'vuex'
 // import AppOrderPrice from '~/components/order/AppOrderPrice.vue'
 import { actionTypes } from '~/store/order'
@@ -85,11 +90,13 @@ export default {
       isShowAddressInput: false
     }
   },
+  
   computed: {
     ...mapState('auth', ['isLoggedIn', 'user']),
     ...mapState('order', ['error']),
     ...mapState('cart', ['deliveryMethod', 'paymentMethod']),
     ...mapGetters('cart', ['totalProductCost', 'products', ]),
+    
   },
   mounted() {
     if (this.isLoggedIn) {
@@ -126,10 +133,16 @@ export default {
         payment_type: this.paymentMethod,
         cart_elements: this.products,
       }
-
+      this.phonemusk()
       this.sendOrder(data)
       console.log('CHEKCOUT STARTTT')
     },
+    phonemusk(){  
+      IMask(
+      document.getElementById('phone-mask'), {
+        mask: '+{7}(000)000-00-00'
+      });
+    }
   },
 }
 </script>

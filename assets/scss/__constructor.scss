@@ -85,6 +85,8 @@
   }
 
   &__product {
+    max-width: 699px;
+    width: 100%;
     margin-right: 20px;
     &-title {
       font-weight: bold;
