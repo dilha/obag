@@ -1,23 +1,23 @@
 
 export const state = ()=>({
   productType: [],
-  productCategory: [],
+  productConstructor: [],
   error:null,
   isLoading:false,
 })
 
 export const mutationTypes = {
-  loadCategorySuccess:"mutation/categorySuccess load constructor success",
+  loadConstructorSuccess:"mutation/constructorSuccess load constructor success",
   loadTypeSuccess:"mutation/typeSuccess load type success",
 }
 export const actionTypes = {
-  loadCategory:'action/loadCategory get all constructor',
+  loadConstructor:'action/loadConstructor get all constructor',
   loadType:'action/loadType get all elements',
 }
 
 export const mutations = {
-  [mutationTypes.loadCategorySuccess](state, payload){
-    state.productCategory = payload;
+  [mutationTypes.loadConstructorSuccess](state, payload){
+    state.productConstructor = payload;
   },
 
   [mutationTypes.loadTypeSuccess](state, payload){
@@ -25,14 +25,15 @@ export const mutations = {
   },
 }
 export const actions = {
-  [actionTypes.loadCategory]({commit},id){
+  [actionTypes.loadConstructor]({commit}, slug){
     return new Promise(resolve => {
       this.$api
-      .get(`/constructor/${id}`)
+      .get(`/constructor/${slug}`)
       .then((response)=>{
-        const productCategory = response.data;
-        commit(mutationTypes.loadCategorySuccess, productCategory )
-        resolve(productCategory);
+        const productConstructor = response.data.constructor;
+        // console.log(response.data)
+        commit(mutationTypes.loadConstructorSuccess, productConstructor )
+        resolve(productConstructor);
       })
     })
   },
@@ -43,6 +44,7 @@ export const actions = {
       .get('/constructor')
       .then((response)=>{
         const productType = response.data;
+        // console.log(response.data)
         commit(mutationTypes.loadTypeSuccess, productType )
         resolve(productType);
       })
