@@ -8,10 +8,7 @@
         {{ category.text }}
       </p>
     </app-intro-button>
-    <app-subcategory-cards
-      :category-id="category.id"
-      :items="category.subcategories"
-    />
+    <app-subcategory-cards :category-id="category.id" :items="category.subcategories" />
     <app-combination :items="category['constructor']" />
     <app-like :id="category.id" />
     <app-news />
@@ -19,7 +16,6 @@
 </template>
 
 <script>
-import MetaSeo from '@/mixins/MetaSeo.vue'
 import { mapActions, mapState } from 'vuex'
 import { actionTypes } from '@/store'
 import { actionTypes as catalogActionTypes } from '@/store/catalog'
@@ -28,6 +24,7 @@ import AppSubcategoryCards from '~/components/cards/AppSubcategoryCards.vue'
 import AppCombination from '~/components/AppCombination.vue'
 import AppLike from '~/components/AppLike.vue'
 import AppNews from '~/components/news/AppNews.vue'
+
 
 export default {
   name: 'ClockPage',
@@ -38,7 +35,6 @@ export default {
     AppLike,
     AppNews,
   },
-  mixins: [MetaSeo],
   computed: {
     ...mapState(['category']),
   },
@@ -49,7 +45,7 @@ export default {
   methods: {
     ...mapActions({ getCategory: actionTypes.loadCategory }),
     ...mapActions('catalog', {
-      loadAllCategories: catalogActionTypes.loadAllCategories,
+      loadAllCategories: catalogActionTypes.loadAllCategories
     }),
   },
 }

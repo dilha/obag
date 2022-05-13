@@ -8,35 +8,21 @@
           <sorting-select />
         </div>
       </div>
-      <div
-        class="burger bar-logo"
-        :class="{ active: isAppear }"
-        @click="isAppear = !isAppear"
-      >
-        <span class="burger-line"></span>
-      </div>
+        <div class="burger bar-logo" :class="{ 'active': isAppear }" @click="isAppear = !isAppear">
+      <span class="burger-line"></span>
+    </div>
 
       <div class="catalog__page">
         <div :class="['aside-wrapper', { appear: isAppear }]">
           <catalog-aside
-            ref="catalogAside"
-            :route-category="routeCategory"
-            :route-subcategory="routeSubcategory"
-            :route-complete="routeComplete"
-          />
+ref="catalogAside" :route-category="routeCategory" :route-subcategory="routeSubcategory"
+            :route-complete="routeComplete" />
         </div>
 
         <div class="catalog__content">
-          <catalog-model
-            ref="catalogModel"
-            @clear-filters="handleClearFilters"
-          />
+          <catalog-model ref="catalogModel" @clear-filters="handleClearFilters" />
           <div v-if="products.length" class="catalog__inner">
-            <product-card
-              v-for="item in products"
-              :key="item.id"
-              :item="item"
-            />
+            <product-card v-for="item in products" :key="item.id" :item="item" />
           </div>
           <div v-else>
             <img v-if="isLoading" src="@/assets/images/loader.gif" alt="" />
@@ -51,7 +37,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '@/store/catalog'
 import productStorage from '@/helpers/products-storage'
 import SortingSelect from '~/components/catalog/SortingSelect.vue'
@@ -59,6 +44,7 @@ import CatalogAside from '~/components/catalog/CatalogAside.vue'
 import CatalogModel from '~/components/catalog/CatalogModel.vue'
 import ProductCard from '~/components/product/ProductCard.vue'
 import AppNews from '~/components/news/AppNews.vue'
+
 
 export default {
   name: 'CatalogPage',
@@ -69,7 +55,6 @@ export default {
     ProductCard,
     AppNews,
   },
-  mixins: [MetaSeo],
   data() {
     return {
       isAppear: false,
@@ -112,6 +97,7 @@ export default {
         productStorage.removeRootSubcategory()
       }
 
+
       // complete index init
       if (this.routeSubcategory !== -1) {
         if (this.$route?.params?.completeId) {
@@ -134,7 +120,7 @@ export default {
     }),
     handleClearFilters() {
       this.$refs.catalogAside?.clearAllFilters()
-    },
+    }
   },
 }
 </script>

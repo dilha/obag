@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import MetaSeo from '@/mixins/MetaSeo.vue'
 import AppIntroArrow from '~/components/intro/AppIntroArrow.vue'
 import AppShopCards from '~/components/cards/AppShopCards.vue'
 import AppShop from '~/components/AppShop.vue'
@@ -36,7 +35,6 @@ export default {
     AppShopCards,
     AppShop,
   },
-  mixins: [MetaSeo],
   data() {
     return {
       items: null,

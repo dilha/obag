@@ -18,13 +18,16 @@ v-for="item in selectedCategory.subcategories" :key="item.id"
         @click.native.stop="handleToggleSubcategory(item)">
         <template v-if="item.preview_image">
           <img :src="getImage(item)" alt="obag" />
-          
+      
           <!-- <img v-if="selectedSubCategory === item.id" :src="item.preview_image" :alt="item.title" /> -->
           <!-- <img v-else :src="item.image" :alt="item.title" /> -->
         </template>
+         
         <img v-else src="@/assets/images/icons/obag.png" :alt="item.title" />
       </swiper-slide>
     </swiper>
+
+    <h2 class="product__card-title" style="text-align:center"> {{this.titletext}} </h2>
   </div>
 </template>
 
@@ -40,6 +43,7 @@ export default {
   },
   data() {
     return {
+      titletext: '',
       swiperOption: {
         slideTo: 1,
         slidesPerView: 10,
@@ -66,6 +70,8 @@ export default {
       productStorage.setRootSubcategory(subcategory.id)
       this.loadAllSubCategoryProducts(subcategory.id)
       this.handleClearFilters()
+      this.titletext = subcategory.title
+      
     },
     handleClearFilters() {
       this.$emit('clear-filters')

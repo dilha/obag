@@ -1,25 +1,24 @@
 <template>
-  <div v-if="item">
-    <app-intro :item="item.image">
-      <h3 class="intro__title">
-        {{ item.title }}
-      </h3>
-    </app-intro>
-    <section class="news__id">
-      <div class="container">
-        <div class="news__id-content">
-          {{ item.text }}
-        </div>
-      </div>
-    </section>
-    <app-news />
-  </div>
+    <div v-if="item">
+        <app-intro :item="item.image"> 
+          <h3 class="intro__title">
+              {{item.title}}
+          </h3>
+        </app-intro>
+        <section class="news__id">
+          <div class="container">
+            <div class="news__id-content">
+              {{item.text}}
+            </div>
+          </div>
+        </section>
+        <app-news />
+    </div>
 </template>
 
 <script>
-import MetaSeo from '@/mixins/MetaSeo.vue'
-import AppIntro from '~/components/intro/AppIntro.vue'
-import AppNews from '~/components/news/AppNews.vue'
+import AppIntro from "~/components/intro/AppIntro.vue";
+import AppNews from "~/components/news/AppNews.vue";
 // import NewsCards from "~/components/news/NewsCards.vue";
 
 export default {
@@ -29,11 +28,10 @@ export default {
     AppIntro,
     AppNews,
   },
-  mixins: [MetaSeo],
-  data() {
+   data() {
     return {
-      content: null,
-      item: null,
+       content: null,
+       item: null
     }
   },
   mounted() {
@@ -45,11 +43,11 @@ export default {
   methods: {
     getNews(id) {
       this.$api
-        .get(`https://bag.a-lux.dev/api/page/get-news/${id}`)
-        .then((res) => {
-          this.item = res.data
-        })
-    },
-  },
+      .get(`https://bag.a-lux.dev/api/page/get-news/${id}`)
+      .then((res)=> {
+        this.item = res.data
+      })
+    }
+  }
 }
 </script>

@@ -7,12 +7,8 @@
 
       <div v-if="productType" class="constructor__inner">
         <div
-          v-for="item in productType"
-          :key="item.id"
-          class="constructor__item"
-          :class="{ active: selectedType.id === item.id }"
-          @click="getTypesProducts(item)"
-        >
+v-for="item in productType" :key="item.id" class="constructor__item"
+          :class="{ active: selectedType.id === item.id }" @click="getTypesProducts(item)">
           <div class="constructor__item-images">
             <img :src="item.square_image" alt="" />
           </div>
@@ -24,12 +20,9 @@
 
       <div v-if="selectedConfiguratorMenu" class="constructor__buttons">
         <button
-          v-for="(constructor, index) in productConstructor.categories"
-          :key="index"
-          class="constructor__btn page__border-btn"
-          :class="{ active: constructor.id === selectedConfiguratorMenu.id }"
-          @click="selectConfiguratorMenu(constructor)"
-        >
+v-for="(constructor, index) in productConstructor.categories" :key="index"
+          class="constructor__btn page__border-btn" :class="{ active: constructor.id === selectedConfiguratorMenu.id }"
+          @click="selectConfiguratorMenu(constructor)">
           {{ constructor.title }}
         </button>
       </div>
@@ -39,58 +32,38 @@
           <h3 class="constructor__product-title"></h3>
           <div class="constructor__card">
             <div
-              ref="obagConstuctor"
-              class="constructor__card-img"
-              :style="{
-                backgroundImage: `${
-                  initBackgroundImage
-                    ? initBackgroundImage
-                    : backgroundImagesArray
-                        .filter((element) => element !== '')
-                        .join()
+ref="obagConstuctor" class="constructor__card-img" :style="{
+              backgroundImage: `${initBackgroundImage
+                ? initBackgroundImage
+                : backgroundImagesArray
+                  .filter((element) => element !== '')
+                  .join()
                 }`,
-              }"
-            ></div>
-            <button
-              class="constructor__card-btn page__border-btn"
-              @click="clearElements"
-            >
+            }"></div>
+            <button class="constructor__card-btn page__border-btn" @click="clearElements">
               Сбросить
             </button>
           </div>
           <div class="constructor__selected">
             <h6 class="constructor__selected-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
-            <app-parts-card
-              v-for="selected in selectedElements"
-              :key="selected.id"
-              :item="selected"
-            />
+            <app-parts-card v-for="selected in selectedElements" :key="selected.id" :item="selected" />
             <div class="constructor__selected-total">
               <p class="constructor__selected-text">Всего:</p>
               <p class="constructor__selected-number">
                 {{ totalAll }}
               </p>
             </div>
-            <button
-              class="constructor__selected-btn"
-              @click="addElementsToCart"
-            >
+            <button class="constructor__selected-btn" @click="addElementsToCart">
               В корзину
             </button>
           </div>
         </div>
         <div class="constructor__elements">
           <h6 class="constructor__elements-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
-          <div
-            v-if="selectedConfiguratorMenu"
-            class="constructor__elements-inner"
-          >
+          <div v-if="selectedConfiguratorMenu" class="constructor__elements-inner">
             <div
-              v-for="element in selectedConfiguratorMenu.constructor_elements"
-              :key="element.id"
-              class="constructor__elements-item"
-              @click="addBackground(element)"
-            >
+v-for="element in selectedConfiguratorMenu.constructor_elements" :key="element.id"
+              class="constructor__elements-item" @click="addBackground(element)">
               <img :src="element.image" alt="" />
               <p class="constructor__elements-price">
                 {{ element.price }}₸
@@ -105,8 +78,6 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import MetaSeo from '@/mixins/MetaSeo.vue'
-
 import { actionTypes } from '@/store/product-constructor'
 import { actionTypes as cartActionTypes } from '~/store/cart'
 
@@ -117,7 +88,6 @@ export default {
   components: {
     AppPartsCard,
   },
-  mixins: [MetaSeo],
   data() {
     return {
       selectedConfiguratorMenu: null,
@@ -239,7 +209,7 @@ export default {
 
       // this.totalAll = this.totalElement.reduce(function (sum, el) {
       //     return Number(sum) + Number(el)
-      //   }, 0)
+      //   }, 0) 
       // this.selectedElements.pop()
       // this.backgroundImagesArray.pop()
       console.log(item)
