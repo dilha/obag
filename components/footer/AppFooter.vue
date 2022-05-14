@@ -20,20 +20,24 @@
             <ul class="footer__list">
               <li class="footer__list-item footer__list-title">Бренд</li>
               <li class="footer__list-item">
-                <nuxt-link to="/about/about-brand" class="footer__list-link" href="#?">
+                <nuxt-link
+                  to="/about/about-brand"
+                  class="footer__list-link"
+                  href="#?"
+                >
                   О бренде O bag
                 </nuxt-link>
               </li>
               <li class="footer__list-item">
-                <nuxt-link to="/about/about-products" class="footer__list-link" href="#?">
+                <nuxt-link
+                  to="/about/about-products"
+                  class="footer__list-link"
+                  href="#?"
+                >
                   О продукции
                 </nuxt-link>
               </li>
-              <li class="footer__list-item">
-                <nuxt-link to="/collection" class="footer__list-link" href="#?">
-                  Коллекции
-                </nuxt-link>
-              </li>
+           
             </ul>
             <ul class="footer__list">
               <li class="footer__list-item footer__list-title">Новости</li>
@@ -50,8 +54,8 @@
             </ul>
           </div>
           <div class="footer__info">
-            <a href="tel:+38 044 333 43 42" class="footer__info-text footer__info-phone">
-              +38 044 333 43 42 ( многоканальный )
+            <a href="tel:+7 701 348 1947" class="footer__info-text footer__info-phone">
+              +7 701 348 1947 ( многоканальный )
             </a>
             <p class="footer__info-text footer__info-schedule">
               Время работы пн-вс с 9:00 до 20:00
@@ -89,7 +93,7 @@
               </nuxt-link>
             </li>
             <li class="footer__list-item">
-              <nuxt-link to="/exploitation-accessories" class="footer__list-link">
+              <nuxt-link to="/exploitation" class="footer__list-link">
                 Инструкции
               </nuxt-link>
             </li>
@@ -117,7 +121,7 @@
           <ul class="footer__list">
             <li class="footer__list-item footer__list-title">Дополнительно</li>
             <li class="footer__list-item">
-              <nuxt-link to="/all-news" class="footer__list-link">
+              <nuxt-link to="/promos" class="footer__list-link">
                 Акции
               </nuxt-link>
             </li>
@@ -126,11 +130,7 @@
                 Подарочные сертификаты
               </nuxt-link>
             </li>
-            <li class="footer__list-item">
-              <nuxt-link to="loyalty" class="footer__list-link">
-                Система лояльности
-              </nuxt-link>
-            </li>
+
             <li class="footer__list-item">
               <nuxt-link to="/corporate" class="footer__list-link" href="#?">
                 Корпоративным клиентам
@@ -150,13 +150,25 @@
           на територии Казахстана
         </p>
         <div class="footer__social">
-          <a class="footer__social-link" href="https://www.facebook.com/Obag/" target="_blank">
+          <a
+            class="footer__social-link"
+            href="https://www.facebook.com/Obag/"
+            target="_blank"
+          >
             <icon-facebook />
           </a>
-          <a class="footer__social-link" href="https://www.instagram.com/obagofficial/" target="_blank">
+          <a
+            class="footer__social-link"
+            href="https://www.instagram.com/obagofficial/"
+            target="_blank"
+          >
             <icon-instagram />
           </a>
-          <a class="footer__social-link" href="https://t.me/obag_copy" target="_blank">
+          <a
+            class="footer__social-link"
+            href="https://t.me/obag_copy"
+            target="_blank"
+          >
             <icon-telegram />
           </a>
         </div>

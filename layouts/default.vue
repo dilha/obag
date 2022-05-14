@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import AppHeader from '~/components/header/AppHeader.vue'
 import AppMail from '~/components/footer/AppMail.vue'
 import AppFooter from '~/components/footer/AppFooter.vue'
@@ -21,15 +21,14 @@ export default {
     AppMail,
     AppFooter,
   },
-  computed: {
-    ...mapState('auth', ['isLoggedIn']),
-  },
+
   mounted() {
+    console.log('ROUTE', this.$route, this.$nuxt.$children)
+
     this.updateIsLoggedIn()
     if (this.isLoggedIn) {
       this.loadFavorites()
     }
-    console.log('QUERY STRING', this.$route.query)
     const token = this.$route?.query?.token
     if (token) {
       this.$api

@@ -18,6 +18,8 @@
     "axios": "^0.26.0",
     "core-js": "^3.19.3",
     "hooper": "^0.3.4",
+    "imask": "^6.4.2",
+    "jquery-mask-plugin": "^1.14.16",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.15.8",
     "swiper": "^5.4.5",

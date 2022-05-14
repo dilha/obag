@@ -9,6 +9,7 @@
   &__page {
     display: flex;
     justify-content: space-between;
+    position: relative;
   }
 
   &__content {
@@ -35,6 +36,10 @@
   &__model {
     width: 100%;
     margin-bottom: 35px;
+
+    img {
+       max-width: 60px;
+    }
 
     &-buttons {
       position: relative;
@@ -73,8 +78,9 @@
 
   &__inner {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    // grid-template-columns: repeat(3, 1fr);
     grid-gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   }
   &__model-item {
     box-sizing: border-box;

@@ -182,7 +182,13 @@
     padding: 0;
     cursor: pointer;
     z-index: 100;
-
+    &.bar-logo {
+        position: relative;
+    }
+    &.bar-logo::before,
+    &.bar-logo::after  {
+        transition: transform .2s linear;
+    }
     &.active {
         .burger-line {
             opacity: 0;

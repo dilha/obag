@@ -7,7 +7,7 @@
     </app-intro>
     <div class="mission">
       <div class="container">
-        <div class="mission__content" v-html="content.text"></div>
+        <div class="mission__content" v-html="content.text" ></div>
       </div>
     </div>
     <app-news />
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import MetaSeo from '@/mixins/MetaSeo.vue'
 import AppIntro from '~/components/intro/AppIntro.vue'
 import AppNews from '~/components/news/AppNews.vue'
 
@@ -24,6 +25,7 @@ export default {
     AppIntro,
     AppNews,
   },
+  mixins: [MetaSeo],
   data() {
     return {
       content: null,
@@ -36,6 +38,7 @@ export default {
     getMission() {
       this.$api.get('/page/mission').then((res) => {
         this.content = res.data.content
+        console.log(this.content)
       })
     },
   },

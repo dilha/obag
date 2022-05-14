@@ -150,6 +150,7 @@
     .intro {
         &__title {
             font-size: 70px;
+            color: #000000;
         }
 
         &__text {
@@ -791,6 +792,7 @@
 
         &__title {
             font-size: 50px;
+            color: #000000;
         }
 
         &__text {
@@ -849,7 +851,9 @@
             max-width: 500px;
         }
     } 
-
+    .product__card-img {
+        height: auto;
+    }
     .constructor {
         &__product{
             &-title  {
@@ -1376,6 +1380,7 @@
     .intro {
         &__title {
             font-size: 40px;
+            color: #000000;
         }
     }
 
@@ -1604,6 +1609,12 @@
             font-size: 40px;
         }
     }
+
+    .product{
+        &__card {
+            max-width: 200px;
+        }
+    }
 }
 
 @media(max-width: 520px) {
@@ -1731,6 +1742,43 @@
 
     }
 
+    .product {
+        &__card {
+              max-width: 180px;
+
+            &-img {
+                height: 200px;  
+            }
+            &-title {
+                font-size: 13px;
+            }
+            .page__basket-btn {
+                font-size: 10px;
+                &::after {
+                    width: 13px;
+                    height: 13px;
+                }
+            }
+            .product__card-link {
+                font-size: 12px;    
+            }
+        }
+    }
+
+
+    .order {
+        &__buttons {
+            justify-content: space-between;
+        }
+        &__method {
+            text-align: center;
+
+            &-btn {
+                display: block;
+                margin: 10px auto
+            }
+        }
+    }
 }
 
 @media(max-width: 470px) {
@@ -1843,26 +1891,7 @@
         
     }
 
-    .product {
-        &__card {
-            &-img {
-                height: 200px;  
-            }
-            &-title {
-                font-size: 13px;
-            }
-            .page__basket-btn {
-                font-size: 10px;
-                &::after {
-                    width: 13px;
-                    height: 13px;
-                }
-            }
-            .product__card-link {
-                font-size: 12px;    
-            }
-        }
-    }
+   
 
     .constructor {
         &__elements {
@@ -2013,7 +2042,13 @@
     }
 
     .product {
+       
         &__card {
+            max-width: 160px;
+
+            &-img {
+                height: auto;
+            }
             &-title {
                 font-size: 11px;
             }

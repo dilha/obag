@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import MetaSeo from '@/mixins/MetaSeo.vue'
 import AppIntroArrow from '~/components/intro/AppIntroArrow.vue'
 import AppNews from '~/components/news/AppNews.vue'
 
@@ -22,6 +23,7 @@ export default {
     AppIntroArrow,
     AppNews,
   },
+  mixins: [MetaSeo],
   data() {
     return {
       content: null,

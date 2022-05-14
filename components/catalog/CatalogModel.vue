@@ -12,14 +12,17 @@
       </div>
     </div>
     <swiper v-if="selectedCategory" ref="reviewsSlider" class="catalog__model-slider" :options="swiperOption">
-      <swiper-slide v-for="item in selectedCategory.subcategories" :key="item.id"
+      <swiper-slide
+v-for="item in selectedCategory.subcategories" :key="item.id"
         :class="['catalog__model-item', { 'is-active': selectedSubCategory === item.id }]" :data-id="item.id"
         @click.native.stop="handleToggleSubcategory(item)">
         <template v-if="item.preview_image">
-          <img v-if="selectedSubCategory === item.id" :src="item.preview_image" :alt="item.title" />
-          <img v-else :src="item.image" :alt="item.title" />
+          <img :src="getImage(item)" alt="obag" />
+          
+          <!-- <img v-if="selectedSubCategory === item.id" :src="item.preview_image" :alt="item.title" /> -->
+          <!-- <img v-else :src="item.image" :alt="item.title" /> -->
         </template>
-        <img v-else :src="item.image" :alt="item.title" />
+        <img v-else src="@/assets/images/icons/obag.png" :alt="item.title" />
       </swiper-slide>
     </swiper>
   </div>
@@ -66,6 +69,14 @@ export default {
     },
     handleClearFilters() {
       this.$emit('clear-filters')
+    },
+    getImage(item) {
+      if(item.preview_image) {
+        return item.preview_image
+      } 
+      else {
+        return require('@/' + 'assets/images/icons/obag.png')
+      }
     }
   },
 }
