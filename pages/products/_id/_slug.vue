@@ -131,8 +131,12 @@
             </div>
             <div class="characteristic__info-content">
               <div v-html="product[productInfo]"></div>
+              <p v-if="productInfo === 'reviews.text' && isLoggedIn">
+                <a class="account__link" @click.prevent="showReviewModal"> Оставить отзыв </a>
+              </p>
             </div>
           </div>
+
           <div class="characteristic__accordion">
             <div class="characteristic__accordion-title" @click="toggleShowAccordionFirst">
               Оплата и доставка
@@ -197,6 +201,8 @@
       </div>
     </div>
     <modal-one-click-order v-if="OrderModal" @close="OrderModal = false" />
+    <app-modal-review :productId="this.$route.params.id" v-if="isVisibleReviewModal"
+      @close="isVisibleReviewModal = false" />
     <transition name="fade">
       <app-product-added v-if="isShownAddedTransition" />
     </transition>
@@ -204,7 +210,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
 import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '~/store/cart'
@@ -214,6 +220,7 @@ import IconBookmark from '~/components/icons/IconBookmark.vue'
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
 import ModalOneClickOrder from '@/components/modal/AppModalOneClickOrder.vue'
 import AppProductAdded from '~/components/modal/AppProductAdded.vue'
+import AppModalReview from '~/components/modal/AppModalReview.vue'
 import 'hooper/dist/hooper.css'
 
 export default {
@@ -226,6 +233,7 @@ export default {
     AppPartsCard,
     ModalOneClickOrder,
     AppProductAdded,
+    AppModalReview
   },
   mixins: [MetaSeo],
   data() {
@@ -240,6 +248,7 @@ export default {
       showAccordionFirst: false,
       showAccordionSecond: false,
       isShownAddedTransition: false,
+      isVisibleReviewModal: false,
       product: {},
       isFavorite: false,
       productInfo: null,
@@ -264,6 +273,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('auth', ['isLoggedIn']),
     ...mapGetters('cart', ['getProductQuantityById']),
   },
   mounted() {
@@ -287,7 +297,9 @@ export default {
       this.productInfo = selectInfo
       console.log(this.productInfo)
     },
-
+    showReviewModal() {
+      this.isVisibleReviewModal = true
+    },
     toggleShowAccordionFirst() {
       this.showAccordionFirst = !this.showAccordionFirst
     },
