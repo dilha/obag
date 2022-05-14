@@ -1,9 +1,6 @@
 <template>
   <div v-if="item" class="parts">
-    <nuxt-link
-      class="product__card-link"
-      :to="{ name: 'products-id', params: { id: item.id } }"
-    >
+    <nuxt-link class="product__card-link" :to="{ name: 'products-id', params: { id: item.id } }">
       <img class="parts__img" :src="item.image" alt="" />
     </nuxt-link>
     <div class="parts__content">
@@ -15,13 +12,15 @@
         <p>1</p>
       </div>
       <div class="parts__price">
-        {{ item.price }}тг
+        {{ numberWithSpaces(item.price) }} тг
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { numberWithSpaces } from '~/helpers/utils'
+
 export default {
   name: 'AppPartsCard',
   props: {
@@ -31,6 +30,7 @@ export default {
     },
   },
   methods: {
+    numberWithSpaces,
     removeElement() {
       this.$emit('deleteElement', this.item)
     },
