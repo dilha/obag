@@ -29,8 +29,8 @@
     max-width: max-content !important;
   }
   .swiper-wrapper {
-    height: 50px;
-    max-height: 50px;
+    height: 85px;
+    max-height: 85px;
     // justify-content: space-between;
   }
   &__model {
@@ -38,7 +38,7 @@
     margin-bottom: 35px;
 
     img {
-       max-width: 60px;
+      max-width: 60px;
     }
 
     &-buttons {
@@ -84,14 +84,26 @@
   }
   &__model-item {
     box-sizing: border-box;
-    min-width: 75px;
+    min-width: 100px;
+    height: 75px;
     text-align: center;
-    img {
-      //width: 42px;
-      // height: 40px;
-      height: 100%;
-      margin: 0 auto;
-      object-fit: contain;
+    &-image {
+      height: 50px;
+      margin: 0 auto 5px;
+      img {
+        //width: 42px;
+        // height: 40px;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    &-cover-image {
+      margin: 20px auto 0;
+    }
+    &-title {
+      font-size: 11px;
+      line-height: 120%;
+      font-weight: 300;
     }
     &.is-active {
       border-bottom: 1px solid black;

@@ -6,13 +6,8 @@
       </h3>
 
       <div v-if="productType" class="constructor__inner">
-        <div
-          v-for="item in productType"
-          :key="item.id"
-          class="constructor__item"
-          :class="{ active: selectedType.id === item.id }"
-          @click="getTypesProducts(item)"
-        >
+        <div v-for="item in productType" :key="item.id" class="constructor__item"
+          :class="{ active: selectedType.id === item.id }" @click="getTypesProducts(item)">
           <div class="constructor__item-images">
             <img :src="item.square_image" alt="" />
           </div>
@@ -23,13 +18,9 @@
       </div>
 
       <div v-if="selectedConfiguratorMenu" class="constructor__buttons">
-        <button
-          v-for="(constructor, index) in productConstructor.categories"
-          :key="index"
-          class="constructor__btn page__border-btn"
-          :class="{ active: constructor.id === selectedConfiguratorMenu.id }"
-          @click="selectConfiguratorMenu(constructor)"
-        >
+        <button v-for="(constructor, index) in productConstructor.categories" :key="index"
+          class="constructor__btn page__border-btn" :class="{ active: constructor.id === selectedConfiguratorMenu.id }"
+          @click="selectConfiguratorMenu(constructor)">
           {{ constructor.title }}
         </button>
       </div>
@@ -38,62 +29,40 @@
         <div class="constructor__product">
           <h3 class="constructor__product-title"></h3>
           <div class="constructor__card">
-            <div
-              ref="obagConstuctor"
-              class="constructor__card-img"
-              :style="{
-                backgroundImage: `${
-                  initBackgroundImage
-                    ? initBackgroundImage
-                    : backgroundImagesArray
-                        .filter((element) => element !== '')
-                        .join()
+            <div ref="obagConstuctor" class="constructor__card-img" :style="{
+              backgroundImage: `${initBackgroundImage
+                  ? initBackgroundImage
+                  : backgroundImagesArray
+                    .filter((element) => element !== '')
+                    .join()
                 }`,
-              }"
-            ></div>
-            <button
-              class="constructor__card-btn page__border-btn"
-              @click="clearElements"
-            >
+            }"></div>
+            <button class="constructor__card-btn page__border-btn" @click="clearElements">
               Сбросить
             </button>
           </div>
           <div class="constructor__selected">
             <h6 class="constructor__selected-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
-            <app-parts-card
-              v-for="selected in selectedElements"
-              :key="selected.id"
-              :item="selected"
-            />
+            <app-parts-card v-for="selected in selectedElements" :key="selected.id" :item="selected" />
             <div class="constructor__selected-total">
               <p class="constructor__selected-text">Всего:</p>
               <p class="constructor__selected-number">
                 {{ totalAll }}
               </p>
             </div>
-            <button
-              class="constructor__selected-btn"
-              @click="addElementsToCart"
-            >
+            <button class="constructor__selected-btn" @click="addElementsToCart">
               В корзину
             </button>
           </div>
         </div>
         <div class="constructor__elements">
           <h6 class="constructor__elements-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
-          <div
-            v-if="selectedConfiguratorMenu"
-            class="constructor__elements-inner"
-          >
-            <div
-              v-for="element in selectedConfiguratorMenu.constructor_elements"
-              :key="element.id"
-              class="constructor__elements-item"
-              @click="addBackground(element)"
-            >
+          <div v-if="selectedConfiguratorMenu" class="constructor__elements-inner">
+            <div v-for="element in selectedConfiguratorMenu.constructor_elements" :key="element.id"
+              class="constructor__elements-item" @click="addBackground(element)">
               <img :src="element.image" alt="" />
               <p class="constructor__elements-price">
-                {{ element.price }}₸
+                {{ numberWithSpaces(element.price) }} ₸
               </p>
             </div>
           </div>
@@ -109,6 +78,7 @@ import MetaSeo from '@/mixins/MetaSeo.vue'
 
 import { actionTypes } from '@/store/product-constructor'
 import { actionTypes as cartActionTypes } from '~/store/cart'
+import { numberWithSpaces } from '~/helpers/utils'
 
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
 
@@ -168,11 +138,12 @@ export default {
       this.selectedType = types[0]
     })
 
-    this.getConstructor('bags').then(() => {
+    this.getConstructor(2).then(() => {
       this.selectedConfiguratorMenu = this.productConstructor.categories[0]
     })
   },
   methods: {
+    numberWithSpaces,
     ...mapActions('product-constructor', { getTypes: actionTypes.loadType }),
     ...mapActions('product-constructor', {
       getConstructor: actionTypes.loadConstructor,

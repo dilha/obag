@@ -3,7 +3,7 @@
     <div class="container">
       <h3 class="page__title">Моя учетная запись</h3>
       <div class="account__inner">
-        <profile-navigation @show-review-modal="showReviewModal" />
+        <profile-navigation />
         <div class="account__info">
           <div class="account__info-name">
             <p class="account__title">Имя Фамилия:</p>
@@ -38,7 +38,6 @@
     </div>
     <app-edit-data v-if="isVisibleEditModal" @close="isVisibleEditModal = false" />
     <app-edit-password v-if="isVisiblePasswordModal" @close="isVisiblePasswordModal = false" />
-    <app-modal-review v-if="isVisibleReviewModal" @close="isVisibleReviewModal = false" />
   </section>
 </template>
 
@@ -47,24 +46,23 @@ import { mapState } from 'vuex'
 import ProfileNavigation from '@/components/my/ProfileNavigation.vue'
 import AppEditData from '~/components/modal/AppEditData.vue'
 import AppEditPassword from '~/components/modal/AppEditPassword.vue'
-import AppModalReview from '~/components/modal/AppModalReview.vue'
 export default {
   name: 'AccountPage',
-  components: { ProfileNavigation, AppEditData, AppEditPassword, AppModalReview },
+  components: {
+    ProfileNavigation,
+    AppEditData,
+    AppEditPassword
+  },
   data() {
     return {
       isVisibleEditModal: false,
       isVisiblePasswordModal: false,
-      isVisibleReviewModal: false,
     }
   },
   computed: {
     ...mapState('auth', ['user', 'isLoggedIn']),
   },
   methods: {
-    showReviewModal() {
-      this.isVisibleReviewModal = true
-    }
   }
 }
 </script>
