@@ -1,30 +1,48 @@
 .constructor {
   padding: 120px 0;
   &__title {
-    color: #3D3935;
+    color: #3d3935;
     margin-bottom: 45px;
     max-width: none;
+  }
+  &__top {
+    display: flex;
+    margin-bottom: 45px;
+    &-btn {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      color: #3d3935;
+      border: none;
+      background: none;
+      & + & {
+        margin-left: 40px;
+      }
+      &.active {
+        color: #d05871;
+      }
+    }
   }
   &__inner {
     display: flex;
     gap: 30px;
     overflow-x: auto;
+    margin-bottom: 20px;
+
     // flex-wrap: wrap;
   }
   &__item {
-    margin-bottom: 20px;
     max-width: 100px;
     cursor: pointer;
     text-align: center;
     border-radius: 20px;
 
     &.active &-title {
-      color: #FFD0DA;
+      color: #ffd0da;
     }
-      
 
     &-images {
-      background: linear-gradient(180deg, #F3F3F3 0%, #F6F6F6 0.01%);
+      background: linear-gradient(180deg, #f3f3f3 0%, #f6f6f6 0.01%);
       border-radius: 5px;
       width: 100px;
       height: 100px;
@@ -37,7 +55,7 @@
     &-title {
       font-size: 14px;
       line-height: 21px;
-      color: #9C9C9C;
+      color: #9c9c9c;
     }
   }
 
@@ -47,16 +65,15 @@
     margin: 40px 0 30px;
     flex-wrap: wrap;
     align-items: center;
-    
   }
 
   &__btn {
     margin-bottom: 20px;
 
     &.active {
-      background-color: #FFD0DA;
-      border-color: #FFD0DA;
-      color: #D05871;
+      background-color: #ffd0da;
+      border-color: #ffd0da;
+      color: #d05871;
     }
   }
 
@@ -66,15 +83,16 @@
   }
 
   &__product {
-    max-width: 699px;
-    width: 100%;
-    margin-right: 20px;
+    max-width: 650px;
+    width: 47%;
+    min-width: 47%;
+    margin-right: 3%;
     &-title {
       font-weight: bold;
       font-size: 64px;
       line-height: 88.4%;
       text-transform: uppercase;
-      color: #3D3935;
+      color: #3d3935;
       margin-bottom: 50px;
     }
   }
@@ -94,7 +112,7 @@
     &-buttons {
       display: flex;
       align-items: center;
-      margin-bottom:  35px;
+      margin-bottom: 35px;
       justify-content: center;
     }
     &-arrow {
@@ -104,7 +122,7 @@
       border: none;
       font-size: 14px;
       line-height: 21px;
-      color: #3D3935;
+      color: #3d3935;
       svg {
         width: 55px;
         height: 55px;
@@ -117,7 +135,7 @@
     &-title {
       font-size: 18px;
       line-height: 132%;
-      color: #3D3935;
+      color: #3d3935;
       margin-bottom: 33px;
       font-weight: 600;
     }
@@ -126,38 +144,45 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid #F6F6F6;
-      border-bottom: 1px solid #F6F6F6;
+      border-top: 1px solid #f6f6f6;
+      border-bottom: 1px solid #f6f6f6;
       padding: 24px 0;
     }
 
     &-btn {
-      background: #D05871;
-      border: 2px solid #D05871;
+      background: #d05871;
+      border: 2px solid #d05871;
       border-radius: 100px;
       padding: 16px 24px;
       margin-top: 24px;
       font-size: 14px;
       line-height: 17px;
-      color: #FFFFFF;
+      color: #ffffff;
     }
   }
 
   &__elements {
+    width: 50%;
+    min-width: 50%;
     &-title {
+      max-width: 245px;
       font-weight: 600;
       font-size: 18px;
       line-height: 132%;
-      color: #3D3935;
-      max-width: 245px;
+      color: #3d3935;
       margin-bottom: 56px;
     }
     &-inner {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      // grid-template-columns: repeat(3, 1fr);
+      row-gap: 40px;
+      column-gap: 20px;
     }
     &-item {
+      width: 165px;
+      height: 185px;
       border-radius: 20px;
       border: 1px solid #000000;
       cursor: pointer;
@@ -166,6 +191,7 @@
         border-top-left-radius: 20px;
         width: 150px;
         height: 150px;
+        margin: 0 0 0 7.5px;
         object-fit: cover;
       }
     }
@@ -175,5 +201,4 @@
       margin-bottom: 5px;
     }
   }
-
 }
