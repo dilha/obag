@@ -281,6 +281,9 @@ export default {
       this.selectedComplect = {}
       this.setSelectedSubCategory(null)
       this.loadAllCategoryProducts(category)
+      this.$router.push({name: 'catalog-slug', params: {
+        slug: category.slug
+      }})
     },
     togglePrice() {
       this.showPrice = !this.showPrice

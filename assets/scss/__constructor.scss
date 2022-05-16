@@ -179,6 +179,8 @@
       // grid-template-columns: repeat(3, 1fr);
       row-gap: 40px;
       column-gap: 20px;
+      max-height: 800px;
+      overflow-y: auto;
     }
     &-item {
       width: 165px;
