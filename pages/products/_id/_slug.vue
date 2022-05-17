@@ -56,7 +56,7 @@
           <!-- Buy buttons -->
           <div v-else class="characteristic__buttons">
             <template>
-              <div v-if="isExist">
+              <div v-if="getProductIsAvailable">
                 <button class="characteristic__buy" @click="addProductCart">
                   Купить
                 </button>
@@ -112,9 +112,9 @@
                 <nuxt-link to="/constructor" class="characteristic__link characteristic__link-constructor">
                   Конструктор
                 </nuxt-link>
-                <nuxt-link to="/shopping" class="characteristic__link characteristic__link-foto">
+                <a href="https://obag.ua/" target="_blank" class="characteristic__link characteristic__link-foto">
                   Запросить фото
-                </nuxt-link>
+                </a>
               </div>
             </template>
           </div>
@@ -195,8 +195,11 @@
           </div>
 
 
-          <div class="characteristic__accordion"><a class="characteristic__accordion-title"
-              href="https://obag.ua/zaprosit-photo"> Запросить фото </a></div>
+          <div class="characteristic__accordion">
+            <a href="https://obag.ua/" target="_blank" class="characteristic__accordion-title">
+              Запросить фото
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -240,7 +243,7 @@ export default {
     return {
       HooperIsActive: '',
       HooperIsNotActive: '',
-      isExist: '',
+      isExist: false,
       email: '',
       NotifyModal: false,
       NotifyModalEnd: false,
@@ -275,6 +278,9 @@ export default {
   computed: {
     ...mapState('auth', ['isLoggedIn']),
     ...mapGetters('cart', ['getProductQuantityById']),
+    getProductIsAvailable() {
+      return this.product?.available && this.product?.remainder > 0
+    }
   },
   mounted() {
     console.log(this.$route, this.$router)

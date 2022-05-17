@@ -29,7 +29,6 @@
               <h5 class="contacts__content-title">
                 {{ contact.number }}
               </h5>
-              <p class="contacts__content-text">(многоканальный)</p>
             </div>
             <div class="contacts__content-item contacts__content-clock">
               <h5 class="contacts__content-title">Время работы</h5>

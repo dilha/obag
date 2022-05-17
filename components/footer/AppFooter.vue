@@ -55,10 +55,10 @@
           </div>
           <div class="footer__info">
             <a href="tel:+7 701 348 1947" class="footer__info-text footer__info-phone">
-              +7 701 348 1947 ( многоканальный )
+              +7 701 348 1947
             </a>
             <p class="footer__info-text footer__info-schedule">
-              Время работы пн-вс с 9:00 до 20:00
+              Время работы пн-вс с 10:00 до 20:00
             </p>
           </div>
         </div>
