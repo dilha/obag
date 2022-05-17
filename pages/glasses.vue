@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-intro-button :image="category.image" :category-id="4">
+    <app-intro-button :image="category.image" :category-id="category.id" :category-slug="category.slug">
       <h2 class="intro__title">
         {{ category.title }}
       </h2>
@@ -8,10 +8,7 @@
         {{ category.text }}
       </p>
     </app-intro-button>
-    <app-subcategory-cards
-      :category-id="category.id"
-      :items="category.subcategories"
-    />
+    <app-subcategory-cards :category-id="category.id" :category-slug="category.slug" :items="category.subcategories" />
     <app-combination :items="category.constructor" />
     <app-like :id="category.id" />
     <app-news />

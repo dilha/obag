@@ -5,7 +5,7 @@
         {{ pageTitle }}
       </h3>
     </app-subcat-intro-button>
-    <app-complete-cards :category-id="category.id" :subcat-id="subcategoryId" :items="subcategory.completes" />
+    <app-complete-cards :items="subcategory.completes" />
     <app-like :id="category.id" />
     <app-news />
   </div>
@@ -33,7 +33,7 @@ export default {
   mixins: [MetaSeo],
   data() {
     return {
-      сategoryId: null,
+      categoryId: null,
       categorySlug: null,
       subcategoryId: null,
       subcategorySlug: null
@@ -47,12 +47,12 @@ export default {
     },
   },
   mounted() {
-    this.сategoryId = this.$route?.params?.id
+    this.categoryId = this.$route?.params?.id
     this.categorySlug = this.$route?.params?.slug
     this.subcategoryId = this.$route?.params?.subcatId
     this.subcategorySlug = this.$route?.params?.subcatSlug
-    console.log(this.сategoryId, this.categorySlug, this.subcategoryId, this.subcategorySlug)
-    this.getCategory(this.сategoryId)
+    console.log(this.categoryId, this.categorySlug, this.subcategoryId, this.subcategorySlug)
+    this.getCategory(this.categoryId)
     this.getSubcategory(this.subcategoryId)
     this.loadAllCategories()
   },

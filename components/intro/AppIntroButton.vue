@@ -1,7 +1,7 @@
 <template>
   <section class="intro" :style="{ backgroundImage: `url(${image})` }">
     <slot></slot>
-    <nuxt-link class="intro__btn" :to="`/catalog/${this.categoryId}/${this.categorySlug}`">
+    <nuxt-link class="intro__btn" :to="`/catalog/${categoryId}/${categorySlug}`">
       Смотреть
     </nuxt-link>
   </section>

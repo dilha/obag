@@ -2,7 +2,7 @@
    <section class="intro" :style="{ backgroundImage: `url(${image})` }">
       <slot></slot>
       <nuxt-link class="intro__btn"
-         :to="`/catalog/${this.categoryId}/${this.categorySlug}/${this.subcategoryId}/${this.subcategorySlug}`">
+         :to="`/catalog/${categoryId}/${categorySlug}/${subcategoryId}/${subcategorySlug}`">
          Смотреть
       </nuxt-link>
    </section>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-intro-button :image="category.image" :category-id="3">
+    <app-intro-button :image="category.image" :category-id="category.id" :category-slug="category.slug">
       <h2 class="intro__title">
         {{ category.title }}
       </h2>
@@ -8,19 +8,16 @@
         {{ category.text }}
       </p>
     </app-intro-button>
-    <app-subcategory-cards
-      :category-id="category.id"
-      :items="category.subcategories"
-    />
-    <app-combination :items="category['constructor']" />
+    <app-subcategory-cards :category-id="category.id" :category-slug="category.slug" :items="category.subcategories" />
+    <app-combination :items="category.constructor" />
     <app-like :id="category.id" />
     <app-news />
   </div>
 </template>
 
 <script>
-import MetaSeo from '@/mixins/MetaSeo.vue'
 import { mapActions, mapState } from 'vuex'
+import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '@/store'
 import { actionTypes as catalogActionTypes } from '@/store/catalog'
 import AppIntroButton from '~/components/intro/AppIntroButton.vue'

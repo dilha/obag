@@ -60,6 +60,8 @@ export default {
       routeCategory: {
         id: -1,
       },
+      routeSubcategory: -1,
+      routeComplete: -1,
     }
   },
   computed: {
@@ -69,7 +71,7 @@ export default {
     // category index init
     if (this.$route?.params?.id) {
       this.routeCategory = this.categories.find(
-        (c) => c.id === this.$route?.params?.id
+        (c) => c.id === parseInt(this.$route?.params?.id)
       )
     }
   },

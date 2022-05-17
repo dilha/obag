@@ -23,7 +23,6 @@ import AppNews from '~/components/news/AppNews.vue'
 
 export default {
   name: 'BagsPage',
-
   components: {
     AppIntroButton,
     AppSubcategoryCards,
