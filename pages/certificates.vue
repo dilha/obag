@@ -1,16 +1,12 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="certificates">
       <h3 class="intro__title intro__title-arrow">Подарочные сертификаты</h3>
     </app-intro-arrow>
-    <div class="certificates page__block">
+    <div class="certificates page__block" id="certificates">
       <div class="container">
         <div v-if="certificates" class="certificates__inner">
-          <app-certificates-cards
-            v-for="(item, index) in certificates"
-            :key="index"
-            :item="item"
-          />
+          <app-certificates-cards v-for="(item, index) in certificates" :key="index" :item="item" />
           <!-- <product-card v-for="item in certificates" :key="item" :item="item"/> -->
         </div>
       </div>

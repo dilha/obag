@@ -1,11 +1,11 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="vacancies">
       <h3 class="intro__title intro__title-arrow">
         Актуальные вакансии компании O bag KAZAKHSTAN
       </h3>
     </app-intro-arrow>
-    <div class="vacancies inside">
+    <div class="vacancies inside" id="vacancies">
       <div class="container">
         <div class="vacancies__block inside__block">
           <h3 class="vacancies__title page__title">Присоединяйтесь к нам!</h3>

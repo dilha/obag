@@ -1,17 +1,13 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="shop">
       <h3 class="intro__title intro__title-arrow">Магазины O bag KAZAKHSTAN</h3>
     </app-intro-arrow>
-    <section class="shop">
+    <section class="shop" id="shop">
       <div v-if="items" class="container">
         <div class="shop__block page__block">
           <div class="shop__inner">
-            <app-shop-cards
-              v-for="(item, index) in items"
-              :key="index"
-              :shop="item"
-            />
+            <app-shop-cards v-for="(item, index) in items" :key="index" :shop="item" />
           </div>
         </div>
         <app-shop />

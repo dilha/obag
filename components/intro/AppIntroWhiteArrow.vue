@@ -1,7 +1,7 @@
 <template>
     <section class="intro intro-red">
         <slot></slot>
-        <a class="intro__arrow" href="#?">
+        <a class="intro__arrow" :href="`#${link}`">
             <icon-white-arrow />
         </a>
     </section>
@@ -15,8 +15,14 @@ export default {
     components: {
         IconWhiteArrow,
     },
-    methods:{
-        getImage(path){
+    props: {
+        link: {
+            type: String,
+            default: '?'
+        }
+    },
+    methods: {
+        getImage(path) {
             return require('@/' + path)
         },
     }

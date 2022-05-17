@@ -1,11 +1,11 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="loyalty">
       <h3 class="intro__title intro__title-arrow">
         Система лояльности от компании O bag KAZAKHSTAN
       </h3>
     </app-intro-arrow>
-    <div v-if="content" class="loyalty">
+    <div v-if="content" class="loyalty" id="loyalty">
       <div class="container" v-html="content.content"></div>
     </div>
     <app-news />

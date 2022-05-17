@@ -1,13 +1,13 @@
 <template>
   <div v-if="content">
-    <app-intro-arrow>
+    <app-intro-arrow link="about-brand">
       <h3 class="intro__title intro__title-arrow">
         <!-- Информация
               о бренде O bag -->
         {{ content.title }}
       </h3>
     </app-intro-arrow>
-    <div class="about__brand">
+    <div class="about__brand" id="about-brand">
       <div class="container">
         <div class="about__brand-text" v-html="content.text"></div>
         <!-- <p class="about__brand-text">

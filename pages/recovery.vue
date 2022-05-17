@@ -1,11 +1,11 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="recovery">
       <h3 class="intro__title intro__title-arrow">
         Как осуществить возврат продукции O bag
       </h3>
     </app-intro-arrow>
-    <div v-if="content" class="recovery inside">
+    <div v-if="content" class="recovery inside" id="recovery">
       <div class="container" v-html="content.content"></div>
     </div>
     <app-news />
