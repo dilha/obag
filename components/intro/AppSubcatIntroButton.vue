@@ -1,7 +1,8 @@
 <template>
    <section class="intro" :style="{ backgroundImage: `url(${image})` }">
       <slot></slot>
-      <nuxt-link class="intro__btn" :to="{ name: 'catalog', params: { id: categoryId, subcatId } }">
+      <nuxt-link class="intro__btn"
+         :to="`/catalog/${this.categoryId}/${this.categorySlug}/${this.subcategoryId}/${this.subcategorySlug}`">
          Смотреть
       </nuxt-link>
    </section>
@@ -9,20 +10,27 @@
 
 <script>
 export default {
-   name: 'AppIntro',
+   name: 'AppSubcatIntro',
    props: {
-      categoryId: {
-         type: Number,
-         default: -1,
-      },
-      subcatId: {
-         type: Number,
-         default: -1,
-      },
       image: {
          type: String,
          required: true,
       },
    },
+   data() {
+      return {
+         categoryId: null,
+         categorySlug: null,
+         subcategoryId: null,
+         subcategorySlug: null
+      }
+   },
+   mounted() {
+      this.categoryId = this.$route?.params?.id
+      this.categorySlug = this.$route?.params?.slug
+      this.subcategoryId = this.$route?.params?.subcatId
+      this.subcategorySlug = this.$route?.params?.subcatSlug
+      console.log(this.сategoryId, this.categorySlug, this.subcategoryId, this.subcategorySlug)
+   }
 }
 </script>

@@ -1,19 +1,11 @@
 <template>
   <div>
-    <app-subcat-intro-button
-      :image="category.image"
-      :category-id="сategoryId"
-      :subcat-id="subcategoryId"
-    >
+    <app-subcat-intro-button :image="category.image">
       <h3 class="intro__title">
         {{ pageTitle }}
       </h3>
     </app-subcat-intro-button>
-    <app-complete-cards
-      :category-id="category.id"
-      :subcat-id="subcategoryId"
-      :items="subcategory.completes"
-    />
+    <app-complete-cards :category-id="category.id" :subcat-id="subcategoryId" :items="subcategory.completes" />
     <app-like :id="category.id" />
     <app-news />
   </div>
@@ -38,11 +30,13 @@ export default {
     AppNews,
     AppCompleteCards,
   },
-    mixins: [MetaSeo],
+  mixins: [MetaSeo],
   data() {
     return {
       сategoryId: null,
+      categorySlug: null,
       subcategoryId: null,
+      subcategorySlug: null
     }
   },
   computed: {
@@ -54,7 +48,10 @@ export default {
   },
   mounted() {
     this.сategoryId = this.$route?.params?.id
+    this.categorySlug = this.$route?.params?.slug
     this.subcategoryId = this.$route?.params?.subcatId
+    this.subcategorySlug = this.$route?.params?.subcatSlug
+    console.log(this.сategoryId, this.categorySlug, this.subcategoryId, this.subcategorySlug)
     this.getCategory(this.сategoryId)
     this.getSubcategory(this.subcategoryId)
     this.loadAllCategories()
