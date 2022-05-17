@@ -1,11 +1,11 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="research">
       <h3 class="intro__title intro__title-arrow">
         Исследования и инновации компании O bag
       </h3>
     </app-intro-arrow>
-    <div v-if="content" class="research inside">
+    <div v-if="content" class="research inside" id="research">
       <div class="container" v-html="content.content"></div>
     </div>
     <app-news />

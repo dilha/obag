@@ -1,7 +1,7 @@
 <template>
   <section class="intro" :style="{ backgroundImage: `url(${image})` }">
     <slot></slot>
-    <nuxt-link class="intro__btn" :to="{ name: 'catalog', params: { id: categoryId } }">
+    <nuxt-link class="intro__btn" :to="`/catalog/${categoryId}/${categorySlug}`">
       Смотреть
     </nuxt-link>
   </section>
@@ -15,10 +15,17 @@ export default {
       type: Number,
       default: -1,
     },
+    categorySlug: {
+      type: String,
+      default: '',
+    },
     image: {
       type: String,
       required: true,
     },
   },
+  mounted() {
+    console.log(this.categoryId, this.categorySlug)
+  }
 }
 </script>

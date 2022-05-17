@@ -1,9 +1,9 @@
 <template>
   <div>
-    <app-intro-white-arrow>
+    <app-intro-white-arrow link="news">
       <h3 class="intro__title">Promo / News</h3>
     </app-intro-white-arrow>
-    <section class="news page__block">
+    <section class="news page__block" id="news">
       <div class="container">
         <div class="news__top page__block-top">
           <h3 class="news__title page__title">Новости компании</h3>

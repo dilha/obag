@@ -1,9 +1,9 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="delivery">
       <h3 class="intro__title intro__title-arrow">Доставка и оплата</h3>
     </app-intro-arrow>
-    <div v-if="content" class="delivery inside">
+    <div v-if="content" class="delivery inside" id="delivery">
       <div class="container" v-html="content.text"></div>
     </div>
     <app-news />

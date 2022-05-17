@@ -1,11 +1,11 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="warranty">
       <h3 class="intro__title intro__title-arrow">
         Гарантия на товары O bagПравила использования подарочных сертификатов
       </h3>
     </app-intro-arrow>
-    <div v-if="content" class="warranty inside">
+    <div v-if="content" class="warranty inside" id="warranty">
       <div class="container" v-html="content.content"></div>
     </div>
     <app-news />

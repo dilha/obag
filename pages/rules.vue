@@ -1,11 +1,11 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="rules">
       <h3 class="intro__title intro__title-arrow">
         Правила использования подарочных сертификатов
       </h3>
     </app-intro-arrow>
-    <div class="rules inside">
+    <div class="rules inside" id="rules">
       <div class="container">
         <div class="rules__block inside__block">
           <h3 class="rules__title page__title inside__title">

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="about-products">
       <h3 class="intro__title intro__title-arrow">
         Информация о продукции O bag
       </h3>
     </app-intro-arrow>
-    <div class="about__products">
+    <div class="about__products" id="about-products">
       <div class="container">
         <h3 class="about__products-title page__title">Сумки</h3>
         <div class="about__content">

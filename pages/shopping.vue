@@ -1,9 +1,9 @@
 <template>
   <div>
-    <app-intro-arrow>
+    <app-intro-arrow link="shopping">
       <h3 class="intro__title intro__title-arrow">Мобильный шопинг</h3>
     </app-intro-arrow>
-    <div v-if="content" class="shopping inside">
+    <div v-if="content" class="shopping inside" id="shopping">
       <div class="container" v-html="content.text"></div>
     </div>
     <app-news />

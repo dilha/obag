@@ -8,35 +8,20 @@
           <sorting-select />
         </div>
       </div>
-      <div
-        class="burger bar-logo"
-        :class="{ active: isAppear }"
-        @click="isAppear = !isAppear"
-      >
+      <div class="burger bar-logo" :class="{ active: isAppear }" @click="isAppear = !isAppear">
         <span class="burger-line"></span>
       </div>
 
       <div class="catalog__page">
         <div :class="['aside-wrapper', { appear: isAppear }]">
-          <catalog-aside
-            ref="catalogAside"
-            :route-category="routeCategory"
-            :route-subcategory="routeSubcategory"
-            :route-complete="routeComplete"
-          />
+          <catalog-aside ref="catalogAside" :route-category="routeCategory" :route-subcategory="routeSubcategory"
+            :route-complete="routeComplete" />
         </div>
 
         <div class="catalog__content">
-          <catalog-model
-            ref="catalogModel"
-            @clear-filters="handleClearFilters"
-          />
+          <catalog-model ref="catalogModel" @clear-filters="handleClearFilters" />
           <div v-if="products.length" class="catalog__inner">
-            <product-card
-              v-for="item in products"
-              :key="item.id"
-              :item="item"
-            />
+            <product-card v-for="item in products" :key="item.id" :item="item" />
           </div>
           <div v-else>
             <img v-if="isLoading" src="@/assets/images/loader.gif" alt="" />
@@ -53,7 +38,6 @@
 import { mapState, mapActions } from 'vuex'
 import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '@/store/catalog'
-import productStorage from '@/helpers/products-storage'
 import SortingSelect from '~/components/catalog/SortingSelect.vue'
 import CatalogAside from '~/components/catalog/CatalogAside.vue'
 import CatalogModel from '~/components/catalog/CatalogModel.vue'
@@ -78,7 +62,6 @@ export default {
       },
       routeSubcategory: -1,
       routeComplete: -1,
-      productStorage,
     }
   },
   computed: {
@@ -88,44 +71,8 @@ export default {
     // category index init
     if (this.$route?.params?.id) {
       this.routeCategory = this.categories.find(
-        (c) => c.id === this.$route?.params?.id
+        (c) => c.id === parseInt(this.$route?.params?.id)
       )
-      productStorage.setRootCategory(this.$route?.params?.id)
-    } else if (productStorage.hasRootCategory()) {
-      this.routeCategory = this.categories.find(
-        (c) => c.id === productStorage.getRootCategory()
-      )
-    } else {
-      this.routeCategory = { id: -1 }
-      productStorage.removeRootCategory()
-    }
-
-    // subcategory index init
-    if (this.routeCategory?.id !== -1) {
-      if (this.$route?.params?.subcatId) {
-        this.routeSubcategory = this.$route?.params?.subcatId
-        productStorage.setRootSubcategory(this.$route?.params?.subcatId)
-      } else if (productStorage.hasRootSubcategory()) {
-        this.routeSubcategory = productStorage.getRootSubcategory()
-      } else {
-        this.routeSubcategory = -1
-        productStorage.removeRootSubcategory()
-      }
-
-      // complete index init
-      if (this.routeSubcategory !== -1) {
-        if (this.$route?.params?.completeId) {
-          this.routeComplete = this.$route?.params?.completeId
-          productStorage.setRootComplete(this.$route?.params?.completeId)
-        } else if (productStorage.hasRootComplete()) {
-          this.routeComplete = productStorage.getRootComplete()
-        } else {
-          this.routeComplete = -1
-        }
-      }
-    } else {
-      this.routeSubcategory = -1
-      this.getRootComplete = -1
     }
   },
   methods: {
@@ -138,6 +85,7 @@ export default {
   },
 }
 </script>
+
 <style scoped>
 .bar-logo {
   display: none;

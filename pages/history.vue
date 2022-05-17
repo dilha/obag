@@ -1,28 +1,30 @@
 <template>
-    <div>
-        <app-intro item="assets/images/intro/history-intro.jpg"> 
-          <h3 class="intro__title">
-              История и миссия компании O bag
+  <div>
+    <app-intro item="assets/images/intro/history-intro.jpg">
+      <h3 class="intro__title">
+        История и миссия компании O bag
+      </h3>
+    </app-intro>
+    <section class="history">
+      <div class="container">
+        <div v-if="content" class="history__content page__block">
+          <h3 class="history__title page__title">
+            {{ content.title }}
           </h3>
-        </app-intro>
-        <section class="history">
-          <div class="container">
-            <div v-if="content" class="history__content page__block">
-              <h3 class="history__title page__title">
-                {{content.title}}
-              </h3>
-              <div class="history" v-html="content.text"></div>
-              <img class="history__img" :src="content.image" alt="">
-            </div>
-            <div v-if="content" class="history__content page__block">
-              <h3 class="history__title page__title">
-                {{content.title}}
-              </h3>
-              <div class="history" v-html="content.text"></div>
-              <img class="history__img" :src="content.image" alt="">
-            </div>
-            <!-- <div class="history__content page__block"> -->
-              <!-- <h3 class="history__title page__title">
+          <div class="history" v-html="content.text"></div>
+          <img class="history__img" :src="content.image" alt="">
+        </div>
+
+        <!-- <div v-if="content" class="history__content page__block">
+          <h3 class="history__title page__title">
+            {{ content.title }}
+          </h3>
+          <div class="history" v-html="content.text"></div>
+          <img class="history__img" :src="content.image" alt="">
+        </div> -->
+        
+        <!-- <div class="history__content page__block"> -->
+        <!-- <h3 class="history__title page__title">
                 O bag: инновационная итальянская марка, создавшая революцию в индустрии сумок
               </h3>
               <p class="history__text">
@@ -56,8 +58,8 @@
                 Эта философия означает, что клиент O bag становится частью творческого процесса. Создавая свою личную комбинацию, покупатель еще больше подчеркивает уникальность и оригинальность, которые являются отличительной чертой бренда.
               </p>
               <img class="history__img" src="@/assets/images/history/history-1.jpg" alt=""> -->
-            <!-- </div> -->
-            <!-- <div class="history__content page__block">
+        <!-- </div> -->
+        <!-- <div class="history__content page__block">
               <h3 class="history__title page__title">
                 Миссия
               </h3>
@@ -78,10 +80,10 @@
                 <img class="history__img" src="@/assets/images/history/history-3.jpg" alt="">
               </div>
             </div> -->
-          </div>
-        </section>
-        <app-news />
-    </div>
+      </div>
+    </section>
+    <app-news />
+  </div>
 </template>
 
 <script>
@@ -94,9 +96,9 @@ export default {
     AppIntro,
     AppNews,
   },
-   data() {
+  data() {
     return {
-       content: null,
+      content: null,
     }
   },
   mounted() {
@@ -105,10 +107,10 @@ export default {
   methods: {
     getHistory() {
       this.$api
-      .get('/page/history')
-      .then((res)=> {
-        this.content = res.data.content
-      })
+        .get('/page/history')
+        .then((res) => {
+          this.content = res.data.content
+        })
     }
   }
 }
