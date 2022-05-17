@@ -6,10 +6,14 @@ export default {
     }
   },
   async fetch() {
-    await this.$axios.get(`/seo/${this.$route.name}`).then((r) => {
-      console.log(r.data)
-      this.seo = r.data
-    })
+    await this.$axios.get(`/seo/${this.$route.name}`)
+      .then((r) => {
+        // console.log(r.data)
+        this.seo = r.data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   },
   head() {
     return {
@@ -18,10 +22,14 @@ export default {
     }
   },
   created() {
-    this.$axios.get(`/seo/${this.$route.name}`).then((r) => {
-      console.log(r.data)
-      this.seo = r.data
-    })
+    this.$axios.get(`/seo/${this.$route.name}`)
+      .then((r) => {
+        // console.log(r.data)
+        this.seo = r.data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   },
 }
 </script>
