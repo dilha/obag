@@ -3,7 +3,7 @@
     <app-intro-arrow link="contacts">
       <h3 class="intro__title intro__title-arrow">Контакты компании O bag</h3>
     </app-intro-arrow>
-    <div class="contacts" id="contacts">
+    <div id="contacts" class="contacts">
       <div class="container">
         <div v-if="contact" class="contacts__inner">
           <div class="contacts__content">
@@ -38,15 +38,20 @@
             </div>
           </div>
           <form class="contacts__form" @submit.prevent="sendfeedbackForm">
-            <input v-model="feedbackForm.name" class="contacts__form-input" type="text" placeholder="Ваше имя*"
+            <input
+v-model="feedbackForm.name" class="contacts__form-input" type="text" placeholder="Ваше имя*"
               required />
-            <input v-model="feedbackForm.surname" class="contacts__form-input" type="text" placeholder="Ваша фамилия*"
+            <input
+v-model="feedbackForm.surname" class="contacts__form-input" type="text" placeholder="Ваша фамилия*"
               required />
-            <input v-model="feedbackForm.email" class="contacts__form-input" type="text" placeholder="E-mail*"
+            <input
+v-model="feedbackForm.email" class="contacts__form-input" type="text" placeholder="E-mail*"
               required />
-            <input v-model="feedbackForm.number" class="contacts__form-input" type="text" placeholder="Номер телефона*"
+            <input
+v-model="feedbackForm.number" class="contacts__form-input" type="text" placeholder="Номер телефона*"
               required />
-            <textarea id="" v-model="feedbackForm.text" class="contacts__form-textarea" name="" cols="30" rows="10"
+            <textarea
+id="" v-model="feedbackForm.text" class="contacts__form-textarea" name="" cols="30" rows="10"
               placeholder="Сообщение*" required></textarea>
             <div class="contacts__form-checkbox">
               <input id="check" class="contacts__form-check" type="checkbox" />

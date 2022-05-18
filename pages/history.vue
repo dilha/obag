@@ -1,85 +1,39 @@
 <template>
-  <div>
-    <app-intro item="assets/images/intro/history-intro.jpg">
-      <h3 class="intro__title">
-        История и миссия компании O bag
+  <div v-if="content">
+    <app-intro :item="content.main_image">
+      <h3 v-if="content.main_title" class="intro__title">
+        {{ content.main_title }}
       </h3>
     </app-intro>
     <section class="history">
       <div class="container">
-        <div v-if="content" class="history__content page__block">
+        <div class="history__content ">
           <h3 class="history__title page__title">
-            {{ content.title }}
+            {{ content.title_first }}
           </h3>
-          <div class="history" v-html="content.text"></div>
-          <img class="history__img" :src="content.image" alt="">
+
+          <div class="history__text" style="white-space: pre-line">
+            {{ content.text_first }}
+          </div>
+          <img class="history__img" :src="content.image_first" alt="" />
         </div>
 
-        <!-- <div v-if="content" class="history__content page__block">
+        <div class="history__content ">
           <h3 class="history__title page__title">
-            {{ content.title }}
+            {{ content.title_second }}
           </h3>
-          <div class="history" v-html="content.text"></div>
-          <img class="history__img" :src="content.image" alt="">
-        </div> -->
-        
-        <!-- <div class="history__content page__block"> -->
-        <!-- <h3 class="history__title page__title">
-                O bag: инновационная итальянская марка, создавшая революцию в индустрии сумок
-              </h3>
-              <p class="history__text">
-                Компания была основана в 2009 году. Предприниматель из Падуи Микеле Занелла создал комплекты часов, составляющие которых можно «комбинировать» между собой. Уже в 2010 году он представил O clock, часы со сменными силиконовыми ремешками и циферблатами, в Salone del Mobile в Милане. 
-              </p>
-              <p class="history__text">
-                Яркие, «веселые» и доступные по стоимости - за очень короткое время они стали мировым хитом. Успех O clock подтолкнул творческого итальянского бизнесмена задуматься над созданием других аксессуаров с той же комбинацией ДНК, что и у часов. 
-              </p>
-              <p class="history__text">
-                Как следствие, в 2012 году компания выпустила O bag - сумку из материала XL Extralight®, которая с легкостью комбинируется, как и O clock.
-              </p>
-              <p class="history__text">
-                Возможно сочетать корпус, ручки, подкладки, а также манжеты, изготовленные из различных материалов: от шерсти до искусственного меха, чтобы сделать сумку еще более уникальной и привлекательной. 
-              </p>
-              <p class="history__text">
-                O bag сразу же стал культом. Было продано более 6 миллионов единиц продукции, а оборот компании достиг 25 миллионов евро только за один год. 
-              </p>
-              <p class="history__text">
-                Кастомизация стала фирменным знаком компании. Вскоре создатели бренда начали разрабатывать новые модели и формы сумок, часов, а также многие другие изделия. 
-              </p>
-              <p class="history__text">
-                Вместе с сумками и часами, что комбинируются, O bag начинает производить солнцезащитные очки O sun, кошельки O hug, обувь O shoes и O slippers, а также предметы домашнего обихода, такие как: умная лампа O joy и ланч-боксы O eat. 
-              </p>
-              <p class="history__text">
-                Каждый продукт O bag отмечен буквой «O», что символизирует три элемента, которые лежат в основе философии бренда: ONE, ORIGINAL, OWN. 
-              </p>
-              <p class="history__text">
-                Изделия O bag на 100% ориентированы на создание индивидуальных образов, поэтому все аксессуары выходят эксклюзивными и необычными.
-              </p>
-              <p class="history__text">
-                Эта философия означает, что клиент O bag становится частью творческого процесса. Создавая свою личную комбинацию, покупатель еще больше подчеркивает уникальность и оригинальность, которые являются отличительной чертой бренда.
-              </p>
-              <img class="history__img" src="@/assets/images/history/history-1.jpg" alt=""> -->
-        <!-- </div> -->
-        <!-- <div class="history__content page__block">
-              <h3 class="history__title page__title">
-                Миссия
-              </h3>
-              <p class="history__text">
-                Успех O bag основан на таких ценностях, как: простота, экологическая устойчивость, командный дух, дружба, семья, забота об окружающей среде. Молодежная, динамичная компания, основанная в Италии, сейчас является компанией международного масштаба, с акцентом на исследования, разработки, инновации и дизайн. 
-              </p>
-              <p class="history__text">
-                O bag верит в поддержку своего региона Венето и активно развивается во всем мире. Благодаря подходу, ориентированному на будущее, O bag быстро выявляет тенденции и развивает их со своей молодой, талантливой командой. Важность командного духа отражена в его упорном и столь молодом управлении, которое стремится сделать O bag стандартом для итальянского и международного бизнеса и розничной торговли, от создания продукта до его распространения и обслуживания клиентов. С 2012 года O bag принимает участие в развитии розничной торговли по всему миру.
-              </p>
-              <img class="history__img" src="@/assets/images/history/history-2.jpg" alt="">
-              <p class="history__text">
-                Сегодня O bag представлен более чем в 50 странах, с сетью свыше 400 фирменных или франчайзинговых магазинов, а также с широким оптовым покрытием более чем в 500 мультибрендовых магазинах. Концепция магазина основана на простом, чистом, оптимизированном пространстве, отражает философию бренда и расширяет возможности продукта, предлагает покупателям лучший опыт покупок. 
-              </p>
-              <p class="history__text">
-                Магазины можно найти в торговых центрах самых оживленных городов в мире:  Рим, Венеция, Барселона, Париж, Варшава, Брюссель, Вена, Киев, Майами, Монреаль, Манила, Дели, Йоханнесбург, Сантьяго-де-Чили, Плайя-дель-Кармен и Китай, с 20 магазинами в Пекине, Шанхае и Чэнду.
-              </p>
-              <div class="history__inner">
-                <img class="history__img" src="@/assets/images/history/history-3.jpg" alt="">
-              </div>
-            </div> -->
+          <div class="history__text" style="white-space: pre-line">
+            {{ content.text_second }}
+          </div>
+          <img class="history__img" :src="content.image_second" alt="" />
+        </div>
+
+        <div class="history__content ">
+          <div class="history__text" style="white-space: pre-line">
+            {{ content.text_third }}
+          </div>
+          <img class="history__img" :src="content.images" alt="" />
+        </div>
       </div>
     </section>
     <app-news />
@@ -87,9 +41,8 @@
 </template>
 
 <script>
-import AppIntro from "~/components/intro/AppIntro.vue";
-import AppNews from "~/components/news/AppNews.vue";
-
+import AppIntro from '~/components/intro/AppIntro.vue'
+import AppNews from '~/components/news/AppNews.vue'
 export default {
   name: 'CollectionPage',
   components: {
@@ -106,12 +59,11 @@ export default {
   },
   methods: {
     getHistory() {
-      this.$api
-        .get('/page/history')
-        .then((res) => {
-          this.content = res.data.content
-        })
-    }
-  }
+      this.$api.get('/history-and-mission').then((res) => {
+        this.content = res.data
+        console.log(this.content)
+      })
+    },
+  },
 }
 </script>
