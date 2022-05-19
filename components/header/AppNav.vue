@@ -53,7 +53,7 @@ export default {
         },
         {
           text: 'Каталог',
-          src: '/catalog/1',
+          src: '/catalog',
         },
         {
           text: 'Конструктор',

@@ -66,7 +66,7 @@ export default {
     handleToggleSubcategory(subcategory) {
       this.loadAllSubCategoryProducts(subcategory.id)
       this.handleClearFilters()
-      this.$router.push({
+      this.$router.replace({
         params: {
           subcatId: subcategory.id,
           subcatSlug: subcategory.slug

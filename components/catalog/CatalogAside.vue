@@ -80,7 +80,6 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { actionTypes } from '@/store/catalog'
-import productStorage from '@/helpers/products-storage'
 
 export default {
   name: 'CatalogAside',
@@ -159,9 +158,14 @@ export default {
             this.setSelectedSubCategory(null)
             this.loadAllCategoryProducts(this.routeCategory)
           }
-          return
+        } else {
+          this.$router.replace({
+            params: {
+              id: this.categories[0].id,
+              slug: this.categories[0].slug,
+            }
+          })
         }
-        this.loadAllCategoryProducts(this.selectedCategory)
       }).catch(error => {
         console.log(error)
       })
@@ -192,7 +196,11 @@ export default {
     getFilteredProducts(complect) {
       if (complect) {
         this.selectedComplect = complect
-        productStorage.setRootComplete(complect.id)
+        this.$router.replace({
+          query: {
+            completId: complect.id,
+          }
+        })
       }
       // Бля перепиши
       if (!this.selectedSubCategory) {
@@ -226,7 +234,7 @@ export default {
       this.selectedComplect = {}
       this.setSelectedSubCategory(null)
       this.loadAllCategoryProducts(category)
-      this.$router.push({
+      this.$router.replace({
         params: {
           id: category.id,
           slug: category.slug,
