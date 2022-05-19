@@ -12,8 +12,7 @@
       </div>
     </div>
     <swiper v-if="selectedCategory" ref="reviewsSlider" class="catalog__model-slider" :options="swiperOption">
-      <swiper-slide
-v-for="item in selectedCategory.subcategories" :key="item.id"
+      <swiper-slide v-for="item in selectedCategory.subcategories" :key="item.id"
         :class="['catalog__model-item', { 'is-active': selectedSubCategory === item.id }]" :data-id="item.id"
         @click.native.stop="handleToggleSubcategory(item)">
         <template v-if="item.preview_image">
@@ -33,7 +32,6 @@ v-for="item in selectedCategory.subcategories" :key="item.id"
 <script>
 import { mapState, mapActions } from 'vuex'
 import { actionTypes } from '~/store/catalog'
-import productStorage from '@/helpers/products-storage'
 
 export default {
   name: 'CatalogModel',
@@ -44,8 +42,9 @@ export default {
     return {
       swiperOption: {
         slideTo: 1,
-        slidesPerView: 10,
+        slidesPerView: 'auto',
         responsive: true,
+        // loop: true,
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',
@@ -65,9 +64,14 @@ export default {
       loadAllSubCategoryProducts: actionTypes.loadAllSubCategoryProducts,
     }),
     handleToggleSubcategory(subcategory) {
-      productStorage.setRootSubcategory(subcategory.id)
       this.loadAllSubCategoryProducts(subcategory.id)
       this.handleClearFilters()
+      this.$router.replace({
+        params: {
+          subcatId: subcategory.id,
+          subcatSlug: subcategory.slug
+        }
+      })
     },
     handleClearFilters() {
       this.$emit('clear-filters')

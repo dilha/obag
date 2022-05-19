@@ -14,8 +14,7 @@
 
       <div class="catalog__page">
         <div :class="['aside-wrapper', { appear: isAppear }]">
-          <catalog-aside ref="catalogAside" :route-category="routeCategory" :route-subcategory="routeSubcategory"
-            :route-complete="routeComplete" />
+          <catalog-aside ref="catalogAside" />
         </div>
 
         <div class="catalog__content">
@@ -57,32 +56,12 @@ export default {
   data() {
     return {
       isAppear: false,
-      routeCategory: {
-        id: -1,
-      },
-      routeSubcategory: -1,
-      routeComplete: -1,
     }
   },
   computed: {
     ...mapState('catalog', ['products', 'isLoading', 'categories']),
   },
-  mounted() {
-    // category index init
-    if (this.$route?.params?.id) {
-      this.routeCategory = this.categories.find(
-        (c) => c.id === parseInt(this.$route?.params?.id)
-      )
-    }
-
-    if (this.$route?.params?.subcatId) {
-      this.routeSubcategory = parseInt(this.$route?.params?.subcatId)
-    }
-
-    if (this.$route?.query?.completId) {
-      this.routeComplete = parseInt(this.$route?.query?.completId)
-    }
-  },
+  mounted() { },
   methods: {
     ...mapActions('catalog', {
       loadSearchProducts: actionTypes.loadSearchProducts,

@@ -43,7 +43,7 @@ export default {
     search() {
       console.log(this.$route.path)
       if (this.$route.path !== 'catalog') {
-        this.$router.push({ name: 'catalog', params: { term: this.term } })
+        this.$router.push({ name: `/catalog`, params: { term: this.term } })
       }
       console.log('TERM FROM APP HEADER', this.term)
       this.changeSearchTerm(this.term)
