@@ -159,7 +159,7 @@
           </a>
           <a
             class="footer__social-link"
-            href="https://www.instagram.com/obagofficial/"
+            href="https://www.instagram.com/obagofficial.kz"
             target="_blank"
           >
             <icon-instagram />
