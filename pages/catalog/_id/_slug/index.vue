@@ -14,7 +14,8 @@
 
       <div class="catalog__page">
         <div :class="['aside-wrapper', { appear: isAppear }]">
-          <catalog-aside ref="catalogAside" :route-category="routeCategory" :route-subcategory="routeSubcategory"
+          <catalog-aside
+ref="catalogAside" :route-category="routeCategory" :route-subcategory="routeSubcategory"
             :route-complete="routeComplete" />
         </div>
 

@@ -165,7 +165,8 @@
         transition: color .2s linear;
         cursor: pointer;
 
-        &:hover {
+        &:hover,
+        &.nuxt-link-active {
             color: #D05871;
         }
     }

@@ -46,12 +46,10 @@
             line-height: 170%;
             color: #3D3935;
             margin: 35px 0;
-            span {
-                font-weight: bold;
-            }
         }
 
         &-btn {
+            display: inline-block;
             &+& {
                 margin-left: 25px;
             }
