@@ -12,8 +12,7 @@
       </div>
     </div>
     <swiper v-if="selectedCategory" ref="reviewsSlider" class="catalog__model-slider" :options="swiperOption">
-      <swiper-slide
-v-for="item in selectedCategory.subcategories" :key="item.id"
+      <swiper-slide v-for="item in selectedCategory.subcategories" :key="item.id"
         :class="['catalog__model-item', { 'is-active': selectedSubCategory === item.id }]" :data-id="item.id"
         @click.native.stop="handleToggleSubcategory(item)">
         <template v-if="item.preview_image">
@@ -44,8 +43,9 @@ export default {
     return {
       swiperOption: {
         slideTo: 1,
-        slidesPerView: 10,
+        slidesPerView: 'auto',
         responsive: true,
+        // loop: true,
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',
