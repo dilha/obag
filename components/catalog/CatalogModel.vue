@@ -32,7 +32,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { actionTypes } from '~/store/catalog'
-import productStorage from '@/helpers/products-storage'
 
 export default {
   name: 'CatalogModel',
@@ -65,9 +64,14 @@ export default {
       loadAllSubCategoryProducts: actionTypes.loadAllSubCategoryProducts,
     }),
     handleToggleSubcategory(subcategory) {
-      productStorage.setRootSubcategory(subcategory.id)
       this.loadAllSubCategoryProducts(subcategory.id)
       this.handleClearFilters()
+      this.$router.push({
+        params: {
+          subcatId: subcategory.id,
+          subcatSlug: subcategory.slug
+        }
+      })
     },
     handleClearFilters() {
       this.$emit('clear-filters')
