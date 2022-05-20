@@ -21,7 +21,7 @@ export default {
         {
           id: 1,
           text: 'Mid Season Sale',
-          src: '/season',
+          src: '/news/1',
         },
         {
           text: 'Сумки',
