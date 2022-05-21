@@ -61,7 +61,9 @@ export default {
   computed: {
     ...mapState('catalog', ['products', 'isLoading', 'categories']),
   },
-  mounted() { },
+  mounted() {
+    console.log(this.$route)
+  },
   methods: {
     ...mapActions('catalog', {
       loadSearchProducts: actionTypes.loadSearchProducts,

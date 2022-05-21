@@ -51,7 +51,6 @@ export default {
     this.categorySlug = this.$route?.params?.slug
     this.subcategoryId = this.$route?.params?.subcatId
     this.subcategorySlug = this.$route?.params?.subcatSlug
-    console.log(this.categoryId, this.categorySlug, this.subcategoryId, this.subcategorySlug)
     this.getCategory(this.categoryId)
     this.getSubcategory(this.subcategoryId)
     this.loadAllCategories()
