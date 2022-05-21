@@ -20,7 +20,7 @@
             </div>
             <img
               class="about__item-img"
-              src="@/assets/images/about/about-1.jpg"
+              :src="item.image"
               alt=""
             />
           </div>
