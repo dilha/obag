@@ -44,7 +44,7 @@ import ProductCard from '~/components/product/ProductCard.vue'
 import AppNews from '~/components/news/AppNews.vue'
 
 export default {
-  name: 'CatalogPage',
+  name: 'CatalogDeepPage',
   components: {
     SortingSelect,
     CatalogAside,

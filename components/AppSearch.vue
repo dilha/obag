@@ -30,7 +30,6 @@ export default {
   watch: {
     searchTerm: {
       handler(newTerm) {
-        console.log('CHNA', newTerm)
         this.loadSearchProducts(newTerm)
       },
     },
@@ -41,11 +40,9 @@ export default {
       loadSearchProducts: actionTypes.loadSearchProducts,
     }),
     search() {
-      console.log(this.$route.path)
       if (this.$route.path !== 'catalog') {
-        this.$router.push({ name: `/catalog`, params: { term: this.term } })
+        this.$router.push({ path: '/catalog', query: { term: this.term } })
       }
-      console.log('TERM FROM APP HEADER', this.term)
       this.changeSearchTerm(this.term)
     },
   },

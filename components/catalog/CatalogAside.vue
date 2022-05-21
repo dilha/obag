@@ -141,8 +141,8 @@ export default {
           this.routeComplete = parseInt(this.$route?.query?.completId)
         }
 
-        const termFromRoute = this.$route.params?.term
-
+        const termFromRoute = this.$route.query?.term
+        console.log(this.$route.query)
         if (termFromRoute) {
           this.loadSearchProducts(termFromRoute)
           return
@@ -182,6 +182,17 @@ export default {
       setSelectedSubCategory: actionTypes.setSelectedSubCategory,
     }),
     search() {
+      this.$router.replace({
+        params: {
+          id: null,
+          slug: null,
+          subcatId: null,
+          subcatSlug: null
+        },
+        query: {
+          term: this.searchTerm,
+        }
+      })
       this.loadSearchProducts(this.searchTerm)
     },
     updateFilter(filter) {
