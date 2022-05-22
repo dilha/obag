@@ -133,6 +133,7 @@ export default {
         payment_type: this.paymentMethod,
         cart_elements: this.products,
       }
+      console.log(data)
       this.phonemusk()
       this.sendOrder(data)
       console.log('CHEKCOUT STARTTT')

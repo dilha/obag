@@ -44,7 +44,7 @@ import ProductCard from '~/components/product/ProductCard.vue'
 import AppNews from '~/components/news/AppNews.vue'
 
 export default {
-  name: 'CatalogPage',
+  name: 'CatalogDeepPage',
   components: {
     SortingSelect,
     CatalogAside,
@@ -61,7 +61,9 @@ export default {
   computed: {
     ...mapState('catalog', ['products', 'isLoading', 'categories']),
   },
-  mounted() { },
+  mounted() {
+    console.log(this.$route)
+  },
   methods: {
     ...mapActions('catalog', {
       loadSearchProducts: actionTypes.loadSearchProducts,

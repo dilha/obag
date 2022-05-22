@@ -26,11 +26,11 @@ export default {
       }
    },
    mounted() {
+      console.log(this.$route)
       this.categoryId = this.$route?.params?.id
       this.categorySlug = this.$route?.params?.slug
       this.subcategoryId = this.$route?.params?.subcatId
       this.subcategorySlug = this.$route?.params?.subcatSlug
-      console.log(this.сategoryId, this.categorySlug, this.subcategoryId, this.subcategorySlug)
    }
 }
 </script>

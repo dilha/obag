@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted() {
-    this.getNews()
+    // this.getNews()
     if (this.$route?.params?.id) {
       this.getNews(this.$route?.params?.id)
     }
