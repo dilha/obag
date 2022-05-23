@@ -15,6 +15,7 @@
     <modal-contact v-if="isVisibleContactModal" @close="isVisibleContactModal = false" />
     <transition name="fade">
       <app-product-added v-if="isRequired" text="Выберите метод доставки и метод оплаты" />
+      <app-product-added v-if="isProductsEmpty" text="Корзина пуста! Bыберите товары для оформление заказа" />
     </transition>
   </div>
 </template>
@@ -27,6 +28,7 @@ import AppOrderProducts from '~/components/order/AppOrderProducts.vue'
 import AppOrderPrice from '~/components/order/AppOrderPrice.vue'
 import AppNews from '~/components/news/AppNews.vue'
 import AppProductAdded from '~/components/modal/AppProductAdded.vue'
+
 export default {
   name: 'BasketPage',
   components: {
@@ -41,6 +43,7 @@ export default {
     return {
       isVisibleContactModal: false,
       isRequired: false,
+      isProductsEmpty: false
     }
   },
   computed: {
@@ -49,12 +52,18 @@ export default {
   },
   methods: {
     checkRequired() {
-      if (this.deliveryMethod === null && this.paymentMethod === null) {
+      if (this.deliveryMethod === null || this.paymentMethod === null) {
         this.isRequired = true
         setTimeout(() => {
           this.isRequired = false
         }, 3000)
-      } else {
+      } else if (this.products.length <= 0) {
+        this.isProductsEmpty = true
+        setTimeout(() => {
+          this.isProductsEmpty = false
+        }, 3000)
+      }
+      else {
         this.isVisibleContactModal = true
       }
     },
