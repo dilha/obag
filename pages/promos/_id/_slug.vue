@@ -18,6 +18,7 @@
         </div>
       </div>
     </section>
+    <app-sales :products="item.products" />
     <app-news />
   </div>
 </template>
@@ -26,12 +27,14 @@
 import MetaSeo from '@/mixins/MetaSeo.vue'
 import AppIntro from '~/components/intro/AppIntro.vue'
 import AppNews from '~/components/news/AppNews.vue'
+import AppSales from '~/components/AppSales.vue'
 
 export default {
   name: 'CollectionPage',
   components: {
     AppIntro,
     AppNews,
+    AppSales,
   },
   mixins: [MetaSeo],
   data() {
