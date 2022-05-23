@@ -125,10 +125,10 @@ export const actions = {
   },
 
   [actionTypes.setPaymentMethod]({ commit }, payload) {
-    commit(mutationTypes.setPaymentMethod,payload)
+    commit(mutationTypes.setPaymentMethod, payload)
   },
   [actionTypes.setDeliveryMethod]({ commit }, payload) {
-    commit(mutationTypes.setDeliveryMethod,payload)
+    commit(mutationTypes.setDeliveryMethod, payload)
   },
 }
 export const getters = {

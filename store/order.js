@@ -1,16 +1,23 @@
+import * as epayment from '~/helpers/epayment-api';
+import { createPaymentObject } from '~/helpers/payment-helpers';
+
 export const state = () => ({
   isLoading: false,
   error: null,
   data: null,
 })
+
 export const mutationTypes = {
   sendOrderStart: 'mutation/sendOrderStart',
   sendOrderSuccess: 'mutation/sendOrderSuccess',
   sendOrderFailure: 'mutation/sendOrderStart',
+  clearCart: 'cart/mutation/clearCart',
 }
+
 export const actionTypes = {
   sendOrder: 'action/sendOrder'
 }
+
 export const mutations = {
   [mutationTypes.sendOrderStart](state) {
     state.isLoading = true;
@@ -24,32 +31,41 @@ export const mutations = {
     state.error = payload;
   },
 }
-export const actions = {
-  [actionTypes.sendOrder]({ commit, rootState }, payload) {
 
-    return new Promise(resolve => {
-      this.$api
-        .post('/cart/store', payload)
+export const actions = {
+  [actionTypes.sendOrder]({ commit, rootState }, { callBack, ...payload }) {
+    if (payload.payment_type === 'card') {
+      this.$api.post('/cart/store', payload)
         .then(response => {
           if (response.status === 200) {
             commit(mutationTypes.sendOrderSuccess, payload)
-            commit('cart/mutation/clearCart', null, { root: true })
-            // this.$router.push(response?.data?.payment?.formUrl)
-            location.href = response?.data?.payment?.formUrl;
-            // rootState.cart.clearCart();
-            // if(rootState.auth.isLoggedIn){
-            //   this.$router.push('/my/order-history')
-            // }else{
-            //    this.$router.push('/my/order-history-guest')
-            // }
+            commit(mutationTypes.clearCart, null, { root: true })
+            const paymentData = response.data;
 
+            epayment.showPaymentWidget(
+              createPaymentObject(paymentData.auth, paymentData.payment.invoiceID, paymentData.cart.price),
+              callBack
+            )
           }
-          resolve(response)
         })
-        .then((e) => {
+        .catch((e) => {
           commit(mutationTypes.sendOrderFailure, e?.response.data?.message)
+          Promise.reject(e)
+        })
+    } else if (payload.payment_type === 'cash') {
+      this.$api.post('/cart/store', payload)
+        .then(response => {
+          if (response.status === 200) {
+            commit(mutationTypes.sendOrderSuccess, payload)
+            commit(mutationTypes.clearCart, null, { root: true })
+            callBack({ success: true })
+          }
+        })
+        .catch((e) => {
+          commit(mutationTypes.sendOrderFailure, e?.response.data?.message)
+          Promise.reject(e)
         })
 
-    })
+    }
   }
 }

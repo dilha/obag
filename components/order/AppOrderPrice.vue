@@ -25,10 +25,12 @@
           <div class="order__method-title">
             Метод доставки:
           </div>
-          <button class="order__method-btn" :class="{active: deliveryMethod ==='Самовывоз'}" @click="setDeliveryMethod('Самовывоз')"> 
+          <button class="order__method-btn" :class="{ active: deliveryMethod === 'pickup' }"
+            @click="setDeliveryMethod('pickup')">
             Самовывоз
           </button>
-          <button class="order__method-btn" :class="{active: deliveryMethod === 'Доставка' }" @click="setDeliveryMethod('Доставка')">
+          <button class="order__method-btn" :class="{ active: deliveryMethod === 'mail' }"
+            @click="setDeliveryMethod('mail')">
             Доставка
           </button>
         </div>
@@ -36,15 +38,17 @@
           <div class="order__method-title">
             Метод оплаты:
           </div>
-          <button class="order__method-btn" :class="{active: paymentMethod ==='Онлайн-оплата'}" @click="setPaymentMethod('Онлайн-оплата')">
+          <button class="order__method-btn" :class="{ active: paymentMethod === 'card' }"
+            @click="setPaymentMethod('card')">
             Онлайн-оплата
           </button>
-          <button class="order__method-btn" :class="{active: paymentMethod ==='Наличными'}" @click="setPaymentMethod('Наличными')">
+          <button class="order__method-btn" :class="{ active: paymentMethod === 'cash' }"
+            @click="setPaymentMethod('cash')">
             Наличными
           </button>
         </div>
       </div>
-      
+
       <div class="order__buttons">
         <button class="order__buttons-issue" @click.prevent="$emit('clickCheckoutButton')">
           Оформить заказ
@@ -63,19 +67,13 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { actionTypes } from '~/store/cart'
+
 export default {
   name: 'AppOrderPrice',
-  // data() {
-  //   return {
-  //     deliveryMethod: null,
-  //     paymentMethod: null,
-  //   }
-  // },
   computed: {
     ...mapState('cart', ['deliveryPrice', 'deliveryMethod', 'paymentMethod']),
     ...mapGetters('cart', ['totalProductCost']),
   },
-  
   mounted() {
     this.setDeliveryPrice()
   },
