@@ -7,16 +7,14 @@
       </h3>
 
       <div class="constructor__top">
-        <button
-v-for="item in productType" :key="item.id" class="constructor__top-btn"
+        <button v-for="item in productType" :key="item.id" class="constructor__top-btn"
           :class="{ active: selectedType.id === item.id }" @click="getTypesProducts(item)">
           {{ item.title }}
         </button>
       </div>
 
       <div v-if="selectedType" class="constructor__inner">
-        <div
-v-for="item in selectedType['constructor']" :key="item.id" class="constructor__item"
+        <div v-for="item in selectedType['constructor']" :key="item.id" class="constructor__item"
           @click="selectCategory(item.id)">
           <div class="constructor__item-images">
             <img :src="item.preview_image" alt="" />
@@ -28,8 +26,7 @@ v-for="item in selectedType['constructor']" :key="item.id" class="constructor__i
       </div>
 
       <div v-if="selectedConfiguratorMenu" class="constructor__buttons">
-        <button
-v-for="(constructor, index) in categories" :key="index" class="constructor__btn page__border-btn"
+        <button v-for="(constructor, index) in categories" :key="index" class="constructor__btn page__border-btn"
           :class="{ active: constructor.id === selectedConfiguratorMenu.id }"
           @click="selectConfiguratorMenu(constructor)">
           {{ constructor.title }}
@@ -40,8 +37,7 @@ v-for="(constructor, index) in categories" :key="index" class="constructor__btn 
         <div class="constructor__product">
           <h3 class="constructor__product-title">{{ selectedCategory.title }}</h3>
           <div class="constructor__card">
-            <div
-ref="obagConstuctor" class="constructor__card-img" :style="{
+            <div ref="obagConstuctor" class="constructor__card-img" :style="{
               backgroundImage: `${initBackgroundImage
                 ? initBackgroundImage
                 : backgroundImagesArray
@@ -70,8 +66,7 @@ ref="obagConstuctor" class="constructor__card-img" :style="{
         <div class="constructor__elements">
           <h6 class="constructor__elements-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
           <div v-if="selectedConfiguratorMenu" class="constructor__elements-inner">
-            <div
-v-for="element in selectedConfiguratorMenu.constructorElements" :key="element.id"
+            <div v-for="element in selectedConfiguratorMenu.constructorElements" :key="element.id"
               class="constructor__elements-item" @click="addBackground(element)">
               <img :src="element.image" alt="" />
               <p class="constructor__elements-price">
@@ -142,9 +137,9 @@ export default {
             this.initBackgroundImage = 'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp)';
             this.orderedBackgroundImages = {
               ruchki: '',
-        podkladki: '',
-        acessory: '',
-        korpusa: '',
+              podkladki: '',
+              acessory: '',
+              korpusa: '',
             }
             break;
           case 'ryukzaki':
@@ -163,7 +158,7 @@ export default {
             this.initBackgroundImage = 'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_osun-655x655.webp)';
             break;
         }
-        
+
       }
     },
     orderedBackgroundImages: {
@@ -243,7 +238,7 @@ export default {
         this.orderedBackgroundImages,
         this.selectedConfiguratorMenu.type,
         backgroundImagesUrl.reverse().join(',')
-      ) 
+      )
 
       console.log(this.orderedBackgroundImages)
 
