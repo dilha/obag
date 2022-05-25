@@ -9,7 +9,8 @@
       </p>
     </app-intro-button>
     <app-subcategory-cards :category-id="category.id" :category-slug="category.slug" :items="category.subcategories" />
-    <app-combination :items="category.constructor" />
+    <app-combination title="Откройте для себя огромный выбор комбинаций очков O sun"
+      link="catalog/4/ocki" image-url="assets/images/glasses/combination-glasses.jpg" />
     <app-like :id="category.id" />
     <app-news />
   </div>
