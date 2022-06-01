@@ -291,6 +291,7 @@ import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
 import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '~/store/cart'
 import { loadProductVideo } from '~/helpers/product-helpers'
+import productsMetaLoader from '~/helpers/meta-loader'
 import { numberWithSpaces } from '~/helpers/utils'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
 import AppPartsCard from '~/components/cards/AppPartsCard.vue'
@@ -301,6 +302,13 @@ import 'hooper/dist/hooper.css'
 
 export default {
   name: 'CharacteristicPage',
+  head() {
+    return this.productsMetaLoader(
+      this.product?.seo_title,
+      this.product?.seo_description,
+      this.product?.seo_content
+    )
+  },
   components: {
     Hooper,
     Slide,
@@ -356,7 +364,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route, this.$router)
     if (this.$route?.params?.id) {
       this.getProducts(this.$route?.params?.id)
       // this.notify(this.$route?.params?.id)
@@ -364,6 +371,7 @@ export default {
     this.productInfo = this.productTubs[0].name
   },
   methods: {
+    productsMetaLoader,
     loadProductVideo,
     numberWithSpaces,
     ...mapActions('cart', {
