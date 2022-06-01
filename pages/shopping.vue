@@ -6,7 +6,7 @@
     <div v-if="content" id="shopping" class="shopping inside">
       <div class="container" v-html="content.text"></div>
     </div>
-    <app-mobile-shopping-cards :shops="blocks"/>
+    <app-mobile-shopping-cards :shops="blocks" />
     <app-news />
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
   mounted() {
     this.getContent()
   },
-  methods: {  
+  methods: {
     getContent() {
       this.$api.get('/mobile-shopping').then((res) => {
         this.content = res.data

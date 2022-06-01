@@ -1,6 +1,10 @@
 <template>
   <div>
-    <app-intro-button :image="category.image" :category-id="category.id" :category-slug="category.slug">
+    <app-intro-button
+      :image="category.image"
+      :category-id="category.id"
+      :category-slug="category.slug"
+    >
       <h2 class="intro__title">
         {{ category.title }}
       </h2>
@@ -8,10 +12,16 @@
         {{ category.text }}
       </p>
     </app-intro-button>
-    <app-subcategory-cards :category-id="category.id" :category-slug="category.slug" :items="category.subcategories" />
-    <app-combination title="Откройте для себя огромный выбор комбинаций часов O clock"
+    <app-subcategory-cards
+      :category-id="category.id"
+      :category-slug="category.slug"
+      :items="category.subcategories"
+    />
+    <app-combination
+      title="Откройте для себя огромный выбор комбинаций часов O clock"
       link="catalog/3/casy/132/o-clock?completId=36"
-      image-url="assets/images/clock/combination-clock.jpg" />
+      image-url="assets/images/clock/combination-clock.jpg"
+    />
     <app-like :id="category.id" />
     <app-news />
   </div>

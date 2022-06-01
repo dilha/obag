@@ -27,7 +27,10 @@
       {{ item.title }}
     </nuxt-link>
     <div class="product__card-price">
-      <p v-if="item.new_price && item.new_price !== item.price" class="product__card-oldprice">
+      <p
+        v-if="item.new_price && item.new_price !== item.price"
+        class="product__card-oldprice"
+      >
         {{ numberWithSpaces(item.price) }} тг
       </p>
       <p class="product__card-newprice">

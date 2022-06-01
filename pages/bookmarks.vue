@@ -9,10 +9,9 @@
   </section>
 </template>
 
-
-
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import MetaSeo from '@/mixins/MetaSeo.vue'
 import ProductCard from '~/components/product/ProductCard.vue'
 import { actionTypes as bookmarkActionTypes } from '~/store/bookmarks'
 
@@ -21,6 +20,7 @@ export default {
   components: {
     ProductCard,
   },
+  mixins: [MetaSeo],
   data() {
     return {
       message: '',

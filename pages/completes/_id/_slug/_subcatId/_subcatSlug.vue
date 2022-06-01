@@ -12,7 +12,6 @@
 </template>
 
 <script>
-
 import { mapActions, mapState } from 'vuex'
 import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '@/store'
@@ -36,7 +35,7 @@ export default {
       categoryId: null,
       categorySlug: null,
       subcategoryId: null,
-      subcategorySlug: null
+      subcategorySlug: null,
     }
   },
   computed: {

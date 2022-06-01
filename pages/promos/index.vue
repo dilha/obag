@@ -9,7 +9,11 @@
           <h3 class="news__title page__title">Акции компании</h3>
         </div>
         <div class="news__inner">
-          <promos-card v-for="(item, index) in promos" :key="index" :item="item" />
+          <promos-card
+            v-for="(item, index) in promos"
+            :key="index"
+            :item="item"
+          />
         </div>
       </div>
     </section>

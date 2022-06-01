@@ -4,29 +4,53 @@
       <div class="characteristic__inner">
         <div class="characteristic__product">
           <div class="characteristic__product-images">
-            <div v-if="HooperIsActive" class="characteristic__product-images-inner">
+            <div
+              v-if="HooperIsActive"
+              class="characteristic__product-images-inner"
+            >
               <hooper class="characteristic__product-images-hooper">
-                <slide v-for="(item, index) in product.image" :key="index" class="image-wrapper">
-                  <img class="characteristic__product-img" :src="item" :alt="product.title" />
+                <slide
+                  v-for="(item, index) in product.image"
+                  :key="index"
+                  class="image-wrapper"
+                >
+                  <img
+                    class="characteristic__product-img"
+                    :src="item"
+                    :alt="product.title"
+                  />
                 </slide>
                 <hooper-pagination slot="hooper-addons"></hooper-pagination>
               </hooper>
             </div>
             <div v-if="HooperIsNotActive">
-              <img class="characteristic__product-img" :src="product.image" :alt="product.title" />
+              <img
+                class="characteristic__product-img"
+                :src="product.image"
+                :alt="product.title"
+              />
             </div>
             <button class="characteristic__product-bookmark">
               <icon-bookmark />
             </button>
           </div>
           <div class="characteristic__product-inner">
-            <app-parts-card v-for="(item, index) in product.complete" :key="index" :item="item" />
+            <app-parts-card
+              v-for="(item, index) in product.complete"
+              :key="index"
+              :item="item"
+            />
           </div>
           <div v-if="HooperIsActive && product.video" class="clip">
-            <iframe width="460" height="280" :src="loadProductVideo(product.video)" title="YouTube video player"
+            <iframe
+              width="460"
+              height="280"
+              :src="loadProductVideo(product.video)"
+              title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
         <div class="characteristic__content">
@@ -37,17 +61,28 @@
           <h3 class="characteristic__title">
             {{ product.title }}
           </h3>
-          <p class="characteristic__price">{{ numberWithSpaces(product.price) }} тг</p>
+          <p class="characteristic__price">
+            {{ numberWithSpaces(product.price) }} тг
+          </p>
 
           <!-- Quantity block -->
-          <div v-if="getProductQuantityById(product.id)" class="characteristic__number">
+          <div
+            v-if="getProductQuantityById(product.id)"
+            class="characteristic__number"
+          >
             <p>Кол-во:</p>
             <div class="order__products-number characteristic__number-num">
-              <button class="order__products-minus" @click.prevent="updatedQuantity({ type: 'decrease', product })">
+              <button
+                class="order__products-minus"
+                @click.prevent="updatedQuantity({ type: 'decrease', product })"
+              >
                 <img src="@/assets/images/icons/minus-icon.svg" alt="-" />
               </button>
               <p>{{ getProductQuantityById(product.id) }}</p>
-              <button class="order__products-plus" @click.prevent="updatedQuantity({ type: 'increase', product })">
+              <button
+                class="order__products-plus"
+                @click.prevent="updatedQuantity({ type: 'increase', product })"
+              >
                 <img src="@/assets/images/icons/plus-icon.svg" alt="+" />
               </button>
             </div>
@@ -79,8 +114,14 @@
                       {{ error }}
                     </p> -->
                       <form class="modal__login-form" @submit.prevent="notify">
-                        <input id="mail-input" v-model="email" class="modal__login-input modal__login-email"
-                          type="email" placeholder="Эл. почта" required />
+                        <input
+                          id="mail-input"
+                          v-model="email"
+                          class="modal__login-input modal__login-email"
+                          type="email"
+                          placeholder="Эл. почта"
+                          required
+                        />
                         <button class="modal__login-btn" type="submit">
                           Подписаться
                         </button>
@@ -109,11 +150,17 @@
                   </button>
                 </div>
 
-                <nuxt-link to="/constructor" class="characteristic__link characteristic__link-constructor">
+                <nuxt-link
+                  to="/constructor"
+                  class="characteristic__link characteristic__link-constructor"
+                >
                   Конструктор
                 </nuxt-link>
-                <a href="https://obagnew.a-lux.dev/shopping" target="_blank"
-                  class="characteristic__link characteristic__link-foto">
+                <a
+                  href="https://obagnew.a-lux.dev/shopping"
+                  target="_blank"
+                  class="characteristic__link characteristic__link-foto"
+                >
                   Запросить фото
                 </a>
               </div>
@@ -122,66 +169,104 @@
 
           <div class="characteristic__info">
             <div class="characteristic__info-buttons">
-              <button v-for="(item, index) in productTubs" :key="index" class="characteristic__info-btn"
-                :class="{ active: item.name === productInfo }" @click="selecProductInfo(item.name)">
+              <button
+                v-for="(item, index) in productTubs"
+                :key="index"
+                class="characteristic__info-btn"
+                :class="{ active: item.name === productInfo }"
+                @click="selecProductInfo(item.name)"
+              >
                 {{ item.title }}
               </button>
 
-              <a href="#" class="order-btn" @click="OrderModal = true">Заказать в 1 клик</a>
-
+              <a href="#" class="order-btn" @click="OrderModal = true"
+                >Заказать в 1 клик</a
+              >
             </div>
             <div class="characteristic__info-content">
               <div v-html="product[productInfo]"></div>
               <p v-if="productInfo === 'reviews.text' && isLoggedIn">
-                <a class="account__link" @click.prevent="showReviewModal"> Оставить отзыв </a>
+                <a class="account__link" @click.prevent="showReviewModal">
+                  Оставить отзыв
+                </a>
               </p>
             </div>
           </div>
 
           <div class="characteristic__accordion">
-            <div class="characteristic__accordion-title" @click="toggleShowAccordionFirst">
+            <div
+              class="characteristic__accordion-title"
+              @click="toggleShowAccordionFirst"
+            >
               Оплата и доставка
-              <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
+              <img
+                class="characteristic__accordion-arrow"
+                src="@/assets/images/icons/red-arrow.svg"
+                alt=""
+              />
             </div>
             <transition name="fade">
-              <div v-if="showAccordionFirst" class="characteristic__accordion-text">
+              <div
+                v-if="showAccordionFirst"
+                class="characteristic__accordion-text"
+              >
                 <p>Онлайн оплата</p>
                 <p>
                   Как оплатить: после оформления заказа:<br />
                   Вы можете оплатить банковскими картами Visa, MasterCard;
-                </p><br />
+                </p>
+                <br />
                 <p>Оплата при получении</p>
                 <p>
-                  Как оплатить: по факту получения товара в пункте самовывоза:<br />
+                  Как оплатить: по факту получения товара в пункте
+                  самовывоза:<br />
                   банковскими картами карты Visa, MasterCard;
-                </p><br />
+                </p>
+                <br />
                 <p>
-                  Доставка курьерской службой в течении 3-5 рабочих дней по Казахстану. По Алматы яндекс курьером либо
-                  самовывоз. Оплата за курьерскую службу при получении.
-                </p><br />
+                  Доставка курьерской службой в течении 3-5 рабочих дней по
+                  Казахстану. По Алматы яндекс курьером либо самовывоз. Оплата
+                  за курьерскую службу при получении.
+                </p>
+                <br />
                 <p>
-                  *При оформлении заказа на доставку, оплата за курьерскую службу оплачиваеться при получении.
+                  *При оформлении заказа на доставку, оплата за курьерскую
+                  службу оплачиваеться при получении.
                 </p>
               </div>
             </transition>
           </div>
-          <div class="characteristic__accordion" @click="toggleShowAccordionSecond">
+          <div
+            class="characteristic__accordion"
+            @click="toggleShowAccordionSecond"
+          >
             <div class="characteristic__accordion-title">
               Поддержка Клиентов
-              <img class="characteristic__accordion-arrow" src="@/assets/images/icons/red-arrow.svg" alt="" />
+              <img
+                class="characteristic__accordion-arrow"
+                src="@/assets/images/icons/red-arrow.svg"
+                alt=""
+              />
             </div>
             <transition name="fade">
-              <div v-if="showAccordionSecond" class="characteristic__accordion-text">
+              <div
+                v-if="showAccordionSecond"
+                class="characteristic__accordion-text"
+              >
                 <p>
-                  Поддержка клиентов ежедневно онлайн с 10:00 до 22:00 по номеру +7 701 348 19 47
+                  Поддержка клиентов ежедневно онлайн с 10:00 до 22:00 по номеру
+                  +7 701 348 19 47
                 </p>
               </div>
             </transition>
           </div>
 
-
           <div class="characteristic__accordion">
-            <a href="https://obagnew.a-lux.dev/shopping" target="_blank" class="characteristic__accordion-title">
+            <a
+              href="https://obagnew.a-lux.dev/shopping"
+              target="_blank"
+              class="characteristic__accordion-title"
+            >
               Запросить фото
             </a>
           </div>
@@ -189,8 +274,11 @@
       </div>
     </div>
     <modal-one-click-order v-if="OrderModal" @close="OrderModal = false" />
-    <app-modal-review :productId="this.$route.params.id" v-if="isVisibleReviewModal"
-      @close="isVisibleReviewModal = false" />
+    <app-modal-review
+      :productId="this.$route.params.id"
+      v-if="isVisibleReviewModal"
+      @close="isVisibleReviewModal = false"
+    />
     <transition name="fade">
       <app-product-added v-if="isShownAddedTransition" />
     </transition>
@@ -221,7 +309,7 @@ export default {
     AppPartsCard,
     ModalOneClickOrder,
     AppProductAdded,
-    AppModalReview
+    AppModalReview,
   },
   mixins: [MetaSeo],
   data() {
@@ -265,7 +353,7 @@ export default {
     ...mapGetters('cart', ['getProductQuantityById']),
     getProductIsAvailable() {
       return this.product?.available && this.product?.remainder > 0
-    }
+    },
   },
   mounted() {
     console.log(this.$route, this.$router)
@@ -358,7 +446,6 @@ export default {
 }
 
 @media (max-width: 900px) {
-
   .characteristic__product,
   .characteristic__content {
     max-width: 100%;
@@ -506,8 +593,7 @@ input {
 .fade-enter,
 .fade-leave-to
 
-/* .fade-leave-active до версии 2.1.8 */
-  {
+/* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0;
 }
 </style>

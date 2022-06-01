@@ -5,17 +5,30 @@
         <h3 class="basket__title page__title">Корзина</h3>
         <div class="basket__inner">
           <div v-if="products" class="basket__products">
-            <app-order-products v-for="(item, index) in products" :key="index" :item="item" />
+            <app-order-products
+              v-for="(item, index) in products"
+              :key="index"
+              :item="item"
+            />
           </div>
           <app-order-price @clickCheckoutButton="checkRequired" />
         </div>
       </div>
     </section>
     <app-news />
-    <modal-contact v-if="isVisibleContactModal" @close="isVisibleContactModal = false" />
+    <modal-contact
+      v-if="isVisibleContactModal"
+      @close="isVisibleContactModal = false"
+    />
     <transition name="fade">
-      <app-product-added v-if="isRequired" text="Выберите метод доставки и метод оплаты" />
-      <app-product-added v-if="isProductsEmpty" text="Корзина пуста! Bыберите товары для оформление заказа" />
+      <app-product-added
+        v-if="isRequired"
+        text="Выберите метод доставки и метод оплаты"
+      />
+      <app-product-added
+        v-if="isProductsEmpty"
+        text="Корзина пуста! Bыберите товары для оформление заказа"
+      />
     </transition>
   </div>
 </template>
@@ -43,7 +56,7 @@ export default {
     return {
       isVisibleContactModal: false,
       isRequired: false,
-      isProductsEmpty: false
+      isProductsEmpty: false,
     }
   },
   computed: {
@@ -62,8 +75,7 @@ export default {
         setTimeout(() => {
           this.isProductsEmpty = false
         }, 3000)
-      }
-      else {
+      } else {
         this.isVisibleContactModal = true
       }
     },
