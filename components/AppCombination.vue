@@ -1,16 +1,16 @@
 <template>
-    <section v-if="items" class="combination page__block">
+    <section class="combination page__block">
         <div class="container">
             <div class="combination__inner">
                 <div class="combination__content">
                     <h3 class="combination__title page__title">
-                        {{items.title}}
+                        {{ title }}
                     </h3>
-                    <button class="combination__btn page__border-btn">
+                    <nuxt-link :to="link" class="combination__btn page__border-btn">
                         Перейти
-                    </button>
+                    </nuxt-link>
                 </div>
-                <img class="combination__img" src="@/assets/images/clock/combination-clock.jpg" alt="">
+                <img class="combination__img" :src="getImage" alt="">
             </div>
         </div>
     </section>
@@ -20,9 +20,25 @@
 export default {
     name: "AppCombination",
     props: {
-        items: {
-            type: Object,
-            require: true,
+        title: {
+            type: String,
+            required: true,
+            default: '',
+        },
+        link: {
+            type: String,
+            required: true,
+            default: '',
+        },
+        imageUrl: {
+            type: String,
+            required: true,
+            default: '',
+        }
+    },
+    computed: {
+        getImage() {
+            return `${require(`@/${this.imageUrl}`)}`
         }
     }
 }

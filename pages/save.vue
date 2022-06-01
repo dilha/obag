@@ -4,9 +4,14 @@
       <div class="container">
         <h3 class="save__title page__title">Save Your O bag</h3>
         <div class="save__inner">
-          <a class="save__btn" href="#?"> Информация о возврате </a>
-          <a class="save__btn" href="#?"> Информация о возврате </a>
-          <a class="save__btn" href="#?"> Информация по сборке </a>
+          <a
+            :key="link.link"
+            v-for="link in links"
+            class="save__btn"
+            :href="link.link"
+            target="_blank"
+            >{{ link.title }}
+          </a>
         </div>
       </div>
     </div>
@@ -24,9 +29,17 @@ export default {
     AppNews,
   },
   mixins: [MetaSeo],
+  data() {
+    return {
+      links: [],
+    }
+  },
+  async mounted() {
+    const response = await this.$axios.get('/save-your-obag')
+    this.links = response.data
+  },
 }
 </script>
-
 
 <style lang="scss">
 .save {
@@ -36,7 +49,10 @@ export default {
     text-align: center;
   }
   &__inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 30px;
+    row-gap: 15px;
     justify-content: space-between;
     margin-top: 72px;
   }
@@ -88,4 +104,3 @@ export default {
   }
 }
 </style>
-

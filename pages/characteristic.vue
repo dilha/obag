@@ -42,7 +42,7 @@
               Констуктор
             </a>
             <a class="characteristic__link characteristic__link-foto" target="_blank"
-              href="https://obag.ua/zaprosit-photo">
+              href="https://obagnew.a-lux.dev/shopping">
               Запросить фото
             </a>
           </div>

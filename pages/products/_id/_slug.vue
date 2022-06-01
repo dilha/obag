@@ -112,7 +112,7 @@
                 <nuxt-link to="/constructor" class="characteristic__link characteristic__link-constructor">
                   Конструктор
                 </nuxt-link>
-                <a href="https://obag.ua/zaprosit-photo" target="_blank"
+                <a href="https://obagnew.a-lux.dev/shopping" target="_blank"
                   class="characteristic__link characteristic__link-foto">
                   Запросить фото
                 </a>
@@ -160,7 +160,7 @@
                   самовывоз. Оплата за курьерскую службу при получении.
                 </p><br />
                 <p>
-                  *При оформлении заказа на доставку, оплата за курьерскую службу оплачиваеться при получении. 
+                  *При оформлении заказа на доставку, оплата за курьерскую службу оплачиваеться при получении.
                 </p>
               </div>
             </transition>
@@ -181,7 +181,7 @@
 
 
           <div class="characteristic__accordion">
-            <a href="https://obag.ua/zaprosit-photo" target="_blank" class="characteristic__accordion-title">
+            <a href="https://obagnew.a-lux.dev/shopping" target="_blank" class="characteristic__accordion-title">
               Запросить фото
             </a>
           </div>

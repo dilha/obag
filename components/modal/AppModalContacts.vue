@@ -13,10 +13,9 @@
           <input v-model="name" class="modal__contacts-name" type="text" placeholder="Введите Ваше ФИО" required />
           <input v-model="phone" @keydown="phonemask" minlength="17" id="phone-mask" class="modal__contacts-phone"
             type="text" placeholder="Введите Ваш номер телефона" required />
-          <input v-model="email" class="modal__contacts-email" type="email" placeholder="Введите Ваш почтовый адрес"
-            required />
-          <template v-if="deliveryMethod === 'Доставка'">
-            <input v-model="address" class="modal__contacts-adress" type="text" placeholder="Адрес доставки" required />
+          <input v-model="email" class="modal__contacts-email" type="email" placeholder="Введите Ваш email или электронный адрес" />
+          <template v-if="deliveryMethod === 'mail'">
+            <input v-model="address" class="modal__contacts-adress" type="text" placeholder="Введите Ваш Адрес доставки" required />
           </template>
 
           <div class="modal__bottom">
