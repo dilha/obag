@@ -1,14 +1,14 @@
 export const loadProductImage = (url) => {
-  const imageRegex = /[/.](gif|jpg|jpeg|tiff|png)$/i
+  const imageRegex = /[/.](gif|jpg|jpeg|tiff|png|webp)$/i
   if (url && imageRegex.test(url)) {
     return url
   }
 
-  return '~/assets/images/products/bag-placeholder.png'
+  return '~/assets/images/products/product-placeholder-img.png'
 }
 
 export const checkProductImage = (url) => {
-  const imageRegex = /[/.](gif|jpg|jpeg|tiff|png)$/i
+  const imageRegex = /[/.](gif|jpg|jpeg|tiff|png|webp)$/i
   return imageRegex.test(url)
 }
 

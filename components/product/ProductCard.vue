@@ -20,7 +20,7 @@
       <img
         v-else
         class="product__card-img"
-        src="~/assets/images/products/bag-placeholder.png"
+        src="~/assets/images/products/product-placeholder-img.png"
         alt=""
       />
     </div>

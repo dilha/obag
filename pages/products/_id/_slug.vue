@@ -4,32 +4,40 @@
       <div class="characteristic__inner">
         <div class="characteristic__product">
           <div class="characteristic__product-images">
-            <div
-              v-if="HooperIsActive"
-              class="characteristic__product-images-inner"
-            >
-              <hooper class="characteristic__product-images-hooper">
-                <slide
-                  v-for="(item, index) in product.image"
-                  :key="index"
-                  class="image-wrapper"
-                >
-                  <img
-                    class="characteristic__product-img"
-                    :src="item"
-                    :alt="product.title"
-                  />
-                </slide>
-                <hooper-pagination slot="hooper-addons"></hooper-pagination>
-              </hooper>
-            </div>
-            <div v-if="HooperIsNotActive">
-              <img
-                class="characteristic__product-img"
-                :src="product.image"
-                :alt="product.title"
-              />
-            </div>
+            <template>
+              <div
+                v-if="HooperIsActive"
+                class="characteristic__product-images-inner"
+              >
+                <hooper class="characteristic__product-images-hooper">
+                  <slide
+                    v-for="(item, index) in product.image"
+                    :key="index"
+                    class="image-wrapper"
+                  >
+                    <img
+                      class="characteristic__product-img"
+                      :src="item"
+                      :alt="product.title"
+                    />
+                  </slide>
+                  <hooper-pagination slot="hooper-addons"></hooper-pagination>
+                </hooper>
+              </div>
+              <div v-else>
+                <img
+                  v-if="checkProductImage(product.image)"
+                  class="characteristic__product-img"
+                  :src="product.image"
+                  :alt="product.title"
+                />
+                <img v-else
+                  class="characteristic__product-img"
+                  src="~/assets/images/products/product-placeholder-img.png"
+                  :alt="product.title"
+                />
+              </div>
+            </template>
             <button class="characteristic__product-bookmark">
               <icon-bookmark />
             </button>
@@ -280,7 +288,10 @@
       @close="isVisibleReviewModal = false"
     />
     <transition name="fade">
-      <app-product-added v-if="isShownAddedTransition" text="Товар добавлен в корзину" />
+      <app-product-added
+        v-if="isShownAddedTransition"
+        text="Товар добавлен в корзину"
+      />
     </transition>
   </section>
 </template>
@@ -290,7 +301,7 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import { Hooper, Slide, Pagination as HooperPagination } from 'hooper'
 import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '~/store/cart'
-import { loadProductVideo } from '~/helpers/product-helpers'
+import { loadProductVideo, checkProductImage } from '~/helpers/product-helpers'
 import productsMetaLoader from '~/helpers/meta-loader'
 import { numberWithSpaces } from '~/helpers/utils'
 import IconBookmark from '~/components/icons/IconBookmark.vue'
@@ -322,8 +333,7 @@ export default {
   mixins: [MetaSeo],
   data() {
     return {
-      HooperIsActive: '',
-      HooperIsNotActive: '',
+      HooperIsActive: false,
       isExist: false,
       email: '',
       NotifyModal: false,
@@ -374,6 +384,7 @@ export default {
     productsMetaLoader,
     loadProductVideo,
     numberWithSpaces,
+    checkProductImage,
     ...mapActions('cart', {
       addProductToCart: actionTypes.addProduct,
       updatedQuantity: actionTypes.updatedQuantity,
@@ -399,8 +410,6 @@ export default {
 
         if (Array.isArray(this.product.image)) {
           this.HooperIsActive = true
-        } else {
-          this.HooperIsNotActive = true
         }
       })
     },
