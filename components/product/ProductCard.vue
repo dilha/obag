@@ -12,8 +12,15 @@
         </button>
       </div>
       <img
+        v-if="checkProductImage(item.image)"
         class="product__card-img"
-        :src="loadProductImage(item.image)"
+        :src="item.image"
+        alt=""
+      />
+      <img
+        v-else
+        class="product__card-img"
+        src="~/assets/images/products/bag-placeholder.png"
         alt=""
       />
     </div>
@@ -102,7 +109,7 @@ import IconBookmark from '~/components/icons/IconBookmark.vue'
 import { actionTypes } from '~/store/cart'
 import { actionTypes as actionTypesBookmark } from '~/store/bookmarks'
 import AppProductAdded from '~/components/modal/AppProductAdded.vue'
-import { loadProductImage } from '~/helpers/product-helpers'
+import { loadProductImage, checkProductImage } from '~/helpers/product-helpers'
 import { numberWithSpaces } from '~/helpers/utils'
 
 export default {
@@ -140,6 +147,7 @@ export default {
       addBookmark: actionTypesBookmark.addBookmark,
     }),
     loadProductImage,
+    checkProductImage,
     numberWithSpaces,
 
     add(item) {
