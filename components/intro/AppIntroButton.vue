@@ -1,12 +1,7 @@
 <template>
   <section class="intro" :style="{ backgroundImage: `url(${image})` }">
     <slot></slot>
-    <nuxt-link
-      class="intro__btn"
-      :to="`/catalog/${categoryId}/${categorySlug}`"
-    >
-      Смотреть
-    </nuxt-link>
+    <nuxt-link class="intro__btn" :to="getLink"> Смотреть </nuxt-link>
   </section>
 </template>
 
@@ -16,16 +11,24 @@ export default {
   props: {
     categoryId: {
       type: Number,
-      default: -1,
+      default: null,
     },
     categorySlug: {
       type: String,
-      default: '',
+      default: null,
     },
     image: {
       type: String,
       required: true,
       default: '',
+    },
+  },
+  computed: {
+    getLink() {
+      if (this.categoryId && this.categorySlug) {
+        return `/catalog/${this.categoryId}/${this.categorySlug}`
+      }
+      return '/catalog'
     },
   },
   mounted() {},

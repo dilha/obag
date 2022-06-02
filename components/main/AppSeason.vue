@@ -8,7 +8,7 @@
             backgroundImage: `url(${items.image})`,
           }"
         >
-          <nuxt-link tag="button" class="intro__btn intro__season" to="/season"
+          <nuxt-link tag="button" class="intro__btn intro__season" to="/promos"
             >Подробнее</nuxt-link
           >
         </div>
