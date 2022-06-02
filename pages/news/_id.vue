@@ -9,6 +9,12 @@
       <div class="container">
         <div class="news__id-content">
           {{ item.text }}
+          {{ item.second_title }}
+          {{ item.second_subtitle }}
+          {{ item.second_text }}
+          {{ item.third_title }}
+          {{ item.third_subtitle }}
+          {{ item.third_text }}
         </div>
       </div>
     </section>

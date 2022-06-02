@@ -21,7 +21,7 @@
             font-weight: 600;
             font-size: 18px;
             line-height: 132%;
-            color: #3D3935;
+            color: #3d3935;
             margin-bottom: 12px;
         }
 
@@ -29,8 +29,8 @@
             font-weight: 500;
             font-size: 14px;
             line-height: 21px;
-            color: #9C9C9C;
-            margin-bottom: 30px;
+            color: #9c9c9c;
+            margin-bottom: 20px;
         }
 
         &-link {
@@ -38,7 +38,7 @@
             font-size: 14px;
             line-height: 17px;
             text-decoration-line: underline;
-            color: #D05871;
+            color: #d05871;
         }
     }
 
@@ -51,4 +51,9 @@
         margin: 0 auto;
     }
 
+    &__id {
+        &-content {
+            white-space: pre-line;
+        }
+    }
 }
