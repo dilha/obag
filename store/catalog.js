@@ -9,14 +9,14 @@ export const state = () => ({
   error: null,
   isLoading: false,
   searchTerm: '',
-  sortPriceType: 'ASC'
+  sortPriceType: 'ASC',
 })
-
 
 export const mutationTypes = {
   loadCategoriesStart: 'mutation/removeSelectedCategory loadCategoriesStart',
-  loadCategoriesSuccess: "mutation/loadCategoriesSuccess load categories success",
-  loadCategoriesFailure: "mutation/loadCategoriesFailure loadCategoriesFailure",
+  loadCategoriesSuccess:
+    'mutation/loadCategoriesSuccess load categories success',
+  loadCategoriesFailure: 'mutation/loadCategoriesFailure loadCategoriesFailure',
 
   setSelectedCategory: 'mutation/setSelectedCategory',
   setSelectedSubCategory: 'mutation/setSelectedSubCategory',
@@ -33,9 +33,8 @@ export const mutationTypes = {
   loadSearchProductsSuccess: 'mutation/loadSearchProductsSuccess',
   loadSearchProductsFailure: 'mutation/loadSearchProductsFailure',
 
-  setSearchTerm: 'mutation/setSearchTerm changed app header serach input"'
+  setSearchTerm: 'mutation/setSearchTerm changed app header serach input"',
 }
-
 
 export const actionTypes = {
   loadAllCategories: 'action/loadAllCategories get all categories',
@@ -50,80 +49,77 @@ export const actionTypes = {
   setSelectedComplete: 'action/setSelectedComplete',
 }
 
-
 export const mutations = {
   [mutationTypes.loadCategoriesStart](state) {
-    state.isLoading = true;
+    state.isLoading = true
   },
   [mutationTypes.setSortPriceType](state, payload) {
-    state.sortPriceType = payload;
+    state.sortPriceType = payload
   },
   [mutationTypes.loadCategoriesSuccess](state, payload) {
-    state.isLoading = false;
-    state.categories = payload;
+    state.isLoading = false
+    state.categories = payload
   },
   [mutationTypes.loadCategoriesFailure](state, payload) {
-    state.isLoading = false;
-    state.error = payload;
+    state.isLoading = false
+    state.error = payload
   },
   [mutationTypes.setSelectedCategory](state, payload) {
-    state.selectedCategory = payload;
+    state.selectedCategory = payload
   },
   [mutationTypes.setSelectedSubCategory](state, payload) {
-    state.selectedSubCategory = payload;
+    state.selectedSubCategory = payload
   },
   [mutationTypes.setSelectedComplete](state, payload) {
-    state.selectedComplete = payload;
+    state.selectedComplete = payload
   },
   [mutationTypes.setCategoryFilters](state, payload) {
-    state.filters = payload;
+    state.filters = payload
   },
   [mutationTypes.setCompletes](state, payload) {
-    state.completes = payload;
+    state.completes = payload
   },
 
   [mutationTypes.loadProductsStart](state) {
-    state.isLoading = true;
+    state.isLoading = true
   },
   [mutationTypes.loadProductsSuccess](state, payload) {
-    state.isLoading = false;
+    state.isLoading = false
     state.products = payload
   },
   [mutationTypes.loadProductsFailure](state, payload) {
-    state.isLoading = false;
-    state.error = payload;
+    state.isLoading = false
+    state.error = payload
   },
 
   [mutationTypes.loadSearchProductsStart](state) {
-    state.isLoading = true;
+    state.isLoading = true
   },
   [mutationTypes.loadSearchProductsSuccess](state, payload) {
-    state.isLoading = false;
+    state.isLoading = false
     state.products = payload
   },
   [mutationTypes.loadSearchProductsFailure](state, payload) {
-    state.isLoading = false;
-    state.error = payload;
+    state.isLoading = false
+    state.error = payload
   },
 
   [mutationTypes.setSearchTerm](state, payload) {
-    state.searchTerm = payload;
+    state.searchTerm = payload
   },
 }
 
-
 export const actions = {
   [actionTypes.loadAllCategories]({ commit }) {
-
-    commit(mutationTypes.loadCategoriesStart);
-    return new Promise(resolve => {
+    commit(mutationTypes.loadCategoriesStart)
+    return new Promise((resolve) => {
       this.$api
         .get('/get-categories')
         .then((response) => {
-          const categories = response.data.categories;
+          const categories = response.data.categories
           commit(mutationTypes.loadCategoriesSuccess, categories)
-          commit(mutationTypes.setSelectedCategory, categories[0]);
-          resolve(categories);
+          commit(mutationTypes.setSelectedCategory, categories[0])
+          resolve(categories)
         })
         .catch((e) => {
           commit(mutationTypes.loadCategoriesFailure, e)
@@ -131,20 +127,19 @@ export const actions = {
     })
   },
   [actionTypes.loadAllCategoryProducts]({ commit, state }, category) {
+    commit(mutationTypes.setSelectedCategory, category)
+    commit(mutationTypes.loadProductsStart)
 
-    commit(mutationTypes.setSelectedCategory, category);
-    commit(mutationTypes.loadProductsStart);
-
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.$api
         .get(`/category/${category.id}?sort_price=${state.sortPriceType}`)
         .then((response) => {
-          const products = response.data.category.products;
-          const filters = response.data?.filters;
+          const products = response.data.category.products
+          const filters = response.data?.filters
           commit(mutationTypes.loadProductsSuccess, products)
           commit(mutationTypes.setCategoryFilters, filters)
           commit(mutationTypes.setCompletes, [])
-          resolve(products);
+          resolve(products)
         })
         .catch((e) => {
           commit(mutationTypes.loadProductsFailure, e)
@@ -153,20 +148,20 @@ export const actions = {
   },
 
   [actionTypes.loadAllSubCategoryProducts]({ commit, state }, subCategoryId) {
-    commit(mutationTypes.loadProductsStart);
-    commit(mutationTypes.setSelectedSubCategory, subCategoryId);
-    return new Promise(resolve => {
+    commit(mutationTypes.loadProductsStart)
+    commit(mutationTypes.setSelectedSubCategory, subCategoryId)
+    return new Promise((resolve) => {
       this.$api
         .get(`/subcategory/${subCategoryId}?sort_price=${state.sortPriceType}`)
         .then((response) => {
-          const products = response.data.subcategory.products;
-          const filters = response.data?.filters;
-          const completes = response.data.completes;
+          const products = response.data.subcategory.products
+          const filters = response.data?.filters
+          const completes = response.data.completes
           commit(mutationTypes.loadProductsSuccess, products)
           commit(mutationTypes.setCategoryFilters, filters)
           commit(mutationTypes.setCompletes, completes)
 
-          resolve(products);
+          resolve(products)
         })
         .catch((e) => {
           commit(mutationTypes.loadProductsFailure, e)
@@ -175,31 +170,30 @@ export const actions = {
   },
 
   [actionTypes.setSelectedCategory]({ commit, state }, category) {
-    commit(mutationTypes.setSelectedCategory, category);
+    commit(mutationTypes.setSelectedCategory, category)
   },
 
   [actionTypes.setSelectedSubCategory]({ commit, state }, subcatId) {
-    commit(mutationTypes.setSelectedSubCategory, subcatId);
+    commit(mutationTypes.setSelectedSubCategory, subcatId)
   },
 
   [actionTypes.setSelectedComplete]({ commit, state }, completeId) {
-    commit(mutationTypes.setSelectedComplete, completeId);
+    commit(mutationTypes.setSelectedComplete, completeId)
   },
 
   [actionTypes.loadSearchProducts]({ commit, state }, term) {
-
-    commit(mutationTypes.loadSearchProductsStart);
+    commit(mutationTypes.loadSearchProductsStart)
     // commit(mutationTypes.setSelectedSubCategory, null);
     // commit(mutationTypes.setSelectedCategory, null);
     // commit(mutationTypes.setCategoryFilters, null )
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.$api
         .get(`/products/search/${term}?sort_price=${state.sortPriceType}`)
         .then((response) => {
-          const products = response.data?.products;
+          const products = response.data?.products
           commit(mutationTypes.loadSearchProductsSuccess, products)
-          resolve(products);
+          resolve(products)
         })
         .catch((e) => {
           commit(mutationTypes.loadSearchProductsFailure, e)
@@ -208,8 +202,8 @@ export const actions = {
   },
 
   [actionTypes.loadFilterProducts]({ commit, state }, payload) {
-    commit(mutationTypes.loadProductsStart);
-    const params = { ids: payload.filters };
+    commit(mutationTypes.loadProductsStart)
+    const params = { ids: payload.filters }
     if (payload?.price_from) {
       params.price_from = payload.price_from
     }
@@ -229,13 +223,13 @@ export const actions = {
       url = `/category/${payload.categoryId}/filtered?sort_price=${state.sortPriceType}`
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.$api
         .post(url, params)
         .then((response) => {
-          const products = response.data.products;
+          const products = response.data.products
           commit(mutationTypes.loadProductsSuccess, products)
-          resolve(products);
+          resolve(products)
         })
         .catch((e) => {
           commit(mutationTypes.loadProductsFailure, e)
@@ -251,7 +245,7 @@ export const actions = {
   },
 }
 
-
 export const getters = {
-  selectedCategory: state => state.selectedCategory ? state.selectedCategory : state.categories[0]
+  selectedCategory: (state) =>
+    state.selectedCategory ? state.selectedCategory : state.categories[0],
 }

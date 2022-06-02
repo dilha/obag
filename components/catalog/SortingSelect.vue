@@ -1,4 +1,3 @@
-
 <template>
   <div class="sorting" @click="select">
     <div class="sorting__header">
@@ -13,7 +12,7 @@
     </div>
     <div class="sorting__body">
       <div
-        v-for="(item, index) in items"
+        v-for="(item, index) in Object.values(items)"
         :key="index"
         class="sorting__item"
         @click="replacement(item)"
@@ -32,25 +31,31 @@ export default {
   data() {
     return {
       currentFilter: '',
-      items: [
-        {
+      items: {
+        ASC: {
           id: 1,
           label: 'по возрастанию',
-          type: 'DESC',
-        },
-        {
-          id: 2,
-          label: 'по убыванию',
           type: 'ASC',
         },
-      ],
+        DESC: {
+          id: 2,
+          label: 'по убыванию',
+          type: 'DESC',
+        },
+      },
     }
   },
   computed: {
-    ...mapState('catalog', ['selectedCategory', 'selectedSubCategory']),
+    ...mapState('catalog', [
+      'selectedCategory',
+      'selectedSubCategory',
+      'sortPriceType',
+    ]),
   },
   mounted() {
-    this.currentFilter = this.items[0]
+    this.currentFilter = this.sortPriceType
+      ? this.items[this.sortPriceType]
+      : this.items.ASC
   },
   methods: {
     ...mapActions('catalog', {
@@ -73,7 +78,7 @@ export default {
       this.currentFilter = item
       this.setSortType(item.type)
       if (this.selectedSubCategory) {
-        this.loadSortedSubCategoryProducts(this.selectedSubCategory.id)
+        this.loadSortedSubCategoryProducts(this.selectedSubCategory)
         return
       }
       this.loadSortedCategoryProducts(this.selectedCategory)
