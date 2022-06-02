@@ -22,7 +22,7 @@
       link="catalog/4/ocki"
       image-url="assets/images/glasses/combination-glasses.jpg"
     />
-    <app-like :id="category.id" />
+    <app-like :category-id="category.id" :category-slug="category.slug" />
     <app-news />
   </div>
 </template>

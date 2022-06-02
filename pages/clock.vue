@@ -22,7 +22,7 @@
       link="catalog/3/casy/132/o-clock?completId=36"
       image-url="assets/images/clock/combination-clock.jpg"
     />
-    <app-like :id="category.id" />
+    <app-like :category-id="category.id" :category-slug="category.slug" />
     <app-news />
   </div>
 </template>

@@ -6,7 +6,7 @@
       </h3>
     </app-subcat-intro-button>
     <app-complete-cards :items="subcategory.completes" />
-    <app-like :id="category.id" />
+    <app-like :category-id="categoryId" :category-slug="categorySlug" />
     <app-news />
   </div>
 </template>

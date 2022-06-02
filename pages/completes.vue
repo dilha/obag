@@ -14,7 +14,7 @@
       :subcat-id="subcategoryId"
       :items="subcategory.completes"
     />
-    <app-like :id="category.id" />
+    <app-like :category-id="category.id" :category-slug="category.slug" />
     <app-news />
   </div>
 </template>
