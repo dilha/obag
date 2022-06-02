@@ -2,8 +2,16 @@
   <section class="shoes page__block">
     <div class="container">
       <div class="card__inner">
-        <div v-for="item in items" :key="item.id" class="card__item" :style="{ backgroundImage: `url(${item.image})` }">
-          <nuxt-link class="card__item-title" :to="`/completes/${categoryId}/${categorySlug}/${item.id}/${item.slug}`">
+        <div
+          v-for="item in items"
+          :key="item.id"
+          class="card__item"
+          :style="{ backgroundImage: `url(${item.image})` }"
+        >
+          <nuxt-link
+            class="card__item-title"
+            :to="`/completes/${categoryId}/${categorySlug}/${item.id}/${item.slug}`"
+          >
             {{ item.title }}
           </nuxt-link>
         </div>
@@ -20,14 +28,17 @@ export default {
     categoryId: {
       type: Number,
       required: true,
+      default: -1,
     },
     categorySlug: {
       type: String,
       required: true,
+      default: '',
     },
     items: {
       type: Array,
       required: true,
+      default: () => [],
     },
   },
   computed: {

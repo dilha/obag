@@ -10,6 +10,7 @@ export default {
   props: {
     item: {
       type: String,
+      default: ''
     },
   },
   methods: {

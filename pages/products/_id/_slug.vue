@@ -280,7 +280,7 @@
       @close="isVisibleReviewModal = false"
     />
     <transition name="fade">
-      <app-product-added v-if="isShownAddedTransition" />
+      <app-product-added v-if="isShownAddedTransition" text="Товар добавлен в корзину" />
     </transition>
   </section>
 </template>
@@ -382,7 +382,6 @@ export default {
 
     selecProductInfo(selectInfo) {
       this.productInfo = selectInfo
-      console.log(this.productInfo)
     },
     showReviewModal() {
       this.isVisibleReviewModal = true
@@ -420,8 +419,6 @@ export default {
           } else {
             alert('Введите коректный email')
           }
-          console.log(response)
-          console.log(id)
 
           // this.res = response.message
         })
