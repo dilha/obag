@@ -26,18 +26,32 @@
             <p class="account__text">{{ user.address }}</p>
           </div>
           <div class="account__info-link">
-            <a class="account__link" href="#?" @click="isVisibleEditModal = true">
+            <a
+              class="account__link"
+              href="#?"
+              @click="isVisibleEditModal = true"
+            >
               Редактировать данные
             </a>
-            <a class="account__link" href="#?" @click="isVisiblePasswordModal = true">
+            <a
+              class="account__link"
+              href="#?"
+              @click="isVisiblePasswordModal = true"
+            >
               Изменить свой пароль
             </a>
           </div>
         </div>
       </div>
     </div>
-    <app-edit-data v-if="isVisibleEditModal" @close="isVisibleEditModal = false" />
-    <app-edit-password v-if="isVisiblePasswordModal" @close="isVisiblePasswordModal = false" />
+    <app-edit-data
+      v-if="isVisibleEditModal"
+      @close="isVisibleEditModal = false"
+    />
+    <app-edit-password
+      v-if="isVisiblePasswordModal"
+      @close="isVisiblePasswordModal = false"
+    />
   </section>
 </template>
 
@@ -51,7 +65,7 @@ export default {
   components: {
     ProfileNavigation,
     AppEditData,
-    AppEditPassword
+    AppEditPassword,
   },
   data() {
     return {
@@ -62,7 +76,6 @@ export default {
   computed: {
     ...mapState('auth', ['user', 'isLoggedIn']),
   },
-  methods: {
-  }
+  methods: {},
 }
 </script>

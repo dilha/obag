@@ -4,7 +4,11 @@
       <h3 class="intro__title">Информация корпоративным клиентам</h3>
     </app-intro>
     <div v-if="content" class="loyalty">
-      <div class="container" style="white-space: pre-line" v-html="content.content"></div>
+      <div
+        class="container"
+        style="white-space: pre-line"
+        v-html="content.content"
+      ></div>
     </div>
     <app-news />
   </div>

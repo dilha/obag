@@ -6,13 +6,12 @@
       </h3>
     </app-subcat-intro-button>
     <app-complete-cards :items="subcategory.completes" />
-    <app-like :id="category.id" />
+    <app-like :category-id="categoryId" :category-slug="categorySlug" />
     <app-news />
   </div>
 </template>
 
 <script>
-
 import { mapActions, mapState } from 'vuex'
 import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '@/store'
@@ -36,7 +35,7 @@ export default {
       categoryId: null,
       categorySlug: null,
       subcategoryId: null,
-      subcategorySlug: null
+      subcategorySlug: null,
     }
   },
   computed: {

@@ -5,7 +5,7 @@
       {{ item.title }}
     </div>
     <p class="news__item-text">
-      {{ item.text }}
+      {{ getPromoText }}
     </p>
     <nuxt-link
       :to="{ name: 'promos-id-slug', params: { id: item.id, slug: item.slug } }"
@@ -23,6 +23,15 @@ export default {
     item: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    getPromoText() {
+      const words = this.item?.text.split(' ')
+      if (words.length > 0) {
+        return words?.slice(0, 12).join(' ') + '...'
+      }
+      return ''
     },
   },
 }

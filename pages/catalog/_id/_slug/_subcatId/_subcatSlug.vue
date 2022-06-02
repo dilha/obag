@@ -8,7 +8,11 @@
           <sorting-select />
         </div>
       </div>
-      <div class="burger bar-logo" :class="{ active: isAppear }" @click="isAppear = !isAppear">
+      <div
+        class="burger bar-logo"
+        :class="{ active: isAppear }"
+        @click="isAppear = !isAppear"
+      >
         <span class="burger-line"></span>
       </div>
 
@@ -18,9 +22,16 @@
         </div>
 
         <div class="catalog__content">
-          <catalog-model ref="catalogModel" @clear-filters="handleClearFilters" />
+          <catalog-model
+            ref="catalogModel"
+            @clear-filters="handleClearFilters"
+          />
           <div v-if="products.length" class="catalog__inner">
-            <product-card v-for="item in products" :key="item.id" :item="item" />
+            <product-card
+              v-for="item in products"
+              :key="item.id"
+              :item="item"
+            />
           </div>
           <div v-else>
             <img v-if="isLoading" src="@/assets/images/loader.gif" alt="" />
@@ -35,7 +46,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import MetaSeo from '@/mixins/MetaSeo.vue'
+import MetaCatalogSeo from '~/mixins/MetaCatalogSeo.vue'
 import { actionTypes } from '@/store/catalog'
 import SortingSelect from '~/components/catalog/SortingSelect.vue'
 import CatalogAside from '~/components/catalog/CatalogAside.vue'
@@ -52,7 +63,7 @@ export default {
     ProductCard,
     AppNews,
   },
-  mixins: [MetaSeo],
+  mixins: [MetaCatalogSeo],
   data() {
     return {
       isAppear: false,
@@ -61,9 +72,7 @@ export default {
   computed: {
     ...mapState('catalog', ['products', 'isLoading', 'categories']),
   },
-  mounted() {
-    console.log(this.$route)
-  },
+  mounted() {},
   methods: {
     ...mapActions('catalog', {
       loadSearchProducts: actionTypes.loadSearchProducts,

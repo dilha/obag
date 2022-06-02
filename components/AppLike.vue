@@ -25,7 +25,7 @@
       <nuxt-link
         tag="button"
         class="will__like-button page__border-btn"
-        :to="{ name: 'catalog', params: { id: id } }"
+        :to="getLink"
       >
         Открыть полный каталог
       </nuxt-link>
@@ -44,8 +44,13 @@ export default {
     // ProductCard,
   },
   props: {
-    id: {
+    categoryId: {
       type: Number,
+      default: null,
+    },
+    categorySlug: {
+      type: String,
+      default: null,
     },
   },
   data() {
@@ -55,6 +60,12 @@ export default {
   },
   computed: {
     ...mapState(['recomended']),
+    getLink() {
+      if (this.categoryId && this.categorySlug) {
+        return `/catalog/${this.categoryId}/${this.categorySlug}`
+      }
+      return '/catalog'
+    },
   },
   mounted() {
     this.getRecomended().then(() => {

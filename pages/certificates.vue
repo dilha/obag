@@ -21,6 +21,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import MetaSeo from '@/mixins/MetaSeo.vue'
 import { actionTypes } from '@/store/certificates'
 import AppIntroArrow from '~/components/intro/AppIntroArrow.vue'
 import AppCertificatesCards from '~/components/cards/AppCertificatesCards.vue'
@@ -35,6 +36,7 @@ export default {
     AppNews,
     // ProductCard,
   },
+  mixins: [MetaSeo],
   data() {
     return {
       items: [],

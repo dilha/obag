@@ -20,7 +20,7 @@ export const mutations = {
 export const actions = {
   [actionTypes.loadCertificates]({ commit }) {
     return new Promise((resolve) => {
-      this.$api.get('/gift-certificates').then((response) => {
+      this.$api.get('/page/gift-certificates').then((response) => {
         const certificates = response.data.certificates
         commit(mutationTypes.loadCertificatesSuccess, certificates)
         resolve(certificates)

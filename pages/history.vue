@@ -7,7 +7,7 @@
     </app-intro>
     <section class="history">
       <div class="container">
-        <div class="history__content ">
+        <div class="history__content">
           <h3 class="history__title page__title">
             {{ content.title_first }}
           </h3>
@@ -18,7 +18,7 @@
           <img class="history__img" :src="content.image_first" alt="" />
         </div>
 
-        <div class="history__content ">
+        <div class="history__content">
           <h3 class="history__title page__title">
             {{ content.title_second }}
           </h3>
@@ -28,7 +28,7 @@
           <img class="history__img" :src="content.image_second" alt="" />
         </div>
 
-        <div class="history__content ">
+        <div class="history__content">
           <div class="history__text" style="white-space: pre-line">
             {{ content.text_third }}
           </div>
@@ -41,14 +41,17 @@
 </template>
 
 <script>
+import MetaSeo from '@/mixins/MetaSeo.vue'
 import AppIntro from '~/components/intro/AppIntro.vue'
 import AppNews from '~/components/news/AppNews.vue'
+
 export default {
   name: 'CollectionPage',
   components: {
     AppIntro,
     AppNews,
   },
+  mixins: [MetaSeo],
   data() {
     return {
       content: null,

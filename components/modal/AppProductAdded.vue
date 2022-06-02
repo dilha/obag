@@ -1,20 +1,24 @@
 <template>
   <div class="product__added">
-    <img class="product__added-img" src="@/assets/images/icons/done-icon.svg" alt="">
+    <img
+      class="product__added-img"
+      src="@/assets/images/icons/done-icon.svg"
+      alt=""
+    />
     <p class="product__added-text">
-      {{text}}
+      {{ text }}
     </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AppProductAdded', 
+  name: 'AppProductAdded',
   props: {
     text: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>

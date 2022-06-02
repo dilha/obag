@@ -7,7 +7,11 @@
       <div v-if="items" class="container">
         <div class="shop__block page__block">
           <div class="shop__inner">
-            <app-shop-cards v-for="(item, index) in items" :key="index" :shop="item" />
+            <app-shop-cards
+              v-for="(item, index) in items"
+              :key="index"
+              :shop="item"
+            />
           </div>
         </div>
         <app-shop />
