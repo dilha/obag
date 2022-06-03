@@ -27,7 +27,14 @@
           @click="handleSelectSubcategory(subcategory.id)"
         >
           <div class="constructor__item-images">
-            <img :src="subcategory.preview_image" alt="" />
+            <img
+              :src="
+                selectedSubcategory.id === subcategory.id
+                  ? subcategory.image
+                  : subcategory.preview_image
+              "
+              alt=""
+            />
           </div>
           <p class="constructor__item-title">
             {{ subcategory.title }}
@@ -95,7 +102,7 @@
               v-for="element in selectedPart.constructorElements"
               :key="element.id"
               class="constructor__elements-item"
-              @click="addBackground(element)"
+              @click="handleSelectElement(element)"
             >
               <img :src="element.image" alt="" />
               <p class="constructor__elements-price">
@@ -108,16 +115,6 @@
     </div>
   </section>
 </template>
-
-<!-- :style="{
-                backgroundImage: `${
-                  initBackgroundImage
-                    ? initBackgroundImage
-                    : backgroundImagesArray
-                        .filter((element) => element !== '')
-                        .join()
-                }`,
-              }" -->
 
 <script>
 import { mapActions, mapState } from 'vuex'
@@ -136,15 +133,11 @@ export default {
   mixins: [MetaSeo],
   data() {
     return {
-      categories: null,
-      categoriesId: null,
       orderedBackgroundImages: null,
-      lastElement: null,
       backgroundImagesArray: [],
       priceElement: {},
       totalElement: [],
       selectedObject: {},
-      firstAddedKey: null,
       totalAll: '0',
 
       selectedCategory: {},
@@ -166,16 +159,19 @@ export default {
     ...mapState('product-constructor', ['productCategory']),
     ...mapState('product-constructor', ['productType']),
     getBackgroundImage() {
-      return `background-image: url(${this.requireAssetImage(
-        this.initBackgroundImage
-      )})`
+      if (this.initBackgroundImage) {
+        return `background-image: url(${this.requireAssetImage(
+          this.initBackgroundImage
+        )})`
+      }
+
+      const background = this.backgroundImagesArray
+        .filter((element) => element !== '')
+        .join()
+      return `background-image: url(${background})`
     },
   },
   watch: {
-    selectedCategory: {
-      deep: true,
-      handler() {},
-    },
     orderedBackgroundImages: {
       deep: true,
       handler() {
@@ -189,25 +185,14 @@ export default {
     },
   },
   mounted() {
-    this.getTypes().then((types) => {
-      this.selectedCategory = types[0]
-      // eslint-disable-next-line dot-notation
-      this.getCategory(this.selectedCategory['constructor'][0].id).then(
-        (category) => {
-          // eslint-disable-next-line dot-notation
-          this.selectedSubcategory = category.constructor
-          this.categories = category.constructor.categories
-          // eslint-disable-next-line dot-notation
-          this.selectedPart = category['constructor'].categories
-        }
-      )
+    this.getCategories().then((categories) => {
+      this.handleSelectCategory(categories[0])
     })
-    this.loadBackground()
   },
   methods: {
     ...mapActions('product-constructor', {
-      getTypes: actionTypes.loadType,
-      getCategory: actionTypes.loadCategory,
+      getCategories: actionTypes.loadType,
+      getSubcategories: actionTypes.loadCategory,
     }),
     ...mapActions('cart', {
       addElements: cartActionTypes.addProduct,
@@ -226,13 +211,35 @@ export default {
 
     handleSelectSubcategory(id) {
       this.clearElements()
-      this.getCategory(id).then((subcategory) => {
+      this.getSubcategories(id).then((subcategory) => {
         this.selectedSubcategory = subcategory?.constructor
       })
     },
 
     handleSelectParts(part) {
       this.selectedPart = part
+    },
+
+    handleSelectElement(element) {
+      this.initBackgroundImage = null
+      const backgroundImagesUrl = []
+      element?.images?.forEach((e) => {
+        backgroundImagesUrl.push(`url(${e})`)
+      })
+      this.$set(
+        this.orderedBackgroundImages,
+        this.selectedPart.type,
+        backgroundImagesUrl.reverse().join(',')
+      )
+
+      console.log(this.orderedBackgroundImages)
+
+      // выбранные элементы
+      this.$set(this.selectedObject, this.selectedPart.id, element)
+
+      // итоговая цена
+      this.$set(this.priceElement, this.selectedPart.id, element.price)
+      this.totalElement = Object.values(this.priceElement)
     },
 
     addElementsToCart() {
@@ -278,29 +285,6 @@ export default {
           this.orderedBackgroundImages = {}
           break
       }
-    },
-
-    addBackground(element) {
-      this.initBackgroundImage = null
-      this.lastElement = element
-      const backgroundImagesUrl = []
-      element?.images?.forEach((e) => {
-        backgroundImagesUrl.push(`url(${e})`)
-      })
-      this.$set(
-        this.orderedBackgroundImages,
-        this.selectedPart.type,
-        backgroundImagesUrl.reverse().join(',')
-      )
-
-      console.log(this.orderedBackgroundImages)
-
-      // выбранные элементы
-      this.$set(this.selectedObject, this.selectedPart.id, element)
-
-      // итоговая цена
-      this.$set(this.priceElement, this.selectedPart.id, element.price)
-      this.totalElement = Object.values(this.priceElement)
     },
 
     clearElements() {
