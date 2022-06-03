@@ -1,4 +1,3 @@
-/* eslint-disable dot-notation */
 <template>
   <section class="constructor">
     <div class="container">
@@ -6,64 +5,59 @@
         Каждый аксессуар O bag – это конструктор!
       </h3>
 
+      <!-- category tabs -->
       <div class="constructor__top">
         <button
-          v-for="item in productType"
-          :key="item.id"
+          v-for="category in productType"
+          :key="category.id"
           class="constructor__top-btn"
-          :class="{ active: selectedType.id === item.id }"
-          @click="getTypesProducts(item)"
+          :class="{ active: selectedCategory.id === category.id }"
+          @click="handleSelectCategory(category)"
         >
-          {{ item.title }}
+          {{ category.title }}
         </button>
       </div>
 
-      <div v-if="selectedType" class="constructor__inner">
+      <!-- subcategory tabs -->
+      <div v-if="selectedCategory" class="constructor__inner">
         <div
-          v-for="item in selectedType['constructor']"
-          :key="item.id"
+          v-for="subcategory in selectedCategory.constructor"
+          :key="subcategory.id"
           class="constructor__item"
-          @click="selectCategory(item.id)"
+          @click="handleSelectSubcategory(subcategory.id)"
         >
           <div class="constructor__item-images">
-            <img :src="item.preview_image" alt="" />
+            <img :src="subcategory.preview_image" alt="" />
           </div>
           <p class="constructor__item-title">
-            {{ item.title }}
+            {{ subcategory.title }}
           </p>
         </div>
       </div>
 
-      <div v-if="selectedConfiguratorMenu" class="constructor__buttons">
+      <!-- parts block -->
+      <div v-if="selectedSubcategory" class="constructor__buttons">
         <button
-          v-for="(constructor, index) in categories"
-          :key="index"
+          v-for="part in selectedSubcategory.categories"
+          :key="part.id"
           class="constructor__btn page__border-btn"
-          :class="{ active: constructor.id === selectedConfiguratorMenu.id }"
-          @click="selectConfiguratorMenu(constructor)"
+          :class="{ active: part.id === selectedPart.id }"
+          @click="handleSelectParts(part)"
         >
-          {{ constructor.title }}
+          {{ part.title }}
         </button>
       </div>
 
       <div class="constructor__container">
         <div class="constructor__product">
           <h3 class="constructor__product-title">
-            {{ selectedCategory.title }}
+            {{ selectedSubcategory.title }}
           </h3>
           <div class="constructor__card">
             <div
               ref="obagConstuctor"
               class="constructor__card-img"
-              :style="{
-                backgroundImage: `${
-                  initBackgroundImage
-                    ? initBackgroundImage
-                    : backgroundImagesArray
-                        .filter((element) => element !== '')
-                        .join()
-                }`,
-              }"
+              :style="getBackgroundImage"
             ></div>
             <button
               class="constructor__card-btn page__border-btn"
@@ -95,12 +89,10 @@
         </div>
         <div class="constructor__elements">
           <h6 class="constructor__elements-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
-          <div
-            v-if="selectedConfiguratorMenu"
-            class="constructor__elements-inner"
-          >
+
+          <div v-if="selectedPart" class="constructor__elements-inner">
             <div
-              v-for="element in selectedConfiguratorMenu.constructorElements"
+              v-for="element in selectedPart.constructorElements"
               :key="element.id"
               class="constructor__elements-item"
               @click="addBackground(element)"
@@ -116,6 +108,16 @@
     </div>
   </section>
 </template>
+
+<!-- :style="{
+                backgroundImage: `${
+                  initBackgroundImage
+                    ? initBackgroundImage
+                    : backgroundImagesArray
+                        .filter((element) => element !== '')
+                        .join()
+                }`,
+              }" -->
 
 <script>
 import { mapActions, mapState } from 'vuex'
@@ -134,71 +136,45 @@ export default {
   mixins: [MetaSeo],
   data() {
     return {
-      selectedConfiguratorMenu: null,
       categories: null,
       categoriesId: null,
-      orderedBackgroundImages: {
-        ruchki: '',
-        podkladki: '',
-        acessory: '',
-        korpusa: '',
-      },
+      orderedBackgroundImages: null,
       lastElement: null,
       backgroundImagesArray: [],
       priceElement: {},
       totalElement: [],
       selectedObject: {},
-      selectedElements: [],
-      selectedType: {},
-      selectedCategory: {},
       firstAddedKey: null,
-      // productConstructor: null,
-
       totalAll: '0',
-      initBackgroundImage:
-        'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp)',
+
+      selectedCategory: {},
+      selectedSubcategory: {},
+      selectedPart: null,
+      selectedElements: [],
+
+      backgroundReplacements: {
+        sumki: 'constructor-bags-replacement.webp',
+        ryukzaki: 'constructor-bags-replacement.webp',
+        casy: 'constructor-clock-replacement.webp',
+        aksesuary: 'constructor-glasses-replacement.webp',
+      },
+      initBackgroundImage: 'constructor-bags-replacement.webp',
       backgroundImages: '',
     }
   },
   computed: {
     ...mapState('product-constructor', ['productCategory']),
     ...mapState('product-constructor', ['productType']),
+    getBackgroundImage() {
+      return `background-image: url(${this.requireAssetImage(
+        this.initBackgroundImage
+      )})`
+    },
   },
   watch: {
-    selectedType: {
+    selectedCategory: {
       deep: true,
-      handler() {
-        switch (this.selectedType.type) {
-          case 'sumki':
-            console.log('sumki')
-            this.initBackgroundImage =
-              'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp)'
-            this.orderedBackgroundImages = {
-              ruchki: '',
-              podkladki: '',
-              acessory: '',
-              korpusa: '',
-            }
-            break
-          case 'ryukzaki':
-            console.log('ryukzaki')
-            break
-          case 'casy':
-            console.log('casy')
-            this.initBackgroundImage =
-              'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_oclockgreat-655x655.webp)'
-            this.orderedBackgroundImages = {
-              ciferblaty: '',
-              remeshki: '',
-            }
-            break
-          case 'aksesuary':
-            console.log('aksesuary')
-            this.initBackgroundImage =
-              'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_osun-655x655.webp)'
-            break
-        }
-      },
+      handler() {},
     },
     orderedBackgroundImages: {
       deep: true,
@@ -214,22 +190,23 @@ export default {
   },
   mounted() {
     this.getTypes().then((types) => {
-      this.selectedType = types[0]
+      this.selectedCategory = types[0]
       // eslint-disable-next-line dot-notation
-      this.getCategory(this.selectedType['constructor'][0].id).then(
+      this.getCategory(this.selectedCategory['constructor'][0].id).then(
         (category) => {
           // eslint-disable-next-line dot-notation
-          this.selectedCategory = category.constructor
+          this.selectedSubcategory = category.constructor
           this.categories = category.constructor.categories
           // eslint-disable-next-line dot-notation
-          this.selectedConfiguratorMenu = category['constructor'].categories
+          this.selectedPart = category['constructor'].categories
         }
       )
     })
+    this.loadBackground()
   },
   methods: {
-    ...mapActions('product-constructor', { getTypes: actionTypes.loadType }),
     ...mapActions('product-constructor', {
+      getTypes: actionTypes.loadType,
       getCategory: actionTypes.loadCategory,
     }),
     ...mapActions('cart', {
@@ -237,21 +214,25 @@ export default {
     }),
     numberWithSpaces,
 
-    getTypesProducts(item) {
-      this.clearElements()
-      this.selectedType = item
-      this.selectCategory(item.id)
+    requireAssetImage(path) {
+      return require('@/assets/images/constructor/' + path)
     },
 
-    selectCategory(id) {
-      this.getCategory(id).then((category) => {
-        // eslint-disable-next-line dot-notation
-        this.selectedCategory = category['constructor']
-        // eslint-disable-next-line dot-notation
-        this.categories = category['constructor'].categories
-        // eslint-disable-next-line dot-notation
-        this.selectedConfiguratorMenu = category['constructor'].categories
+    handleSelectCategory(item) {
+      this.clearElements()
+      this.selectedCategory = item
+      this.handleSelectSubcategory(item.constructor[0].id)
+    },
+
+    handleSelectSubcategory(id) {
+      this.clearElements()
+      this.getCategory(id).then((subcategory) => {
+        this.selectedSubcategory = subcategory?.constructor
       })
+    },
+
+    handleSelectParts(part) {
+      this.selectedPart = part
     },
 
     addElementsToCart() {
@@ -264,8 +245,39 @@ export default {
       }
     },
 
-    selectConfiguratorMenu(configuratorItem) {
-      this.selectedConfiguratorMenu = configuratorItem
+    loadBackground() {
+      const type = this.selectedCategory.type
+      this.initBackgroundImage = type
+        ? this.backgroundReplacements[type]
+        : this.backgroundReplacements.sumki
+
+      switch (type) {
+        case 'sumki':
+          this.orderedBackgroundImages = {
+            ruchki: '',
+            podkladki: '',
+            acessory: '',
+            korpusa: '',
+            kryshki: '',
+            remni: '',
+          }
+          break
+        case 'ryukzaki':
+          this.orderedBackgroundImages = {}
+          break
+        case 'casy':
+          this.orderedBackgroundImages = {
+            ciferblaty: '',
+            remeshki: '',
+          }
+          break
+        case 'aksesuary':
+          this.orderedBackgroundImages = {}
+          break
+        default:
+          this.orderedBackgroundImages = {}
+          break
+      }
     },
 
     addBackground(element) {
@@ -277,45 +289,25 @@ export default {
       })
       this.$set(
         this.orderedBackgroundImages,
-        this.selectedConfiguratorMenu.type,
+        this.selectedPart.type,
         backgroundImagesUrl.reverse().join(',')
       )
 
       console.log(this.orderedBackgroundImages)
 
       // выбранные элементы
-      this.$set(this.selectedObject, this.selectedConfiguratorMenu.id, element)
+      this.$set(this.selectedObject, this.selectedPart.id, element)
 
       // итоговая цена
-      this.$set(
-        this.priceElement,
-        this.selectedConfiguratorMenu.id,
-        element.price
-      )
+      this.$set(this.priceElement, this.selectedPart.id, element.price)
       this.totalElement = Object.values(this.priceElement)
     },
 
-    removeElements(item) {
-      // this.$delete(this.selectedObject, item)
-      // this.totalElement.pop()
-      // this.totalAll = this.totalElement.reduce(function (sum, el) {
-      //     return Number(sum) + Number(el)
-      //   }, 0)
-      // this.selectedElements.pop()
-      // this.backgroundImagesArray.pop()
-    },
-
     clearElements() {
-      this.orderedBackgroundImages = {
-        ruchki: '',
-        podkladki: '',
-        acessory: '',
-        korpusa: '',
-      }
       this.totalElement = []
       this.selectedObject = {}
-      this.initBackgroundImage =
-        'url(https://obag.ua/image/cache/wp/gp/category_constructor/config_obag-655x655.webp'
+      this.selectedPart = {}
+      this.loadBackground()
     },
   },
 }
