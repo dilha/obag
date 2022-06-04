@@ -76,14 +76,14 @@
           <div class="constructor__selected">
             <h6 class="constructor__selected-title">ВЫБРАННЫЕ ЭЛЕМЕНТЫ</h6>
             <app-parts-card
-              v-for="selected in selectedElements"
+              v-for="selected in getSelectedElements"
               :key="selected.id"
               :item="selected"
             />
             <div class="constructor__selected-total">
               <p class="constructor__selected-text">Всего:</p>
               <p class="constructor__selected-number">
-                {{ numberWithSpaces(totalAll) }} ₸
+                {{ numberWithSpaces(getTotalPrice) }} ₸
               </p>
             </div>
             <button
@@ -133,18 +133,13 @@ export default {
   mixins: [MetaSeo],
   data() {
     return {
-      orderedBackgroundImages: null,
-      backgroundImagesArray: [],
-      priceElement: {},
-      totalElement: [],
-      selectedObject: {},
-      totalAll: '0',
-
       selectedCategory: {},
       selectedSubcategory: {},
       selectedPart: null,
-      selectedElements: [],
+      selectedElementsObject: {},
 
+      orderedBackgroundImages: null,
+      backgroundImagesArray: [],
       backgroundReplacements: {
         sumki: 'constructor-bags-replacement.webp',
         ryukzaki: 'constructor-bags-replacement.webp',
@@ -152,7 +147,6 @@ export default {
         aksesuary: 'constructor-glasses-replacement.webp',
       },
       initBackgroundImage: 'constructor-bags-replacement.webp',
-      backgroundImages: '',
     }
   },
   computed: {
@@ -168,20 +162,15 @@ export default {
       const background = this.backgroundImagesArray
         .filter((element) => element !== '')
         .join()
-      return `background-image: url(${background})`
+      return `background-image: ${background}`
     },
-  },
-  watch: {
-    orderedBackgroundImages: {
-      deep: true,
-      handler() {
-        this.backgroundImagesArray = Object.values(this.orderedBackgroundImages)
-        this.selectedElements = Object.values(this.selectedObject)
-
-        this.totalAll = this.totalElement.reduce(function (sum, el) {
-          return Number(sum) + Number(el)
-        }, 0)
-      },
+    getSelectedElements() {
+      return Object.values(this.selectedElementsObject)
+    },
+    getTotalPrice() {
+      let sum = 0
+      this.getSelectedElements.forEach((item) => (sum += item.price))
+      return String(sum)
     },
   },
   mounted() {
@@ -223,6 +212,8 @@ export default {
     handleSelectElement(element) {
       this.initBackgroundImage = null
       const backgroundImagesUrl = []
+
+      // change the background
       element?.images?.forEach((e) => {
         backgroundImagesUrl.push(`url(${e})`)
       })
@@ -231,22 +222,17 @@ export default {
         this.selectedPart.type,
         backgroundImagesUrl.reverse().join(',')
       )
-
-      console.log(this.orderedBackgroundImages)
+      this.backgroundImagesArray = Object.values(this.orderedBackgroundImages)
 
       // выбранные элементы
-      this.$set(this.selectedObject, this.selectedPart.id, element)
-
-      // итоговая цена
-      this.$set(this.priceElement, this.selectedPart.id, element.price)
-      this.totalElement = Object.values(this.priceElement)
+      this.$set(this.selectedElementsObject, this.selectedPart.id, element)
     },
 
     addElementsToCart() {
-      this.selectedElements.forEach((e) => {
+      this.getSelectedElements.forEach((e) => {
         this.addElements(e)
       })
-      if (this.selectedElements.length > 0) {
+      if (this.getSelectedElements.length > 0) {
         this.clearElements()
         alert('Детали добавлены в корзину')
       }
@@ -262,11 +248,11 @@ export default {
         case 'sumki':
           this.orderedBackgroundImages = {
             ruchki: '',
-            podkladki: '',
             acessory: '',
-            korpusa: '',
             kryshki: '',
             remni: '',
+            korpusa: '',
+            podkladki: '',
           }
           break
         case 'ryukzaki':
@@ -288,9 +274,8 @@ export default {
     },
 
     clearElements() {
-      this.totalElement = []
-      this.selectedObject = {}
       this.selectedPart = {}
+      this.selectedElementsObject = {}
       this.loadBackground()
     },
   },
