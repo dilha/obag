@@ -1,8 +1,6 @@
 <template>
   <div v-if="item" class="parts">
-    <nuxt-link class="product__card-link" :to="{ name: 'products-id', params: { id: item.id } }">
-      <img class="parts__img" :src="item.image" alt="" />
-    </nuxt-link>
+    <img class="parts__img" :src="item.image" alt="" />
     <div class="parts__content">
       <div class="parts__title">
         {{ item.title }}
@@ -11,9 +9,7 @@
         <p>Кол-во:</p>
         <p>1</p>
       </div>
-      <div class="parts__price">
-        {{ numberWithSpaces(item.price) }} тг
-      </div>
+      <div class="parts__price">{{ numberWithSpaces(item.price) }} тг</div>
     </div>
   </div>
 </template>
