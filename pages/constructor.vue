@@ -249,10 +249,10 @@ export default {
           this.orderedBackgroundImages = {
             ruchki: '',
             acessory: '',
-            kryshki: '',
             remni: '',
-            korpusa: '',
+            kryshki: '',
             podkladki: '',
+            korpusa: '',
           }
           break
         case 'ryukzaki':
