@@ -49,7 +49,7 @@ export default {
   methods: {
     getNews(id) {
       this.$api
-        .get(`http://api.obagofficial.kz/api/page/get-news/${id}`)
+        .get(`https://api.obagofficial.kz/api/page/get-news/${id}`)
         .then((res) => {
           this.item = res.data
         })
