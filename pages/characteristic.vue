@@ -48,13 +48,12 @@
             >
               Констуктор
             </a>
-            <a
+            <nuxt-link
               class="characteristic__link characteristic__link-foto"
-              target="_blank"
-              href="https://obagnew.a-lux.dev/shopping"
+              to="/shopping"
             >
               Запросить фото
-            </a>
+            </nuxt-link>
           </div>
           <div class="characteristic__info">
             <div class="characteristic__info-buttons">

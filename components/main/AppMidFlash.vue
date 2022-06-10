@@ -1,43 +1,21 @@
 <template>
   <section class="mid__flash page__block">
     <div class="container">
-      <div class="mid__flash-inner">
-        <img
-          class="mid__flash-img mid-img"
-          src="@/assets/images/mid-flash/mid-flash-1.jpg"
-          alt=""
-        />
+      <div v-for="item in items" :key="item.id" class="mid__flash-inner">
+        <img class="mid__flash-img mid-img" :src="item.image" alt="" />
         <div class="mid__flash-content">
-          <h3 class="mid__flash-title page__title">Mid Season</h3>
+          <h3 class="mid__flash-title page__title">{{ item.title }}</h3>
           <p class="mid__flash-text">
-            Подборка комплектующих по самой выгодной цене!
+            {{ sliceItemText(item.text) }}
           </p>
           <nuxt-link
             tag="button"
-            to="/promos"
+            :to="`/promos/${item.id}`"
             class="mid__flash-btn page__border-btn"
           >
             Перейти
           </nuxt-link>
         </div>
-      </div>
-      <div class="mid__flash-inner">
-        <div class="mid__flash-content">
-          <h3 class="mid__flash-title page__title">FLASH XMAS CAPSULE</h3>
-          <p class="mid__flash-text">Праздничная история уже ждет вас!</p>
-          <nuxt-link
-            tag="button"
-            to="/promos"
-            class="mid__flash-btn page__border-btn"
-          >
-            Перейти
-          </nuxt-link>
-        </div>
-        <img
-          class="mid__flash-img flash-img"
-          src="@/assets/images/mid-flash/mid-flash-2.jpg"
-          alt=""
-        />
       </div>
     </div>
   </section>
@@ -46,5 +24,20 @@
 <script>
 export default {
   name: 'AppMidFlash',
+  props: {
+    items: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    sliceItemText(text) {
+      const words = text.split(' ')
+      if (words.length > 0) {
+        return words?.slice(0, 12).join(' ') + '...'
+      }
+      return ''
+    },
+  },
 }
 </script>

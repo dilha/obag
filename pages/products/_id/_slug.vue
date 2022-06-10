@@ -31,7 +31,8 @@
                   :src="product.image"
                   :alt="product.title"
                 />
-                <img v-else
+                <img
+                  v-else
                   class="characteristic__product-img"
                   src="~/assets/images/products/product-placeholder-img.png"
                   :alt="product.title"
@@ -164,13 +165,12 @@
                 >
                   Конструктор
                 </nuxt-link>
-                <a
-                  href="https://obagnew.a-lux.dev/shopping"
-                  target="_blank"
+                <nuxt-link
+                  to="/shopping"
                   class="characteristic__link characteristic__link-foto"
                 >
                   Запросить фото
-                </a>
+                </nuxt-link>
               </div>
             </template>
           </div>
@@ -270,13 +270,12 @@
           </div>
 
           <div class="characteristic__accordion">
-            <a
-              href="https://obagnew.a-lux.dev/shopping"
-              target="_blank"
+            <nuxt-link
+              to="/shopping"
               class="characteristic__accordion-title"
             >
               Запросить фото
-            </a>
+            </nuxt-link>
           </div>
         </div>
       </div>
