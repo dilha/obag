@@ -50,7 +50,7 @@
       </p>
     </div>
     <div class="product__card-bottom">
-      <button
+      <button v-if="item.remainder > 0"
         class="page__basket-btn product__card-basket"
         :class="{ active: isAdded }"
         :disabled="isAdded"

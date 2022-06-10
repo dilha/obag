@@ -89,7 +89,13 @@
               </button>
               <p>{{ getProductQuantityById(product.id) }}</p>
               <button
-                class="order__products-plus"
+                :class="[
+                  'order__products-plus',
+                  {
+                    disabled:
+                      getProductQuantityById(product.id) >= product.remainder,
+                  },
+                ]"
                 @click.prevent="updatedQuantity({ type: 'increase', product })"
               >
                 <img src="@/assets/images/icons/plus-icon.svg" alt="+" />
@@ -270,10 +276,7 @@
           </div>
 
           <div class="characteristic__accordion">
-            <nuxt-link
-              to="/shopping"
-              class="characteristic__accordion-title"
-            >
+            <nuxt-link to="/shopping" class="characteristic__accordion-title">
               Запросить фото
             </nuxt-link>
           </div>
