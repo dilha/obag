@@ -283,7 +283,11 @@
         </div>
       </div>
     </div>
-    <modal-one-click-order v-if="OrderModal" @close="OrderModal = false" />
+    <modal-one-click-order
+      :productId="product.id"
+      v-if="OrderModal"
+      @close="OrderModal = false"
+    />
     <app-modal-review
       :productId="this.$route.params.id"
       v-if="isVisibleReviewModal"
