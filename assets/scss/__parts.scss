@@ -1,12 +1,12 @@
 .parts {
-    display: flex;
-    align-items: center;
-    
-    & + & {
-      padding-top: 24px;
-      margin-top: 24px;
-      border-top: 1px solid #F6F6F6;
-    }
+  display: flex;
+  align-items: center;
+
+  & + & {
+    padding-top: 24px;
+    margin-top: 24px;
+    border-top: 1px solid #f6f6f6;
+  }
 
   &__img {
     margin-right: 40px;
@@ -18,9 +18,9 @@
     font-weight: 600;
     font-size: 18px;
     line-height: 132%;
-    color: #3D3935;
+    color: #3d3935;
     margin-bottom: 8px;
-    word-wrap: break-word;
+    line-break: anywhere;
   }
 
   &__number {
@@ -28,7 +28,7 @@
     align-items: center;
     margin-bottom: 8px;
 
-    P:first-child  {
+    P:first-child {
       margin-right: 16px;
     }
   }
@@ -37,6 +37,6 @@
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
-    color: #D05871;
+    color: #d05871;
   }
 }

@@ -76,6 +76,10 @@
       width: 16px;
       height: 16px;
       padding: 0;
+
+      &.disabled {
+        display: none;
+      }
     }
   }
 
@@ -178,17 +182,17 @@
       font-weight: 700;
       font-size: 14px;
       line-height: 17px;
-      color: #3D3935;
+      color: #3d3935;
     }
     &-btn {
-      background: #F6F6F6;
+      background: #f6f6f6;
       border-radius: 100px;
       padding: 8px 16px;
-      color: #9C9C9C;
+      color: #9c9c9c;
       border: none;
       &.active {
-        background: #FFD0DA;
-        color: #D05871;
+        background: #ffd0da;
+        color: #d05871;
       }
     }
   }

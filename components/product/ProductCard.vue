@@ -12,8 +12,15 @@
         </button>
       </div>
       <img
+        v-if="checkProductImage(item.image)"
         class="product__card-img"
-        :src="loadProductImage(item.image)"
+        :src="item.image"
+        alt=""
+      />
+      <img
+        v-else
+        class="product__card-img"
+        src="~/assets/images/products/product-placeholder-img.png"
         alt=""
       />
     </div>
@@ -43,7 +50,7 @@
       </p>
     </div>
     <div class="product__card-bottom">
-      <button
+      <button v-if="item.remainder > 0"
         class="page__basket-btn product__card-basket"
         :class="{ active: isAdded }"
         :disabled="isAdded"
@@ -102,7 +109,7 @@ import IconBookmark from '~/components/icons/IconBookmark.vue'
 import { actionTypes } from '~/store/cart'
 import { actionTypes as actionTypesBookmark } from '~/store/bookmarks'
 import AppProductAdded from '~/components/modal/AppProductAdded.vue'
-import { loadProductImage } from '~/helpers/product-helpers'
+import { loadProductImage, checkProductImage } from '~/helpers/product-helpers'
 import { numberWithSpaces } from '~/helpers/utils'
 
 export default {
@@ -140,6 +147,7 @@ export default {
       addBookmark: actionTypesBookmark.addBookmark,
     }),
     loadProductImage,
+    checkProductImage,
     numberWithSpaces,
 
     add(item) {

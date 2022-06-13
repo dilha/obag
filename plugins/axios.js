@@ -28,7 +28,7 @@ export default ({ $axios, store }, inject) => {
     }
   )
 
-  $axios.setBaseURL('https://bag.a-lux.dev/api')
+  $axios.setBaseURL('https://api.obagofficial.kz/api')
   $axios.interceptors.response.use(
     (response) => {
       return response
