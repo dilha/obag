@@ -5,10 +5,10 @@
       :category-id="category.id"
       :category-slug="category.slug"
     >
-      <h2 class="intro__title">
+      <h2 class="intro__title" data-aos="fade-right" data-aos-duration="700">
         {{ category.title }}
       </h2>
-      <p class="intro__text">
+      <p class="intro__text" data-aos="fade-right" data-aos-duration="700">
         {{ category.text }}
       </p>
     </app-intro-button>

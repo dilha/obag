@@ -7,6 +7,8 @@
           :key="item.id"
           class="card__item"
           :style="{ backgroundImage: `url(${item.image})` }"
+          data-aos="flip-left"
+          data-aos-duration="1000"
         >
           <nuxt-link
             class="card__item-title"

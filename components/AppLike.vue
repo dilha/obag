@@ -27,7 +27,7 @@
           :key="selected.id"
           :item="selected"
           data-aos="flip-left"
-          data-aos-duration="700"
+          data-aos-duration="1000"
         />
       </div>
       <nuxt-link
