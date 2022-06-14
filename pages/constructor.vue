@@ -1,7 +1,11 @@
 <template>
   <section class="constructor">
     <div class="container">
-      <h3 class="intro__title constructor__title">
+      <h3
+        class="intro__title constructor__title"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      >
         Каждый аксессуар O bag – это конструктор!
       </h3>
 

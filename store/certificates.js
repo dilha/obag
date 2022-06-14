@@ -20,11 +20,16 @@ export const mutations = {
 export const actions = {
   [actionTypes.loadCertificates]({ commit }) {
     return new Promise((resolve) => {
-      this.$api.get('/page/gift-certificates').then((response) => {
-        const certificates = response.data.certificates
-        commit(mutationTypes.loadCertificatesSuccess, certificates)
-        resolve(certificates)
-      })
+      this.$api
+        .get('/page/gift-certificates')
+        .then((response) => {
+          const certificates = response.data
+          commit(mutationTypes.loadCertificatesSuccess, certificates)
+          resolve(certificates)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     })
   },
 }

@@ -1,7 +1,13 @@
 <template>
   <div>
     <app-intro-arrow link="certificates">
-      <h3 class="intro__title intro__title-arrow">Подарочные сертификаты</h3>
+      <h3
+        class="intro__title intro__title-arrow"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      >
+        Подарочные сертификаты
+      </h3>
     </app-intro-arrow>
     <div class="certificates page__block" id="certificates">
       <div class="container">
@@ -10,6 +16,8 @@
             v-for="(item, index) in certificates"
             :key="index"
             :item="item"
+            data-aos="flip-left"
+            data-aos-duration="1000"
           />
           <!-- <product-card v-for="item in certificates" :key="item" :item="item"/> -->
         </div>
