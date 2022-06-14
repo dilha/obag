@@ -2,7 +2,13 @@
   <div>
     <section class="basket">
       <div class="container">
-        <h3 class="basket__title page__title">Корзина</h3>
+        <h3
+          class="basket__title page__title"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
+          Корзина
+        </h3>
         <div class="basket__inner">
           <div v-if="products" class="basket__products">
             <app-order-products

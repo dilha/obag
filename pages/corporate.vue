@@ -1,13 +1,17 @@
 <template>
   <div>
     <app-intro bg-img="assets/images/intro/corporate-intro.jpg">
-      <h3 class="intro__title">Информация корпоративным клиентам</h3>
+      <h3 class="intro__title" data-aos="fade-right" data-aos-duration="700">
+        Информация корпоративным клиентам
+      </h3>
     </app-intro>
     <div v-if="content" class="loyalty">
       <div
         class="container"
         style="white-space: pre-line"
         v-html="content.content"
+        data-aos="fade-right"
+        data-aos-duration="700"
       ></div>
     </div>
     <app-news />

@@ -2,7 +2,13 @@
   <div class="shop__block">
     <!-- <h3 class="shop__title page__title">Партнерские магазины</h3   > -->
     <div class="shop__inner">
-      <app-shop-cards v-for="item in items" :key="item.title" :shop="item" />
+      <app-shop-cards
+        v-for="item in items"
+        :key="item.title"
+        :shop="item"
+        data-aos="flip-left"
+        data-aos-duration="1000"
+      />
     </div>
   </div>
 </template>

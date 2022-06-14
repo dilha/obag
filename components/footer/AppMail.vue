@@ -2,7 +2,11 @@
   <section class="mailing">
     <div class="container">
       <div class="mailing__inner">
-        <div class="mailing__content">
+        <div
+          class="mailing__content"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
           <h3 class="mailing__title page__title">
             Подпишитесь на нашу рассылку
           </h3>
@@ -16,7 +20,13 @@
             Подписаться
           </button>
         </div>
-        <img class="mailing__img" src="@/assets/images/mail-box.png" alt="" />
+        <img
+          class="mailing__img"
+          src="@/assets/images/mail-box.png"
+          alt=""
+          data-aos="fade-left"
+          data-aos-duration="700"
+        />
       </div>
     </div>
     <app-subscription

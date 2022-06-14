@@ -2,7 +2,13 @@
   <div>
     <div class="save">
       <div class="container">
-        <h3 class="save__title page__title">Save Your O bag</h3>
+        <h3
+          class="save__title page__title"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
+          Save Your O bag
+        </h3>
         <div class="save__inner">
           <a
             :key="link.link"
@@ -10,6 +16,8 @@
             class="save__btn"
             :href="link.link"
             target="_blank"
+            data-aos="fade-up"
+            data-aos-duration="700"
             >{{ link.title }}
           </a>
         </div>

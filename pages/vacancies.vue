@@ -1,15 +1,29 @@
 <template>
   <div>
     <app-intro-arrow link="vacancies">
-      <h3 class="intro__title intro__title-arrow">
+      <h3
+        class="intro__title intro__title-arrow"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      >
         Актуальные вакансии компании O bag KAZAKHSTAN
       </h3>
     </app-intro-arrow>
     <div class="vacancies inside" id="vacancies">
       <div class="container">
         <div class="vacancies__block inside__block">
-          <h3 class="vacancies__title page__title">Присоединяйтесь к нам!</h3>
-          <p class="vacancies__text">
+          <h3
+            class="vacancies__title page__title"
+            data-aos="fade-right"
+            data-aos-duration="700"
+          >
+            Присоединяйтесь к нам!
+          </h3>
+          <p
+            class="vacancies__text"
+            data-aos="fade-right"
+            data-aos-duration="800"
+          >
             Мы всегда ищем увлечённых, активных людей, которые умеют отличаться.
             Если вы считаете, что обладаете этими качествами и чувствуете, что
             готовы работать в мире O bag, выберите свою специализацию и
@@ -22,6 +36,8 @@
             ref="resumeFormRef"
             class="vacancies__form"
             @submit.prevent="sendResume"
+            data-aos="fade-left"
+            data-aos-duration="700"
           >
             <div class="vacancies__form-box">
               <input
