@@ -1,7 +1,14 @@
 <template>
   <section class="intro" :style="{ backgroundImage: `url(${image})` }">
     <slot></slot>
-    <nuxt-link class="intro__btn" :to="getLink"> Смотреть </nuxt-link>
+    <nuxt-link
+      class="intro__btn"
+      :to="getLink"
+      data-aos="fade-left"
+      data-aos-duration="700"
+    >
+      Смотреть
+    </nuxt-link>
   </section>
 </template>
 

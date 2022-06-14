@@ -2,7 +2,13 @@
   <section v-if="recomended" class="will__like page__block">
     <div class="container">
       <div class="will__like-top page__block-top">
-        <h3 class="will__like-title page__title">Вам понравится</h3>
+        <h3
+          class="will__like-title page__title"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
+          Вам понравится
+        </h3>
         <div class="will__like-button">
           <button
             v-for="(item, index) in recomended"
@@ -20,12 +26,16 @@
           v-for="selected in selectedRecomendedMenu.products"
           :key="selected.id"
           :item="selected"
+          data-aos="flip-left"
+          data-aos-duration="700"
         />
       </div>
       <nuxt-link
         tag="button"
         class="will__like-button page__border-btn"
         :to="getLink"
+        data-aos="fade-left"
+        data-aos-duration="700"
       >
         Открыть полный каталог
       </nuxt-link>
