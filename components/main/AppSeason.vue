@@ -7,12 +7,25 @@
           :style="{
             backgroundImage: `url(${items.image})`,
           }"
+          data-aos="fade-right"
+          data-aos-duration="700"
         >
-          <nuxt-link tag="button" class="intro__btn intro__season" to="/promos"
+          <nuxt-link
+            tag="button"
+            class="intro__btn intro__season"
+            to="/promos"
+            data-aos="fade-down"
+            data-aos-delay="100"
+            data-aos-duration="700"
             >Подробнее</nuxt-link
           >
         </div>
-        <div v-if="items.products.length" class="season__slider">
+        <div
+          v-if="items.products.length"
+          class="season__slider"
+          data-aos="fade-left"
+          data-aos-duration="700"
+        >
           <VueSlickCarousel :arrows="true">
             <product-card
               v-for="item in items.products"

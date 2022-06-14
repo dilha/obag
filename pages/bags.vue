@@ -5,7 +5,7 @@
       :category-id="category.id"
       :category-slug="category.slug"
     >
-      <h2 class="intro__title">
+      <h2 class="intro__title" data-aos="fade-right" data-aos-duration="1000">
         {{ category.title }}
       </h2>
     </app-intro-button>

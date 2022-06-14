@@ -1,10 +1,21 @@
 <template>
   <div>
     <app-intro-arrow link="shopping">
-      <h3 class="intro__title intro__title-arrow">Мобильный шопинг</h3>
+      <h3
+        class="intro__title intro__title-arrow"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      >
+        Мобильный шопинг
+      </h3>
     </app-intro-arrow>
     <div v-if="content" id="shopping" class="shopping inside">
-      <div class="container" v-html="content.text"></div>
+      <div
+        class="container"
+        v-html="content.text"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      ></div>
     </div>
     <app-mobile-shopping-cards :shops="blocks" />
     <app-news />

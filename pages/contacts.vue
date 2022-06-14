@@ -1,12 +1,22 @@
 <template>
   <div>
     <app-intro-arrow link="contacts">
-      <h3 class="intro__title intro__title-arrow">Контакты компании O bag</h3>
+      <h3
+        class="intro__title intro__title-arrow"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      >
+        Контакты компании O bag
+      </h3>
     </app-intro-arrow>
     <div id="contacts" class="contacts">
       <div class="container">
         <div v-if="contact" class="contacts__inner">
-          <div class="contacts__content">
+          <div
+            class="contacts__content"
+            data-aos="fade-right"
+            data-aos-duration="700"
+          >
             <div class="contacts__content-item contacts__content-message">
               <a
                 :href="`mailto:${contact['1_email']}`"
@@ -31,7 +41,12 @@
               </p>
             </div>
           </div>
-          <form class="contacts__form" @submit.prevent="sendfeedbackForm">
+          <form
+            class="contacts__form"
+            @submit.prevent="sendfeedbackForm"
+            data-aos="fade-left"
+            data-aos-duration="700"
+          >
             <input
               v-model="feedbackForm.name"
               class="contacts__form-input"

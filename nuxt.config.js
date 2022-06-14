@@ -18,6 +18,7 @@ export default {
   plugins: [
     { src: '@/plugins/vue-swiper.js', ssr: false },
     { src: '@/plugins/axios' },
+    { src: '@/plugins/aos.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

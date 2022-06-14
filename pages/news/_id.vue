@@ -1,13 +1,17 @@
 <template>
   <div v-if="item">
     <app-intro :item="item.image">
-      <h3 class="intro__title">
+      <h3 class="intro__title" data-aos="fade-right" data-aos-duration="700">
         {{ item.title }}
       </h3>
     </app-intro>
     <section class="news__id">
       <div class="container">
-        <div class="news__id-content">
+        <div
+          class="news__id-content"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
           {{ item.text }}
           {{ item.second_title }}
           {{ item.second_subtitle }}

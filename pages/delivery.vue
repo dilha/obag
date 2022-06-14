@@ -1,10 +1,21 @@
 <template>
   <div>
     <app-intro-arrow link="delivery">
-      <h3 class="intro__title intro__title-arrow">Доставка и оплата</h3>
+      <h3
+        class="intro__title intro__title-arrow"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      >
+        Доставка и оплата
+      </h3>
     </app-intro-arrow>
     <div v-if="content" class="delivery inside" id="delivery">
-      <div class="container" v-html="content.text"></div>
+      <div
+        class="container"
+        v-html="content.text"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      ></div>
     </div>
     <app-news />
   </div>

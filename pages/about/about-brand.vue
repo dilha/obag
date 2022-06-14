@@ -1,13 +1,22 @@
 <template>
   <div v-if="content">
     <app-intro-arrow link="about-brand">
-      <h3 class="intro__title intro__title-arrow">
+      <h3
+        class="intro__title intro__title-arrow"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      >
         {{ content.title }}
       </h3>
     </app-intro-arrow>
     <div id="about-brand" class="about__brand">
       <div class="container">
-        <div class="about__brand-text" v-html="content.text"></div>
+        <div
+          class="about__brand-text"
+          v-html="content.text"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        ></div>
       </div>
     </div>
     <app-news />

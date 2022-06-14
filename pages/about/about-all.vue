@@ -1,11 +1,17 @@
 <template>
   <div>
     <app-intro bgImg="assets/images/intro/about-intro.jpg">
-      <h3 class="intro__title">Все о продукции O bag</h3>
+      <h3 class="intro__title" data-aos="fade-right" data-aos-duration="700">
+        Все о продукции O bag
+      </h3>
     </app-intro>
     <div class="about__all">
       <div class="container">
-        <p class="about__all-text">
+        <p
+          class="about__all-text"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
           Вся продукция O bag - это результат плодотворного сотрудничества
           основателя O bag Микеле Занелла, творческой команды и Миланской студии
           архитектуры и дизайна laboratorio.quattro. Большая часть продукции
@@ -13,24 +19,46 @@
           - партнеров и поставщиков, что обеспечивает отличные стандарты
           качества, соответствующие традициям Made in Italy.
         </p>
-        <p class="about__all-text">
+        <p
+          class="about__all-text"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
           Четыре элемента сделали бренд O bag уникальным, и со временем они
           стали основой компании:
         </p>
-        <ul class="about__all-list">
+        <ul
+          class="about__all-list"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
           <li class="about__all-item">кастомизация</li>
           <li class="about__all-item">инновационные материалы</li>
           <li class="about__all-item">дизайн</li>
           <li class="about__all-item">доступные цены</li>
         </ul>
-        <p class="about__all-text">Каждый год наши коллекции делятся на:</p>
-        <ul class="about__all-list">
+        <p
+          class="about__all-text"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
+          Каждый год наши коллекции делятся на:
+        </p>
+        <ul
+          class="about__all-list"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
           <li class="about__all-item">весна</li>
           <li class="about__all-item">лето</li>
           <li class="about__all-item">осень</li>
           <li class="about__all-item">зима</li>
         </ul>
-        <p class="about__all-text">
+        <p
+          class="about__all-text"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
           Кроме того, капсульные и лимитированные коллекции выпускаются в
           течение года. Как правило, они приурочены к особому событию: к
           примеру, 90-летие Микки Мауса в 2018 году. O bag решила отметить эту

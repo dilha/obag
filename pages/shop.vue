@@ -1,7 +1,13 @@
 <template>
   <div>
     <app-intro-arrow link="shop">
-      <h3 class="intro__title intro__title-arrow">Магазины O bag KAZAKHSTAN</h3>
+      <h3
+        class="intro__title intro__title-arrow"
+        data-aos="fade-right"
+        data-aos-duration="700"
+      >
+        Магазины O bag KAZAKHSTAN
+      </h3>
     </app-intro-arrow>
     <section class="shop" id="shop">
       <div v-if="items" class="container">
@@ -11,6 +17,8 @@
               v-for="(item, index) in items"
               :key="index"
               :shop="item"
+              data-aos="flip-left"
+              data-aos-duration="1000"
             />
           </div>
         </div>
