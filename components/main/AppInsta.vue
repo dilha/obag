@@ -11,7 +11,7 @@
         </h3>
         <a
           class="obag__insta-link page__block-link"
-          href="https://www.instagram.com/obag.almaty/"
+          href="https://www.instagram.com/Obagofficial.kz/"
           target="_blank"
         >
           Перейти в instagram
@@ -19,9 +19,9 @@
       </div>
       <div class="obag__insta-gallery">
         <img
-          v-for="(item, index) in images"
-          :key="index"
-          :src="getImage(item)"
+          v-for="item in getIntagramPosts"
+          :key="item.id"
+          :src="item.media_url"
           alt=""
           data-aos="flip-left"
           data-aos-duration="1000"
@@ -45,19 +45,26 @@ export default {
   name: 'AppInsta',
   data() {
     return {
-      images: [
-        'insta/insta-1.jpg',
-        'insta/insta-2.jpg',
-        'insta/insta-3.jpg',
-        'insta/insta-4.jpg',
-        'insta/insta-5.jpg',
-        'insta/insta-6.jpg',
-        'insta/insta-7.jpg',
-        'insta/insta-8.jpg',
-      ],
+      images: [],
     }
   },
+  computed: {
+    getIntagramPosts() {
+      if (this.images.length < 8) return this.images
+      return this.images.slice(0, 8)
+    },
+  },
+  mounted() {
+    this.loadIntagramPosts()
+  },
   methods: {
+    loadIntagramPosts() {
+      fetch(
+        'https://graph.instagram.com/me/media?fields=id,media_url&access_token=IGQVJWekczNV9WZAFozVlUyTEFSX1VUcDhUY1hGYVZAQUWVQTmVuYWkwRVBsQUZAqSXlLcVl5NDR4N3NPWVlSTm1NY3ZAGaGFQLU5vcVNEV3o3dE50bHBVM0FQY3pHQTdZAem13VGdKUVM0aGYzbkNWd3NSNAZDZD'
+      )
+        .then((response) => response.json())
+        .then((result) => (this.images = result.data))
+    },
     getImage(imageUrl) {
       return `${require(`@/assets/images/${imageUrl}`)}`
     },
