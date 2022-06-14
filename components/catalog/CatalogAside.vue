@@ -187,7 +187,7 @@ export default {
   },
   mounted() {
     this.loadAllCategories()
-      .then(() => {
+      .then(async () => {
         if (this.$route?.params?.id) {
           this.routeCategory = this.categories.find(
             (c) => c.id === parseInt(this.$route?.params?.id)
@@ -211,7 +211,8 @@ export default {
         if (this.routeCategory.id !== -1) {
           if (this.routeSubcategory !== -1) {
             this.setSelectedCategory(this.routeCategory)
-            this.loadAllSubCategoryProducts(this.routeSubcategory)
+            await this.loadAllSubCategoryProducts(this.routeSubcategory)
+
             if (this.routeComplete !== -1)
               this.getFilteredProducts({ id: this.routeComplete })
           } else {
