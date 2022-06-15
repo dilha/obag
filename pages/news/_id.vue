@@ -11,15 +11,8 @@
           class="news__id-content"
           data-aos="fade-right"
           data-aos-duration="700"
-        >
-          {{ item.text }}
-          {{ item.second_title }}
-          {{ item.second_subtitle }}
-          {{ item.second_text }}
-          {{ item.third_title }}
-          {{ item.third_subtitle }}
-          {{ item.third_text }}
-        </div>
+          v-html="item.second_title"
+        ></div>
       </div>
     </section>
     <app-news />
