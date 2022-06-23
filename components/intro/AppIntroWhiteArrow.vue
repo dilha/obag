@@ -1,5 +1,8 @@
 <template>
-  <section class="intro intro-red">
+  <section
+    class="intro intro-red"
+    :style="{ backgroundImage: `url(${getImageUrl})` }"
+  >
     <slot></slot>
     <a
       class="intro__arrow"
@@ -17,18 +20,25 @@ import IconWhiteArrow from '~/components/icons/IconWhiteArrow.vue'
 
 export default {
   name: 'AppIntroWhiteArrow',
+
   components: {
     IconWhiteArrow,
   },
+
   props: {
+    banner: {
+      type: String,
+      default: '',
+    },
     link: {
       type: String,
       default: '?',
     },
   },
-  methods: {
-    getImage(path) {
-      return require('@/' + path)
+
+  computed: {
+    getImageUrl() {
+      return `https://api.obagofficial.kz/storage/${this.banner}`
     },
   },
 }

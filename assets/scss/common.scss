@@ -231,6 +231,7 @@ input::-webkit-inner-spin-button {
   max-width: 1190px;
   margin: 0 auto;
   padding: 0 15px;
+  overflow-x: hidden;
 }
 
 .form-row {
