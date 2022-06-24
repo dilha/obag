@@ -44,8 +44,6 @@
           />
         </div>
       </div>
-
-      <!-- Categories -->
       <div class="aside__product aside__block">
         <div class="aside__top" @click="toggleProduct">
           <h6 class="aside__top-title">Товар:</h6>
@@ -55,6 +53,8 @@
             alt=""
           />
         </div>
+
+        <!-- categories -->
         <div v-if="!showProduct && categories.length" class="aside__body">
           <div
             v-for="category of categories"
@@ -76,34 +76,7 @@
         </div>
       </div>
 
-      <!-- Sales -->
-      <div class="aside__product aside__block">
-        <div class="aside__top" @click="toggleSales">
-          <h6 class="aside__top-title">Акции:</h6>
-          <img
-            class="aside__top-arrow"
-            src="@/assets/images/icons/select-icon.svg"
-            alt=""
-          />
-        </div>
-        <div v-if="!showSales" class="aside__body">
-          <div v-for="sale of sales" :key="sale.id" class="aside__checkbox">
-            <input
-              :id="sale.id + sale.title"
-              name="category"
-              class="aside__check"
-              type="checkbox"
-              :checked="selectedSale.id === sale.id"
-              @change="handleToggleSale(sale)"
-            />
-            <label class="aside__label" :for="sale.id + sale.title">
-              {{ sale.title }}
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Completes -->
+      <!-- completes -->
       <div v-if="completes.length" class="aside__product aside__block">
         <div class="aside__top">
           <h6 class="aside__top-title">Комплектующие:</h6>
@@ -134,7 +107,7 @@
         </div>
       </div>
 
-      <!-- Filters -->
+      <!-- filters -->
       <div v-for="(field, index) in Object.keys(filters)" :key="index">
         <div class="aside__colors aside__block">
           <div class="aside__top" @click="toggleColor">
@@ -166,6 +139,7 @@
           </div>
         </div>
       </div>
+      
     </form>
   </div>
 </template>
@@ -176,16 +150,13 @@ import { actionTypes } from '@/store/catalog'
 
 export default {
   name: 'CatalogAside',
-
   props: {},
-
   data() {
     return {
       selectedFilters: [],
       selectedComplect: {},
       showPrice: false,
       showProduct: false,
-      showSales: false,
       showDiscount: false,
       showColor: false,
       price_from: null,
@@ -199,14 +170,11 @@ export default {
       routeComplete: -1,
     }
   },
-
   computed: {
     ...mapState('catalog', [
       'categories',
-      'sales',
       'filters',
       'selectedSubCategory',
-      'selectedSale',
       'completes',
     ]),
     ...mapGetters('catalog', ['selectedCategory']),
@@ -214,7 +182,6 @@ export default {
       return this.categories.length > 0 ? this.categories[0] : null
     },
   },
-
   watch: {
     selectedSubCategory: {
       handler() {
@@ -223,7 +190,6 @@ export default {
       },
     },
   },
-
   mounted() {
     this.loadAllCategories()
       .then(async () => {
@@ -281,8 +247,6 @@ export default {
       loadSearchProducts: actionTypes.loadSearchProducts,
       setSelectedCategory: actionTypes.setSelectedCategory,
       setSelectedSubCategory: actionTypes.setSelectedSubCategory,
-      setSelectedSale: actionTypes.setSelectedSale,
-      setSelectedSaleProducts: actionTypes.setSelectedSaleProducts,
     }),
     search() {
       this.$router.replace({
@@ -298,7 +262,6 @@ export default {
       })
       this.loadSearchProducts(this.searchTerm)
     },
-
     updateFilter(filter) {
       const indexOf = this.selectedFilters.indexOf(filter.id)
       if (indexOf !== -1) {
@@ -308,10 +271,7 @@ export default {
       }
       this.getFilteredProducts()
     },
-
     getFilteredProducts(complect) {
-      this.setSelectedSale({})
-
       if (complect) {
         this.selectedComplect = complect
         this.$router.replace({
@@ -347,12 +307,10 @@ export default {
         })
       }
     },
-
     handleToggleCategory(category) {
       this.selectedFilters = []
       this.selectedComplect = {}
       this.setSelectedSubCategory(null)
-      this.setSelectedSale({})
       this.loadAllCategoryProducts(category)
       this.$router.replace({
         params: {
@@ -363,20 +321,11 @@ export default {
         },
       })
     },
-
-    handleToggleSale(sale) {
-      this.clearAllFilters()
-      this.setSelectedSaleProducts(sale)
-    },
-
     togglePrice() {
       this.showPrice = !this.showPrice
     },
     toggleProduct() {
       this.showProduct = !this.showProduct
-    },
-    toggleSales() {
-      this.showSales = !this.showSales
     },
     toggleDiscount() {
       this.showDiscount = !this.showDiscount
@@ -384,12 +333,10 @@ export default {
     toggleColor() {
       this.showColor = !this.showColor
     },
-
     isFilterChecked(id) {
       return this.selectedFilters.includes(id)
     },
     clearAllFilters() {
-      this.setSelectedSale({})
       this.selectedFilters = []
       this.selectedComplect = {}
     },

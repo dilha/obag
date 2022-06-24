@@ -7,7 +7,6 @@ export const state = () => ({
   selectedCategory: null,
   selectedSubCategory: null,
   selectedComplete: null,
-  selectedSale: {},
   error: null,
   isLoading: false,
   searchTerm: '',
@@ -22,9 +21,7 @@ export const mutationTypes = {
 
   setSelectedCategory: 'mutation/setSelectedCategory',
   setSelectedSubCategory: 'mutation/setSelectedSubCategory',
-  setSelectedSale: 'mutation/setSelectedSale',
   setSelectedComplete: 'mutation/setSelectedComplete',
-
   setCategorySales: 'mutation/setCategorySales',
   setCategoryFilters: 'mutation/setCategoryFilters',
   setCompletes: 'mutation/setCompletes',
@@ -51,8 +48,6 @@ export const actionTypes = {
   changeSortPriceType: 'action/changeSortPriceType',
   setSelectedCategory: 'action/setSelectedCategory',
   setSelectedSubCategory: 'action/setSelectedSubCategory',
-  setSelectedSale: 'action/setSelectedSale',
-  setSelectedSaleProducts: 'action/setSelectedSaleProducts',
   setSelectedComplete: 'action/setSelectedComplete',
 }
 
@@ -71,7 +66,6 @@ export const mutations = {
     state.isLoading = false
     state.error = payload
   },
-
   [mutationTypes.setSelectedCategory](state, payload) {
     state.selectedCategory = payload
   },
@@ -81,10 +75,6 @@ export const mutations = {
   [mutationTypes.setSelectedComplete](state, payload) {
     state.selectedComplete = payload
   },
-  [mutationTypes.setSelectedSale](state, payload) {
-    state.selectedSale = payload
-  },
-
   [mutationTypes.setCategorySales](state, payload) {
     state.sales = payload
   },
@@ -131,7 +121,7 @@ export const actions = {
       this.$api
         .get('/get-categories')
         .then((response) => {
-          const categories = response.data.categories.slice(1)
+          const categories = response.data.categories
           commit(mutationTypes.loadCategoriesSuccess, categories)
           commit(mutationTypes.setSelectedCategory, categories[0])
           resolve(categories)
@@ -152,7 +142,6 @@ export const actions = {
           const products = response.data.category.products
           const sales = response.data?.sales
           const filters = response.data?.filters
-
           commit(mutationTypes.loadProductsSuccess, products)
           commit(mutationTypes.setCategorySales, sales)
           commit(mutationTypes.setCategoryFilters, filters)
@@ -173,12 +162,9 @@ export const actions = {
         .get(`/subcategory/${subCategoryId}?sort_price=${state.sortPriceType}`)
         .then((response) => {
           const products = response.data.subcategory.products
-          const sales = response.data?.sales
           const filters = response.data?.filters
           const completes = response.data.completes
-
           commit(mutationTypes.loadProductsSuccess, products)
-          commit(mutationTypes.setCategorySales, sales)
           commit(mutationTypes.setCategoryFilters, filters)
           commit(mutationTypes.setCompletes, completes)
 
@@ -198,22 +184,12 @@ export const actions = {
     commit(mutationTypes.setSelectedSubCategory, subcatId)
   },
 
-  [actionTypes.setSelectedSaleProducts]({ commit, state }, sale) {
-    commit(mutationTypes.loadProductsSuccess, sale.products)
-    commit(mutationTypes.setSelectedSale, sale)
-  },
-
-  [actionTypes.setSelectedSale]({ commit, state }, sale) {
-    commit(mutationTypes.setSelectedSale, sale)
-  },
-
   [actionTypes.setSelectedComplete]({ commit, state }, completeId) {
     commit(mutationTypes.setSelectedComplete, completeId)
   },
 
   [actionTypes.loadSearchProducts]({ commit, state }, term) {
     commit(mutationTypes.loadSearchProductsStart)
-    commit(mutationTypes.setSelectedSale, {})
     // commit(mutationTypes.setSelectedSubCategory, null);
     // commit(mutationTypes.setSelectedCategory, null);
     // commit(mutationTypes.setCategoryFilters, null )
