@@ -13,7 +13,7 @@ export const mutationTypes = {
   setDeliveryPrice: 'mutation/setDeliveryPrice',
 
   setPaymentMethod: 'mutation/setPaymentMethod',
-  setDeliveryMethod: 'mutation/setDeliveryMethod'
+  setDeliveryMethod: 'mutation/setDeliveryMethod',
 }
 export const actionTypes = {
   addProduct: 'action/addProduct',
@@ -23,7 +23,7 @@ export const actionTypes = {
   setDeliveryPrice: 'action/setDeliveryPrice',
 
   setPaymentMethod: 'action/setPaymentMethod',
-  setDeliveryMethod: 'action/setDeliveryMethod'
+  setDeliveryMethod: 'action/setDeliveryMethod',
 }
 
 export const mutations = {
@@ -36,20 +36,20 @@ export const mutations = {
   [mutationTypes.removeProduct](state, payload) {
     state.cartProducts.forEach((p, i) => {
       if (p.id === payload) {
-        state.cartProducts.splice(i, 1);
+        state.cartProducts.splice(i, 1)
       }
     })
   },
   [mutationTypes.updatedQuantity](state, { type, product }) {
-
-    const productIndex = state.cartProducts.findIndex(p => p.id === product.id);
+    const productIndex = state.cartProducts.findIndex(
+      (p) => p.id === product.id
+    )
 
     switch (type) {
       case 'increase':
         state.cartProducts.forEach((p, i) => {
           if (i === productIndex) {
-
-            const newQuantity = state.cartProducts[i].quantity++;
+            const newQuantity = state.cartProducts[i].quantity++
             this._vm.$set(state.cartProducts, i, {
               quantity: newQuantity,
               ...state.cartProducts[i],
@@ -67,7 +67,7 @@ export const mutations = {
               ...state.cartProducts[i],
             })
           } else if (i === productIndex && p.quantity === 1) {
-            state.cartProducts.splice(i, 1);
+            state.cartProducts.splice(i, 1)
           }
         })
     }
@@ -85,7 +85,7 @@ export const mutations = {
 }
 export const actions = {
   [actionTypes.addProduct]({ commit, state }, product) {
-    let productWithQuantity = null;
+    let productWithQuantity = null
 
     if (!product.quantity) {
       productWithQuantity = { ...product, quantity: 1 }
@@ -93,14 +93,13 @@ export const actions = {
       productWithQuantity = product
     }
 
-    const isProductExists = state.cartProducts.some(p => p.id === product.id);
+    const isProductExists = state.cartProducts.some((p) => p.id === product.id)
 
     if (!isProductExists) {
-
       commit(mutationTypes.addProduct, productWithQuantity)
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       resolve(isProductExists)
     })
   },
@@ -115,12 +114,11 @@ export const actions = {
     commit(mutationTypes.clearCart)
   },
   [actionTypes.setDeliveryPrice]({ commit }) {
-    return new Promise(resolve => {
-      this.$api.get('/delivery-price')
-        .then((response) => {
-          commit(mutationTypes.setDeliveryPrice, parseInt(response.data.price))
-          resolve(response)
-        })
+    return new Promise((resolve) => {
+      this.$api.get('/delivery-price').then((response) => {
+        commit(mutationTypes.setDeliveryPrice, parseInt(response.data.price))
+        resolve(response)
+      })
     })
   },
 
@@ -132,12 +130,22 @@ export const actions = {
   },
 }
 export const getters = {
-  totalProductCount: state => state.cartProducts.length,
+  totalProductCount: (state) => state.cartProducts.length,
   // eslint-disable-next-line no-return-assign
-  totalProductCost: state => state.cartProducts.reduce((acc, p) => acc += p.price * p.quantity, 0) + state.deliveryPrice,
-  products: state => state.cartProducts,
+  totalProductCost: (state) => {
+    return (
+      state.cartProducts.reduce((acc, p) => {
+        const price = p.new_price || p.price
+        acc += price * p.quantity
+        return acc
+      }, 0) + state.deliveryPrice
+    )
+  },
+  products: (state) => state.cartProducts,
   getProductQuantityById: (state) => (id) => {
-    const product = state.cartProducts.find(item => parseInt(item.id) === parseInt(id))
+    const product = state.cartProducts.find(
+      (item) => parseInt(item.id) === parseInt(id)
+    )
     return product ? product.quantity : null
-  }
+  },
 }
