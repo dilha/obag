@@ -28,10 +28,12 @@
 
     &-text {
         font-size: 18px;
-        line-height: 170%;
+        line-height: 1.7;
+        max-height: 18px * 1.7 * 3;
         color: #3d3935;
         margin: 50px 0;
         max-width: 260px;
+        overflow-y: hidden;
     }
 }
 

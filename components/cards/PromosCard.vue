@@ -1,15 +1,13 @@
 <template>
-  <div v-if="item" class="news__item">
-    <img class="news__item-img" :src="item.image" alt="" />
-    <div class="news__item-title">
+  <div v-if="item" class="promos__item">
+    <img class="promos__item-img" :src="item.image" alt="" />
+    <div class="promos__item-title">
       {{ item.title }}
     </div>
-    <p class="news__item-text">
-      {{ getPromoText }}
-    </p>
+    <div class="promos__item-text" v-html="item.text"></div>
     <nuxt-link
       :to="{ name: 'promos-id-slug', params: { id: item.id, slug: item.slug } }"
-      class="news__item-link"
+      class="promos__item-link"
     >
       Подробнее
     </nuxt-link>

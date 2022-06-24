@@ -1,6 +1,6 @@
 <template>
   <div v-if="totalProductCost > 0" class="basket__price">
-    <app-order-promo />
+    <!-- <app-order-promo /> -->
     <div class="order__price">
       <div class="order__price-content">
         <div class="order__total">
@@ -22,35 +22,46 @@
       </div>
       <div class="order__methods">
         <div class="order__method">
-          <div class="order__method-title">
-            Метод доставки:
-          </div>
-          <button class="order__method-btn" :class="{ active: deliveryMethod === 'pickup' }"
-            @click="setDeliveryMethod('pickup')">
+          <div class="order__method-title">Метод доставки:</div>
+          <button
+            class="order__method-btn"
+            :class="{ active: deliveryMethod === 'pickup' }"
+            @click="setDeliveryMethod('pickup')"
+          >
             Самовывоз
           </button>
-          <button class="order__method-btn" :class="{ active: deliveryMethod === 'mail' }"
-            @click="setDeliveryMethod('mail')">
+          <button
+            class="order__method-btn"
+            :class="{ active: deliveryMethod === 'mail' }"
+            @click="setDeliveryMethod('mail')"
+          >
             Доставка
           </button>
         </div>
         <div class="order__method">
-          <div class="order__method-title">
-            Метод оплаты:
-          </div>
-          <button class="order__method-btn" :class="{ active: paymentMethod === 'card' }"
-            @click="setPaymentMethod('card')">
+          <div class="order__method-title">Метод оплаты:</div>
+          <button
+            class="order__method-btn"
+            :class="{ active: paymentMethod === 'card' }"
+            @click="setPaymentMethod('card')"
+          >
             Онлайн-оплата
           </button>
-          <button class="order__method-btn" :class="{ active: paymentMethod === 'cash' }"
-            @click="setPaymentMethod('cash')">
+          <button
+            class="order__method-btn"
+            :class="{ active: paymentMethod === 'cash' }"
+            @click="setPaymentMethod('cash')"
+          >
             Наличными
           </button>
         </div>
       </div>
 
       <div class="order__buttons">
-        <button class="order__buttons-issue" @click.prevent="$emit('clickCheckoutButton')">
+        <button
+          class="order__buttons-issue"
+          @click.prevent="$emit('clickCheckoutButton')"
+        >
           Оформить заказ
         </button>
         <button class="order__buttons-delete" @click.prevent="clearCart">
@@ -66,10 +77,14 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+// import AppOrderPromo from './AppOrderPromo.vue'
 import { actionTypes } from '~/store/cart'
 
 export default {
   name: 'AppOrderPrice',
+  components: {
+    // AppOrderPromo,
+  },
   computed: {
     ...mapState('cart', ['deliveryPrice', 'deliveryMethod', 'paymentMethod']),
     ...mapGetters('cart', ['totalProductCost']),
@@ -82,7 +97,7 @@ export default {
       clearCart: actionTypes.clearCart,
       setDeliveryPrice: actionTypes.setDeliveryPrice,
       setDeliveryMethod: actionTypes.setDeliveryMethod,
-      setPaymentMethod: actionTypes.setPaymentMethod
+      setPaymentMethod: actionTypes.setPaymentMethod,
     }),
   },
 }

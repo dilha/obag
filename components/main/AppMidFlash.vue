@@ -15,9 +15,7 @@
           data-aos-duration="700"
         >
           <h3 class="mid__flash-title page__title">{{ item.title }}</h3>
-          <p class="mid__flash-text">
-            {{ sliceItemText(item.text) }}
-          </p>
+          <div class="mid__flash-text" v-html="item.text"></div>
           <nuxt-link
             tag="button"
             :to="`/promos/${item.id}`"

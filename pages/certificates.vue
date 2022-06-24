@@ -16,8 +16,6 @@
             v-for="(item, index) in certificates"
             :key="index"
             :item="item"
-            data-aos="flip-left"
-            data-aos-duration="1000"
           />
           <!-- <product-card v-for="item in certificates" :key="item" :item="item"/> -->
         </div>
