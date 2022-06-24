@@ -199,7 +199,6 @@ export const actions = {
   },
 
   [actionTypes.setSelectedSaleProducts]({ commit, state }, sale) {
-    console.log(sale)
     commit(mutationTypes.loadProductsSuccess, sale.products)
     commit(mutationTypes.setSelectedSale, sale)
   },
