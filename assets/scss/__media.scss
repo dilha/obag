@@ -1174,6 +1174,9 @@
     }
 
     .catalog {
+        &__burger-mobile {
+            display: flex;
+        }
         &__page {
             flex-direction: column;
         }

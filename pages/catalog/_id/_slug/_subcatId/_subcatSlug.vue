@@ -9,11 +9,11 @@
         </div>
       </div>
       <div
-        class="burger bar-logo"
+        class="catalog__burger-mobile"
         :class="{ active: isAppear }"
         @click="isAppear = !isAppear"
       >
-        <span class="burger-line"></span>
+        Фильтр
       </div>
 
       <div class="catalog__page">

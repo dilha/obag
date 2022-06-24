@@ -6,6 +6,27 @@
     margin-bottom: 10px;
   }
 
+  &__burger-mobile {
+    display: none;
+    align-items: center;
+    column-gap: 15px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 132%;
+    color: #3d3935;
+    cursor: pointer;
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+      background-image: url(../images/icons/filter-icon.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+
   &__page {
     display: flex;
     justify-content: space-between;
