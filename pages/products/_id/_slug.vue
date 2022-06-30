@@ -21,7 +21,10 @@
                       :alt="product.title"
                     />
                   </slide>
-                  <hooper-pagination slot="hooper-addons"></hooper-pagination>
+                  <hooper-pagination
+                    class="characteristic__hooper-pagination"
+                    slot="hooper-addons"
+                  ></hooper-pagination>
                 </hooper>
               </div>
               <div v-else>
@@ -64,8 +67,13 @@
         </div>
         <div class="characteristic__content">
           <p class="characteristic__code">Код Товара: {{ product.code }}</p>
-          <p class="characteristic__remainder">
-            В наличии: {{ product.remainder }} шт.
+          <p
+            :class="[
+              'characteristic__remainder',
+              { danger: product.remainder <= 0 },
+            ]"
+          >
+            {{ getProductIsInStock }}
           </p>
           <h3 class="characteristic__title">
             {{ product.title }}
@@ -378,6 +386,10 @@ export default {
     getProductIsAvailable() {
       return this.product?.available && this.product?.remainder > 0
     },
+    getProductIsInStock() {
+      if (this.product?.remainder > 0) return 'В наличии'
+      return 'Нет в наличии'
+    },
   },
   mounted() {
     if (this.$route?.params?.id) {
@@ -453,7 +465,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .clip {
   margin: 100px 0;
 }
@@ -615,5 +627,19 @@ input {
 
 /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0;
+}
+</style>
+
+<style lang="scss">
+.characteristic__hooper-pagination {
+  position: absolute;
+  bottom: -30px;
+
+  .hooper-indicator {
+    background: #bbb !important;
+    &.is-active {
+      background: #d05871 !important;
+    }
+  }
 }
 </style>

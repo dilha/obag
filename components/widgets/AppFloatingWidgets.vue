@@ -52,6 +52,21 @@ export default {
       }
     }
   }
+
+  @media screen and (max-width: 700px) {
+    right: 20px;
+    bottom: 20px;
+
+    &__whatsapp {
+      width: 55px;
+      height: 55px;
+
+      &-logo {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
 }
 
 @keyframes tossing {
