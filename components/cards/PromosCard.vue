@@ -1,6 +1,6 @@
 <template>
   <div v-if="item" class="promos__item">
-    <img class="promos__item-img" :src="item.image" alt="" />
+    <img class="promos__item-img" :src="item.preview_image" alt="" />
     <div class="promos__item-title">
       {{ item.title }}
     </div>

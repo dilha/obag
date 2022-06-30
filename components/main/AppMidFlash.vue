@@ -4,7 +4,7 @@
       <div v-for="item in items" :key="item.id" class="mid__flash-inner">
         <img
           class="mid__flash-img mid-img"
-          :src="item.image"
+          :src="item.preview_image"
           alt=""
           data-aos="fade-right"
           data-aos-duration="700"

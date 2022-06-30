@@ -9,6 +9,10 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      { src: 'https://www.googletagmanager.com/gtag/js?id=G-LKJ3LMDL84' },
+      { src: 'https://mc.yandex.ru/metrika/tag.js' },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -19,6 +23,7 @@ export default {
     { src: '@/plugins/vue-swiper.js', ssr: false },
     { src: '@/plugins/axios' },
     { src: '@/plugins/aos.js', ssr: false },
+    { src: '@/plugins/yandex-metrika.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

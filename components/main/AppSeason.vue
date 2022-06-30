@@ -5,7 +5,7 @@
         <div
           class="season__intro"
           :style="{
-            backgroundImage: `url(${items.image})`,
+            backgroundImage: `url(${items.preview_image})`,
           }"
           data-aos="fade-right"
           data-aos-duration="700"
