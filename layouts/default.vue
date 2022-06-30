@@ -4,6 +4,7 @@
     <Nuxt />
     <app-mail />
     <app-footer />
+    <app-floating-widgets />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import { mapActions } from 'vuex'
 import AppHeader from '~/components/header/AppHeader.vue'
 import AppMail from '~/components/footer/AppMail.vue'
 import AppFooter from '~/components/footer/AppFooter.vue'
+import AppFloatingWidgets from '~/components/widgets/AppFloatingWidgets.vue'
 import { actionTypes } from '~/store/auth'
 import { actionTypes as bookmarkActionTypes } from '~/store/bookmarks'
 
@@ -20,6 +22,7 @@ export default {
     AppHeader,
     AppMail,
     AppFooter,
+    AppFloatingWidgets,
   },
 
   mounted() {
