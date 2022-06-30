@@ -24,6 +24,9 @@
         alt=""
       />
     </div>
+    <nuxt-link :to="'/constructor'" class="product__card-link">
+      Конструктор
+    </nuxt-link>
     <nuxt-link
       :to="{
         name: 'products-id-slug',
